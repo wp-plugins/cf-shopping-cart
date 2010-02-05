@@ -1,0 +1,23 @@
+@charset "utf-8";
+/*
+ * cfshoppingcart.css
+ * -*- Encoding: utf8n -*-
+ */
+
+
+fieldset {
+  border: 1px solid #ccc;
+  margin: 0 5px 5px 0;
+  width: 94%;
+}
+
+
+legend {
+  margin: 0 0 0 10px;
+}
+
+.infield {
+  padding: 5px;
+}
+
+
