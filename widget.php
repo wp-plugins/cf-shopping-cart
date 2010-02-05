@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart widget
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.1.2
+Version: 0.1.3
 Author URI: http://takeai.silverpigeon.jp/
 */
 
