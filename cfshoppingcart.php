@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.1.3
+Version: 0.1.5
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -50,11 +50,13 @@ if (is_admin()) {
     require_once('module/add_wp_head.php');
     add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/function_cfshoppingcart.php');
-    
+    require_once('module/show_product.php');
+    add_action('the_content', 'show_product');
     // short-code
-    //add_shortcode('cfshoppingcart', 'cfshoppingcart');
+    require_once('module/cart.php');
+    add_shortcode('cfshoppingcart_cart', 'cfshoppingcart_cart');
     // Can use the short-code in sidebar widget
-    //add_filter('widget_text', 'do_shortcode');
+    add_filter('widget_text', 'do_shortcode');
 }
 
 /* Data model */
@@ -64,6 +66,7 @@ class WpCFShoppingcartItemModel {
 class WpCFShoppingcartModel {
     // member variable
     var $version = '0.1.2';
+    var $debug = '';
     var $custom_fields = 'name,sn,price';
     var $price_field_name = 'price';
     //var $currency_before = '$';
@@ -78,12 +81,64 @@ class WpCFShoppingcartModel {
     var $cfshoppingcart_justamomentplease = 'text-align:center;background:#fff09e;border:2px solid orange;';
     var $max_quantity_of_one_commodity = 12;
     var $max_quantity_of_total_order = 36;
+    //
+    var $show_commodity_on_home = 'checked';
+    var $show_commodity_on_page = 'checked';
+    var $show_commodity_on_archive = 'checked';
+    var $show_commodity_on_single = 'checked';
+    var $show_commodity_on_manually = '';
     
     // constructor
     function WpCFShoppingcartModel() {
         // default value
     }
-    
+
+    //
+    function is_debug() {
+        if ($this->debug) return true;
+        else return false;
+    }
+    function setDebug($fields) {
+        $this->debug = $fields;
+    }
+    function getDebug() {
+        return $this->debug;
+    }
+    //
+    function setShowCommodityOnHome($fields) {
+        $this->show_commodity_on_home = $fields;
+    }
+    function getShowCommodityOnHome() {
+        return $this->show_commodity_on_home;
+    }
+    //
+    function setShowCommodityOnPage($fields) {
+        $this->show_commodity_on_page = $fields;
+    }
+    function getShowCommodityOnPage() {
+        return $this->show_commodity_on_page;
+    }
+    //
+    function setShowCommodityOnArchive($fields) {
+        $this->show_commodity_on_archive = $fields;
+    }
+    function getShowCommodityOnArchive() {
+        return $this->show_commodity_on_archive;
+    }
+    //
+    function setShowCommodityOnSingle($fields) {
+        $this->show_commodity_on_single = $fields;
+    }
+    function getShowCommodityOnSingle() {
+        return $this->show_commodity_on_single;
+    }
+    //
+    function setShowCommodityOnManually($fields) {
+        $this->show_commodity_on_manually = $fields;
+    }
+    function getShowCommodityOnManually() {
+        return $this->show_commodity_on_manually;
+    }
     //
     function setCustomFields($fields) {
         $f = split(',', $fields);
@@ -95,7 +150,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setPriceFieldName($field) {
-        $this->price_field_name = $field;
+        $this->price_field_name = trim($field);
     }
     function getPriceFieldName() {
         return $this->price_field_name;
