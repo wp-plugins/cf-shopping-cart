@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 2.9.1
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.

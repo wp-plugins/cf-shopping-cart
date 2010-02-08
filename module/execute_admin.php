@@ -69,13 +69,17 @@ function edit(&$obj, $msg = '') {
     }
 
     $model = $obj->model;
-    
+
+    // Custom Field array and string
+    $custom_fields_array = $model->getCustomFields();
+    $custom_fields = $model->getCustomFieldsString();
+    //echo '$model->getCustomFields() = ' . $model->getCustomFields() . ']';
     ?>
 
     <fieldset><legend><?php _e('Options', 'cfshoppingcart');?></legend>
       <div class="infield">
         <table>
-        <tr><td><?php _e('Custom field names', 'cfshoppingcart');?> </td><td><input type="text" name="custom_fields" id="custom_fields" value="<?php echo join(',',$model->getCustomFields());?>" size="60" /> </td></tr>
+        <tr><td><?php _e('Custom field names', 'cfshoppingcart');?> </td><td><input type="text" name="custom_fields" id="custom_fields" value="<?php echo $custom_fields;?>" size="60" /> </td></tr>
         <tr><td><?php _e('Price field name', 'cfshoppingcart');?> </td><td><input type="text" name="price_field_name" id="price_field_name" value="<?php echo $model->getPriceFieldName();?>" size="60" /></td></tr>
         <tr><td><?php _e('Quantity', 'cfshoppingcart');?></td><td><input type="text" name="quantity" id="quantity" value="<?php echo $model->getQuantity();?>" size="60" /></td></tr>
         <tr><td><?php _e('Currency format', 'cfshoppingcart');?></td><td><input type="text" name="currency_format" id="currency_format" value="<?php echo $model->getCurrencyFormat();?>" size="10" /> <?php _e('example: $%.02f','cfshoppingcart');?></td></tr>
