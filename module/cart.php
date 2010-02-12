@@ -47,7 +47,7 @@ function cfshoppingcart_cart($args = '') {
     $sum = $_SESSION['cfshoppingcart']['sum'];
 
     if ($sum['quantity_of_commodity'] == 0 || !$commodities) {
-        $content = __('Shopping Cart is empty.', 'cfshoppingcart');
+        $content = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
         if ($is_shortcode) return $content;
         else echo $content;
         return;

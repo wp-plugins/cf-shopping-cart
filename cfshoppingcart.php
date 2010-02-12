@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.1.6
+Version: 0.1.7
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -65,32 +65,50 @@ class WpCFShoppingcartItemModel {
 }
 class WpCFShoppingcartModel {
     // member variable
-    var $version = '0.1.2';
-    var $debug = '';
-    var $custom_fields = 'name,sn,price';
-    var $price_field_name = 'price';
-    //var $currency_before = '$';
-    //var $currency_after = 'yen';
-    var $currency_format = '$%.02fYen';
-    var $quantity = 'Quantity';
-    var $cart_url = 'http://';
-    var $send_order_url = 'http://';
-    var $qfgetthumb_option_1 = 'tag=0&num=0&crop_w=150&width=160&crop_h=150&height=160';
-    var $qfgetthumb_default_image = '';
-    var $is_use_shipping = '';
-    var $cfshoppingcart_justamomentplease = 'text-align:center;background:#fff09e;border:2px solid orange;';
-    var $max_quantity_of_one_commodity = 12;
-    var $max_quantity_of_total_order = 36;
+    var $version;// = '0.1.7';
+    var $debug;// = '';
+    var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
+    var $price_field_name;// = 'Price';
+    var $currency_format;// = '$%.02fYen';
+    var $quantity;// = 'Quantity';
+    var $cart_url;// = 'http://';
+    var $send_order_url;// = 'http://';
+    var $qfgetthumb_option_1;// = 'tag=0&num=0&crop_w=150&width=160&crop_h=150&height=160';
+    var $qfgetthumb_default_image;// = '';
+    var $is_use_shipping;// = '';
+    var $cfshoppingcart_justamomentplease;// = 'text-align:center;background:#fff09e;border:2px solid orange;';
+    var $max_quantity_of_one_commodity;// = 12;
+    var $max_quantity_of_total_order;// = 36;
     //
-    var $show_commodity_on_home = 'checked';
-    var $show_commodity_on_page = 'checked';
-    var $show_commodity_on_archive = 'checked';
-    var $show_commodity_on_single = 'checked';
-    var $show_commodity_on_manually = '';
+    var $show_commodity_on_home;// = 'checked';
+    var $show_commodity_on_page;// = 'checked';
+    var $show_commodity_on_archive;// = 'checked';
+    var $show_commodity_on_single;// = 'checked';
+    var $show_commodity_on_manually;// = '';
     
     // constructor
     function WpCFShoppingcartModel() {
         // default value
+        $this->version = '0.1.7';
+        $this->debug = '';
+        $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
+        $this->price_field_name = 'Price';
+        $this->currency_format = '$%.02fYen';
+        $this->quantity = 'Quantity';
+        $this->cart_url = 'http://';
+        $this->send_order_url = 'http://';
+        $this->qfgetthumb_option_1 = 'tag=0&num=0&crop_w=150&width=160&crop_h=150&height=160';
+        $this->qfgetthumb_default_image = '';
+        $this->is_use_shipping = '';
+        $this->cfshoppingcart_justamomentplease = 'text-align:center;background:#fff09e;border:2px solid orange;';
+        $this->max_quantity_of_one_commodity = 12;
+        $this->max_quantity_of_total_order = 36;
+        //
+        $this->show_commodity_on_home = 'checked';
+        $this->show_commodity_on_page = 'checked';
+        $this->show_commodity_on_archive = 'checked';
+        $this->show_commodity_on_single = 'checked';
+        $this->show_commodity_on_manually = '';
     }
 
     //

@@ -4,6 +4,9 @@
  * -*- Encoding: utf8n -*-
  */
 
+/* NOTE: 
+     This file copy to /wp-content/cfshoppingcart/shipping.php */
+
 /* If $shipping less than 0 then display message only */
 function shipping($quantity, $total_price) {
     /* edit this */

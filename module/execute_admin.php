@@ -33,6 +33,13 @@ function save(&$obj) {
         // Array extract to variable
         extract($_REQUEST);
     }
+    
+    require_once('common.php');
+    $shipping_php_path = get_shipping_php_path();
+    if (!file_exists($shipping_php_path)) {
+        $is_use_shipping = '';
+    }
+    
     //print $custom_fields;
     $model = &$obj->model;
     $model->setCustomFields($custom_fields);
@@ -64,6 +71,12 @@ function save(&$obj) {
 }
 
 function edit(&$obj, $msg = '') {
+    require_once('common.php');
+    $shipping_php_path = get_shipping_php_path();
+    if (!file_exists($shipping_php_path)) {
+        $msg .= '<p>' . __('Can not use Shipping.','cfshoppingcart') . '<br />' . __('Shipping setting file not found','cfshoppingcart') . ': "' . $shipping_php_path . '"</p>';
+    }
+    
     if ($msg) {
         printf("<div class=\"msg\">%s</div>", $msg);
     }
@@ -85,7 +98,7 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Currency format', 'cfshoppingcart');?></td><td><input type="text" name="currency_format" id="currency_format" value="<?php echo $model->getCurrencyFormat();?>" size="10" /> <?php _e('example: $%.02f','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Max quantity of one commodity', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_one_commodity" id="max_quantity_of_one_commodity" value="<?php echo $model->getMaxQuantityOfOneCommodity();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Max quantity of total order', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_total_order" id="max_quantity_of_total_order" value="<?php echo $model->getMaxQuantityOfTotalOrder();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
-        <tr><td><?php _e('Shipping', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php _e('Must edit plugin/cfshoppingcart/extention/shipping.php.','cfshoppingcart');?></td></tr>
+        <tr><td><?php _e('Shipping', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php echo __('Must be edit','cfshoppingcart') . ': ' . $shipping_php_path; ?></td></tr>
         <tr><td><?php _e('Cart Url', 'cfshoppingcart');?></td><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('Send order Url', 'cfshoppingcart');?></td><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('In Cart, QF-GetThumb option 1', 'cfshoppingcart');?></td><td><input type="text" name="qfgetthumb_option_1" id="qfgetthumb_option_1" value="<?php echo $model->getQfgetthumbOption1();?>" size="60" /></td></tr>

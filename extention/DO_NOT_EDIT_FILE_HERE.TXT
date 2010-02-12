@@ -1,0 +1,7 @@
+Do not edit file here.
+because, this folder may be overwriiten by automatic upgrade process.
+Please create '/wp-content/cfshoppingcart' directory and use it.
+
+ファイルをこのフォルダ内で編集しないでください。
+このフォルダーは自動アップグレードによって上書きされます。
+'/wp-content/cfshoppingcart' フォルダーを作成しその中へコピーしてご使用下さい。

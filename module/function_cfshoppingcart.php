@@ -94,17 +94,19 @@ function cfshoppingcart($args = '') {//($get_post_custom){
     }
     $content .= '</table></div>';
     
-    $content .= '<div class="cfshoppingcart_commodity_op">';
+    $content .= '<div class="cfshoppingcart_commodity_op"><span>';
     if ($is_change) {
         $content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="' . $quantity . '" /> ' . $quantity_str . ' ';
         //$content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' (' . __('In cart is ','cfshoppingcart') . ' ' . $quantity . ') ';
+        $content .= '</span>';
         $content .= '<input class="change_quantity_button" type="button" name="id=' . $id . '" value="' . __('Into Cart','cfshoppingcart') . '" />';
         //$content .= '<input class="change_quantity_button" type="button" name="id=' . $id . '" value="' . __('Change quantity','cfshoppingcart') . '" />';
     } else {
         $content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
+        $content .= '</span>';
         $content .= '<input class="add_to_cart_button" type="button" name="id=' . $id . '" value="' . __('Add to Cart','cfshoppingcart') . '" />';
     }
-    $content .= '</div>';
+    $content .= '</div><!-- /cfshoppingcart_commodity_op -->';
 
     if ($model->getShowCommodityOnManually()) {
         echo $content;

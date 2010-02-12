@@ -113,13 +113,30 @@ jQuery(document).ready(function(){
             return;
         }
         var json = eval(html);  // decode JSON
-        document.location = json; // move url
+        document.location = json[0]; // move url
       }
     });
   });
 
 });
 
+function cfshoppingcart_empty_cart() {
+    alert('cfshoppingcart_empty_cart()');
+    jQuery.ajax({
+      url: get_get(plugin_module_uri, 'empty_cart', 0, 0),
+      cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
+      success: function(html){
+          if (!html) {
+              alert('<?php _e('Do empty cart faild.','cfshoppingcart');?>');
+              jQuery('#cfshoppingcart_form input').attr("disabled", "");
+              cfshoppingcart_message('');
+              return;
+          }
+          var json = eval(html);  // decode JSON
+          document.location = json[0]; // move url
+      }
+    });
+}
 
 function get_get(plugin_module_uri, cmd, id, quantity) {
     return plugin_module_uri + '/commu.php?cmd=' + cmd + '&include=' + id + '&quantity=' + quantity;

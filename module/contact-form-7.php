@@ -28,7 +28,7 @@ function cfshoppingcart_ContactForm7() {
     $sum = $_SESSION['cfshoppingcart']['sum'];
 
     if ($sum['quantity_of_commodity'] == 0 || !$commodities) {
-        //return __('Shopping Cart is empty.', 'cfshoppingcart');
+        //return '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
         return '';
     }
     

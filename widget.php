@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart widget
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.1.6
+Version: 0.1.7
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -56,7 +56,7 @@ class CfshoppingcartWidget extends WP_Widget {
         // @ on function don't output error message.
         if (!session_id()){ @session_start(); }
         if (!$html = $_SESSION['cfshoppingcart']['sum']['html']) {
-            $html = '<span>'. __('Cart is empty','cfshoppingcart') . '</span>';
+            $html = '<span class="cart_empty">'. __('Shopping Cart is empty','cfshoppingcart') . '</span>';
         }
         echo $html;
         echo '</div>';

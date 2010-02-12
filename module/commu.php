@@ -146,6 +146,11 @@ function cfshoppingcart_work($cmd, $id, $quantity, $customfield) {
             cfshoppingcart_sum();
             return array($cart_url, ''); // success;
         }
+    } else if ($cmd === 'empty_cart') {
+        unset($_SESSION[$sname]['commodities']);
+        //$_SESSION[$sname]['commodities'] = $commodities;
+        cfshoppingcart_sum();
+        return array($_SESSION[$sname]['sum']['html'], '');
     }
     cfshoppingcart_error_exit();
 }

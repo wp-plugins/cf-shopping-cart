@@ -17,6 +17,7 @@ function cfshoppingcart_sum() {
     //$plugin_folder = get_plugin_folder();
     //$plugin_uri = get_plugin_uri();
     //$plugin_module_uri = get_plugin_module_uri();
+    $shipping_php_path = get_shipping_php_path();
     
     // get data object
     $WpCFShoppingcart = & new WpCFShoppingcart();
@@ -36,8 +37,8 @@ function cfshoppingcart_sum() {
         }
     }
 
-    if ($is_use_shipping) {
-        require_once($plugin_fullpath . '/extention/shipping.php');
+    if ($is_use_shipping && file_exists($shipping_php_path)) {
+        require_once($shipping_php_path);
         list($shipping, $shipping_msg) = shipping($num, $sum);
     }
     
@@ -48,7 +49,7 @@ function cfshoppingcart_sum() {
     $_SESSION[$sname]['sum']['total'] = $shipping + $sum;
     
     if ($sum == 0 || $num == 0) {
-        $html = __('Shopping Cart is empty.', 'cfshoppingcart');
+        $html = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
     } else {
         $html  = cfshoppingcart_widget_html($_SESSION[$sname]['sum']);
     }

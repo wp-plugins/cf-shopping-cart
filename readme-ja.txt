@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 2.9.1
-Stable tag: 0.1.6
+Stable tag: 0.1.7
 
 Cfショッピングカートはシンプルなショッピングカート機能です。
 
@@ -21,7 +21,7 @@ Cfショッピングカートはシンプルなショッピングカート機能です。(同じ)
 1. 追加プラグインのインストール。次のプラグインをインストールし利用可能にして下さい。Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb(任意).
 2. CFショッピングカートのインストール。cf-shopping-cart フォルダを '/wp-content/plugins/' ディレクトリーへアップロードします。
 3. Contact Form 7 プラグイン用の拡張モジュールをインストールします。拡張モジュールファイル 'cfshoppingcart.php' を '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' フォルダから '/wp-content/plugins/contact-form-7/module/' フォルダへコピーします。
-4. CFショッピングカートプラグイン2個を有効にして下さい。送料機能を使用する場合はファイル '/wp-content/plugins/cf-shopping-cart/extention/shipping.php' を編集して下さい。
+4. CFショッピングカートプラグイン2個を有効にして下さい。送料機能を使用する場合はファイル 'shipping.php を '/wp-content/plugins/cf-shopping-cart/extention/' から '/wp-content/cfshoppingcart/' へコピーし、それを編集して下さい。
 5. サイドバーウィジットに CFショッピングカートウィジットを配置してください。
 6. Contact Form 7 のフォームを作成します。フォームの内容に '[cfshoppingcart* cartdata class:cfshoppingcart7]' を追加します。また、送信メールの内容に '[cartdata]' を追加します。そして新しいページ(例:オーダー送信)を作成しフォームのショートコードを書きます。このページのURLを覚えて置いてください。
 7. 新しいページ(例:ショッピングカート)を作成し、内容に次のショートコードを書きます '[cfshoppingcart_cart 1]'。このページのURLを覚えておいてください。
@@ -30,7 +30,7 @@ Cfショッピングカートはシンプルなショッピングカート機能です。(同じ)
 10. CFショッピングカートの設定を行います。
 11. 項目10で「手動」を選んだ場合はテーマファイルの編集作業が必要です。archive.php と single.php (必要であれば home.php, page.php なども) を編集し PHPコードを追加します。'<?php cfshoppingcart(); ?>'。書き込む場所は記事出力ループ内です。
 12. 商品ページの作成。新しい記事の追加をし、商品の内容を書きます。カテゴリーを設定し、カスタムフィールドを入力します。
-13. 項目12を繰り返し商品を追加しいます。
+13. 項目12を繰り返し商品を追加します。
 
 
 == More plugins. Thank you! ==
