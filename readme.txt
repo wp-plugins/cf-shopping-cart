@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 2.9.1
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -35,7 +35,11 @@ If you have created your own language pack, or have an update of an existing one
 3. Install extended module for Contact Form 7 plugin. Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'.
 4. Activate Cf Shopping Cart 2 plugins. If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
 5. Be place Cf Shopping Cart widget to sidebar.
-6. Add new Contact Form 7's contact-form, put in '[cfshoppingcart* cartdata class:cfshoppingcart7]' to the form and '[cartdata]' to the email text. and put in short-code to add new page (example 'Send order'). remember this page url.
+6. Visit settings Contact Form 7, Add new contact form.
+   Add code into the Form: '[cfshoppingcart* cartdata class:cfshoppingcart7]'.
+   Add code into the Message body: '[cartdata]'.
+   Add code into Additional Settings: 'on_sent_ok: "cfshoppingcart_empty_cart();"'.
+   Add new page (example 'Send order'), add code into the article: '[contact-form ? "???"]'. remember this page url.
 7. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
 8. Add new category example 'commodity'.
 9. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
@@ -46,6 +50,9 @@ If you have created your own language pack, or have an update of an existing one
 
 
 == Changelog ==
+
+= 0.2.1 =
+* Additions: submit order to empty the cart. (Installation 6th step changed.)
 
 = 0.2.0 =
 * Include language file (pot file).

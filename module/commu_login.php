@@ -1,6 +1,6 @@
 <?php
-/* commu.php
- * communication module
+/* commu_login.php
+ * login communication module
  * Return Custom-field data.
  *
  * -*- Encoding: utf8n -*-
@@ -146,10 +146,6 @@ function cfshoppingcart_work($cmd, $id, $quantity, $customfield) {
             cfshoppingcart_sum();
             return array($cart_url, ''); // success;
         }
-    } else if ($cmd === 'empty_cart') {
-        $_SESSION[$sname]['commodities'] = array();
-        cfshoppingcart_sum();
-        return array($_SESSION[$sname]['sum']['html'], '');
     }
     cfshoppingcart_error_exit();
 }
@@ -159,24 +155,13 @@ function cfshoppingcart_main() {
 
     // command
     if (!$cmd = $_REQUEST['cmd']) cfshoppingcart_error_exit();
-    // 商品ID (post id)
-    if (!$id = $_REQUEST['include']) cfshoppingcart_error_exit();
-    // 注文数
-    if (!array_key_exists('quantity', $_REQUEST)) cfshoppingcart_error_exit();
-    $quantity = intval($_REQUEST['quantity']);
+    if (!$username = $_REQUEST['username']) cfshoppingcart_error_exit();
+    if (!$password = $_REQUEST['password']) cfshoppingcart_error_exit();
 
-    // カスタムフィールドの情報を得る
-    $c = get_post_custom($id);
-    //print_r($c);
-    //if (!$c) cfshoppingcart_error_exit(); // empty_cart
-
-    // これまでの注文情報に加える
-    list($html, $msg) = cfshoppingcart_work($cmd, $id, $quantity, $c);
-    //$html = 'a'; $msg='b';
     
     // $html : Sidebar widget message will be overwrite to $html by Javascript.
     // $msg : Javascript put alert msg.
-    $j = array($html, $msg);
+    $j = array($username, $password);
 
     // Javascript へ送る為に JSON 形式に変換
     require_once('../JSON/JSON.php');

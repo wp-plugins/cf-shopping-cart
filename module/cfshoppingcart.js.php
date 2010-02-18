@@ -13,16 +13,6 @@ jQuery(document).ready(function(){
   //alert('cfshoppingcart.js is ready');
   //load_html();
 
-    <?php
-    require_once('common.php');
-    //$plugin_fullpath = get_plugin_fullpath();
-    //$plugin_path = get_plugin_path();
-    //$plugin_folder = get_plugin_folder();
-    //$plugin_uri = get_plugin_uri();
-    $plugin_module_uri = get_plugin_module_uri();
-    echo 'var plugin_module_uri = "' . $plugin_module_uri . '";';
-    ?>
-      
   cfshoppingcart_set_message_layer();
 
   jQuery('.add_to_cart_button').click(function(){
@@ -33,7 +23,7 @@ jQuery(document).ready(function(){
       return;
     }
     jQuery.ajax({
-      url: get_get(plugin_module_uri, 'add_to_cart', id, quantity),
+      url: get_get('add_to_cart', id, quantity),
       cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
       success: function(html){
         //alert(html);
@@ -53,7 +43,7 @@ jQuery(document).ready(function(){
       return;
     }
     jQuery.ajax({
-      url: get_get(plugin_module_uri, 'change_quantity_commodity', id, quantity),
+      url: get_get('change_quantity_commodity', id, quantity),
       cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
       success: function(html){
         //alert(html);
@@ -77,7 +67,7 @@ jQuery(document).ready(function(){
     jQuery('#cfshoppingcart_form input').attr("disabled", "disabled");
     cfshoppingcart_message('<?php _e('Just a moment please.', 'cfshoppingcart');?>');
     jQuery.ajax({
-      url: get_get(plugin_module_uri, 'change_quantity', id, quantity),
+      url: get_get('change_quantity', id, quantity),
       cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
       success: function(html){
         if (!html) {
@@ -103,7 +93,7 @@ jQuery(document).ready(function(){
     jQuery('#cfshoppingcart_form input').attr("disabled", "disabled");
     cfshoppingcart_message('<?php _e('Just a moment please.', 'cfshoppingcart');?>');
     jQuery.ajax({
-      url: get_get(plugin_module_uri, 'cancel', id, quantity),
+      url: get_get('cancel', id, quantity),
       cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
       success: function(html){
         if (!html) {
@@ -121,25 +111,32 @@ jQuery(document).ready(function(){
 });
 
 function cfshoppingcart_empty_cart() {
-    alert('cfshoppingcart_empty_cart()');
+    //alert('cfshoppingcart_empty_cart()');
     jQuery.ajax({
-      url: get_get(plugin_module_uri, 'empty_cart', 0, 0),
+      url: get_get('empty_cart', -1, 0),
       cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
       success: function(html){
-          if (!html) {
-              alert('<?php _e('Do empty cart faild.','cfshoppingcart');?>');
-              jQuery('#cfshoppingcart_form input').attr("disabled", "");
-              cfshoppingcart_message('');
-              return;
-          }
-          var json = eval(html);  // decode JSON
-          document.location = json[0]; // move url
+        //alert(html);
+        if (!html) { alert('<?php _e('Empty cart faild.','cfshoppingcart');?>'); return; }
+        var json = eval(html);  // decode JSON
+        jQuery('.cfshoppingcart_widget').html(json[0]);
+        if (json[1]) { alert(json[1]); }
       }
     });
 }
 
-function get_get(plugin_module_uri, cmd, id, quantity) {
-    return plugin_module_uri + '/commu.php?cmd=' + cmd + '&include=' + id + '&quantity=' + quantity;
+function get_get(cmd, id, quantity) {
+    <?php
+    //
+    require_once('common.php');
+    //$plugin_fullpath = get_plugin_fullpath();
+    //$plugin_path = get_plugin_path();
+    //$plugin_folder = get_plugin_folder();
+    //$plugin_uri = get_plugin_uri();
+    $cfshoppingcart_plugin_module_uri = get_plugin_module_uri();
+    echo 'var cfshoppingcart_plugin_module_uri = "' . $cfshoppingcart_plugin_module_uri . '";';
+    ?>
+    return cfshoppingcart_plugin_module_uri + '/commu.php?cmd=' + cmd + '&include=' + id + '&quantity=' + quantity;
 }
 
 function checkNumber(quantity) {

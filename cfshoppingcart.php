@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.2.0
+Version: 0.2.1
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -44,9 +44,16 @@ if (is_admin()) {
     // Registration of management screen function.
     add_action('admin_menu', array(&$wpCFShoppingcart, 'addAdminMenu'));
 } else {
-    wp_enqueue_script('jQuery', $plugin_uri . '/js/jquery.js', null, '1.3.2');
-    //wp_enqueue_script('jQuery.cookie', $plugin_uri . '/js/jquery.cookie.js', null, null);
-    //wp_enqueue_script('jQuery.droppy', $plugin_uri . '/module/jquery.droppy.js', null, null);
+    /* $handle スクリプトの識別名
+     * $src(optional) スクリプトファイルへのパス
+     * http://で始まるURLまたはサイトルートから絶対パス
+     * $deps(optional) 依存するスクリプトのリスト（配列）
+     * $ver(optional) スクリプトのバージョン
+     */
+    //wp_enqueue_script('jQuery', $plugin_uri . '/js/jquery.js', null, '1.4.1');
+    //wp_enqueue_script('jQuery.form', $plugin_uri . '/js/jquery.form.js', array('jQuery'), 2.36);
+    //wp_enqueue_script('jQuery.cookie', $plugin_uri . '/js/jquery.cookie.js', array('jQuery'), null);
+    //wp_enqueue_script('jQuery.droppy', $plugin_uri . '/module/jquery.droppy.js', array('jQuery'), null);
     require_once('module/add_wp_head.php');
     add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/function_cfshoppingcart.php');
@@ -55,6 +62,12 @@ if (is_admin()) {
     // short-code
     require_once('module/cart.php');
     add_shortcode('cfshoppingcart_cart', 'cfshoppingcart_cart');
+    //
+    require_once('module/cart_link.php');
+    add_shortcode('cfshoppingcart_cart_link', 'cfshoppingcart_cart_link');
+    //
+    require_once('module/send_order_link.php');
+    add_shortcode('cfshoppingcart_send_order_link', 'cfshoppingcart_send_order_link');
     // Can use the short-code in sidebar widget
     add_filter('widget_text', 'do_shortcode');
 }
@@ -65,7 +78,7 @@ class WpCFShoppingcartItemModel {
 }
 class WpCFShoppingcartModel {
     // member variable
-    var $version;// = '0.1.7';
+    var $version;// = '0.2.1';
     var $debug;// = '';
     var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
     var $price_field_name;// = 'Price';
@@ -89,7 +102,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.1.7';
+        $this->version = '0.2.1';
         $this->debug = '';
         $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
         $this->price_field_name = 'Price';

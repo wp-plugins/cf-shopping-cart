@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 19:22+0900\n"
+"POT-Creation-Date: 2010-02-10 11:19+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AI Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: \n"
@@ -16,23 +16,120 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: cfshoppingcart.php:369
+#: _tilde/Rs[ ` cfshoppingcart.php:352
 msgid "Cf Shopping Cart Options"
 msgstr "CFショッピングカート"
 
 #: cfshoppingcart.php:370
 #: widget.php:42
+#: _tilde/Rs[ `
+#: cfshoppingcart.php:353
 #: module/execute_admin.php:18
 msgid "Cf Shopping Cart"
 msgstr "CFショッピングカート"
 
 #: widget.php:59
+#: login.php:59
 msgid "Shopping Cart is empty"
 msgstr "買い物かごは空です"
 
 #: widget.php:77
+#: login.php:77
 #, fuzzy
 msgid "Title:"
 msgstr "メニュー題名"
+
+#: login.php:42
+msgid "Cf Shopping Cart Login"
+msgstr "CFショッピングカート ログイン画面"
+
+#: module/cart.php:50
+msgid "Shopping Cart is empty."
+msgstr "買い物かごは空です"
+
+#: module/cart.php:77
+#: module/cart.php:87
+#: module/contact-form-7.php:53
+#: module/contact-form-7.php:58
+#: module/execute_admin.php:97
+#: module/function_cfshoppingcart.php:99
+#: module/function_cfshoppingcart.php:105
+msgid "Quantity"
+msgstr "数量"
+
+#: module/cart.php:78
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: module/cart.php:78
+msgid "Change quantity"
+msgstr "数量変更"
+
+#: module/cart.php:88
+#: module/contact-form-7.php:59
+msgid "Subtotal"
+msgstr "小計"
+
+#: module/cart.php:94
+#: module/contact-form-7.php:66
+#: module/execute_admin.php:101
+msgid "Shipping"
+msgstr "送料"
+
+#: module/cart.php:99
+#: module/contact-form-7.php:71
+msgid "Total price"
+msgstr "合計金額"
+
+#: module/cart.php:103
+msgid "Orderer Input screen"
+msgstr "ご注文者情報入力画面"
+
+#: module/cfshoppingcart.js.php:37
+#: module/cfshoppingcart.js.php:57
+#: module/cfshoppingcart.js.php:81
+#: module/cfshoppingcart.js.php:107
+msgid "Communication error"
+msgstr "通信エラーが発生しました。"
+
+#: module/cfshoppingcart.js.php:40
+msgid "Add to cart faild, please try again."
+msgstr "カートへの追加に失敗しました。やりなおしてください。"
+
+#: module/cfshoppingcart.js.php:60
+#: module/cfshoppingcart.js.php:84
+msgid "Change quantity faild, please try again."
+msgstr "数量の変更に失敗しました。やりなおしてください。"
+
+#: module/cfshoppingcart.js.php:78
+#: module/cfshoppingcart.js.php:104
+msgid "Just a moment please."
+msgstr "しばらくお待ちください..."
+
+#: module/cfshoppingcart.js.php:110
+msgid "Cancel commodity faild, please try again."
+msgstr "商品のキャンセルに失敗しました。やりなおしてください。"
+
+#: module/cfshoppingcart.js.php:130
+#: module/cfshoppingcart.js.php:134
+msgid "Please enter the quantity of the commodity."
+msgstr "正しい商品数量を入力してください。"
+
+#: module/cfshoppingcart.js.php:139
+msgid "Commodity must be less than 100."
+msgstr "商品数量は１００未満にして下さい。"
+
+#: module/commu.php:73
+#: module/commu.php:101
+#: module/commu.php:129
+msgid "Max quantity of total order is"
+msgstr "注文合計数量の最大は"
+
+#: module/commu.php:84
+#: module/commu.php:106
+#: module/commu.php:134
+msgid "Max quantity of one commodity is"
+msgstr "1商品の最大注文数は"
 
 #: module/execute_admin.php:69
 msgid "Saved"
@@ -58,17 +155,6 @@ msgstr "カスタムフィールドのフィールド名"
 msgid "Price field name"
 msgstr "単価フィールドの名称"
 
-#: module/execute_admin.php:97
-#: module/sum.php:77
-#: module/function_cfshoppingcart.php:99
-#: module/function_cfshoppingcart.php:105
-#: module/cart.php:77
-#: module/cart.php:87
-#: module/contact-form-7.php:53
-#: module/contact-form-7.php:58
-msgid "Quantity"
-msgstr "数量"
-
 #: module/execute_admin.php:98
 msgid "Currency format"
 msgstr "通貨フォーマット"
@@ -90,13 +176,6 @@ msgstr "ゼロは無制限"
 #: module/execute_admin.php:100
 msgid "Max quantity of total order"
 msgstr "注文合計数量の最大"
-
-#: module/execute_admin.php:101
-#: module/sum.php:83
-#: module/cart.php:94
-#: module/contact-form-7.php:66
-msgid "Shipping"
-msgstr "送料"
 
 #: module/execute_admin.php:101
 msgid "Must be edit"
@@ -158,39 +237,6 @@ msgstr "デバッグモード"
 msgid "Save"
 msgstr "保存"
 
-#: module/sum.php:52
-#: module/cart.php:50
-msgid "Shopping Cart is empty."
-msgstr "買い物かごは空です"
-
-#: module/sum.php:78
-#: module/cart.php:88
-#: module/contact-form-7.php:59
-msgid "Subtotal"
-msgstr "小計"
-
-#: module/sum.php:88
-#: module/cart.php:99
-#: module/contact-form-7.php:71
-msgid "Total price"
-msgstr "合計金額"
-
-#: module/sum.php:91
-msgid "Go to Cart"
-msgstr "買い物かごを表示"
-
-#: module/commu.php:73
-#: module/commu.php:101
-#: module/commu.php:129
-msgid "Max quantity of total order is"
-msgstr "注文合計数量の最大は"
-
-#: module/commu.php:84
-#: module/commu.php:106
-#: module/commu.php:134
-msgid "Max quantity of one commodity is"
-msgstr "1商品の最大注文数は"
-
 #: module/function_cfshoppingcart.php:102
 msgid "Into Cart"
 msgstr "買い物かごに入れる"
@@ -199,56 +245,9 @@ msgstr "買い物かごに入れる"
 msgid "Add to Cart"
 msgstr "かごへ"
 
-#: module/cart.php:78
-msgid "Cancel"
-msgstr "キャンセル"
-
-#: module/cart.php:78
-msgid "Change quantity"
-msgstr "数量変更"
-
-#: module/cart.php:103
-msgid "Orderer Input screen"
-msgstr "ご注文者情報入力画面"
-
-#: module/cfshoppingcart.js.php:37
-#: module/cfshoppingcart.js.php:57
-#: module/cfshoppingcart.js.php:81
-#: module/cfshoppingcart.js.php:107
-#: module/cfshoppingcart.js.php:127
-msgid "Communication error"
-msgstr "通信エラーが発生しました。"
-
-#: module/cfshoppingcart.js.php:40
-msgid "Add to cart faild, please try again."
-msgstr "カートへの追加に失敗しました。やりなおしてください。"
-
-#: module/cfshoppingcart.js.php:60
-#: module/cfshoppingcart.js.php:84
-msgid "Change quantity faild, please try again."
-msgstr "数量の変更に失敗しました。やりなおしてください。"
-
-#: module/cfshoppingcart.js.php:78
-#: module/cfshoppingcart.js.php:104
-msgid "Just a moment please."
-msgstr "しばらくお待ちください..."
-
-#: module/cfshoppingcart.js.php:110
-msgid "Cancel commodity faild, please try again."
-msgstr "商品のキャンセルに失敗しました。やりなおしてください。"
-
-#: module/cfshoppingcart.js.php:130
-msgid "Do empty cart faild."
-msgstr "ショッピングカートを空にすることに失敗しました。"
-
-#: module/cfshoppingcart.js.php:147
-#: module/cfshoppingcart.js.php:151
-msgid "Please enter the quantity of the commodity."
-msgstr "正しい商品数量を入力してください。"
-
-#: module/cfshoppingcart.js.php:156
-msgid "Commodity must be less than 100."
-msgstr "商品数量は１００未満にして下さい。"
+#: module/sum.php:91
+msgid "Go to Cart"
+msgstr "買い物かごを表示"
 
 #~ msgid "Cart is empty"
 #~ msgstr "買い物かごは空です"
