@@ -109,7 +109,7 @@ function cfshoppingcart_cart($args = '') {
 
 /* qf-getthumb */
 function get_commodity_img($postid, $qfgetthumb_option_1, $qfgetthumb_default_image) {
-    //global $post;
+    global $post;
     $posts = get_posts('include=' . $postid . '&quantityposts=1');
     $post = $posts[0];
     setup_postdata($post);
