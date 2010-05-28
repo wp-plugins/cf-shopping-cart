@@ -4,6 +4,11 @@
  * -*- Encoding: utf8n -*-
  */
 
+function check_wpcf7_cfshoppingcart_shortcode_handler() {
+    if (!function_exists('wpcf7_cfshoppingcart_shortcode_handler')) {
+        echo '<p>' . __("Cf Shopping Cart Extended module for Contact From 7 not found.<br />Please, Install extended module for Contact Form 7 plugin.<br />Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'.", 'cfshoppingcart') . '</p>';
+    }
+}
 
 function get_shipping_php_path() {
     return get_wp_content_fullpath() . '/cfshoppingcart/shipping.php';

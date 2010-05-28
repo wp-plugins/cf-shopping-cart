@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.2.3
+Version: 0.2.4
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -43,6 +43,7 @@ if (is_admin()) {
     add_action('admin_head', array(&$wpCFShoppingcart, 'addAdminHead'));
     // Registration of management screen function.
     add_action('admin_menu', array(&$wpCFShoppingcart, 'addAdminMenu'));
+    add_action('admin_notices', 'cfshoppingcart_action_admin_notices', 5);
 } else {
     /* $handle スクリプトの識別名
      * $src(optional) スクリプトファイルへのパス
@@ -72,13 +73,17 @@ if (is_admin()) {
     add_filter('widget_text', 'do_shortcode');
 }
 
+function cfshoppingcart_action_admin_notices() {
+    check_wpcf7_cfshoppingcart_shortcode_handler();
+}
+
 /* Data model */
 class WpCFShoppingcartItemModel {
     //
 }
 class WpCFShoppingcartModel {
     // member variable
-    var $version;// = '0.2.3';
+    var $version;// = '0.2.4';
     var $debug;// = '';
     var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
     var $price_field_name;// = 'Price';
@@ -102,7 +107,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.2.3';
+        $this->version = '0.2.4';
         $this->debug = '';
         $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
         $this->price_field_name = 'Price';
@@ -374,7 +379,7 @@ class WpCFShoppingcart {
      */
     function addAdminHead() {
         echo '<link type="text/css" rel="stylesheet" href="';
-        echo $this->plugin_uri . 'cfshoppingcart.css" />' . "\n";;
+        echo $this->plugin_uri . 'cfshoppingcart.css" />' . "\n";
     }
 
     function addAdminMenu() {
