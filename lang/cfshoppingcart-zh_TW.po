@@ -1,0 +1,254 @@
+# Translation of the WordPress plugin   by .
+# Copyright (C) 2010
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress plugin cfshoppingcart\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/cf-shopping-cart\n"
+"POT-Creation-Date: 2010-02-17 10:03+0000\n"
+"PO-Revision-Date: 2010-05-30 19:03+0800\n"
+"Last-Translator: \n"
+"Language-Team:  <fichtner@carola-fichtner.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: cfshoppingcart.php:369
+msgid "Cf Shopping Cart Options"
+msgstr "訂購單 設定"
+
+#: cfshoppingcart.php:370
+#: module/execute_admin.php:18
+#: widget.php:42
+msgid "Cf Shopping Cart"
+msgstr "訂購單"
+
+#: module/cart.php:50
+#: module/sum.php:52
+msgid "Shopping Cart is empty."
+msgstr "沒有商品"
+
+#: module/cart.php:77
+#: module/cart.php:87
+#: module/contact-form-7.php:53
+#: module/contact-form-7.php:58
+#: module/execute_admin.php:97
+#: module/function_cfshoppingcart.php:99
+#: module/function_cfshoppingcart.php:105
+#: module/sum.php:77
+msgid "Quantity"
+msgstr "數量"
+
+#: module/cart.php:78
+msgid "Cancel"
+msgstr "取消"
+
+#: module/cart.php:78
+msgid "Change quantity"
+msgstr "變更數量"
+
+#: module/cart.php:88
+#: module/contact-form-7.php:59
+#: module/sum.php:78
+msgid "Subtotal"
+msgstr "總金額"
+
+#: module/cart.php:94
+#: module/contact-form-7.php:66
+#: module/execute_admin.php:101
+#: module/sum.php:83
+msgid "Shipping"
+msgstr "送貨"
+
+#: module/cart.php:99
+#: module/contact-form-7.php:71
+#: module/sum.php:88
+msgid "Total price"
+msgstr "總金額"
+
+#: module/cart.php:103
+msgid "Orderer Input screen"
+msgstr "訂購確認！"
+
+#: module/cfshoppingcart.js.php:37
+#: module/cfshoppingcart.js.php:57
+#: module/cfshoppingcart.js.php:81
+#: module/cfshoppingcart.js.php:107
+#: module/cfshoppingcart.js.php:127
+msgid "Communication error"
+msgstr "錯誤訊息"
+
+#: module/cfshoppingcart.js.php:40
+msgid "Add to cart faild, please try again."
+msgstr "訂購錯誤,請再一次."
+
+#: module/cfshoppingcart.js.php:60
+#: module/cfshoppingcart.js.php:84
+msgid "Change quantity faild, please try again."
+msgstr "變更數量,請再一次"
+
+#: module/cfshoppingcart.js.php:78
+#: module/cfshoppingcart.js.php:104
+msgid "Just a moment please."
+msgstr "請稍等"
+
+#: module/cfshoppingcart.js.php:110
+msgid "Cancel commodity faild, please try again."
+msgstr "取消商品錯誤,請再一次"
+
+#: module/cfshoppingcart.js.php:130
+msgid "Do empty cart faild."
+msgstr "清空訂購錯誤"
+
+#: module/cfshoppingcart.js.php:147
+#: module/cfshoppingcart.js.php:151
+msgid "Please enter the quantity of the commodity."
+msgstr "請輸入商品數量"
+
+#: module/cfshoppingcart.js.php:156
+msgid "Commodity must be less than 100."
+msgstr "商品必須小於100"
+
+#: module/commu.php:73
+#: module/commu.php:101
+#: module/commu.php:129
+msgid "Max quantity of total order is"
+msgstr "全部訂單的最多數量"
+
+#: module/commu.php:84
+#: module/commu.php:106
+#: module/commu.php:134
+msgid "Max quantity of one commodity is"
+msgstr "單一商品的最多數量"
+
+#: module/execute_admin.php:69
+msgid "Saved"
+msgstr "已儲存"
+
+#: module/execute_admin.php:77
+msgid "Can not use Shipping."
+msgstr "不能使用送貨"
+
+#: module/execute_admin.php:77
+msgid "Shipping setting file not found"
+msgstr "無送貨設定檔案"
+
+#: module/execute_admin.php:92
+msgid "Options"
+msgstr "設定"
+
+#: module/execute_admin.php:95
+msgid "Custom field names"
+msgstr "設定欄位名稱"
+
+#: module/execute_admin.php:96
+msgid "Price field name"
+msgstr "價格 欄位名稱"
+
+#: module/execute_admin.php:98
+msgid "Currency format"
+msgstr "貨幣規則"
+
+#: module/execute_admin.php:98
+#, php-format
+msgid "example: $%.02f"
+msgstr "例如: $10.00"
+
+#: module/execute_admin.php:99
+msgid "Max quantity of one commodity"
+msgstr "單一商品的最大數量值"
+
+#: module/execute_admin.php:99
+#: module/execute_admin.php:100
+msgid "Zero is no limit."
+msgstr "零是無限制的"
+
+#: module/execute_admin.php:100
+msgid "Max quantity of total order"
+msgstr "全部訂購的最大數量值"
+
+#: module/execute_admin.php:101
+msgid "Must be edit"
+msgstr "必須編輯"
+
+#: module/execute_admin.php:102
+msgid "Cart Url"
+msgstr "訂購 網址"
+
+#: module/execute_admin.php:103
+msgid "Send order Url"
+msgstr "訂購表單 網址"
+
+#: module/execute_admin.php:104
+msgid "In Cart, QF-GetThumb option 1"
+msgstr "In Cart, QF-GetThumb option 1"
+
+#: module/execute_admin.php:105
+msgid "In Cart, QF-GetThumb default image"
+msgstr "In Cart, QF-GetThumb default image"
+
+#: module/execute_admin.php:106
+msgid "CSS \"Just a moment please\""
+msgstr "CSS \"Just a moment please\""
+
+#: module/execute_admin.php:107
+msgid "Choice show commodity on page"
+msgstr "請選擇顯示在分頁的商品"
+
+#: module/execute_admin.php:107
+msgid "home"
+msgstr "首頁"
+
+#: module/execute_admin.php:107
+msgid "page"
+msgstr "分頁"
+
+#: module/execute_admin.php:107
+msgid "archive"
+msgstr "分類"
+
+#: module/execute_admin.php:107
+msgid "single"
+msgstr "文章"
+
+#: module/execute_admin.php:107
+msgid "manually (must edit theme)"
+msgstr "手動 (必須編輯佈景主題)"
+
+#: module/execute_admin.php:108
+msgid "* Choice manually then insert PHP code: "
+msgstr "選擇手動 然後貼入PHP語碼:"
+
+#: module/execute_admin.php:109
+msgid "Debug mode"
+msgstr "臭蟲 模式"
+
+#: module/execute_admin.php:110
+msgid "Save"
+msgstr "儲存"
+
+#: module/function_cfshoppingcart.php:102
+msgid "Into Cart"
+msgstr "詳細 訂購清單"
+
+#: module/function_cfshoppingcart.php:107
+msgid "Add to Cart"
+msgstr "加入 訂購單"
+
+#: module/sum.php:91
+msgid "Go to Cart"
+msgstr "詳細 訂購清單"
+
+#: widget.php:59
+msgid "Shopping Cart is empty"
+msgstr "沒有商品"
+
+#: widget.php:77
+msgid "Title:"
+msgstr "標題:"
+
