@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: WordPress plugin cfshoppingcart\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/cf-shopping-cart\n"
 "POT-Creation-Date: 2010-02-17 10:03+0000\n"
-"PO-Revision-Date: 2010-05-31 10:46+0900\n"
+"PO-Revision-Date: 2010-05-31 12:49+0900\n"
 "Last-Translator: AI Takeuchi <takeai@silverpigeon.jp>\n"
-"Language-Team:  <tsaopeter@yahoo.com.tw>\n"
+"Language-Team: Tsao Peter <tsaopeter@yahoo.com.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,7 +56,7 @@ msgstr "變更數量"
 #: module/contact-form-7.php:59
 #: module/sum.php:78
 msgid "Subtotal"
-msgstr "總金額"
+msgstr "小計"
 
 #: module/cart.php:94
 #: module/contact-form-7.php:66
@@ -95,7 +95,7 @@ msgstr "變更數量,請再一次"
 #: module/cfshoppingcart.js.php:78
 #: module/cfshoppingcart.js.php:104
 msgid "Just a moment please."
-msgstr "請稍等"
+msgstr "請稍等~"
 
 #: module/cfshoppingcart.js.php:110
 msgid "Cancel commodity faild, please try again."
@@ -194,7 +194,7 @@ msgstr "In Cart, QF-GetThumb default image"
 
 #: module/execute_admin.php:106
 msgid "CSS \"Just a moment please\""
-msgstr "CSS \"Just a moment please\""
+msgstr "CSS \"請稍等~\""
 
 #: module/execute_admin.php:107
 msgid "Choice show commodity on page"
