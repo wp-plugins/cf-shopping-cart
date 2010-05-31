@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: WordPress plugin cfshoppingcart\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/cf-shopping-cart\n"
 "POT-Creation-Date: 2010-02-17 10:03+0000\n"
-"PO-Revision-Date: 2010-05-30 19:03+0800\n"
-"Last-Translator: \n"
-"Language-Team:  <fichtner@carola-fichtner.de>\n"
+"PO-Revision-Date: 2010-05-31 10:46+0900\n"
+"Last-Translator: AI Takeuchi <takeai@silverpigeon.jp>\n"
+"Language-Team:  <tsaopeter@yahoo.com.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: cfshoppingcart.php:369
@@ -157,7 +157,7 @@ msgstr "貨幣規則"
 #: module/execute_admin.php:98
 #, php-format
 msgid "example: $%.02f"
-msgstr "例如: $10.00"
+msgstr "例如: $%.02f"
 
 #: module/execute_admin.php:99
 msgid "Max quantity of one commodity"
