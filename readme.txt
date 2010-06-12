@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 2.9.2
-Stable tag: 0.2.8
+Stable tag: 0.2.9
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -20,6 +20,7 @@ Thereby website can have flexible design.
 
 = Translators =
 
+* Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefanía Muñoz](http://www.tehacesver.com/)
 * Chinese (zh_TW) - [Tsao Peter](mailto:tsaopeter@yahoo.com.tw)
 * German (de_DE) - Carola Fichtner
 * Japanese (ja) - [AI.Takeuchi](http://takeai.silverpigeon.jp/)
@@ -49,6 +50,9 @@ If you have created your own language pack, or have an update of an existing one
 
 
 == Changelog ==
+
+= 0.2.9 =
+* Translation for Spanish has been newly created by Jorge Guerrero, Miguel Olivares, Estefanía Muñoz.
 
 = 0.2.8 =
 * Update Chinese language pack by Tsao Peter.

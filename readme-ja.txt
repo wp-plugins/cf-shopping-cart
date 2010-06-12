@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 2.9.2
-Stable tag: 0.2.8
+Stable tag: 0.2.9
 
 Cfショッピングカートはシンプルなショッピングカート機能です。
 
