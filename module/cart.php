@@ -13,7 +13,7 @@
 require_once('sum.php');
 
 function cfshoppingcart_cart($args = '') {
-    if (!session_id()){ @session_start(); }
+    //if (!session_id()){ @session_start(); }
 
     global $cfshoppingcart_stat;
     $cfshoppingcart_stat = 'cart_page';

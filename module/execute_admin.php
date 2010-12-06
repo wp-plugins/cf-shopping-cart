@@ -19,12 +19,50 @@ function execute_admin(&$obj) {
     <form name="formCFShoppingcart" method="post">
       
     <?php
+    symbolic_link_for_contactForm7Modules($obj);
     if (isset($save)) {
         $msg = save($obj);
     }
     edit($obj, $msg);
     
     echo '</form>';
+}
+
+function symbolic_link_for_contactForm7Modules ($obj) {
+    //print $custom_fields;
+    $model = &$obj->model;
+
+    $ver = $model->get_version();
+    //echo 'ver = ' . $ver;
+    
+    if ($model->is_dontCreateSymbolicLinkCF7Module()) {
+        //echo 'dont crate';
+    } else {
+        //echo 'create';
+        // create symbolic link for contact-form-7 modules
+        //$f1 = dirname(__FILE__);
+        $f1 = get_plugin_fullpath();
+        //$f2 = $f1;
+        $f2dir = $f1;
+        $f1 .= '/contact-form-7-module/cfshoppingcart.php';
+        $f2dir = str_replace('/cf-shopping-cart', '/contact-form-7/modules', $f2dir);
+        $f2 = $f2dir . '/cfshoppingcart.php';
+        //echo "$f1 $f2 $f2dir";
+        
+        //unlink($f2);
+        //chmod($f2, 0777);
+        if (!file_exists($f2)) {
+            //echo 'create';
+            $old_umask = umask(0);
+            $old_dir = fileperms($f2dir);
+            chmod($f2dir, 0777);
+            symlink($f1, $f2);
+            chmod($f2, 0755);
+            chmod($f2dir, $old_dir);
+            umask($old_umask);
+        }
+        //unlink($f2);
+    }
 }
 
 function save(&$obj) {
@@ -57,6 +95,7 @@ function save(&$obj) {
     $model->setMaxQuantityOfOneCommodity($max_quantity_of_one_commodity);
     $model->setMaxQuantityOfTotalOrder($max_quantity_of_total_order);
     $model->setDebug($is_debug);
+    $model->setDontCreateSymbolicLinkCF7Module($dont_create_symbolic_link_cf7_module);
     $model->setShowCommodityOnHome($show_commodity_on_home);
     $model->setShowCommodityOnPage($show_commodity_on_page);
     $model->setShowCommodityOnArchive($show_commodity_on_archive);
@@ -107,6 +146,7 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Choice show commodity on page', 'cfshoppingcart');?></td><td><input type="checkbox" name="show_commodity_on_home" value="checked" <?php echo $model->getShowCommodityOnHome();?> /> <?php _e('home','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_page" value="checked" <?php echo $model->getShowCommodityOnPage();?> /> <?php _e('page','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_archive" value="checked" <?php echo $model->getShowCommodityOnArchive();?> /> <?php _e('archive','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_single" value="checked" <?php echo $model->getShowCommodityOnSingle();?> /> <?php _e('single','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_manually" value="checked" <?php echo $model->getShowCommodityOnManually();?> /> <?php _e('manually (must edit theme)','cfshoppingcart');?> </td></tr>
         <tr><td colspan="2"><?php _e('* Choice manually then insert PHP code: ', 'cfshoppingcart');?> '&lt;?php cfshoppingcart(); ?&gt;' to 'archive.php' and 'single.php' files(and more page.php, index.php...) in '<?php echo get_bloginfo( 'template_directory' );?>' directory.</td></tr>
         <tr><td><?php _e('Debug mode', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /></td></tr>
+        <tr><td><?php _e("Don't create symbolic link for Contact-Form-7 Module", 'cfshoppingcart');?></td><td><input type="checkbox" name="dont_create_symbolic_link_cf7_module" value="checked" <?php echo $model->getDontCreateSymbolicLinkCF7Module();?> /></td></tr>
         <tr><td><input type="submit" name="save" value="<?php _e('Save', 'cfshoppingcart')?>" /></td><td></td></tr>
         </table>
       </div>

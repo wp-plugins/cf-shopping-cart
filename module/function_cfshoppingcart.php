@@ -16,10 +16,12 @@ function cfshoppingcart($args = '') {//($get_post_custom){
 
     global $post;
     $get_post_custom = get_post_custom();
-    
+
+    /*
     if ($is_change) {
-        if (!session_id()){ @session_start(); }
+        //if (!session_id()){ @session_start(); }
     }
+      */
 
     /*
     $plugin_fullpath = get_plugin_fullpath();

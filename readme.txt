@@ -4,7 +4,7 @@ Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.0.1
-Stable tag: 0.2.10
+Stable tag: 0.2.11
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -21,7 +21,7 @@ Thereby website can have flexible design.
 = Translators =
 
 * Dutch (nl_NL) - [Rene](http://www.cesmehotels.com)
-* Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefanía Muñoz](http://www.tehacesver.com/)
+* Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefanía Mu?z](http://www.tehacesver.com/)
 * Chinese (zh_TW) - [Tsao Peter](mailto:tsaopeter@yahoo.com.tw)
 * German (de_DE) - Carola Fichtner
 * Japanese (ja) - [AI.Takeuchi](http://takeai.silverpigeon.jp/)
@@ -33,30 +33,33 @@ If you have created your own language pack, or have an update of an existing one
 
 1. Install more plugins and activate. Exec-PHP, Contact Form 7, Custom Field Template and QF-GetThumb(optional).
 2. Upload the entire 'cf-shopping-cart' folder to the '/wp-content/plugins/' directory.
-3. Install extended module for Contact Form 7 plugin. Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'.
-4. Activate Cf Shopping Cart 2 plugins. If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
-5. Be place Cf Shopping Cart widget to sidebar.
-6. Visit settings Contact Form 7, Add new contact form.
+3. Activate Cf Shopping Cart 2 plugins. If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
+4. Be place Cf Shopping Cart widget to sidebar.
+5. Visit settings Contact Form 7, Add new contact form.
    Add code into the Form: '[cfshoppingcart* cartdata class:cfshoppingcart7]'.
    Add code into the Message body: '[cartdata]'.
    Add code into Additional Settings: 'on_sent_ok: "cfshoppingcart_empty_cart();"'.
    Add new page (example 'Send order'), add code into the article: '[contact-form ? "???"]'. remember this page url.
-7. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
-8. Add new category example 'commodity'.
-9. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
-10. Settings Cf Shopping Cart.
-11. If choice manually at 10th step then edit theme file (archive.php, single.php and more). Insert php code '<?php cfshoppingcart(); ?>' into the loop of output-article.
-12. Make commodity pages. Add new page/post, input Custom Field, write article and set category.
-13. Repeat 12th step.
+6. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
+7. Add new category example 'commodity'.
+8. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
+9. Settings Cf Shopping Cart.
+10. If choice manually at 9th step then edit theme file (archive.php, single.php and more). Insert php code '<?php cfshoppingcart(); ?>' into the loop of output-article.
+11. Make commodity pages. Add new page/post, input Custom Field, write article and set category.
+12. Repeat 11th step.
 
 
 == Changelog ==
+
+= 0.2.11 =
+* Changed way to session start.
+* Automatic create symbolic link cfshoppingcart.php for Contact-Form-7 module, and add setting option for them. Accordingly removed installation step 3rd.
 
 = 0.2.10 =
 * Translation for Dutch has been newly created by Rene.
 
 = 0.2.9 =
-* Translation for Spanish has been newly created by Jorge Guerrero, Miguel Olivares, Estefanía Muñoz.
+* Translation for Spanish has been newly created by Jorge Guerrero, Miguel Olivares, Estefanía Mu?z.
 
 = 0.2.8 =
 * Update Chinese language pack by Tsao Peter.

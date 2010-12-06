@@ -10,7 +10,7 @@
  * displaying Shopping-cart data in contact form textarea.
  */
 function cfshoppingcart_ContactForm7() {
-    if (!session_id()){ @session_start(); }
+    //if (!session_id()){ @session_start(); }
 
     // get data object
     $WpCFShoppingcart = & new WpCFShoppingcart();

@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.2.10
+Version: 0.2.11
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -36,6 +36,22 @@ $plugin_uri = get_plugin_uri();
 
 load_plugin_textdomain('cfshoppingcart',
                        $plugin_path . '/lang', $plugin_folder . '/lang');
+
+/* session start */
+add_action('init', 'cfshoppingcart_init_session_start');
+function cfshoppingcart_init_session_start(){
+    global $Ktai_Style;
+    if (is_object($Ktai_Style)) {
+        if ($Ktai_Style->is_ktai()) {
+            ini_set('session.use_cookies','off');
+            ini_set('session.use_trans_sid', '1');
+        }
+    }
+    if (!session_id()) {
+        session_start();
+    }
+}
+
 
 if (is_admin()) {
     $wpCFShoppingcart = & new WpCFShoppingcart();
@@ -83,8 +99,9 @@ class WpCFShoppingcartItemModel {
 }
 class WpCFShoppingcartModel {
     // member variable
-    var $version;// = '0.2.10';
+    var $version;// = '0.2.11';
     var $debug;// = '';
+    var $dont_create_symbolic_link_cf7_module;
     var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
     var $price_field_name;// = 'Price';
     var $currency_format;// = '$%.02fYen';
@@ -107,8 +124,9 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.2.10';
+        $this->version = '0.2.11';
         $this->debug = '';
+        $this->dont_create_symbolic_link_cf7_module = '';
         $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
         $this->price_field_name = 'Price';
         $this->currency_format = '$%.02fYen';
@@ -130,6 +148,10 @@ class WpCFShoppingcartModel {
     }
 
     //
+    function get_version() {
+        return $this->version;
+    }
+    
     function is_debug() {
         if ($this->debug) return true;
         else return false;
@@ -139,6 +161,16 @@ class WpCFShoppingcartModel {
     }
     function getDebug() {
         return $this->debug;
+    }
+    function setDontCreateSymbolicLinkCF7Module($fields) {
+        $this->dont_create_symbolic_link_cf7_module = $fields;
+    }
+    function getDontCreateSymbolicLinkCF7Module() {
+        return $this->dont_create_symbolic_link_cf7_module;
+    }
+    function is_dontCreateSymbolicLinkCF7Module() {
+        if ($this->dont_create_symbolic_link_cf7_module) return true;
+        else return false;
     }
     //
     function setShowCommodityOnHome($fields) {
