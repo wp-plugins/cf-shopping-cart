@@ -115,8 +115,11 @@ URL: http://wordpress.org/extend/plugins/qf-getthumb/
 
 == Others ==
 
-# If you notice my mistakes(Program, English...), Please tell me.
-Web site: http://takeai.silverpigeon.jp/
+#I can not speak english very well.
+#I would like you to tell me mistake my English, code and others.
+#thanks.
+Cf Shopping Cart Website: http://takeai.silverpigeon.jp/
+Blog: http://takeai.silverpigeon.jp/
 AI.Takeuchi <takeai@silverpigeon.jp>
 
 
