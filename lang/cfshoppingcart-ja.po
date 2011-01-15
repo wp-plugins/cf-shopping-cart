@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-15 10:29+0900\n"
+"POT-Creation-Date: 2011-01-15 11:32+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: widget.php:42
-#: cfshoppingcart.php:439
+#: cfshoppingcart.php:448
 #: module/customer_management.php:18
 #: module/execute_admin.php:18
 msgid "Cf Shopping Cart"
@@ -31,12 +31,12 @@ msgstr "買い物かごは空です"
 msgid "Title:"
 msgstr "メニュー題名"
 
-#: cfshoppingcart.php:438
+#: cfshoppingcart.php:447
 msgid "Cf Shopping Cart Options"
 msgstr "CFショッピングカート"
 
 #: module/customer_management.php:73
-#: module/execute_admin.php:111
+#: module/execute_admin.php:112
 msgid "Saved"
 msgstr "保存しました"
 
@@ -46,27 +46,27 @@ msgid "Customer data fields"
 msgstr "カスタムフィールドのフィールド名"
 
 #: module/customer_management.php:244
-#: module/execute_admin.php:119
+#: module/execute_admin.php:120
 msgid "Can not use Shipping."
 msgstr "「送料」は使用できません"
 
 #: module/customer_management.php:244
-#: module/execute_admin.php:119
+#: module/execute_admin.php:120
 msgid "Shipping setting file not found"
 msgstr "送料設定ファイルが見つかりません"
 
 #: module/customer_management.php:263
-#: module/execute_admin.php:134
+#: module/execute_admin.php:135
 msgid "Options"
 msgstr "オプション"
 
 #: module/customer_management.php:266
-#: module/execute_admin.php:137
+#: module/execute_admin.php:138
 msgid "Custom field names"
 msgstr "カスタムフィールドのフィールド名"
 
 #: module/customer_management.php:267
-#: module/execute_admin.php:138
+#: module/execute_admin.php:139
 msgid "Price field name"
 msgstr "単価フィールドの名称"
 
@@ -76,117 +76,117 @@ msgstr "単価フィールドの名称"
 #: module/function_cfshoppingcart.php:101
 #: module/function_cfshoppingcart.php:107
 #: module/sum.php:77
-#: module/execute_admin.php:139
+#: module/execute_admin.php:140
 msgid "Quantity"
 msgstr "数量"
 
 #: module/customer_management.php:269
-#: module/execute_admin.php:140
+#: module/execute_admin.php:141
 msgid "Currency format"
 msgstr "通貨フォーマット"
 
 #: module/customer_management.php:269
-#: module/execute_admin.php:140
+#: module/execute_admin.php:141
 #, php-format
 msgid "example: $%.02f"
 msgstr "example: $%.02f円"
 
 #: module/customer_management.php:270
-#: module/execute_admin.php:141
+#: module/execute_admin.php:142
 msgid "Max quantity of one commodity"
 msgstr "1商品の最大注文数"
 
 #: module/customer_management.php:270
 #: module/customer_management.php:271
-#: module/execute_admin.php:141
 #: module/execute_admin.php:142
+#: module/execute_admin.php:143
 msgid "Zero is no limit."
 msgstr "ゼロは無制限"
 
 #: module/customer_management.php:271
-#: module/execute_admin.php:142
+#: module/execute_admin.php:143
 msgid "Max quantity of total order"
 msgstr "注文合計数量の最大"
 
 #: module/customer_management.php:272
 #: module/contact-form-7.php:66
 #: module/sum.php:83
-#: module/execute_admin.php:145
+#: module/execute_admin.php:146
 msgid "Shipping"
 msgstr "送料"
 
 #: module/customer_management.php:272
-#: module/execute_admin.php:145
+#: module/execute_admin.php:146
 msgid "Must be edit"
 msgstr "編集する必要があります"
 
 #: module/customer_management.php:273
-#: module/execute_admin.php:146
+#: module/execute_admin.php:147
 msgid "Cart Url"
 msgstr "買い物かごのURL"
 
 #: module/customer_management.php:274
-#: module/execute_admin.php:147
+#: module/execute_admin.php:148
 msgid "Send order Url"
 msgstr "注文画面のURL"
 
 #: module/customer_management.php:275
-#: module/execute_admin.php:148
+#: module/execute_admin.php:150
 msgid "In Cart, QF-GetThumb option 1"
 msgstr "買い物かご内、QF-GetThumb オプション"
 
 #: module/customer_management.php:276
-#: module/execute_admin.php:149
+#: module/execute_admin.php:151
 msgid "In Cart, QF-GetThumb default image"
 msgstr "買い物かご内、QF-GetThumbで使用するデフォルト画像"
 
 #: module/customer_management.php:277
-#: module/execute_admin.php:150
+#: module/execute_admin.php:152
 msgid "CSS \"Just a moment please\""
 msgstr "CSS \"しばらくお待ちください\""
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "Choice show commodity on page"
 msgstr "商品を表示するページを選んでください"
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "home"
 msgstr "home"
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "page"
 msgstr "page"
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "archive"
 msgstr "archive"
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "single"
 msgstr "single"
 
 #: module/customer_management.php:278
-#: module/execute_admin.php:151
+#: module/execute_admin.php:153
 msgid "manually (must edit theme)"
 msgstr "手動 (テーマを編集してください)"
 
 #: module/customer_management.php:279
-#: module/execute_admin.php:152
+#: module/execute_admin.php:154
 msgid "* Choice manually then insert PHP code: "
 msgstr "* 手動を選択した場合次の PHPコードを挿入してください:"
 
 #: module/customer_management.php:280
-#: module/execute_admin.php:153
+#: module/execute_admin.php:155
 msgid "Debug mode"
 msgstr "デバッグモード"
 
 #: module/customer_management.php:281
-#: module/execute_admin.php:155
+#: module/execute_admin.php:157
 msgid "Save"
 msgstr "保存"
 
@@ -240,15 +240,19 @@ msgstr "かごへ"
 msgid "Shopping Cart is empty."
 msgstr "買い物かごは空です"
 
-#: module/execute_admin.php:143
+#: module/execute_admin.php:144
 msgid "\"Go to Cart\" text"
 msgstr "\"買い物かごを表示\"テキストの変更"
 
-#: module/execute_admin.php:144
+#: module/execute_admin.php:145
 msgid "\"Orderer Input screen\" text"
 msgstr "\"ご注文者情報入力画面\"テキストの変更"
 
-#: module/execute_admin.php:154
+#: module/execute_admin.php:149
+msgid "Thanks Url"
+msgstr "サンクスURL"
+
+#: module/execute_admin.php:156
 msgid "Don't create symbolic link for Contact-Form-7 Module"
 msgstr "Contact-Form-7 用モジュールのシンボリックリンクを作成しない"
 
@@ -260,7 +264,7 @@ msgstr "Contact From 7 プラグイン用のCFショッピングカート拡張�
 #: module/cfshoppingcart.js.php:47
 #: module/cfshoppingcart.js.php:71
 #: module/cfshoppingcart.js.php:97
-#: module/cfshoppingcart.js.php:117
+#: module/cfshoppingcart.js.php:118
 msgid "Communication error"
 msgstr "通信エラーが発生しました。"
 
@@ -282,16 +286,16 @@ msgstr "しばらくお待ちください..."
 msgid "Cancel commodity faild, please try again."
 msgstr "商品のキャンセルに失敗しました。やりなおしてください。"
 
-#: module/cfshoppingcart.js.php:120
+#: module/cfshoppingcart.js.php:121
 msgid "Empty cart faild."
 msgstr "カートを空にするのに失敗しました。"
 
-#: module/cfshoppingcart.js.php:144
-#: module/cfshoppingcart.js.php:148
+#: module/cfshoppingcart.js.php:146
+#: module/cfshoppingcart.js.php:150
 msgid "Please enter the quantity of the commodity."
 msgstr "正しい商品数量を入力してください。"
 
-#: module/cfshoppingcart.js.php:153
+#: module/cfshoppingcart.js.php:155
 msgid "Commodity must be less than 100."
 msgstr "商品数量は１００未満にして下さい。"
 

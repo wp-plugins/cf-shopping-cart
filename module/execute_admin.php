@@ -104,6 +104,7 @@ function save(&$obj) {
     //
     $model->setGoToCartText($go_to_cart_text);
     $model->setOrdererInputScreenText($orderer_input_screen_text);
+    $model->setThanksUrl($thanks_url);
     
     //print_r($model);
 
@@ -145,6 +146,7 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Shipping', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php echo __('Must be edit','cfshoppingcart') . ': ' . $shipping_php_path; ?></td></tr>
         <tr><td><?php _e('Cart Url', 'cfshoppingcart');?></td><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('Send order Url', 'cfshoppingcart');?></td><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" size="60" /></td></tr>
+        <tr><td><?php _e('Thanks Url', 'cfshoppingcart');?></td><td><input type="text" name="thanks_url" id="thanks_url" value="<?php echo $model->getThanksUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('In Cart, QF-GetThumb option 1', 'cfshoppingcart');?></td><td><input type="text" name="qfgetthumb_option_1" id="qfgetthumb_option_1" value="<?php echo $model->getQfgetthumbOption1();?>" size="60" /></td></tr>
         <tr><td><?php _e('In Cart, QF-GetThumb default image', 'cfshoppingcart');?></td><td><input type="text" name="qfgetthumb_default_image" id="qfgetthumb_default_image" value="<?php echo $model->getQfgetthumbDefaultImage();?>" size="60" /></td></tr>
         <tr><td><?php _e('CSS "Just a moment please"', 'cfshoppingcart');?></td><td><input type="text" name="cfshoppingcart_justamomentplease" id="cfshoppingcart_justamomentplease" value="<?php echo $model->getJustAMomentPlease();?>" size="60" /></td></tr>

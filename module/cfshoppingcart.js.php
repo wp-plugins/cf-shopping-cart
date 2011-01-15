@@ -111,6 +111,7 @@ jQuery(document).ready(function(){
 });
 
 function cfshoppingcart_empty_cart() {
+    var thanks = "<?php echo $model->getThanksUrl(); ?>";
     //alert('cfshoppingcart_empty_cart()');
     jQuery.ajax({
       url: get_get('empty_cart', -1, 0),
@@ -121,6 +122,7 @@ function cfshoppingcart_empty_cart() {
         var json = eval(html);  // decode JSON
         jQuery('.cfshoppingcart_widget').html(json[0]);
         if (json[1]) { alert(json[1]); }
+        if (thanks) { location.replace(thanks); }
       }
     });
 }
