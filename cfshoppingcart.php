@@ -120,6 +120,8 @@ class WpCFShoppingcartModel {
     var $show_commodity_on_archive;// = 'checked';
     var $show_commodity_on_single;// = 'checked';
     var $show_commodity_on_manually;// = '';
+    var $go_to_cart_text;
+    var $orderer_input_screen_text;
     
     // constructor
     function WpCFShoppingcartModel() {
@@ -145,6 +147,9 @@ class WpCFShoppingcartModel {
         $this->show_commodity_on_archive = 'checked';
         $this->show_commodity_on_single = 'checked';
         $this->show_commodity_on_manually = '';
+        //
+        $this->go_to_cart_text = '&raquo;&nbsp;Go To Cart';
+        $this->orderer_input_screen_text = '&raquo;&nbsp;Orderer Input screen';
     }
 
     //
@@ -268,6 +273,20 @@ class WpCFShoppingcartModel {
     }
     function getQuantity() {
         return $this->quantity;
+    }
+    //
+    function setGoToCartText($field) {
+        $this->go_to_cart_text = $field;
+    }
+    function getGoToCartText() {
+        return $this->go_to_cart_text;
+    }
+    //
+    function setOrdererInputScreenText($field) {
+        $this->orderer_input_screen_text = $field;
+    }
+    function getOrdererInputScreenText() {
+        return $this->orderer_input_screen_text;
     }
     //
     function setCartUrl($field) {

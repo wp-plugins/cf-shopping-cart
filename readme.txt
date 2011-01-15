@@ -3,8 +3,8 @@ Contributors: AI.Takeuchi
 Donate link: http://takeai.silverpigeon.jp/
 Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
-Tested up to: 3.0.1
-Stable tag: 0.2.11
+Tested up to: 3.0.4
+Stable tag: 0.2.12
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -31,25 +31,29 @@ If you have created your own language pack, or have an update of an existing one
 
 == Installation ==
 
-1. Install more plugins and activate. Exec-PHP, Contact Form 7, Custom Field Template and QF-GetThumb(optional).
-2. Upload the entire 'cf-shopping-cart' folder to the '/wp-content/plugins/' directory.
-3. Activate Cf Shopping Cart 2 plugins. If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
-4. Be place Cf Shopping Cart widget to sidebar.
-5. Visit settings Contact Form 7, Add new contact form.
+1. Install plugins and activate. Cf Shopping Cart, Exec-PHP, Contact Form 7, Custom Field Template and QF-GetThumb(optional).
+2. Be place Cf Shopping Cart widget to sidebar.
+3. Visit settings Contact Form 7, Add new contact form.
    Add code into the Form: '[cfshoppingcart* cartdata class:cfshoppingcart7]'.
    Add code into the Message body: '[cartdata]'.
    Add code into Additional Settings: 'on_sent_ok: "cfshoppingcart_empty_cart();"'.
-   Add new page (example 'Send order'), add code into the article: '[contact-form ? "???"]'. remember this page url.
-6. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
-7. Add new category example 'commodity'.
-8. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
-9. Settings Cf Shopping Cart.
-10. If choice manually at 9th step then edit theme file (archive.php, single.php and more). Insert php code '<?php cfshoppingcart(); ?>' into the loop of output-article.
-11. Make commodity pages. Add new page/post, input Custom Field, write article and set category.
-12. Repeat 11th step.
+4. Add new page (example 'Send order'), add code into the article: '[contact-form ? "???"]'. remember this page url.
+5. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
+6. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
+7. Settings Cf Shopping Cart.
+(If choice manually at 7th step then edit theme file (archive.php, single.php and more). Insert php code '<?php cfshoppingcart(); ?>' into the loop of output-article.)
+8. Make product pages. Add new page or post, input Custom Field, write article and set category.
+9. Repeat 8th steps.
+
+* If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
+
+[For basic Installation, you can also have a look at the plugin homepage.](http://cfshoppingcart.silverpigeon.jp/?page_id=13)
 
 
 == Changelog ==
+
+= 0.2.12 =
+Added setting options, can setting the text of 'Go To Cart' and 'Orderer Input screen'.
 
 = 0.2.11 =
 * Changed way to session start.
@@ -118,7 +122,7 @@ URL: http://wordpress.org/extend/plugins/qf-getthumb/
 #I can not speak english very well.
 #I would like you to tell me mistake my English, code and others.
 #thanks.
-Cf Shopping Cart Website: http://takeai.silverpigeon.jp/
+Cf Shopping Cart Website: http://cfshoppingcart.silverpigeon.jp/
 Blog: http://takeai.silverpigeon.jp/
 AI.Takeuchi <takeai@silverpigeon.jp>
 

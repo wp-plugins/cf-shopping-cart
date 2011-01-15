@@ -101,6 +101,9 @@ function save(&$obj) {
     $model->setShowCommodityOnArchive($show_commodity_on_archive);
     $model->setShowCommodityOnSingle($show_commodity_on_single);
     $model->setShowCommodityOnManually($show_commodity_on_manually);
+    //
+    $model->setGoToCartText($go_to_cart_text);
+    $model->setOrdererInputScreenText($orderer_input_screen_text);
     
     //print_r($model);
 
@@ -137,6 +140,8 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Currency format', 'cfshoppingcart');?></td><td><input type="text" name="currency_format" id="currency_format" value="<?php echo $model->getCurrencyFormat();?>" size="10" /> <?php _e('example: $%.02f','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Max quantity of one commodity', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_one_commodity" id="max_quantity_of_one_commodity" value="<?php echo $model->getMaxQuantityOfOneCommodity();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Max quantity of total order', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_total_order" id="max_quantity_of_total_order" value="<?php echo $model->getMaxQuantityOfTotalOrder();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
+        <tr><td><?php _e('"Go to Cart" text', 'cfshoppingcart');?></td><td><input type="text" name="go_to_cart_text" id="go_to_cart_text" value="<?php echo $model->getGoToCartText();?>" size="40" /></td></tr>
+        <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><input type="text" name="orderer_input_screen_text" id="orderer_input_screen_text" value="<?php echo $model->getOrdererInputScreenText();?>" size="40" /></td></tr>
         <tr><td><?php _e('Shipping', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php echo __('Must be edit','cfshoppingcart') . ': ' . $shipping_php_path; ?></td></tr>
         <tr><td><?php _e('Cart Url', 'cfshoppingcart');?></td><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('Send order Url', 'cfshoppingcart');?></td><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" size="60" /></td></tr>

@@ -100,7 +100,7 @@ function cfshoppingcart_cart($args = '') {
     }
     $content .= '</table></div>';
 
-    $content .= '<div class="orderer">&raquo;&nbsp;<a class="orderder_input_screen" href="' . $send_order_url . '">' . __('Orderer Input screen','cfshoppingcart') . '</a></div>';
+    $content .= '<div class="orderer">&raquo;&nbsp;<a class="orderder_input_screen" href="' . $send_order_url . '">' . $model->getOrdererInputScreenText() . '</a></div>';
 
     if ($is_shortcode) return $content;
     else echo $content;
