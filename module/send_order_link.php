@@ -23,24 +23,8 @@ function cfshoppingcart_send_order_link($args = '') {
         require_once('debug.php');
         echo debug_cfshoppingcart('called: function cfshoppingcart_cart_link()');
     }
-    //echo 'is_debug = ' . $is_debug;
-    /*
-    $price_field_name = $model->getPriceFieldName();
-    $custom_fields = $model->getCustomFields();
-    $currency_format = $model->getCurrencyFormat();
-    $quantity = $model->getQuantity();
-    */
-    //$cart_url = $model->getCartUrl();
     $send_order_url = $model->getSendOrderUrl();
-    /*
-    $qfgetthumb_option_1 = $model->getQfgetthumbOption1();
-    $qfgetthumb_default_image = $model->getQfgetthumbDefaultImage();
-    $is_use_shipping = $model->getIsUseShipping();
     
-    $commodities = $_SESSION['cfshoppingcart']['commodities'];
-    $sum = $_SESSION['cfshoppingcart']['sum'];
-      */
-
     $a = '<a href="' . $send_order_url . '" class="cfshoppingcart_send_order_url">' . $link_string . '</a>';
     
     return $a;

@@ -9,20 +9,14 @@ require_once('cart.php');
 require_once('contact-form-7.php');
 
 function cfshoppingcart($args = '') {//($get_post_custom){
+    //print_r($_SESSION);
+    
     global $cfshoppingcart_stat;
     if ($cfshoppingcart_stat === 'cart_page') return;
-
-    $is_change = 0; /* CONFIGURATION - 1:change or 0:add */
-
+    
     global $post;
     $get_post_custom = get_post_custom();
-
-    /*
-    if ($is_change) {
-        //if (!session_id()){ @session_start(); }
-    }
-      */
-
+    
     /*
     $plugin_fullpath = get_plugin_fullpath();
     $plugin_path = get_plugin_path();
@@ -53,20 +47,17 @@ function cfshoppingcart($args = '') {//($get_post_custom){
     }
     
     $price_field_name = $model->getPriceFieldName();
+    $number_of_stock_field_name = $model->getNumberOfStockFieldName();
     $custom_fields = $model->getCustomFields();
     $currency_format = $model->getCurrencyFormat();
     $quantity_str = $model->getQuantity();
+    $table_tag = $model->getTableTag();
     //print_r($custom_fields);
     //trim($custom_fields);
     //print "[$price_field_name]";
     
     //global $post;
     $id = $post->ID;
-    if ($is_change) {
-        $commodities = $_SESSION['cfshoppingcart']['commodities'];
-        $quantity = $commodities[$id]['quantity'];
-        if (!$quantity) $quantity = 1;
-    }
     
     //$custom_fields = array('メーカー', '品番', '単価', 'シリーズ名', '年代');
     $c = $get_post_custom;
@@ -85,31 +76,77 @@ function cfshoppingcart($args = '') {//($get_post_custom){
         debug_cfshoppingcart('custom_fields is');
         print_r($custom_fields);
     }
-    $content .= '<div class="cfshoppingcart_commodity"><table>';
+    // form start ****************************************************
+    $content = '<div class="cfshoppingcart_post_wrap">';
+    //$fnid = 'cfshoppingcart_product_id_' . $id;
+    //$content .= '<form id="' . $fnid . '" name="' . $fnid . '" method="post" action="">';
+    $fnid = 'cfshoppingcart_product_id_x';
+    $content .= '<form class="' . $fnid . '" name="' . $fnid . '" method="post" action="">';
+    $content .= '<input type="hidden" name="include" value="' . $id . '" />';
+    //$content .= '<input type="hidden" name="cmd" value="add_to_cart" />';
+    //
+    $content .= '<div class="cfshoppingcart_commodity">';
+    if ($table_tag == 'table') {
+        $content .= '<table>';
+        $trth = '<tr><th>';
+        $thtd = '</th><td>';
+        $tdtr = '</td></tr>';
+    } else {
+        $content .= '<dl>';
+        $trth = '<dt>';
+        $thtd = '</dt><dd>';
+        $tdtr = '</dd>';
+    }
     foreach ($custom_fields as $key => $value) {
         //print "[$value]";
         $value = trim($value);
+        $is_sold_out = false;
         if ($value === $price_field_name) {
             $c[$value][0] = sprintf($currency_format, $c[$value][0]);
         }
-        $content .= '<tr><td>' . $value . '</td><td>' . $c[$value][0] . '</td></tr>';
+        // stock
+        if ($value === $number_of_stock_field_name) {
+            if ($c[$value][0] == 0 && $model->getTypeOfShowSoldOutMessage() === 'show_sold_out_message') {
+                $c[$value][0] = $model->getSoldOutMessage();
+                $is_sold_out = true;
+            } else if ($c[$value][0] == -1) {
+                continue;
+            }
+        }
+        // select
+        if (preg_match('/^#select\|/', $c[$value][0])) {
+            //$content .= '['.$c[$value][0].']';
+            $c[$value][0] = cfshoppingcart_get_post_select($value, $c[$value][0]);
+        }
+        
+        //if ($table_tag == 'table') {
+        //$content .= '<table>';
+        $content .= $trth . $value . $thtd . $c[$value][0] . $tdtr;
+        //} else {
+        //$content .= '<dl>';
+        //    $content .= '<dt>' . $value . '</dt><dd>' . $c[$value][0] . '</dd>';
+        //}
     }
-    $content .= '</table></div>';
-    
-    $content .= '<div class="cfshoppingcart_commodity_op"><span>';
-    if ($is_change) {
-        $content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="' . $quantity . '" /> ' . $quantity_str . ' ';
-        //$content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' (' . __('In cart is ','cfshoppingcart') . ' ' . $quantity . ') ';
-        $content .= '</span>';
-        $content .= '<input class="change_quantity_button" type="button" name="id=' . $id . '" value="' . __('Into Cart','cfshoppingcart') . '" />';
-        //$content .= '<input class="change_quantity_button" type="button" name="id=' . $id . '" value="' . __('Change quantity','cfshoppingcart') . '" />';
-    } else {
-        $content .= __('Quantity','cfshoppingcart') . ' <input class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
-        $content .= '</span>';
-        $content .= '<input class="add_to_cart_button" type="button" name="id=' . $id . '" value="' . __('Add to Cart','cfshoppingcart') . '" />';
-    }
-    $content .= '</div><!-- /cfshoppingcart_commodity_op -->';
+    if ($table_tag == 'table') { $content .= '</table>'; } else { $content .= '</dl>'; }
+    $content .= '</div>';
 
+    $current_user = wp_get_current_user();
+    if ($model->getShopNowClosed() && $current_user->user_level < $model->getShopNowClosedUserLevel()) {
+        return $content .= '<div class="cfshoppingcart_commodity_op_shop_now_closed"><span></span></div>';
+    }
+    if ($is_sold_out) {
+        $content .= '<div class="cfshoppingcart_commodity_op_sold_out"></div>';
+    } else {
+        $content .= '<div class="cfshoppingcart_commodity_op"><span>';
+        $content .= __('Quantity','cfshoppingcart') . ' <input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
+        $content .= '</span>';
+        $content .= '<input class="add_to_cart_button" type="submit" name="add_to_cart" value="' . __('Add to Cart','cfshoppingcart') . '" />';
+        $content .= '</div><!-- /cfshoppingcart_commodity_op -->';
+    }
+    // form end ********************************************************
+    $content .= '</form>';
+    $content .= '</div><!-- /.cfshoppingcart_post_wrap -->';
+    
     if ($model->getShowCommodityOnManually()) {
         echo $content;
     } else {
@@ -117,4 +154,19 @@ function cfshoppingcart($args = '') {//($get_post_custom){
     }
 }
 
+function cfshoppingcart_get_post_select($value, $cf) {
+    //echo 'cfshoppingcart_get_post_select';
+    $cfa = split('\|', $cf);
+    //print_r($cfa);
+    $h = '';
+    foreach ($cfa as $index => $value) {
+        if ($index == 0) { continue; }
+        $value = trim($value);
+        if (!$value) { continue; }
+        $h .= '<option value="' . $value . '">' . $value . '</option>';
+    }
+    if (!$h) return '';
+    $h = '<select name="' . $value . '">' . $h . '</select>';
+    return $h;
+}
 ?>

@@ -1,10 +1,9 @@
 === Cf Shopping Cart ===
 Contributors: AI.Takeuchi
-Donate link: http://takeai.silverpigeon.jp/
-Tags: shopping, content, widget, plugin, custom field, wordpress, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
+Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.0.4
-Stable tag: 0.2.13
+Stable tag: 0.3.1
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -31,13 +30,13 @@ If you have created your own language pack, or have an update of an existing one
 
 == Installation ==
 
-1. Install plugins and activate. Cf Shopping Cart, Exec-PHP, Contact Form 7, Custom Field Template and QF-GetThumb(optional).
+1. Install plugins and activate. Cf Shopping Cart, Contact Form 7, Custom Field Template, Exec-PHP(optional) and QF-GetThumb(optional).
 2. Be place Cf Shopping Cart widget to sidebar.
 3. Visit settings Contact Form 7, Add new contact form.
    Add code into the Form: '[cfshoppingcart* cartdata class:cfshoppingcart7]'.
    Add code into the Message body: '[cartdata]'.
    Add code into Additional Settings: 'on_sent_ok: "cfshoppingcart_empty_cart();"'.
-4. Add new page (example 'Send order'), add code into the article: '[contact-form ? "???"]'. remember this page url.
+4. Add new page (example 'Check out'), add code into the article: '[contact-form ? "???"]'. remember this page url.
 5. Add new page (example 'Shopping Cart') and put in '[cfshoppingcart_cart 1]' to article. remember this page url.
 6. Setting Custom Field Template, add new template. Field name example: 'Product ID', 'Name' and 'Price'... remember field names.
 7. Settings Cf Shopping Cart.
@@ -45,22 +44,48 @@ If you have created your own language pack, or have an update of an existing one
 8. Make product pages. Add new page or post, input Custom Field, write article and set category.
 9. Repeat 8th steps.
 
-* If use Shipping then copy 'shipping.php' file from '/wp-content/plugins/cf-shopping-cart/extention/' to '/wp-content/cfshoppingcart/', and edit it file.
-
 [For basic Installation, you can also have a look at the plugin homepage.](http://cfshoppingcart.silverpigeon.jp/?page_id=13)
 
 
 == Changelog ==
 
+= 0.3.1 =
+* Attention, this version has many changes. previous version is 0.2.13.
+
+= 0.3.0 beta5 =
+* Bug fix.
+
+= 0.3.0 beta4 =
+* Bug fix.
+* Fix table tag and image tag.
+* Can select table tag from table or dl.
+* others
+
+= 0.3.0 beta3 =
+* Added some messages in setting screen.
+* Using jQuery Form Plugin and jQuery Pines Notify (pnotify) Plugin.
+* Fix: way to loading jQuery.
+* others
+
+= 0.3.0 beta2 =
+* Bug fix: about 'Shop now closed option'.
+* Put message if server don't have symlink function.
+
+= 0.3.0 beta1 =
+* Changed way to setting module for Contact Form 7.
+* Changed way to setting of shipping.
+* Added shop open/closed status option.
+* Added number of stock manage.
+
 = 0.2.13 =
-Added setting option: can setting Thanks page url, move this url after send order.
+* Added setting option: can setting Thanks page url, move this url after send order.
 
 = 0.2.12 =
-Added setting options, can setting the text of 'Go To Cart' and 'Orderer Input screen'.
+* Added setting options, can setting the text of 'Go To Cart' and 'Orderer Input screen'.
 
 = 0.2.11 =
 * Changed way to session start.
-* Automatic create symbolic link cfshoppingcart.php for Contact-Form-7 module, and add setting option for them. Accordingly removed installation step 3rd.
+* Automatic create symbolic link cfshoppingcart.php for Contact Form 7 module, and add setting option for them. Accordingly removed installation step 3rd.
 
 = 0.2.10 =
 * Translation for Dutch has been newly created by Rene.
@@ -105,16 +130,22 @@ Added setting options, can setting the text of 'Go To Cart' and 'Orderer Input s
 * bug fixed.
 
 
+== Screenshots ==
+
+1. screenshot-1.png
+2. screenshot-2.png
+
+
 == More plugins. Thank you! ==
 
-Name: Exec-PHP
-URL: http://wordpress.org/extend/plugins/exec-php/
+Name: Custom Field Template
+URL: http://wordpress.org/extend/plugins/custom-field-template/
 
 Name: Contact Form 7
 URL: http://wordpress.org/extend/plugins/contact-form-7/
 
-Name: Custom Field Template
-URL: http://wordpress.org/extend/plugins/custom-field-template/
+Name: Exec-PHP
+URL: http://wordpress.org/extend/plugins/exec-php/
 
 Name: QF-GetThumb
 URL: http://wordpress.org/extend/plugins/qf-getthumb/

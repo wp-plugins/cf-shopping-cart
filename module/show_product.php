@@ -13,8 +13,6 @@ function show_product($content) {//($get_post_custom){
     //global $cfshoppingcart_stat;
     //if ($cfshoppingcart_stat === 'cart_page') return;
 
-    //$is_change = 0; /* CONFIGURATION - 1:change or 0:add */
-
     //global $post;
     //$get_post_custom = get_post_custom();
 

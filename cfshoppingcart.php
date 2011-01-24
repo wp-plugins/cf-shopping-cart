@@ -4,14 +4,14 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.2.13
+Version: 0.3.1
 Author URI: http://takeai.silverpigeon.jp/
 */
 
 // -*- Encoding: utf8n -*-
 // If you notice a my mistake(Program, English...), Please tell me.
 
-/*  Copyright 2009 AI Takeuchi (email: takeai@silverpigeon.jp)
+/*  Copyright 2009-2011 AI Takeuchi (email: takeai@silverpigeon.jp)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,6 +50,11 @@ function cfshoppingcart_init_session_start(){
     if (!session_id()) {
         session_start();
     }
+    // create sidebar widget html
+    require_once('module/sum.php');
+    $sname = 'cfshoppingcart';
+    $html  = cfshoppingcart_widget_html($_SESSION[$sname]['sum']);
+    $_SESSION[$sname]['sum']['html'] = $html;
 }
 
 
@@ -67,10 +72,14 @@ if (is_admin()) {
      * $deps(optional) 依存するスクリプトのリスト（配列）
      * $ver(optional) スクリプトのバージョン
      */
-    //wp_enqueue_script('jQuery', $plugin_uri . '/js/jquery.js', null, '1.4.1');
-    //wp_enqueue_script('jQuery.form', $plugin_uri . '/js/jquery.form.js', array('jQuery'), 2.36);
+    //wp_enqueue_script('jquery', $plugin_uri . '/js/jquery.js', null, '1.4.4');
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery.form', $plugin_uri . '/js/jquery.form.js', array('jquery'), 2.52);
+    wp_enqueue_script('jquery.pnotify', $plugin_uri . '/js/jquery.pnotify.min.js', array('jquery'), '1.0.1');
+    wp_enqueue_script('jquery.alerts', $plugin_uri . '/js/jquery.alerts.js', array('jquery'), 1.1);
     //wp_enqueue_script('jQuery.cookie', $plugin_uri . '/js/jquery.cookie.js', array('jQuery'), null);
     //wp_enqueue_script('jQuery.droppy', $plugin_uri . '/module/jquery.droppy.js', array('jQuery'), null);
+    
     require_once('module/add_wp_head.php');
     add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/function_cfshoppingcart.php');
@@ -90,7 +99,16 @@ if (is_admin()) {
 }
 
 function cfshoppingcart_action_admin_notices() {
-    check_wpcf7_cfshoppingcart_shortcode_handler();
+    //check_wpcf7_cfshoppingcart_shortcode_handler();
+    //function check_wpcf7_cfshoppingcart_shortcode_handler() {
+    if (!function_exists('symlink')) {
+        function symlink($a,$b){ return false; }
+        $symlink_msg = '<li>' . __("This server don't have symlink function, therefore can't use button 'Set extend module for Contact Form 7' in Cf Shopping Cart setting screen.",'cfshoppingcart') . '</li>';
+    }
+    if (!function_exists('wpcf7_cfshoppingcart_shortcode_handler')) {
+        echo '<p>' . __("Could you install extended module for Contact Form 7 plugin.",'cfshoppingcart') . '<br />' . __("Two ways:",'cfshoppingcart') . '<ol><li>' . __("Visit Cf Shopping Cart Setting Screen and click button: 'Set extend module for Contact Form 7'.",'cfshoppingcart') . '</li><li>' . __("Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'.",'cfshoppingcart') . '</li>' . $symlink_msg . '</ol></p>';
+    }
+    //}
 }
 
 /* Data model */
@@ -101,9 +119,14 @@ class WpCFShoppingcartModel {
     // member variable
     var $version;// = '0.2.11';
     var $debug;// = '';
-    var $dont_create_symbolic_link_cf7_module;
+    //var $dont_create_symbolic_link_cf7_module;
     var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
     var $price_field_name;// = 'Price';
+    // stock
+    var $number_of_stock_field_name;
+    var $type_of_show_sold_out_message;
+    var $sold_out_message;
+    
     var $currency_format;// = '$%.02fYen';
     var $quantity;// = 'Quantity';
     var $cart_url;// = 'http://';
@@ -123,13 +146,18 @@ class WpCFShoppingcartModel {
     var $go_to_cart_text;
     var $orderer_input_screen_text;
     var $thanks_url;
+    var $shipping;
+    var $shipping_enabled;
+    var $shop_now_closed;
+    var $closed_message_for_sidebar_widget;
+    var $table_tag;
     
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.2.13';
+        $this->version = '0.3.1';
         $this->debug = '';
-        $this->dont_create_symbolic_link_cf7_module = '';
+        //$this->dont_create_symbolic_link_cf7_module = '';
         $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
         $this->price_field_name = 'Price';
         $this->currency_format = '$%.02fYen';
@@ -152,8 +180,32 @@ class WpCFShoppingcartModel {
         $this->go_to_cart_text = '&raquo;&nbsp;Go To Cart';
         $this->orderer_input_screen_text = '&raquo;&nbsp;Orderer Input screen';
         $this->thanks_url = '';
+        $this->shipping = array();
+        $this->shipping_enabled = '';
+        // stock
+        $this->number_of_stock_field_name = '';
+        $this->type_of_show_sold_out_message = '';
+        $this->sold_out_message = 'Sold out';
+        $this->shop_now_closed = '';
+        $this->closed_message_for_sidebar_widget = 'Shop now closed';
+        //
+        $this->table_tag = 'table'; // table, dl
     }
 
+    function toDouble($v) {
+        if (preg_match('/-?[0-9]+\.[0-9]+$/', $v)) {
+            return $v;
+        } else if (preg_match('/-?[0-9]+$/', $v)) {
+            return $v;
+        } else {
+            return '';
+        }
+    }
+
+    function toAlpha($v) {
+        return preg_replace('/[^-?[0-9]+\.[0-9]+$/', $v);
+    }
+    
     //
     function get_version() {
         return $this->version;
@@ -169,7 +221,9 @@ class WpCFShoppingcartModel {
     function getDebug() {
         return $this->debug;
     }
+    /*
     function setDontCreateSymbolicLinkCF7Module($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->dont_create_symbolic_link_cf7_module = $fields;
     }
     function getDontCreateSymbolicLinkCF7Module() {
@@ -179,8 +233,119 @@ class WpCFShoppingcartModel {
         if ($this->dont_create_symbolic_link_cf7_module) return true;
         else return false;
     }
+      */
+    //
+    function getShopNowClosedUserLevel() {
+        return 6; // user level
+    }
+    function setShopNowClosed($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->shop_now_closed = $fields;
+    }
+    function getShopNowClosed() {
+        return $this->shop_now_closed;
+    }
+    function setClosedMessageForSidebarWidget($fields) {
+        $this->closed_message_for_sidebar_widget = strip_tags($fields);
+    }
+    function getClosedMessageForSidebarWidget() {
+        return $this->closed_message_for_sidebar_widget;
+    }
+    //
+    function setShippingEnabled($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->shipping_enabled = $fields;
+    }
+    function getShippingEnabled() {
+        return $this->shipping_enabled;
+    }
+    function setShipping($fields) {
+        //print_r($fields);
+        for ($l = 0; $l < 5; $l++) {
+            //echo 'k0 = ' . $fields[$l][0];
+            $fields[$l][0] = $this->toDouble($fields[$l][0]);
+            $fields[$l][1] = $this->toDouble($fields[$l][1]);
+            if ($fields[$l][2] !== '<' && $fields[$l][2] !== '<=') {
+                $fields[$l][2] = '';
+            }
+            if ($fields[$l][3] !== '<' && $fields[$l][3] !== '<=') {
+                $fields[$l][3] = '';
+            }
+            $fields[$l][4] = $this->toDouble($fields[$l][4]);
+        }
+        $this->shipping = $fields;
+    }
+    function getShipping($l, $c) {
+        return $this->shipping[$l][$c];
+    }
+    function getShippingListHtml($l, $c) {
+        $gt = $this->shipping[$l][$c];
+        
+        $h = '<select name="shipping[' . $l . '][' . $c . ']" id="shipping[' . $l . '][' . $c . ']" >';
+        $h .= '<option value="">' . __('Select','cfshoppingcart').'</option>';
+        if ($gt === '<') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="lt" value="<" ' . $selected . '>&lt;</option>';
+        if ($gt === '<=') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="le" value="<=" ' . $selected . '>&lt;=</option>';
+        $h .= '</select>';
+return $h;
+    }
+    
+    //
+    function setTableTag($fields) {
+        $this->table_tag = strip_tags($fields);
+    }
+    function getTableTag() {
+        return $this->table_tag;
+    }
+    function getTableTagListHtml() {
+        $gt = $this->table_tag;
+        
+        $h = '<select name="table_tag" id="table_tag">';
+        if ($gt === 'table') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="table" value="table" ' . $selected . '>table</option>';
+        if ($gt === 'dl') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="dl" value="dl" ' . $selected . '>dl</option>';
+        $h .= '</select>';
+        return $h;
+    }
+    
+    // stock
+    function setNumberOfStockFieldName($fields) {
+        $this->number_of_stock_field_name = strip_tags(trim($fields));
+    }
+    function getNumberOfStockFieldName() {
+        return $this->number_of_stock_field_name;
+    }
+    //
+    function setTypeOfShowSoldOutMessage($fields) {
+        $this->type_of_show_sold_out_message = strip_tags($fields);
+    }
+    function getTypeOfShowSoldOutMessage() {
+        return $this->type_of_show_sold_out_message;
+    }
+    function getTypeOfShowSoldOutMessageListHtml() {
+        $gt = $this->type_of_show_sold_out_message;
+        
+        $h = '<select name="type_of_show_sold_out_message" id="type_of_show_sold_out_message" >';
+        if ($gt === 'show_sold_out_message') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="show_sold_out_message" value="show_sold_out_message" ' . $selected . '>Show sold out message</option>';
+        if ($gt === 'dont_show_the_product') { $selected = 'selected="selected"'; } else { $selected = ''; }
+        $h .= '<option class="dont_show_the_product" value="dont_show_the_product" ' . $selected . ">Don't show the product</option>";
+        $h .= '</select>';
+return $h;
+    }
+    //
+    function setSoldOutMessage($fields) {
+        $this->sold_out_message = strip_tags(trim($fields));
+    }
+    function getSoldOutMessage() {
+        return $this->sold_out_message;
+    }
+    
     //
     function setShowCommodityOnHome($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->show_commodity_on_home = $fields;
     }
     function getShowCommodityOnHome() {
@@ -188,6 +353,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setShowCommodityOnPage($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->show_commodity_on_page = $fields;
     }
     function getShowCommodityOnPage() {
@@ -195,6 +361,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setShowCommodityOnArchive($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->show_commodity_on_archive = $fields;
     }
     function getShowCommodityOnArchive() {
@@ -202,6 +369,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setShowCommodityOnSingle($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->show_commodity_on_single = $fields;
     }
     function getShowCommodityOnSingle() {
@@ -209,6 +377,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setShowCommodityOnManually($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
         $this->show_commodity_on_manually = $fields;
     }
     function getShowCommodityOnManually() {
@@ -220,7 +389,7 @@ class WpCFShoppingcartModel {
         //$f = split(',', $fields);
         $f = mb_split(',', $fields);
         foreach ($f as $key => $value) {
-            $s = trim($value);
+            $s = strip_tags(trim($value));
             if ($s) array_push($a, $s);
         }
         $this->custom_fields = $a;
@@ -241,7 +410,7 @@ class WpCFShoppingcartModel {
     }
     //
     function setPriceFieldName($field) {
-        $this->price_field_name = trim($field);
+        $this->price_field_name = strip_tags(trim($field));
     }
     function getPriceFieldName() {
         return $this->price_field_name;
@@ -264,91 +433,91 @@ class WpCFShoppingcartModel {
       */
     //
     function setCurrencyFormat($field) {
-        $this->currency_format = $field;
+        $this->currency_format = strip_tags($field);
     }
     function getCurrencyFormat() {
         return $this->currency_format;
     }
     //
     function setQuantity($field) {
-        $this->quantity = $field;
+        $this->quantity = strip_tags($field);
     }
     function getQuantity() {
         return $this->quantity;
     }
     //
     function setGoToCartText($field) {
-        $this->go_to_cart_text = $field;
+        $this->go_to_cart_text = strip_tags($field);
     }
     function getGoToCartText() {
         return $this->go_to_cart_text;
     }
     //
     function setOrdererInputScreenText($field) {
-        $this->orderer_input_screen_text = $field;
+        $this->orderer_input_screen_text = strip_tags($field);
     }
     function getOrdererInputScreenText() {
         return $this->orderer_input_screen_text;
     }
     //
     function setThanksUrl($field) {
-        $this->thanks_url = $field;
+        $this->thanks_url = strip_tags($field);
     }
     function getThanksUrl() {
         return $this->thanks_url;
     }
     //
     function setCartUrl($field) {
-        $this->cart_url = $field;
+        $this->cart_url = strip_tags($field);
     }
     function getCartUrl() {
         return $this->cart_url;
     }
     //
     function setSendOrderUrl($field) {
-        $this->send_order_url = $field;
+        $this->send_order_url = strip_tags($field);
     }
     function getSendOrderUrl() {
         return $this->send_order_url;
     }
     //
     function setQfgetthumbOption1($field) {
-        $this->qfgetthumb_option_1 = $field;
+        $this->qfgetthumb_option_1 = strip_tags($field);
     }
     function getQfgetthumbOption1() {
         return $this->qfgetthumb_option_1;
     }
     //
     function setQfgetthumbDefaultImage($field) {
-        $this->qfgetthumb_default_image = $field;
+        $this->qfgetthumb_default_image = strip_tags($field);
     }
     function getQfgetthumbDefaultImage() {
         return $this->qfgetthumb_default_image;
     }
     //
     function setIsUseShipping($field) {
-        $this->is_use_shipping = $field;
+        $this->is_use_shipping = strip_tags($field);
     }
     function getIsUseShipping() {
         return $this->is_use_shipping;
     }
     //
     function setJustAMomentPlease($field) {
-        $this->cfshoppingcart_justamomentplease = $field;
+        $this->cfshoppingcart_justamomentplease = strip_tags($field);
     }
     function getJustAMomentPlease() {
         return $this->cfshoppingcart_justamomentplease;
     }
     //
     function setMaxQuantityOfOneCommodity($field) {
-        $this->max_quantity_of_one_commodity = $field;
+        $this->max_quantity_of_one_commodity = $this->toDouble($field);
     }
     function getMaxQuantityOfOneCommodity() {
         return $this->max_quantity_of_one_commodity;
     }
     //
     function setMaxQuantityOfTotalOrder($field) {
-        $this->max_quantity_of_total_order = $field;
+        $this->max_quantity_of_total_order = $this->toDouble($field);
     }
     function getMaxQuantityOfTotalOrder() {
         return $this->max_quantity_of_total_order;
