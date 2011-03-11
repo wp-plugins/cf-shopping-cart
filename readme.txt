@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.3.3
+Stable tag: 0.3.4
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -49,6 +49,9 @@ If you have created your own language pack, or have an update of an existing one
 
 
 == Changelog ==
+
+= 0.3.4 =
+* Bug fix: Not display 'empty cart' in Cart Widget after check out.
 
 = 0.3.3 =
 * Translation for Russian has been newly created by Evgeny Vakhteev.

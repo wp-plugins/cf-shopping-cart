@@ -172,8 +172,10 @@ function cfshoppingcart_empty_cart() {
         //alert(html);
         if (!html) { alert('<?php _e('Empty cart faild.','cfshoppingcart');?>'); return; }
         var json = eval(html);  // decode JSON
-        jQuery('.cfshoppingcart_widget').html(json[1]);
-        if (json[0]) { alert(json[0]); }
+        //alert(json);
+        //alert(json['widget']);
+        jQuery('.cfshoppingcart_widget').html(json['widget']);
+        if (json['msg_red']) { alert(json['msg_red']); }
         if (thanks) { location.replace(thanks); }
       }
     });
@@ -208,36 +210,3 @@ function checkNumber(quantity) {
 function checkIsNumber (value) {
   return (value.match(/[0-9]+/g) == value);
 }
-
-/*
-function cfshoppingcart_message(msg) {
-    var layer = '#cfshoppingcart_message_layer';
-    if (msg) {
-        jQuery(layer).html(msg);
-        
-        var width = jQuery(window).width();
-        var height = jQuery(window).height();
-        var w = width / 2;
-        var h = height / 2;
-        var x = (width - w) / 2 + jQuery(window).scrollLeft();;
-        var y = (height - h) / 2 + jQuery(window).scrollTop();;
-        
-        jQuery(layer).css('left',x);
-        jQuery(layer).css('top',y);
-        
-        jQuery(layer).css("width", w + "px");
-        jQuery(layer).css("height", h + "px");
-        jQuery(layer).css("line-height", h + "px");
-        
-        jQuery(layer).css("visibility", "visible");
-    } else {
-        jQuery(layer).css("visibility", "hidden");
-    }
-}
-
-function cfshoppingcart_set_message_layer() {
-    var popuphtml = '<!-- cfshoppingcart_message_layer --><div id="cfshoppingcart_message_layer" style="position: absolute; z-index: 99; visibility: hidden; left: 45px; top: 33px;<?php echo $cfshoppingcart_justamomentplease; ?>"></div><!-- end of cfshoppingcart_message_layer -->';
-    jQuery("body").append(popuphtml);
-}
-*/
-
