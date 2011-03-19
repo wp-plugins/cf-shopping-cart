@@ -30,7 +30,7 @@ function get_plugin_fullpath() {
     $cpath = get_current_path();
     $first = substr($cpath, 0, 1);
     if ($first === '/') $path = $first;
-    $f = split('/', $cpath);
+    $f = explode('/', $cpath);
     $max = count($f);
     foreach ($f as $i => $p) {
         if ($p === 'module') {
@@ -52,7 +52,7 @@ function get_wp_fullpath() {
     $cpath = get_current_path();
     $first = substr($cpath, 0, 1);
     if ($first === '/') $path = $first;
-    $f = split('/', $cpath);
+    $f = explode('/', $cpath);
     $max = count($f);
     foreach ($f as $i => $p) {
         if ($p === 'wp-content') {
@@ -80,7 +80,7 @@ function get_plugin_path() {
     $cpath = get_current_path();
     $first = substr($cpath, 0, 1);
     if ($first === '/') $path = $first;
-    $f = split('/', $cpath);
+    $f = explode('/', $cpath);
     $max = count($f);
     foreach ($f as $i => $p) {
         if ($p !== 'wp-content' && $flag) continue;
@@ -101,7 +101,7 @@ function get_plugin_path() {
 /* ex: this_plugin */
 function get_plugin_folder() {
     $cpath = get_current_path();
-    $f = split('/', $cpath);
+    $f = explode('/', $cpath);
     $max = count($f);
     for ($i = $max - 1; $i >= 0; $i--) {
         if ($f[$i] === 'module' && $i > 0) {
@@ -111,10 +111,22 @@ function get_plugin_folder() {
     return false;
 }
 
+/*
+ * php.ini
+ * -- before --
+ * error_reporting = E_ALL | E_STRICT
+ * -- after --
+ * ;error_reporting = E_ALL | E_STRICT
+ * error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
+ */
 /* ex: /home/user/public_html/wordpress/wp-content/plugins/this_plugin... */
 function get_current_path() {
     //echo "WP_PLUGIN_URL = " . WP_PLUGIN_URL;
     $current_path = (dirname(__FILE__));
+
+    // sanitize for Win32 installs
+    $current_path = str_replace('\\' ,'/', $current_path);
+    $current_path = preg_replace('|/+|', '/', $current_path);
     return $current_path;
     //echo "<p>current_path = $current_path</p>";
 }

@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.3.4
+Version: 0.3.5
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -120,7 +120,7 @@ class WpCFShoppingcartModel {
     var $version;// = '0.2.11';
     var $debug;// = '';
     //var $dont_create_symbolic_link_cf7_module;
-    var $custom_fields;// = mb_split(',', 'Product_ID,Name,Price');
+    var $custom_fields;// = explode(',', 'Product_ID,Name,Price');
     var $price_field_name;// = 'Price';
     // stock
     var $number_of_stock_field_name;
@@ -155,10 +155,10 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.3.4';
+        $this->version = '0.3.5';
         $this->debug = '';
         //$this->dont_create_symbolic_link_cf7_module = '';
-        $this->custom_fields = mb_split(',', 'Product_ID,Name,Price');
+        $this->custom_fields = explode(',', 'Product_ID,Name,Price');
         $this->price_field_name = 'Price';
         $this->currency_format = '$%.02fYen';
         $this->quantity = 'Quantity';
@@ -386,8 +386,8 @@ return $h;
     //
     function setCustomFields($fields) {
         $a = array();
-        //$f = split(',', $fields);
-        $f = mb_split(',', $fields);
+        //$f = explode(',', $fields);
+        $f = explode(',', $fields);
         foreach ($f as $key => $value) {
             $s = strip_tags(trim($value));
             if ($s) array_push($a, $s);

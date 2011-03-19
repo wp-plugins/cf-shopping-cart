@@ -156,7 +156,7 @@ function cfshoppingcart($args = '') {//($get_post_custom){
 
 function cfshoppingcart_get_post_select($value, $cf) {
     //echo 'cfshoppingcart_get_post_select';
-    $cfa = split('\|', $cf);
+    $cfa = explode('|', $cf);
     //print_r($cfa);
     $h = '';
     foreach ($cfa as $index => $value) {

@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.3.4
+Stable tag: 0.3.5
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -47,8 +47,23 @@ If you have created your own language pack, or have an update of an existing one
 
 [For basic Installation, you can also have a look at the plugin homepage.](http://cfshoppingcart.silverpigeon.jp/?page_id=13)
 
+If you be running WordPress on Windows, must be rewrite php.ini file, if necessary.
+Thereby, Php don't say error message very well.
+Reference: http://php.net/manual/en/function.error-reporting.php
+php.ini: 
+-- before --
+error_reporting = E_ALL | E_STRICT
+-- after --
+;error_reporting = E_ALL | E_STRICT
+error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
+------------
+
 
 == Changelog ==
+
+= 0.3.5 =
+* Support to path separator for Windows.
+* Stop the use of split function, use to explode function.
 
 = 0.3.4 =
 * Bug fix: Not display 'empty cart' in Cart Widget after check out.
