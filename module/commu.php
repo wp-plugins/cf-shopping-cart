@@ -49,7 +49,7 @@ function cfshoppingcart_work($cmd, $id, $quantity, $customfield) {
     }
 
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
 
@@ -232,7 +232,7 @@ function cfshoppingcart_work($cmd, $id, $quantity, $customfield) {
 function cfshoppingcart_stock() {
     $sname = 'cfshoppingcart';
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     
     $number_of_stock_field_name = $model->getNumberOfStockFieldName();

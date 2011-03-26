@@ -4,7 +4,6 @@
  * -*- Encoding: utf8n -*-
  */
 
-//require_once('common.php');
 require_once('cart.php');
 require_once('contact-form-7.php');
 
@@ -26,12 +25,14 @@ function cfshoppingcart($args = '') {//($get_post_custom){
     //echo "<p>current_path = $plugin_folder, $plugin_path</p>";
     
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     if ($is_debug = $model->is_debug()) {
         require_once('debug.php');
         echo debug_cfshoppingcart('called: function cfshoppingcart()');
+        require_once('common.php');
+        echo '<a href="' . get_plugin_module_uri() . '/commu.php' . '" target="_blank">SEE THE commu.php OUTPUT MESSAGE.</a>';
     }
     
     $rf = 1;

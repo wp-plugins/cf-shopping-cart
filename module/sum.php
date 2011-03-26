@@ -20,7 +20,7 @@ function cfshoppingcart_sum() {
     $shipping_php_path = get_shipping_php_path();
     
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     $price_field_name = $model->getPriceFieldName();
     $is_use_shipping = $model->getIsUseShipping();
@@ -66,7 +66,7 @@ function cfshoppingcart_sum() {
 
 function cfshoppingcart_widget_html($sum) {
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     $price_field_name = $model->getPriceFieldName();

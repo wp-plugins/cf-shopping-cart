@@ -4,7 +4,7 @@
  */
 
 <?php
-$wpCfshoppingcart = & new WpCFShoppingcart();
+$wpCfshoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
 $model = $wpCfshoppingcart->model;
 if ($model->is_debug()) {
   echo 'var cfshoppingcart_debug = 1;';

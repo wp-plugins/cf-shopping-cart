@@ -13,7 +13,7 @@ function cfshoppingcart_ContactForm7() {
     //if (!session_id()){ @session_start(); }
 
     // get data object
-    $WpCFShoppingcart = & new WpCFShoppingcart();
+    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     $price_field_name = $model->getPriceFieldName();
