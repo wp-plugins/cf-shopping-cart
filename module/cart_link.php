@@ -9,14 +9,12 @@
  * [cfshoppingcart_cart_link link-string]
  */
 
-//require_once('sum.php');
-
 function cfshoppingcart_cart_link($args = '') {
     //print_r($args);
     $link_string = $args[0];
     
     // get data object
-    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
+    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     if ($is_debug = $model->is_debug()) {

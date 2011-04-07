@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.3.6
+Stable tag: 0.6.0
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -21,7 +21,7 @@ Thereby website can have flexible design.
 
 * Russian (ru_RU) - [Evgeny Vakhteev](http://www.sdelanomnoy.ru/)
 * Dutch (nl_NL) - [Rene](http://www.cesmehotels.com)
-* Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefanía Mu?z](http://www.tehacesver.com/)
+* Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefanåƒ˜ Mu?z](http://www.tehacesver.com/)
 * Chinese (zh_TW) - [Tsao Peter](mailto:tsaopeter@yahoo.com.tw)
 * German (de_DE) - Carola Fichtner
 * Japanese (ja) - [AI.Takeuchi](http://takeai.silverpigeon.jp/)
@@ -58,8 +58,51 @@ error_reporting = E_ALL | E_STRICT
 error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
-
 == Changelog ==
+
+= 0.6.0 =
+* Attention, this version has many changes. previous version is 0.3.6.
+* Bug fix: css load path failed in admin screen.
+
+= 0.5.9 =
+* Call wpcf7_add_shortcode function in myself.
+
+= 0.5.8 =
+* Bug fix: number of products in cart not clear after check out.
+
+= 0.5.7 =
+* Bug fix: shop closed message for widget.
+
+= 0.5.6 =
+* Added setting: Don't load css.
+
+= 0.5.5 =
+* Be put such 'empty cart' and other messages on check out screen.
+* Move output script to footer.
+* Added do_action_ref_array 'before_clear_cart'.
+* Bug fix: process of after about check stock.
+
+= 0.5.4 =
+* Hook to 'wpcf7_mail_sent' of Contact Form 7.
+* Remove unnecessary php class object.
+* Support to be working when no ajax.
+* Added shortcode.
+* Remove no use css color setting.
+* Bug fix to update Stock Custom Field value function.
+
+= 0.4.5 =
+* Bug fix: check out of stock.
+
+= 0.4.3 =
+* Added to Custom Field keyword '#postid'. This keyword be replaced to formatted Post ID Number.
+* Added to Custom Field keyword '#hidden'. This keyword use to hidden to the Custom Field.
+* Added option chooser of product and supported extra charges.
+* Fix internationalization message.
+* Removed old shipping function.
+* Others
+
+= 0.3.7 =
+* Changed way to ajax communication.
 
 = 0.3.6 =
 * Change coding:
@@ -119,7 +162,7 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 * Translation for Dutch has been newly created by Rene.
 
 = 0.2.9 =
-* Translation for Spanish has been newly created by Jorge Guerrero, Miguel Olivares, Estefanía Mu?z.
+* Translation for Spanish has been newly created by Jorge Guerrero, Miguel Olivares, Estefanåƒ˜ Mu?z.
 
 = 0.2.8 =
 * Update Chinese language pack by Tsao Peter.
@@ -161,6 +204,7 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 == Screenshots ==
 
 1. screenshot-1.png
+2. screenshot-2.png
 
 
 == More plugins. Thank you! ==

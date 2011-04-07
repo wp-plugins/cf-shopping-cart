@@ -13,7 +13,8 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
 
     if ( ! is_array( $tag ) )
       return '';
-    
+    //print_r($tag);
+
     $type = $tag['type'];
     $name = $tag['name'];
     $options = (array) $tag['options'];
@@ -42,6 +43,12 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
         } elseif ( preg_match( '%^([0-9]*)[x/]([0-9]*)$%', $option, $matches ) ) {
             $cols_att = (int) $matches[1];
             $rows_att = (int) $matches[2];
+        } elseif ( preg_match( '%^(.*?)=(.*)$%', $option, $matches ) ) {
+            if (strstr($matches[2], '|')) {
+                $cf_opt[$matches[1]] = explode('|', $matches[2]);
+            } else {
+                $cf_opt[$matches[1]] = $matches[2];
+            }
         }
     }
     
@@ -78,12 +85,29 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
 
     //
     if (function_exists('cfshoppingcart_ContactForm7')) {
-        $value = cfshoppingcart_ContactForm7();
+        // $b is true or false
+        list($b, $value) = cfshoppingcart_ContactForm7($cf_opt);
     } else {
-        $value = 'Function cfshoppingcart_ContactForm7 is not found.';
+        list($b, $value) = 'Function cfshoppingcart_ContactForm7 is not found.';
     }
+    $value = esc_html( $value );
+    //print_r($cf_opt);
 
-    $html = '<textarea name="' . $name . '"' . $atts . ' readonly="readonly">' . esc_html( $value ) . '</textarea>';
+    if (array_key_exists('hidden', $cf_opt)) {
+        if ($b) {
+            $html = '<input type="hidden" name="' . $name . '"' . $atts . ' value="' . $value . '">';
+        } else {
+            //$html = '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
+            $html .= '<input type="hidden" name="' . $name . '"' . $atts . ' value="">';
+        }
+    } else {
+        if ($b) {
+            $html = '<textarea name="' . $name . '"' . $atts . ' readonly="readonly">' . $value . '</textarea>';
+        } else {
+            $html = '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
+            $html .= '<textarea name="' . $name . '"' . $atts . ' readonly="readonly"></textarea>';
+        }
+    }
 
     $validation_error = '';
     if ( is_a( $wpcf7_contact_form, 'WPCF7_ContactForm' ) )

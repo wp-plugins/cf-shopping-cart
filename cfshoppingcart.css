@@ -4,6 +4,11 @@
  * -*- Encoding: utf8n -*-
  */
 
+.cfs_top_link {
+  text-align: right;
+  margin: 0 5px 0px 0;
+  width: 94%;
+}
 
 fieldset {
   border: 1px solid #ccc;

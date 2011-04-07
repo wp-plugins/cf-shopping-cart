@@ -4,15 +4,16 @@
  */
 
 <?php
-$wpCfshoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
+$wpCfshoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
 $model = $wpCfshoppingcart->model;
 if ($model->is_debug()) {
   echo 'var cfshoppingcart_debug = 1;';
 } else {
   echo 'var cfshoppingcart_debug = 0;'; // 
 }
-$cfshoppingcart_justamomentplease = $model->getJustAMomentPlease();
-$cfshoppingcart_plugin_commu_uri = get_plugin_module_uri() . '/commu.php';
+//$cfshoppingcart_justamomentplease = $model->getJustAMomentPlease();
+//$cfshoppingcart_plugin_commu_uri = $cfshoppingcart_common->get_plugin_module_uri() . '/commu.php';
+$widgetEmptyCartHtml = $model->getWidgetEmpyCartHtml();
 ?>
 
 jQuery(document).ready(function(){
@@ -62,7 +63,7 @@ function cfshoppingcart_js_init() {
     //target: '.cfshoppingcart_widget', // Out put return html
     beforeSubmit: cfshoppingcart_request, // call function before send
     success: cfshoppingcart_response, // call function after send
-    url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
+    //url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
     type: 'post', // post or get
     datatype:'json', // type of server respons
     timeout: 3000 // timeout
@@ -79,7 +80,7 @@ function cfshoppingcart_js_init() {
     //target: '.cfshoppingcart_widget', // Out put return html
     beforeSubmit: cfshoppingcart_request, // call function before send
     success: cfshoppingcart_response, // call function after send
-    url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
+    //url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
     type: 'post', // post or get
     datatype:'json', // type of server respons
     timeout: 3000 // timeout
@@ -111,10 +112,16 @@ function cfshoppingcart_js_init() {
   //
   function cfshoppingcart_response(responseText, statusText) {
     if (cfshoppingcart_debug) {
-      //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText);
-      alert('status: ' + statusText + '\n\nresponseText: \n' + obj2text(responseText));
+      alert('status: ' + statusText + '\n\nresponseText: \n' + responseText);
+      //alert('status: ' + statusText + '\n\nresponseText: \n' + obj2text(responseText));
     }
     var json = eval(responseText);  // decode JSON
+    if (json == null) {
+        if (cfshoppingcart_debug) {
+            alert('json == null');
+        }
+        return;
+    }
     //jQuery('.cfshoppingcart_widget').html(json[1]);
     if (json['widget']) {
       jQuery('.cfshoppingcart_widget').html(json['widget']);
@@ -165,34 +172,8 @@ function cfshoppingcart_js_init() {
 function cfshoppingcart_empty_cart() {
     var thanks = "<?php echo $model->getThanksUrl(); ?>";
     //alert('cfshoppingcart_empty_cart()');
-    jQuery.ajax({
-      url: get_get('empty_cart', -1, 0),
-      cache: function(){alert('<?php _e('Communication error','cfshoppingcart');?>');},
-      success: function(html){
-        //alert(html);
-        if (!html) { alert('<?php _e('Empty cart faild.','cfshoppingcart');?>'); return; }
-        var json = eval(html);  // decode JSON
-        //alert(json);
-        //alert(json['widget']);
-        jQuery('.cfshoppingcart_widget').html(json['widget']);
-        if (json['msg_red']) { alert(json['msg_red']); }
-        if (thanks) { location.replace(thanks); }
-      }
-    });
-}
-
-function get_get(cmd, id, quantity) {
-    <?php
-    //
-    require_once('common.php');
-    //$plugin_fullpath = get_plugin_fullpath();
-    //$plugin_path = get_plugin_path();
-    //$plugin_folder = get_plugin_folder();
-    //$plugin_uri = get_plugin_uri();
-    $cfshoppingcart_plugin_module_uri = get_plugin_module_uri();
-    echo 'var cfshoppingcart_plugin_module_uri = "' . $cfshoppingcart_plugin_module_uri . '";';
-    ?>
-    return cfshoppingcart_plugin_module_uri + '/commu.php?cmd=' + cmd + '&include=' + id + '&quantity=' + quantity;
+    jQuery('.cfshoppingcart_widget').html('<?php echo $widgetEmptyCartHtml;?>');
+    if (thanks) { location.replace(thanks); }
 }
 
 function checkNumber(quantity) {
@@ -210,3 +191,4 @@ function checkNumber(quantity) {
 function checkIsNumber (value) {
   return (value.match(/[0-9]+/g) == value);
 }
+

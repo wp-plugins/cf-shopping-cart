@@ -6,17 +6,17 @@
 
 /*
  * shortcode: 
- * [cfshoppingcart_send_order_link link-string]
+ * [cfshoppingcart_checkout_link link-string]
  */
 
 //require_once('sum.php');
 
-function cfshoppingcart_send_order_link($args = '') {
+function cfshoppingcart_checkout_link($args = '') {
     //print_r($args);
     $link_string = $args[0];
     
     // get data object
-    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
+    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     if ($is_debug = $model->is_debug()) {

@@ -11,19 +11,22 @@ function cfshoppingcart_sum() {
         return $m;
     }
 
-    require_once('common.php');
-    $plugin_fullpath = get_plugin_fullpath();
-    //$plugin_path = get_plugin_path();
-    //$plugin_folder = get_plugin_folder();
-    //$plugin_uri = get_plugin_uri();
-    //$plugin_module_uri = get_plugin_module_uri();
-    $shipping_php_path = get_shipping_php_path();
+    //require_once('common.php');
+    //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
+    global $cfshoppingcart_common;
+
+    $plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
+    //$plugin_path = $cfshoppingcart_common->get_plugin_path();
+    //$plugin_folder = $cfshoppingcart_common->get_plugin_folder();
+    //$plugin_uri = $cfshoppingcart_common->get_plugin_uri();
+    //$plugin_module_uri = $cfshoppingcart_common->get_plugin_module_uri();
+    //$shipping_php_path = get_shipping_php_path();
     
     // get data object
-    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
+    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     $price_field_name = $model->getPriceFieldName();
-    $is_use_shipping = $model->getIsUseShipping();
+    //$is_use_shipping = $model->getIsUseShipping();
     
     $sname = 'cfshoppingcart';
     $commodities  = $_SESSION[$sname]['commodities'];
@@ -42,10 +45,6 @@ function cfshoppingcart_sum() {
         // new version shipping
         require_once('shipping.php');
         list($shipping, $shipping_msg) = shipping(&$model, $num, $sum);
-    } else if ($is_use_shipping && file_exists($shipping_php_path)) {
-        // old version shipping
-        require_once($shipping_php_path);
-        list($shipping, $shipping_msg) = shipping($num, $sum);
     }
     
     $_SESSION[$sname]['sum']['quantity_of_commodity'] = $num;
@@ -66,7 +65,7 @@ function cfshoppingcart_sum() {
 
 function cfshoppingcart_widget_html($sum) {
     // get data object
-    $WpCFShoppingcart =  /* php4_110323 & new */ new WpCFShoppingcart();
+    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
     $price_field_name = $model->getPriceFieldName();
@@ -74,7 +73,7 @@ function cfshoppingcart_widget_html($sum) {
     $currency_format = $model->getCurrencyFormat();
     $quantity = $model->getQuantity();
     $cart_url = $model->getCartUrl();
-    $is_use_shipping = $model->getIsUseShipping();
+    //$is_use_shipping = $model->getIsUseShipping();
 
     // shop now closed
     $current_user = wp_get_current_user();
@@ -85,14 +84,16 @@ function cfshoppingcart_widget_html($sum) {
     
     //$sum = $_SESSION['cfshoppingcart']['sum'];
     if ($sum['price'] == 0 || $sum['quantity_of_commodity'] == 0) {
-        $html = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
+        //$html = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
+        $html = $model->getWidgetEmpyCartHtml();
         return $html;
     }
     
     $html  = '<table>';
     $html .= '<tr><td>' . __('Quantity','cfshoppingcart') . '</td><td>' . $sum['quantity_of_commodity'] . $quantity . '</td></tr>';
     $html .= '<tr><td>' . __('Subtotal','cfshoppingcart') . '</td><td>' . sprintf($currency_format, $sum['price']) . '</td></tr>';
-    if ($is_use_shipping || $model->getShippingEnabled()) {
+    //if ($is_use_shipping || $model->getShippingEnabled()) {
+    if ($model->getShippingEnabled()) {
         if ($sum['shipping'] < 0 && $sum['shipping_msg']) {
             $html .= '<tr><td colspan="2">' . $sum['shipping_msg'] . '</td></tr>';
         } else {
