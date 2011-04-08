@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -59,6 +59,9 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
 == Changelog ==
+
+= 0.6.1 =
+* Bug fix: duplicate module error: wpcf7_cfshoppingcart_shortcode_handler.
 
 = 0.6.0 =
 * Attention, this version has many changes. previous version is 0.3.6.
