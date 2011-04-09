@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.1
+Version: 0.6.2
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -54,6 +54,10 @@ add_action('cfshoppingcart_before_clear_cart', 'cfshoppingcart_before_clear_cart
   */
 // Clear cart after sent email
 function cfshoppingcart_clear_after_sent_email($cf7) {
+    //echo 'cfshoppingcart_clear_after_sent_email';
+    if (!session_id()) {
+        session_start();
+    }
     // Clear cart before action
     //$a = array('a');
     //do_action_ref_array('cfshoppingcart_before_clear_cart', array(&$this));
@@ -69,8 +73,8 @@ function cfshoppingcart_clear_after_sent_email($cf7) {
 add_action('wpcf7_mail_sent', 'cfshoppingcart_clear_after_sent_email');
 
 /* session start */
-//add_action('init', 'cfshoppingcart_init_session_start');
-add_action('init', 'cfshoppingcart_init_session_start', 12);
+// $priority number (8) is less than Contact Form 7
+add_action('init', 'cfshoppingcart_init_session_start', 8);
 function cfshoppingcart_init_session_start(){
     global $Ktai_Style;
     if (is_object($Ktai_Style)) {
@@ -223,7 +227,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.6.1';
+        $this->version = '0.6.2';
         $this->debug = '';
         $this->custom_fields = array('Product ID','Name','Price');
         $this->price_field_name = 'Price';

@@ -301,6 +301,7 @@ class cfshoppingcart_commu {
             $quantity = $commodity['quantity'];
             // get number of stock array
             $stock = $this->common->get_cf_stock($post_id);
+            //print_r($stock);
             if ($stock['num'] == -1) {
                 // the product is not use stock manage.
                 continue;

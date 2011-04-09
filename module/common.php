@@ -206,6 +206,7 @@ class cfshoppingcart_common {
      *   failed: -255
      */
     function set_cf_stock($postid, $stock_key, $stock_num) {
+        //echo "function set_cf_stock($postid, $stock_key, $stock_num) {";
         if (!preg_match('/^-{0,1}[0-9]*$/', $postid)) {
             echo '<p>set_cf_stock: postid is not integer.</p>';
             return -255;
@@ -232,11 +233,13 @@ class cfshoppingcart_common {
             $strx = '${1}' . $stock_key . '=' . $stock_num . '${2}';
             $cf_stock_value = preg_replace($regx, $strx, $cf_stock_value, 1);
         } else {
-            $regx = '/(^|\n)' . $stock_num . '(\n|$)/';
+            //$regx = '/(^|\n)' . $stock_num . '(\n|$)/';
+            $regx = '/(^|\n)[0-9]*(\n|$)/';
             $strx = '${1}' . $stock_num . '${2}';
             $cf_stock_value = preg_replace($regx, $strx, $cf_stock_value, 1);
         }
         //$stock_str = $this->join_cf_array($stock_value);
+        //echo "if (update_post_meta($postid, $number_of_stock_field_name, $cf_stock_value) == false) {";
         if (update_post_meta($postid, $number_of_stock_field_name, $cf_stock_value) == false) {
             // error
             echo '<p>Error: can not update meta.</p>';

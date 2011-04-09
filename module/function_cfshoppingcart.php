@@ -150,14 +150,19 @@ function cfshoppingcart($args = '') {
     $content .= '</div>';
 
     $stock_value = $c[$number_of_stock_field_name][0];
+    //echo 'stock_value = ' . $stock_value;
     // stock table html
     //echo 'select_array = '; print_r($select_array);
     //$stock_value = cfshoppingcart_get_stock_html($select_array, $stock_value);
     $stock_value = cfshoppingcart_get_stock_html($stock_value);
     //echo 'stock_value = ' . $stock_value;
-    if (preg_match('/[^0-9\-]/', $stock_value)) {
+    if (!$number_of_stock_field_name) {
+        // don't stock manage
+        $is_sold_out = false;
+    } else if (preg_match('/[^0-9\-]/', $stock_value)) {
     } else if ($stock_value == -1) {
         // -1: don't stock manage
+        $is_sold_out = false;
         $stock_value = __('Many','cfshoppingcart');
     } else if ($stock_value == 0 && $model->getTypeOfShowSoldOutMessage() === 'show_sold_out_message') {
         $stock_value = $model->getSoldOutMessage();
@@ -172,6 +177,7 @@ function cfshoppingcart($args = '') {
     if ($model->getShopNowClosed() && $current_user->user_level < $model->getShopNowClosedUserLevel()) {
         return $content = '<div class="cfshoppingcart_commodity_op_shop_now_closed"><span></span></div>';
     }
+    //echo 'is_sold_out = ' . $is_sold_out;
     if ($is_sold_out) {
         $content .= '<div class="cfshoppingcart_commodity_op_sold_out"></div>';
     } else if (!$c[$price_field_name]) {

@@ -10,13 +10,16 @@
  * displaying Shopping-cart data in contact form textarea.
  */
 function cfshoppingcart_ContactForm7($cf_opt = array()) {
+    //echo 'cfshoppingcart_ContactForm7';
     //if (!session_id()){ @session_start(); }
-    if (array_key_exists('show_product_url', $cf_opt)) {
+    //if (array_key_exists('show_product_url', $cf_opt)) {
+    if (isset($cf_opt['show_product_url'])) {
         $show_product_url = true;
     } else {
         $show_product_url = false;
     }
-    if (array_key_exists('hidden_fields', $cf_opt)) {
+    //if (array_key_exists('hidden_fields', $cf_opt)) {
+    if (isset($cf_opt['hidden_fields'])) {
         $cf_opt['hidden_fields'] = array_flip($cf_opt['hidden_fields']);
     }
     //print_r($cf_opt);
@@ -72,7 +75,8 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
         
         $ret .= '---------------------------------' . "\n";
         foreach ($custom_fields as $key => $value) {
-            if (array_key_exists($value, $cf_opt['hidden_fields'])) {
+            //if (array_key_exists($value, $cf_opt['hidden_fields'])) {
+            if (isset($cf_opt['hidden_fields'][$value])) {
                 continue;
             }
             

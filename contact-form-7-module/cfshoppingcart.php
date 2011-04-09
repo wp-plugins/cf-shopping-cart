@@ -11,8 +11,10 @@ wpcf7_add_shortcode( 'cfshoppingcart*', 'wpcf7_cfshoppingcart_shortcode_handler'
 function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     global $wpcf7_contact_form;
 
-    if ( ! is_array( $tag ) )
-      return '';
+    if ( ! is_array( $tag ) ) {
+        //echo '1';
+        return '';
+    }
     //print_r($tag);
 
     $type = $tag['type'];
@@ -21,8 +23,10 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     //$values = (array) $tag['values'];
     $content = $tag['content'];
 
-    if ( empty( $name ) )
-      return '';
+    if ( empty( $name ) ) {
+        //echo '2';
+        return '';
+    }
     
     $atts = '';
     $id_att = '';
@@ -92,11 +96,14 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     }
     $value = esc_html( $value );
     //print_r($cf_opt);
+    //echo 'value = ' . $value;
 
-    if (array_key_exists('hidden', $cf_opt)) {
+    //if (array_key_exists('hidden', $cf_opt)) {
+    if (isset($cf_opt['hidden'])) {
         if ($b) {
             $html = '<input type="hidden" name="' . $name . '"' . $atts . ' value="' . $value . '">';
         } else {
+            //echo $value;
             //$html = '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
             $html .= '<input type="hidden" name="' . $name . '"' . $atts . ' value="">';
         }
@@ -114,7 +121,8 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
       $validation_error = $wpcf7_contact_form->validation_error( $name );
     
     $html = '<span class="wpcf7-form-control-wrap ' . $name . '">' . $html . $validation_error . '</span>';
-    
+
+    //echo '3: ' . $html;
     return $html;
 }
 

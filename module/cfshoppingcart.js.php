@@ -71,22 +71,6 @@ function cfshoppingcart_js_init() {
 
   // Ajax form
   jQuery('.cfshoppingcart_product_id_x').ajaxForm(options);
-
-
-  /***** In cart ******************/
-
-  //各種プロパティの配列
-  var options = {
-    //target: '.cfshoppingcart_widget', // Out put return html
-    beforeSubmit: cfshoppingcart_request, // call function before send
-    success: cfshoppingcart_response, // call function after send
-    //url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
-    type: 'post', // post or get
-    datatype:'json', // type of server respons
-    timeout: 3000 // timeout
-  };
-
-  // Ajax form
   jQuery('.cfshoppingcart_in_cart_product_id_x').ajaxForm(options);
   
   /***************************************************/
