@@ -8,21 +8,13 @@
  *
  */
 
-//require_once('./common.php');
-//$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
-
-//$wp_fullpath = $cfshoppingcart_common->get_wp_fullpath();
-//require_once($wp_fullpath . '/wp-load.php');
-//$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-//require_once('./sum.php');
-//$cfshoppingcart_commu = /* php4_110323 & new */ new cfshoppingcart_commu(dirname(__FILE__));
-
 class cfshoppingcart_commu {
     var $_self_path;
     var $model;
     var $common;
     var $customfieldnames;
     var $postid;
+    var $the_post;
     var $stock;
 
     function cfshoppingcart_commu() {//$self_path) {
@@ -253,6 +245,7 @@ class cfshoppingcart_commu {
                 continue;
             }
             $value = str_replace('#postid', sprintf($this->model->getPostidFormat(), $this->postid), $value);
+            $value = str_replace('#post_title', $this->the_post->post_title, $value);
             if ($number_of_stock_field_name && $key === $number_of_stock_field_name) {
                 $commodity[$number_of_stock_field_name] = $number_of_stock;
             } else if (preg_match('/^#select/', $value)) {
@@ -359,6 +352,7 @@ class cfshoppingcart_commu {
             return;
         }
         $this->postid = $id;
+        $this->the_post = get_post($id);
         
         // 注文数
         if (!array_key_exists('quantity', $_POST)) {

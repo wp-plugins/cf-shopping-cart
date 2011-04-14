@@ -119,6 +119,7 @@ function cfshoppingcart($args = '') {
         if (strstr($c[$value][0], '#hidden')) { continue; }
         if (!$c[$value][0] && $model->getBeDontShowEmptyField()) { continue; }
         $c[$value][0] = str_replace('#postid', sprintf($model->getPostidFormat(), $id), $c[$value][0]);
+        $c[$value][0] = str_replace('#post_title', $post->post_title, $c[$value][0]);
         if ($link_to_product) {
             if ($value === $link_to_product_field_name) {
                 if ($open_product_link_to_another_window) {

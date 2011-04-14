@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.6.2
+Stable tag: 0.6.3
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -19,14 +19,15 @@ Thereby website can have flexible design.
 
 = Translators =
 
-* Russian (ru_RU) - [Evgeny Vakhteev](http://www.sdelanomnoy.ru/)
+* Dutch (nl_NL) - [G. J. van den Os](http://www.arrowhosting.nl)
 * Dutch (nl_NL) - [Rene](http://www.cesmehotels.com)
+* Russian (ru_RU) - [Evgeny Vakhteev](http://www.sdelanomnoy.ru/)
 * Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefan僘 Mu?z](http://www.tehacesver.com/)
 * Chinese (zh_TW) - [Tsao Peter](mailto:tsaopeter@yahoo.com.tw)
 * German (de_DE) - Carola Fichtner
 * Japanese (ja) - [AI.Takeuchi](http://takeai.silverpigeon.jp/)
 
-If you have created your own language pack, or have an update of an existing one, you can send [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to [me](http://takeai.silverpigeon.jp/) so that I can bundle it into Cf Shopping Cart. You can [download the latest POT file from here](http://plugins.svn.wordpress.org/cf-shopping-cart/trunk/lang/cfshoppingcart.pot).
+If you have created your own language pack, or have an update of an existing one, you can send [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to [me](http://takeai.silverpigeon.jp/) so that I can bundle it into Cf Shopping Cart. You can [download the latest POT file from here](http://cfshoppingcart.silverpigeon.jp/?page_id=112).
 
 
 == Installation ==
@@ -59,6 +60,11 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
 == Changelog ==
+
+= 0.6.3 =
+* Update Dutch language pack by G. J. van den Os. supported version 0.6.3.
+* Added to Custom Field keyword '#post_title'. This keyword be replaced to Post title.
+* Rewrite Javascript.
 
 = 0.6.2 =
 * Bug fix: Process function argument error in shortcode for Contact Form 7.
@@ -234,8 +240,8 @@ URL: http://wordpress.org/extend/plugins/qf-getthumb/
 #I can not speak english very well.
 #I would like you to tell me mistake my English, code and others.
 #thanks.
-Cf Shopping Cart Website: http://cfshoppingcart.silverpigeon.jp/
-Blog: http://takeai.silverpigeon.jp/
+Cf Shopping Cart Website/Blog: http://takeai.silverpigeon.jp/
+Cf Shopping Cart Demonstration: http://cfshoppingcart.silverpigeon.jp/
 AI.Takeuchi <takeai@silverpigeon.jp>
 
 

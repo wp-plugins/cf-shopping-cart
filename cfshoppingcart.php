@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.2
+Version: 0.6.3
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -54,7 +54,6 @@ add_action('cfshoppingcart_before_clear_cart', 'cfshoppingcart_before_clear_cart
   */
 // Clear cart after sent email
 function cfshoppingcart_clear_after_sent_email($cf7) {
-    //echo 'cfshoppingcart_clear_after_sent_email';
     if (!session_id()) {
         session_start();
     }
@@ -67,8 +66,6 @@ function cfshoppingcart_clear_after_sent_email($cf7) {
     require_once('module/commu.php');
     $commu = new cfshoppingcart_commu();
     $commu->cfshoppingcart_empty_cart();
-    //unset($_SESSION['cfshoppingcart']['commodities']);
-    //cfshoppingcart_sum();
 }
 add_action('wpcf7_mail_sent', 'cfshoppingcart_clear_after_sent_email');
 
@@ -99,15 +96,11 @@ function cfshoppingcart_init_session_start(){
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             // ajax json echo
             @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
+            //@header('Content-Type: text/html; charset=' . get_option('blog_charset'));
             require_once('JSON/JSON.php');
         }
         require_once('module/commu.php');
         $commu = new cfshoppingcart_commu();
-        //cfshoppingcart_session_start();
-        //require_once('module/common.php');
-        //$wp_fullpath = get_wp_fullpath();
-        //require_once('module/sum.php');
-        //
         $msg = $commu->cfshoppingcart_main();
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             // ajax json echo
@@ -117,10 +110,6 @@ function cfshoppingcart_init_session_start(){
             //print_r($msg);
             $_SESSION['cfshoppingcart']['no_ajax_msg'] = $msg;
         }
-        //$commu->cfshoppingcart_error_exit();
-        //exit();
-        //} else if (isset($_POST['wp_nonajax_cfshoppingcart'])) {
-        // nonajax submitting
     }
 }
 
@@ -137,19 +126,15 @@ if (is_admin()) {
      * $deps(optional) 依存するスクリプトのリスト（配列）
      * $ver(optional) スクリプトのバージョン
      */
-    //wp_enqueue_script('jquery', $plugin_uri . '/js/jquery.js', null, '1.4.4');
     wp_enqueue_script('jquery');
     wp_enqueue_script('jquery.form', $plugin_uri . '/js/jquery.form.js', array('jquery'), 2.52);
     wp_enqueue_script('jquery.pnotify', $plugin_uri . '/js/jquery.pnotify.min.js', array('jquery'), '1.0.1');
-    //wp_enqueue_script('jquery.alerts', $plugin_uri . '/js/jquery.alerts.js', array('jquery'), 1.1);
-    //wp_enqueue_script('jQuery.cookie', $plugin_uri . '/js/jquery.cookie.js', array('jQuery'), null);
-    //wp_enqueue_script('jQuery.droppy', $plugin_uri . '/module/jquery.droppy.js', array('jQuery'), null);
-    
+    //
     require_once('module/add_wp_head.php');
     add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/add_wp_footer.php');
     add_action('wp_footer', 'cfshoppingcart_add_wp_footer');
-    
+    //
     require_once('module/function_cfshoppingcart.php');
     require_once('module/show_product.php');
     add_action('the_content', 'show_product');
@@ -227,7 +212,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.6.2';
+        $this->version = '0.6.3';
         $this->debug = '';
         $this->custom_fields = array('Product ID','Name','Price');
         $this->price_field_name = 'Price';
@@ -325,7 +310,7 @@ class WpCFShoppingcartModel {
     //
     function getWidgetEmpyCartHtml() {
         $current_user = wp_get_current_user();
-        //return "if ($this->getShopNowClosed() && $current_user->user_level < $this->getShopNowClosedUserLevel())";
+        
         if ($this->getShopNowClosed() && $current_user->user_level < $this->getShopNowClosedUserLevel()) {
             return '<span class="shop_closed">' . $this->getClosedMessageForSidebarWidget() . '</span>';
         } else {
@@ -644,15 +629,6 @@ return $h;
     function getQfgetthumbDefaultImage() {
         return $this->qfgetthumb_default_image;
     }
-    //
-    /*
-    function setJustAMomentPlease($field) {
-        $this->cfshoppingcart_justamomentplease = strip_tags($field);
-    }
-    function getJustAMomentPlease() {
-        return $this->cfshoppingcart_justamomentplease;
-    }
-      */
     //
     function setMaxQuantityOfOneCommodity($field) {
         $this->max_quantity_of_one_commodity = $this->toDouble($field);

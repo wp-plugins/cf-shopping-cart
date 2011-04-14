@@ -4,14 +4,12 @@
  */
 
 function cfshoppingcart_add_wp_footer() {
-    //require_once('common.php');
-    //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
-    global $cfshoppingcart_common;
+    //global $cfshoppingcart_common;
 
     //$plugin_folder = $cfshoppingcart_common->get_plugin_folder();
     //$plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
     //$plugin_path = $cfshoppingcart_common->get_plugin_path();
-    $plugin_uri = $cfshoppingcart_common->get_plugin_uri();
+    //$plugin_uri = $cfshoppingcart_common->get_plugin_uri();
 
     /*
     echo '<link type="text/css" rel="stylesheet" href="';

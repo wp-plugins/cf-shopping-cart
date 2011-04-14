@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-07 14:33+0900\n"
+"POT-Creation-Date: 2011-04-14 09:59+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: widget.php:42
-#: cfshoppingcart.php:763
+#: cfshoppingcart.php:734
 #: module/execute_admin.php:18
 msgid "Cf Shopping Cart"
 msgstr "CFショッピングカート"
@@ -25,30 +25,30 @@ msgstr "CFショッピングカート"
 msgid "Title:"
 msgstr "メニュー題名:"
 
-#: cfshoppingcart.php:179
+#: cfshoppingcart.php:156
 msgid "'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin."
 msgstr "'wpcf7_add_shortcode' 関数が見つかりません。 Contact Form 7 プラグインをインストールしてください。"
 
-#: cfshoppingcart.php:340
-#: module/commu.php:145
-#: module/commu.php:213
-#: module/contact-form-7.php:51
+#: cfshoppingcart.php:317
+#: module/commu.php:137
+#: module/commu.php:205
+#: module/contact-form-7.php:54
 msgid "Shopping Cart is empty."
 msgstr "買い物かごは空です"
 
-#: cfshoppingcart.php:440
+#: cfshoppingcart.php:417
 msgid "Select"
 msgstr "選択"
 
-#: cfshoppingcart.php:507
+#: cfshoppingcart.php:484
 msgid "Show sold out message"
 msgstr "売り切れメッセージを表示"
 
-#: cfshoppingcart.php:509
+#: cfshoppingcart.php:486
 msgid "Don't show the product"
 msgstr "商品を表示しない"
 
-#: cfshoppingcart.php:762
+#: cfshoppingcart.php:733
 msgid "Cf Shopping Cart Options"
 msgstr "CFショッピングカート オプション"
 
@@ -60,94 +60,94 @@ msgstr "CFショッピングカート オプション"
 msgid "Shipping Error"
 msgstr "送料エラー"
 
-#: module/commu.php:67
-#: module/commu.php:155
-#: module/commu.php:408
+#: module/commu.php:59
+#: module/commu.php:147
+#: module/commu.php:403
 msgid "Sorry, stock is no."
 msgstr "申し訳御座いません、在庫が御座いません。"
 
-#: module/commu.php:75
-#: module/commu.php:164
+#: module/commu.php:67
+#: module/commu.php:156
 msgid "Out of stock"
 msgstr "在庫数量を越えています"
 
-#: module/commu.php:84
-#: module/commu.php:173
+#: module/commu.php:76
+#: module/commu.php:165
 msgid "Max quantity of total order is"
 msgstr "注文合計数量の最大は"
 
-#: module/commu.php:108
-#: module/commu.php:181
+#: module/commu.php:100
+#: module/commu.php:173
 msgid "Max quantity of one commodity is"
 msgstr "1商品の最大注文数は"
 
-#: module/commu.php:120
+#: module/commu.php:112
 msgid "Item to cart."
 msgstr "買い物かごに入れました"
 
-#: module/commu.php:127
+#: module/commu.php:119
 msgid "Change quantity is faild."
 msgstr "数量変更に失敗しました。"
 
-#: module/commu.php:140
+#: module/commu.php:132
 msgid "Off the item."
 msgstr "買い物かごから除きました。"
 
-#: module/commu.php:192
+#: module/commu.php:184
 msgid "Quantity has changed"
 msgstr "数量を変更しました"
 
-#: module/commu.php:208
+#: module/commu.php:200
 msgid "Off the item"
 msgstr "買い物かごから除きました"
 
-#: module/commu.php:410
+#: module/commu.php:405
 msgid "Error: Check Stock Custom Field value."
 msgstr "エラー: 在庫のカスタムフィールドの値を確認してください。"
 
-#: module/contact-form-7.php:70
+#: module/contact-form-7.php:73
 msgid "Includes no stock products. Please confirm."
 msgstr "カートに在庫の無い商品が含まれています、ご確認ください。"
 
-#: module/contact-form-7.php:89
+#: module/contact-form-7.php:93
 msgid "Includes out of stock products. Please confirm."
 msgstr "カートに在庫を超える商品が含まれています、ご確認ください。"
 
-#: module/contact-form-7.php:104
-#: module/contact-form-7.php:112
-#: module/function_cfshoppingcart.php:183
+#: module/contact-form-7.php:108
+#: module/contact-form-7.php:116
+#: module/function_cfshoppingcart.php:190
 #: module/sum.php:93
-#: module/execute_admin.php:151
+#: module/execute_admin.php:152
 msgid "Quantity"
 msgstr "数量"
 
-#: module/contact-form-7.php:113
+#: module/contact-form-7.php:117
 #: module/sum.php:94
 msgid "Subtotal"
 msgstr "小計"
 
-#: module/contact-form-7.php:122
+#: module/contact-form-7.php:126
 #: module/sum.php:100
-#: module/execute_admin.php:173
+#: module/execute_admin.php:174
 msgid "Shipping"
 msgstr "送料"
 
-#: module/contact-form-7.php:127
+#: module/contact-form-7.php:131
 #: module/sum.php:105
-#: module/execute_admin.php:175
 #: module/execute_admin.php:176
 #: module/execute_admin.php:177
 #: module/execute_admin.php:178
 #: module/execute_admin.php:179
+#: module/execute_admin.php:180
 msgid "Total price"
 msgstr "合計金額"
 
-#: module/function_cfshoppingcart.php:161
-#: module/function_cfshoppingcart.php:227
+#: module/function_cfshoppingcart.php:167
+#: module/function_cfshoppingcart.php:234
 msgid "Many"
 msgstr "豊富"
 
-#: module/function_cfshoppingcart.php:185
+#: module/function_cfshoppingcart.php:192
 msgid "Add to Cart"
 msgstr "かごへ"
 
@@ -155,210 +155,205 @@ msgstr "かごへ"
 msgid "Saved"
 msgstr "保存しました"
 
-#: module/execute_admin.php:129
+#: module/execute_admin.php:130
 msgid "Options"
 msgstr "オプション"
 
-#: module/execute_admin.php:133
+#: module/execute_admin.php:134
 msgid "Shop now closed"
 msgstr "現在閉店中"
 
-#: module/execute_admin.php:133
+#: module/execute_admin.php:134
 msgid "Closed"
 msgstr "閉店"
 
-#: module/execute_admin.php:133
+#: module/execute_admin.php:134
 msgid "(Be 'Shop Closed' is user level less than 6.)"
 msgstr "(閉店表示となるのはユーザーレベル6未満です)"
 
-#: module/execute_admin.php:134
+#: module/execute_admin.php:135
 msgid "Closed message for Sidebar widget"
 msgstr "サイドバーウィジットに表示する閉店メッセージ"
 
-#: module/execute_admin.php:136
+#: module/execute_admin.php:137
 msgid "Custom field names"
 msgstr "カスタムフィールドのフィールド名"
 
-#: module/execute_admin.php:137
+#: module/execute_admin.php:138
 msgid "Price field name"
 msgstr "単価フィールドの名称"
 
-#: module/execute_admin.php:139
+#: module/execute_admin.php:140
 msgid "Be Custom Field name of linking to product page"
 msgstr "商品ページにリンクを張るカスタムフィールド名"
 
-#: module/execute_admin.php:139
+#: module/execute_admin.php:140
 msgid "Open another window"
 msgstr "別の窓で開く"
 
-#: module/execute_admin.php:141
+#: module/execute_admin.php:142
 msgid "Number of stock field name"
 msgstr "在庫数のフィールド名"
 
-#: module/execute_admin.php:141
+#: module/execute_admin.php:142
 msgid "Empty is don't manage stock."
 msgstr "空白の場合在庫を管理しません。"
 
-#: module/execute_admin.php:142
+#: module/execute_admin.php:143
 msgid "Product name field name"
 msgstr "商品名フィールドの名称"
 
-#: module/execute_admin.php:143
+#: module/execute_admin.php:144
 msgid "Show Custom Field when price field is empty."
 msgstr "価格フィールドが空の場合でもカスタムフィールドを表示する."
 
-#: module/execute_admin.php:143
 #: module/execute_admin.php:144
-#: module/execute_admin.php:169
+#: module/execute_admin.php:145
 #: module/execute_admin.php:170
-#: module/execute_admin.php:173
+#: module/execute_admin.php:171
+#: module/execute_admin.php:174
 msgid "Enabled"
 msgstr "有効"
 
-#: module/execute_admin.php:144
+#: module/execute_admin.php:145
 msgid "Be don't show empty field"
 msgstr "空のカスタムフィールドは表示しない"
 
-#: module/execute_admin.php:146
+#: module/execute_admin.php:147
 msgid "Custom Field default value"
 msgstr "カスタムフィールドの初期値"
 
-#: module/execute_admin.php:146
+#: module/execute_admin.php:147
 msgid "example: <br />FieldName1=value1<br />FieldName2=value2<br />..."
 msgstr "例: <br />FieldName1=value1<br />FieldName2=value2<br />..."
 
-#: module/execute_admin.php:148
+#: module/execute_admin.php:149
 msgid "Type of show sold out message"
 msgstr "売り切れ表示の方法"
 
-#: module/execute_admin.php:148
+#: module/execute_admin.php:149
 msgid "if select \"Don't show the post\" then to be private the post at sold out."
 msgstr "もし\"投稿を表示しない\"を選んだ場合、売り切れ時に投稿の表示ステータスはプライベートに設定されます。"
 
-#: module/execute_admin.php:149
+#: module/execute_admin.php:150
 msgid "Sold out message"
 msgstr "売り切れメッセージ"
 
-#: module/execute_admin.php:152
+#: module/execute_admin.php:153
 msgid "Currency format"
 msgstr "通貨フォーマット"
 
-#: module/execute_admin.php:152
+#: module/execute_admin.php:153
 #, php-format
 msgid "example: $%.02f"
 msgstr "example: $%.02f円"
 
-#: module/execute_admin.php:153
+#: module/execute_admin.php:154
 msgid "\"#postid\" keyword format"
 msgstr "\"#postid\" キーワード・フォーマット"
 
-#: module/execute_admin.php:153
+#: module/execute_admin.php:154
 #, php-format
 msgid "example: %05d"
 msgstr "例: %05d"
 
-#: module/execute_admin.php:154
+#: module/execute_admin.php:155
 msgid "Max quantity of one commodity"
 msgstr "1商品の最大注文数"
 
-#: module/execute_admin.php:154
 #: module/execute_admin.php:155
+#: module/execute_admin.php:156
 msgid "Zero is no limit."
 msgstr "ゼロは無制限"
 
-#: module/execute_admin.php:155
+#: module/execute_admin.php:156
 msgid "Max quantity of total order"
 msgstr "注文合計数量の最大"
 
-#: module/execute_admin.php:156
+#: module/execute_admin.php:157
 msgid "\"Go to Cart\" text"
 msgstr "\"買い物かごを表示\"テキストの変更"
 
-#: module/execute_admin.php:157
+#: module/execute_admin.php:158
 msgid "\"Orderer Input screen\" text"
 msgstr "\"ご注文者情報入力画面\"テキストの変更"
 
-#: module/execute_admin.php:158
+#: module/execute_admin.php:159
 msgid "Table tag type"
 msgstr "テーブルタグのタイプ"
 
-#: module/execute_admin.php:162
+#: module/execute_admin.php:163
 msgid "Cart Url"
 msgstr "買い物かごのURL"
 
-#: module/execute_admin.php:163
+#: module/execute_admin.php:164
 msgid "Send order Url"
 msgstr "注文画面のURL"
 
-#: module/execute_admin.php:164
+#: module/execute_admin.php:165
 msgid "Thanks Url"
 msgstr "サンクスURL"
 
-#: module/execute_admin.php:165
+#: module/execute_admin.php:166
 msgid "In Cart, QF-GetThumb option 1"
 msgstr "買い物かご内、QF-GetThumb オプション"
 
-#: module/execute_admin.php:166
+#: module/execute_admin.php:167
 msgid "In Cart, QF-GetThumb default image"
 msgstr "買い物かご内、QF-GetThumbで使用するデフォルト画像"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "Choice show commodity on page"
 msgstr "商品を表示するページを選んでください"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "home"
 msgstr "home"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "page"
 msgstr "page"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "archive"
 msgstr "archive"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "single"
 msgstr "single"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:168
 msgid "manually (must edit theme)"
 msgstr "手動 (テーマを編集してください)"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:169
 msgid "* Choice manually then insert PHP code: "
 msgstr "* 手動を選択した場合次の PHPコードを挿入してください:"
 
-#: module/execute_admin.php:169
+#: module/execute_admin.php:170
 msgid "Don't load css"
 msgstr "css ファイルをロードしない"
 
-#: module/execute_admin.php:170
+#: module/execute_admin.php:171
 msgid "Debug mode"
 msgstr "デバッグモード"
 
-#: module/execute_admin.php:183
+#: module/execute_admin.php:184
 msgid "Save"
 msgstr "保存"
 
-#: module/execute_admin.php:190
+#: module/execute_admin.php:191
 msgid "Others"
 msgstr "その他の設定"
 
-#: module/execute_admin.php:193
+#: module/execute_admin.php:194
 msgid "License"
 msgstr "License"
 
-#: module/cfshoppingcart.js.php:133
-#: module/cfshoppingcart.js.php:136
+#: module/cfshoppingcart.js.php:99
+#: module/cfshoppingcart.js.php:102
 msgid "Shopping Cart"
 msgstr "買い物かご"
-
-#: module/cfshoppingcart.js.php:181
-#: module/cfshoppingcart.js.php:185
-msgid "Please enter the quantity of the commodity."
-msgstr "正しい商品数量を入力してください。"
 
 #: module/cart.php:138
 msgid "Order is more than stock"
@@ -375,6 +370,9 @@ msgstr "数量変更"
 #: module/cart.php:190
 msgid "Order is more than stock, Can't check out."
 msgstr "オーダーが在庫数より多いです、買い物を確定できません。"
+
+#~ msgid "Please enter the quantity of the commodity."
+#~ msgstr "正しい商品数量を入力してください。"
 
 #~ msgid ""
 #~ "This server don't have symlink function, therefore can't use button 'Set "

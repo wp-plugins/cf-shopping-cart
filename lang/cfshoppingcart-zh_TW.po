@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WordPress plugin cfshoppingcart\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/cf-shopping-cart\n"
-"POT-Creation-Date: 2010-02-17 10:03+0000\n"
-"PO-Revision-Date: 2010-05-31 16:37+0800\n"
-"Last-Translator: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-14 10:00+0900\n"
+"PO-Revision-Date: 2011-04-14 10:00+0900\n"
+"Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: Tsao Peter <tsaopeter@yahoo.com.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,240 +18,409 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ../cf-shopping-cart\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: cfshoppingcart.php:369
-msgid "Cf Shopping Cart Options"
-msgstr "訂購單 設定"
-
-#: cfshoppingcart.php:370
-#: module/execute_admin.php:18
 #: widget.php:42
+#: cfshoppingcart.php:734
+#: module/execute_admin.php:18
 msgid "Cf Shopping Cart"
 msgstr "訂購單"
 
-#: module/cart.php:50
-#: module/sum.php:52
+#: widget.php:78
+msgid "Title:"
+msgstr "標題:"
+
+#: cfshoppingcart.php:156
+msgid "'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin."
+msgstr ""
+
+#: cfshoppingcart.php:317
+#: module/commu.php:137
+#: module/commu.php:205
+#: module/contact-form-7.php:54
 msgid "Shopping Cart is empty."
 msgstr "沒有商品"
 
-#: module/cart.php:77
-#: module/cart.php:87
-#: module/contact-form-7.php:53
-#: module/contact-form-7.php:58
-#: module/execute_admin.php:97
-#: module/function_cfshoppingcart.php:99
-#: module/function_cfshoppingcart.php:105
-#: module/sum.php:77
-msgid "Quantity"
-msgstr "數量"
+#: cfshoppingcart.php:417
+msgid "Select"
+msgstr ""
 
-#: module/cart.php:78
-msgid "Cancel"
-msgstr "取消"
+#: cfshoppingcart.php:484
+msgid "Show sold out message"
+msgstr ""
 
-#: module/cart.php:78
-msgid "Change quantity"
-msgstr "變更數量"
+#: cfshoppingcart.php:486
+msgid "Don't show the product"
+msgstr ""
 
-#: module/cart.php:88
-#: module/contact-form-7.php:59
-#: module/sum.php:78
-msgid "Subtotal"
-msgstr "小計"
+#: cfshoppingcart.php:733
+msgid "Cf Shopping Cart Options"
+msgstr "訂購單 設定"
 
-#: module/cart.php:94
-#: module/contact-form-7.php:66
-#: module/execute_admin.php:101
-#: module/sum.php:83
-msgid "Shipping"
+#: module/shipping.php:21
+#: module/shipping.php:24
+#: module/shipping.php:27
+#: module/shipping.php:30
+#: module/shipping.php:46
+#, fuzzy
+msgid "Shipping Error"
 msgstr "送貨"
 
-#: module/cart.php:99
-#: module/contact-form-7.php:71
-#: module/sum.php:88
-msgid "Total price"
-msgstr "總金額"
+#: module/commu.php:59
+#: module/commu.php:147
+#: module/commu.php:403
+msgid "Sorry, stock is no."
+msgstr ""
 
-#: module/cart.php:103
-msgid "Orderer Input screen"
-msgstr "準備 送出訂購單"
+#: module/commu.php:67
+#: module/commu.php:156
+msgid "Out of stock"
+msgstr ""
 
-#: module/cfshoppingcart.js.php:37
-#: module/cfshoppingcart.js.php:57
-#: module/cfshoppingcart.js.php:81
-#: module/cfshoppingcart.js.php:107
-#: module/cfshoppingcart.js.php:127
-msgid "Communication error"
-msgstr "錯誤訊息"
-
-#: module/cfshoppingcart.js.php:40
-msgid "Add to cart faild, please try again."
-msgstr "訂購錯誤,請再一次."
-
-#: module/cfshoppingcart.js.php:60
-#: module/cfshoppingcart.js.php:84
-msgid "Change quantity faild, please try again."
-msgstr "變更數量,請再一次"
-
-#: module/cfshoppingcart.js.php:78
-#: module/cfshoppingcart.js.php:104
-msgid "Just a moment please."
-msgstr "請稍等~"
-
-#: module/cfshoppingcart.js.php:110
-msgid "Cancel commodity faild, please try again."
-msgstr "取消商品錯誤,請再一次"
-
-#: module/cfshoppingcart.js.php:130
-msgid "Do empty cart faild."
-msgstr "清空訂購錯誤"
-
-#: module/cfshoppingcart.js.php:147
-#: module/cfshoppingcart.js.php:151
-msgid "Please enter the quantity of the commodity."
-msgstr "請輸入商品數量"
-
-#: module/cfshoppingcart.js.php:156
-msgid "Commodity must be less than 100."
-msgstr "商品必須小於100"
-
-#: module/commu.php:73
-#: module/commu.php:101
-#: module/commu.php:129
+#: module/commu.php:76
+#: module/commu.php:165
 msgid "Max quantity of total order is"
 msgstr "全部訂單的最多數量"
 
-#: module/commu.php:84
-#: module/commu.php:106
-#: module/commu.php:134
+#: module/commu.php:100
+#: module/commu.php:173
 msgid "Max quantity of one commodity is"
 msgstr "單一商品的最多數量"
 
-#: module/execute_admin.php:69
+#: module/commu.php:112
+#, fuzzy
+msgid "Item to cart."
+msgstr "產品訂購 一覽表"
+
+#: module/commu.php:119
+#, fuzzy
+msgid "Change quantity is faild."
+msgstr "變更數量"
+
+#: module/commu.php:132
+msgid "Off the item."
+msgstr ""
+
+#: module/commu.php:184
+msgid "Quantity has changed"
+msgstr ""
+
+#: module/commu.php:200
+msgid "Off the item"
+msgstr ""
+
+#: module/commu.php:405
+msgid "Error: Check Stock Custom Field value."
+msgstr ""
+
+#: module/contact-form-7.php:73
+msgid "Includes no stock products. Please confirm."
+msgstr ""
+
+#: module/contact-form-7.php:93
+msgid "Includes out of stock products. Please confirm."
+msgstr ""
+
+#: module/contact-form-7.php:108
+#: module/contact-form-7.php:116
+#: module/function_cfshoppingcart.php:190
+#: module/sum.php:93
+#: module/execute_admin.php:152
+msgid "Quantity"
+msgstr "數量"
+
+#: module/contact-form-7.php:117
+#: module/sum.php:94
+msgid "Subtotal"
+msgstr "小計"
+
+#: module/contact-form-7.php:126
+#: module/sum.php:100
+#: module/execute_admin.php:174
+msgid "Shipping"
+msgstr "送貨"
+
+#: module/contact-form-7.php:131
+#: module/sum.php:105
+#: module/execute_admin.php:176
+#: module/execute_admin.php:177
+#: module/execute_admin.php:178
+#: module/execute_admin.php:179
+#: module/execute_admin.php:180
+msgid "Total price"
+msgstr "總金額"
+
+#: module/function_cfshoppingcart.php:167
+#: module/function_cfshoppingcart.php:234
+msgid "Many"
+msgstr ""
+
+#: module/function_cfshoppingcart.php:192
+msgid "Add to Cart"
+msgstr "加入 訂購單"
+
+#: module/execute_admin.php:100
 msgid "Saved"
 msgstr "已儲存"
 
-#: module/execute_admin.php:77
-msgid "Can not use Shipping."
-msgstr "不能使用送貨"
-
-#: module/execute_admin.php:77
-msgid "Shipping setting file not found"
-msgstr "無送貨設定檔案"
-
-#: module/execute_admin.php:92
+#: module/execute_admin.php:130
 msgid "Options"
 msgstr "設定"
 
-#: module/execute_admin.php:95
+#: module/execute_admin.php:134
+msgid "Shop now closed"
+msgstr ""
+
+#: module/execute_admin.php:134
+msgid "Closed"
+msgstr ""
+
+#: module/execute_admin.php:134
+msgid "(Be 'Shop Closed' is user level less than 6.)"
+msgstr ""
+
+#: module/execute_admin.php:135
+msgid "Closed message for Sidebar widget"
+msgstr ""
+
+#: module/execute_admin.php:137
 msgid "Custom field names"
 msgstr "設定欄位名稱"
 
-#: module/execute_admin.php:96
+#: module/execute_admin.php:138
 msgid "Price field name"
 msgstr "價格 欄位名稱"
 
-#: module/execute_admin.php:98
+#: module/execute_admin.php:140
+msgid "Be Custom Field name of linking to product page"
+msgstr ""
+
+#: module/execute_admin.php:140
+msgid "Open another window"
+msgstr ""
+
+#: module/execute_admin.php:142
+#, fuzzy
+msgid "Number of stock field name"
+msgstr "設定欄位名稱"
+
+#: module/execute_admin.php:142
+msgid "Empty is don't manage stock."
+msgstr ""
+
+#: module/execute_admin.php:143
+#, fuzzy
+msgid "Product name field name"
+msgstr "價格 欄位名稱"
+
+#: module/execute_admin.php:144
+msgid "Show Custom Field when price field is empty."
+msgstr ""
+
+#: module/execute_admin.php:144
+#: module/execute_admin.php:145
+#: module/execute_admin.php:170
+#: module/execute_admin.php:171
+#: module/execute_admin.php:174
+msgid "Enabled"
+msgstr ""
+
+#: module/execute_admin.php:145
+msgid "Be don't show empty field"
+msgstr ""
+
+#: module/execute_admin.php:147
+#, fuzzy
+msgid "Custom Field default value"
+msgstr "設定欄位名稱"
+
+#: module/execute_admin.php:147
+msgid "example: <br />FieldName1=value1<br />FieldName2=value2<br />..."
+msgstr ""
+
+#: module/execute_admin.php:149
+msgid "Type of show sold out message"
+msgstr ""
+
+#: module/execute_admin.php:149
+msgid "if select \"Don't show the post\" then to be private the post at sold out."
+msgstr ""
+
+#: module/execute_admin.php:150
+msgid "Sold out message"
+msgstr ""
+
+#: module/execute_admin.php:153
 msgid "Currency format"
 msgstr "貨幣格式"
 
-#: module/execute_admin.php:98
+#: module/execute_admin.php:153
 #, php-format
 msgid "example: $%.02f"
 msgstr "例如: $%.02f"
 
-#: module/execute_admin.php:99
+#: module/execute_admin.php:154
+msgid "\"#postid\" keyword format"
+msgstr ""
+
+#: module/execute_admin.php:154
+#, fuzzy, php-format
+msgid "example: %05d"
+msgstr "例如: $%.02f"
+
+#: module/execute_admin.php:155
 msgid "Max quantity of one commodity"
 msgstr "單一商品的最大數量值"
 
-#: module/execute_admin.php:99
-#: module/execute_admin.php:100
+#: module/execute_admin.php:155
+#: module/execute_admin.php:156
 msgid "Zero is no limit."
 msgstr "零是無限制的"
 
-#: module/execute_admin.php:100
+#: module/execute_admin.php:156
 msgid "Max quantity of total order"
 msgstr "全部訂購的最大數量值"
 
-#: module/execute_admin.php:101
-msgid "Must be edit"
-msgstr "必須編輯"
+#: module/execute_admin.php:157
+#, fuzzy
+msgid "\"Go to Cart\" text"
+msgstr "產品訂購 一覽表"
 
-#: module/execute_admin.php:102
+#: module/execute_admin.php:158
+#, fuzzy
+msgid "\"Orderer Input screen\" text"
+msgstr "準備 送出訂購單"
+
+#: module/execute_admin.php:159
+msgid "Table tag type"
+msgstr ""
+
+#: module/execute_admin.php:163
 msgid "Cart Url"
 msgstr "訂購 網址"
 
-#: module/execute_admin.php:103
+#: module/execute_admin.php:164
 msgid "Send order Url"
 msgstr "訂購表單 網址"
 
-#: module/execute_admin.php:104
+#: module/execute_admin.php:165
+msgid "Thanks Url"
+msgstr ""
+
+#: module/execute_admin.php:166
 msgid "In Cart, QF-GetThumb option 1"
 msgstr "In Cart, QF-GetThumb option 1"
 
-#: module/execute_admin.php:105
+#: module/execute_admin.php:167
 msgid "In Cart, QF-GetThumb default image"
 msgstr "In Cart, QF-GetThumb default image"
 
-#: module/execute_admin.php:106
-msgid "CSS \"Just a moment please\""
-msgstr "CSS \"請稍等~\""
-
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "Choice show commodity on page"
 msgstr "請選擇顯示在分頁的商品"
 
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "home"
 msgstr "首頁"
 
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "page"
 msgstr "分頁"
 
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "archive"
 msgstr "分類"
 
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "single"
 msgstr "文章"
 
-#: module/execute_admin.php:107
+#: module/execute_admin.php:168
 msgid "manually (must edit theme)"
 msgstr "手動 (必須編輯佈景主題)"
 
-#: module/execute_admin.php:108
+#: module/execute_admin.php:169
 msgid "* Choice manually then insert PHP code: "
 msgstr "選擇手動 然後貼入PHP語碼:"
 
-#: module/execute_admin.php:109
+#: module/execute_admin.php:170
+msgid "Don't load css"
+msgstr ""
+
+#: module/execute_admin.php:171
 msgid "Debug mode"
 msgstr "調試 模式"
 
-#: module/execute_admin.php:110
+#: module/execute_admin.php:184
 msgid "Save"
 msgstr "儲存"
 
-#: module/function_cfshoppingcart.php:102
-msgid "Into Cart"
-msgstr "產品訂購 一覽表"
+#: module/execute_admin.php:191
+msgid "Others"
+msgstr ""
 
-#: module/function_cfshoppingcart.php:107
-msgid "Add to Cart"
-msgstr "加入 訂購單"
+#: module/execute_admin.php:194
+msgid "License"
+msgstr ""
 
-#: module/sum.php:91
-msgid "Go to Cart"
-msgstr "產品訂購 一覽表"
+#: module/cfshoppingcart.js.php:99
+#: module/cfshoppingcart.js.php:102
+#, fuzzy
+msgid "Shopping Cart"
+msgstr "訂購單"
 
-#: widget.php:59
-msgid "Shopping Cart is empty"
-msgstr "沒有商品"
+#: module/cart.php:138
+msgid "Order is more than stock"
+msgstr ""
 
-#: widget.php:77
-msgid "Title:"
-msgstr "標題:"
+#: module/cart.php:146
+msgid "Cancel"
+msgstr "取消"
 
+#: module/cart.php:146
+msgid "Change quantity"
+msgstr "變更數量"
+
+#: module/cart.php:190
+msgid "Order is more than stock, Can't check out."
+msgstr ""
+
+#~ msgid "Communication error"
+#~ msgstr "錯誤訊息"
+
+#~ msgid "Add to cart faild, please try again."
+#~ msgstr "訂購錯誤,請再一次."
+
+#~ msgid "Change quantity faild, please try again."
+#~ msgstr "變更數量,請再一次"
+
+#~ msgid "Just a moment please."
+#~ msgstr "請稍等~"
+
+#~ msgid "Cancel commodity faild, please try again."
+#~ msgstr "取消商品錯誤,請再一次"
+
+#~ msgid "Do empty cart faild."
+#~ msgstr "清空訂購錯誤"
+
+#~ msgid "Please enter the quantity of the commodity."
+#~ msgstr "請輸入商品數量"
+
+#~ msgid "Commodity must be less than 100."
+#~ msgstr "商品必須小於100"
+
+#~ msgid "Can not use Shipping."
+#~ msgstr "不能使用送貨"
+
+#~ msgid "Shipping setting file not found"
+#~ msgstr "無送貨設定檔案"
+
+#~ msgid "Must be edit"
+#~ msgstr "必須編輯"
+
+#~ msgid "CSS \"Just a moment please\""
+#~ msgstr "CSS \"請稍等~\""
+
+#~ msgid "Shopping Cart is empty"
+#~ msgstr "沒有商品"
