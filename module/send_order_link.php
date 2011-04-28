@@ -11,22 +11,28 @@
 
 //require_once('sum.php');
 
-function cfshoppingcart_checkout_link($args = '') {
+function cfshoppingcart_checkout_link($args = '', $content = '') {
     //print_r($args);
-    $link_string = $args[0];
     
     // get data object
     global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
     //print_r($model);
-    if ($is_debug = $model->is_debug()) {
-        require_once('debug.php');
-        echo debug_cfshoppingcart('called: function cfshoppingcart_cart_link()');
+    $a = '';
+    
+    if ($args) {
+        $link_string = $args[0];
+        if ($is_debug = $model->is_debug()) {
+            require_once('debug.php');
+            echo debug_cfshoppingcart('called: function cfshoppingcart_cart_link()');
+        }
+        $send_order_url = $model->getSendOrderUrl();
+        
+        $a .= '<a href="' . $send_order_url . '" class="cfshoppingcart_send_order_url">' . $link_string . '</a>';
     }
-    $send_order_url = $model->getSendOrderUrl();
-    
-    $a = '<a href="' . $send_order_url . '" class="cfshoppingcart_send_order_url">' . $link_string . '</a>';
-    
+    if ($content) {
+        $a .= '<a href="' . $send_order_url . '" class="cfshoppingcart_send_order_url">' . $content . '</a>';
+    }
     return $a;
 }
 

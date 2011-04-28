@@ -43,7 +43,7 @@ cfshoppingcart_js.find_key = function(obj, keyname) {
 cfshoppingcart_js.init = function init() {
     // propaties array
     var options = {
-      //target: '.cfshoppingcart_widget', // Out put return html
+      //target: '.cfshoppingcart_widget_cart', // Out put return html
       beforeSubmit: cfshoppingcart_js.cfshoppingcart_request, // call function before send
       success: cfshoppingcart_js.cfshoppingcart_response, // call function after send
       //url: '<?php echo $cfshoppingcart_plugin_commu_uri; ?>', // form action
@@ -60,13 +60,16 @@ cfshoppingcart_js.init = function init() {
 // 
 cfshoppingcart_js.cfshoppingcart_request = function(formData, jqForm, options) {
     //jQuery('.cfshoppingcart_commodity_op').html('');
-    //alert(obj2text(formData));
+    //alert(cfshoppingcart_js.obj2text(formData));
+    //alert(cfshoppingcart_js.obj2text(jqForm));
+    //alert(jqForm);
     if (cfshoppingcart_js.find_key(formData, 'cancel') == true ||
         (cfshoppingcart_js.find_key(formData, 'change_quantity') == true &&
          cfshoppingcart_js.find_key(formData, 'quantity') == true && cfshoppingcart_js.find_key_value == 0)) {
         // click cancel button to product form scroll up hide.
         jqForm.slideToggle("fast");
     }
+    jqForm.find('.cfshoppingcart_waiting_anm').css('display','inline');
     //alert(find_key_value);
     if (!cfshoppingcart_js.cfshoppingcart_debug) { return true; }
     // convert to request string from form object
@@ -77,6 +80,7 @@ cfshoppingcart_js.cfshoppingcart_request = function(formData, jqForm, options) {
 
 //
 cfshoppingcart_js.cfshoppingcart_response = function(responseText, statusText) {
+    jQuery('.cfshoppingcart_waiting_anm').css('display','none');
     if (cfshoppingcart_js.cfshoppingcart_debug) {
         alert('status: ' + statusText + '\n\nresponseText: \n' + responseText);
         //alert('status: ' + statusText + '\n\nresponseText: \n' + obj2text(responseText));
@@ -88,9 +92,9 @@ cfshoppingcart_js.cfshoppingcart_response = function(responseText, statusText) {
         }
         return;
     }
-    //jQuery('.cfshoppingcart_widget').html(json[1]);
+    //jQuery('.cfshoppingcart_widget_cart').html(json[1]);
     if (json['widget']) {
-        jQuery('.cfshoppingcart_widget').html(json['widget']);
+        jQuery('.cfshoppingcart_widget_cart').html(json['widget']);
     }
     if (json['cart_html']) {
         jQuery('#cfshoppingcart_form').html(json['cart_html']);
@@ -153,7 +157,7 @@ cfshoppingcart_js.obj2text = function(obj) {
 function cfshoppingcart_empty_cart() {
     var thanks = "<?php echo $model->getThanksUrl(); ?>";
     //alert('cfshoppingcart_empty_cart()');
-    jQuery('.cfshoppingcart_widget').html('<?php echo $widgetEmptyCartHtml;?>');
+    jQuery('.cfshoppingcart_widget_cart').html('<?php echo preg_replace('/[\r\n]/', '', $widgetEmptyCartHtml);?>');
     if (thanks) { location.replace(thanks); }
 }
 

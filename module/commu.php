@@ -416,16 +416,22 @@ class cfshoppingcart_commu {
         }
 
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
-            if (0) {
-                // Javascript へ送る為に JSON 形式に変換
-                require_once($this->_self_path . '/../Jsphon/Jsphon.php');
-                $json = Jsphon::encode($j);
-                return $json;
-            } else {
-                require_once($this->_self_path . '/../JSON/JSON.php');
-                $json = /* php4_110323 & new */ new Services_JSON;
-                $encode = $json->encode($j, true);
+            if (function_exists(json_encode)) {
+                // PHP 5 >= 5.2.0, PECL json >= 1.2.0
+                $encode = json_encode($j);
                 return $encode;
+            } else {
+                if (0) {
+                    // Javascript へ送る為に JSON 形式に変換
+                    require_once($this->_self_path . '/../Jsphon/Jsphon.php');
+                    $json = Jsphon::encode($j);
+                    return $json;
+                } else {
+                    require_once($this->_self_path . '/../JSON/JSON.php');
+                    $json = /* php4_110323 & new */ new Services_JSON;
+                    $encode = $json->encode($j, true);
+                    return $encode;
+                }
             }
         } else {
             return $j;

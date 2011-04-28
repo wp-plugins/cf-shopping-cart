@@ -1,9 +1,9 @@
 === Cf Shopping Cart ===
 Contributors: AI.Takeuchi
-Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
+Tags: PayPal payment, shopping cart, widget, plugin, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 0.6.3
+Stable tag: 0.6.7
 
 Cf Shopping Cart is simple shopping cart plugin.
 This plugin work together such as Custom Field and more plugins.
@@ -60,6 +60,23 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
 == Changelog ==
+
+= 0.6.7 =
+* Fix textarea size.
+
+= 0.6.6 =
+* Bug fix: about specify products category number.
+
+= 0.6.5 =
+* Can be specify products category number.
+
+= 0.6.4 =
+* Be using json_encode function when PHP have it.
+* Added option: Display waiting animation.
+* Added shorcode: cfshoppingcart_put_shipping.
+* Added PayPal payment support.
+* Visual Editor support.
+* Added text area to widget.
 
 = 0.6.3 =
 * Update Dutch language pack by G. J. van den Os. supported version 0.6.3.
@@ -218,6 +235,7 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 
 1. screenshot-1.png
 2. screenshot-2.png
+3. screenshot-3.png
 
 
 == More plugins. Thank you! ==

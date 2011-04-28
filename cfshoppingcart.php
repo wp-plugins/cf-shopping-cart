@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.3
+Version: 0.6.7
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -31,7 +31,7 @@ Author URI: http://takeai.silverpigeon.jp/
 $wpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
 require_once('module/sum.php');
 require_once('module/common.php');
-
+require_once('module/paypal.php');
 
 // global
 $cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
@@ -54,9 +54,11 @@ add_action('cfshoppingcart_before_clear_cart', 'cfshoppingcart_before_clear_cart
   */
 // Clear cart after sent email
 function cfshoppingcart_clear_after_sent_email($cf7) {
+    /*
     if (!session_id()) {
         session_start();
     }
+      */
     // Clear cart before action
     //$a = array('a');
     //do_action_ref_array('cfshoppingcart_before_clear_cart', array(&$this));
@@ -97,7 +99,7 @@ function cfshoppingcart_init_session_start(){
             // ajax json echo
             @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
             //@header('Content-Type: text/html; charset=' . get_option('blog_charset'));
-            require_once('JSON/JSON.php');
+            //require_once('JSON/JSON.php');
         }
         require_once('module/commu.php');
         $commu = new cfshoppingcart_commu();
@@ -113,12 +115,99 @@ function cfshoppingcart_init_session_start(){
     }
 }
 
+
+// ritch text editor
+/*
+function cfshoppingcart_admin_tinymce() {
+    // conditions here
+    wp_enqueue_script( 'common' );
+    wp_enqueue_script( 'jquery-color' );
+    //wp_enqueue_script('post');
+    wp_print_scripts('editor');
+    if (function_exists('add_thickbox')) add_thickbox();
+    wp_print_scripts('media-upload');
+    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+    wp_admin_css();
+    wp_enqueue_script('utils');
+    do_action("admin_print_styles-post-php");
+    do_action('admin_print_styles');
+}
+*/
+/*
+function cfshoppingcart_admin_tinymce() {
+    wp_admin_css('thickbox');
+    wp_print_scripts('jquery-ui-core');
+    wp_print_scripts('jquery-ui-tabs');
+    //wp_print_scripts('post');
+    wp_print_scripts('editor');
+    add_thickbox();
+    wp_print_scripts('media-upload');
+    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+    // use the if condition because this function doesn't exist in version prior to 2.7
+}
+*/
+/*
+function cfshoppingcart_admin_tinymce() { // ok
+    // conditions here
+    wp_enqueue_script( 'common' );
+    wp_enqueue_script( 'jquery-color' );
+    wp_print_scripts('editor');
+    if (function_exists('add_thickbox')) add_thickbox();
+    wp_print_scripts('media-upload');
+    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+    wp_admin_css();
+    wp_enqueue_script('utils');
+    do_action("admin_print_styles-post-php");
+    do_action('admin_print_styles');
+}
+*/
+
+// 2011-04-23
+function cfshoppingcart_admin_tinymce() { //ok 
+    wp_enqueue_script('common');
+    wp_enqueue_script('jquery-color');
+    wp_print_scripts('editor');
+    if (function_exists('add_thickbox')) add_thickbox();
+    wp_print_scripts('media-upload');
+    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+    wp_admin_css();
+    wp_enqueue_script('utils');
+    do_action("admin_print_styles-post-php");
+    do_action('admin_print_styles');
+    remove_all_filters('mce_external_plugins');
+}
+
+/*
+function cfshoppingcart_admin_tinymce() { //ok?
+    wp_enqueue_script('word-count');
+    wp_enqueue_script('post');
+    wp_enqueue_script('common');
+    wp_print_scripts('editor');
+    if (function_exists('add_thickbox')) add_thickbox();
+    wp_print_scripts('media-upload');
+    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+    wp_admin_css();
+    wp_enqueue_script('utils');
+}
+*/
 if (is_admin()) {
+    $model = $wpCFShoppingcart->model;
+    
     // Registration of management screen header output function.
     add_action('admin_head', array(&$wpCFShoppingcart, 'addAdminHead'));
     // Registration of management screen function.
     add_action('admin_menu', array(&$wpCFShoppingcart, 'addAdminMenu'));
     add_action('admin_notices', 'cfshoppingcart_action_admin_notices', 5);
+
+    if ($model->getVisualEditor()) {
+        // tiny mce
+        //add_action('admin_head', 'wp_tiny_mce'); // this line is commnet.
+        add_filter('admin_head','cfshoppingcart_admin_tinymce');
+        // when not working "Insert/edit link" button, add two lines:
+        // http://wordpress.org/support/topic/wp-31-problem-insertedit-link-button
+        add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
+        add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
+    }
 } else {
     /* $handle スクリプトの識別名
      * $src(optional) スクリプトファイルへのパス
@@ -135,6 +224,7 @@ if (is_admin()) {
     require_once('module/add_wp_footer.php');
     add_action('wp_footer', 'cfshoppingcart_add_wp_footer');
     //
+    require_once('module/contact-form-7.php');
     require_once('module/function_cfshoppingcart.php');
     require_once('module/show_product.php');
     add_action('the_content', 'show_product');
@@ -145,6 +235,9 @@ if (is_admin()) {
     require_once('module/cart_link.php');
     add_shortcode('cfshoppingcart_cart_link', 'cfshoppingcart_cart_link');
     //
+    require_once('module/put_shipping.php');
+    add_shortcode('cfshoppingcart_put_shipping', 'cfshoppingcart_put_shipping');
+    //
     require_once('module/send_order_link.php');
     add_shortcode('cfshoppingcart_checkout_link', 'cfshoppingcart_checkout_link');
     // Can use the short-code in sidebar widget
@@ -153,7 +246,7 @@ if (is_admin()) {
 
 function cfshoppingcart_action_admin_notices() {
     if (!function_exists('wpcf7_add_shortcode')) {
-        echo '<p>' . __("'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin.",'cfshoppingcart') . '</p>';
+        echo '<div id="message" class="updated"><p>' . __("'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin.",'cfshoppingcart') . '</p></div>';
     }
 }
 
@@ -192,6 +285,7 @@ class WpCFShoppingcartModel {
     var $show_commodity_on_archive;// = 'checked';
     var $show_commodity_on_single;// = 'checked';
     var $show_commodity_on_manually;// = '';
+    var $show_products_category_numbers;
     var $go_to_cart_text;
     var $orderer_input_screen_text;
     var $thanks_url;
@@ -208,12 +302,15 @@ class WpCFShoppingcartModel {
     //
     var $dont_load_css;
     var $show_custom_field_when_price_field_is_empty;
+    var $display_waiting_animation;
+    var $visual_editor;
     
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.6.3';
+        $this->version = '0.6.7';
         $this->debug = '';
+        $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
         $this->price_field_name = 'Price';
         $this->currency_format = '$%.02fYen';
@@ -232,6 +329,7 @@ class WpCFShoppingcartModel {
         $this->show_commodity_on_archive = 'checked';
         $this->show_commodity_on_single = 'checked';
         $this->show_commodity_on_manually = '';
+        $this->show_products_category_numbers = '';
         //
         $this->go_to_cart_text = '&raquo;&nbsp;Go To Cart';
         $this->orderer_input_screen_text = '&raquo;&nbsp;Orderer Input screen';
@@ -257,6 +355,7 @@ class WpCFShoppingcartModel {
         $this->custom_field_default_value = '';
         //
         $this->dont_load_css = '';
+        $this->display_waiting_animation = '';
         $show_custom_field_when_price_field_is_empty = '';
     }
 
@@ -275,8 +374,14 @@ class WpCFShoppingcartModel {
     }
     
     //
+    function get_current_version() {
+        return '0.6.7';
+    }
     function get_version() {
         return $this->version;
+    }
+    function set_version($fields) {
+        $this->version = $fields;
     }
     function getLicenceText() {
         global $cfshoppingcart_common;
@@ -290,6 +395,17 @@ class WpCFShoppingcartModel {
         fclose($fp);
         return $gpl;
     }
+    //
+    function setVisualEditor($fields) {
+        if (!user_can_richedit()) {
+            $fields = '';
+        }
+        $this->visual_editor = $fields;
+    }
+    function getVisualEditor() {
+        return $this->visual_editor;
+    }
+    //
     function is_debug() {
         if ($this->debug) return true;
         else return false;
@@ -301,6 +417,13 @@ class WpCFShoppingcartModel {
         return $this->debug;
     }
     //
+    function setDisplayWaitingAnimation($fields) {
+        $this->display_waiting_animation = $fields;
+    }
+    function getDisplayWaitingAnimation() {
+        return $this->display_waiting_animation;
+    }
+    //
     function setDontLoadCss($fields) {
         $this->dont_load_css = $fields;
     }
@@ -310,12 +433,13 @@ class WpCFShoppingcartModel {
     //
     function getWidgetEmpyCartHtml() {
         $current_user = wp_get_current_user();
-        
+        $html = '';
         if ($this->getShopNowClosed() && $current_user->user_level < $this->getShopNowClosedUserLevel()) {
-            return '<span class="shop_closed">' . $this->getClosedMessageForSidebarWidget() . '</span>';
+            $html .= '<span class="shop_closed">' . $this->getClosedMessageForSidebarWidget() . '</span>';
         } else {
-            return '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
+            $html .= '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
         }
+        return $html;
     }
     //
     function setPostidFormat($fields) {
@@ -536,6 +660,39 @@ return $h;
         return $this->show_commodity_on_manually;
     }
     //
+    function setShowProductsCategoryNumbers($fields) {
+        $f = trim(preg_replace('/[^0-9,]|^,+|,+$/', '', $fields));
+        if ($f === "") {
+            $this->show_products_category_numbers = NULL;
+        } else {
+            $f = explode(',', $f);
+            $this->show_products_category_numbers = $f;
+        }
+    }
+    function getShowProductsCategoryNumbers() {
+        $a = $this->show_products_category_numbers;
+        if (!is_array($a)) return '';
+        return join(',', $a);
+    }
+    function isShowProductsCategoryNumber($postid) {
+        //echo "postid = $postid ";
+        $ca = $this->show_products_category_numbers;
+        //print_r($ca);
+        if (count($ca) == 0) return true;
+        
+        $cates  = get_the_category($postid);
+        foreach ($cates as $cate) {
+            // 未分類を除外
+            //if ($cate->cat_ID == 0) { continue; }
+            //echo "catid = " . $cate->cat_ID;
+            if (in_array($cate->cat_ID, $ca)) {
+                //echo " (" . $ca . " == " . $cate->cat_ID . ")";
+                return true;
+            }
+        }
+        return false;
+    }
+    //
     function setCustomFields($fields) {
         $a = array();
         $f = explode(',', $fields);
@@ -589,10 +746,12 @@ return $h;
     }
     //
     function setOrdererInputScreenText($field) {
-        $this->orderer_input_screen_text = strip_tags($field);
+        //$this->orderer_input_screen_text = strip_tags($field);
+        $this->orderer_input_screen_text = $field;
     }
     function getOrdererInputScreenText() {
         return $this->orderer_input_screen_text;
+        //return stripslashes($this->orderer_input_screen_text);
     }
     //
     function setThanksUrl($field) {
@@ -726,6 +885,11 @@ class WpCFShoppingcart {
     function addAdminHead() {
         echo '<link type="text/css" rel="stylesheet" href="';
         echo $this->plugin_uri . '/cfshoppingcart.css" />' . "\n";
+
+        echo '<script type="text/javascript" src="';
+        echo $this->plugin_uri . '/js/jquery.cookie.js"></script>' . "\n";
+        echo '<script type="text/javascript" src="';
+        echo $this->plugin_uri . '/js/postbox.js"></script>' . "\n";
     }
 
     function addAdminMenu() {

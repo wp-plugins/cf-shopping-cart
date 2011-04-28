@@ -4,8 +4,8 @@
  * -*- Encoding: utf8n -*-
  */
 
-require_once('cart.php');
-require_once('contact-form-7.php');
+//require_once('cart.php');
+//require_once('contact-form-7.php');
 
 // get data object
 $WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
@@ -14,9 +14,10 @@ $cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
 
 function cfshoppingcart($args = '') {
     //print_r($_SESSION);
-    
-    global $cfshoppingcart_stat;
-    if ($cfshoppingcart_stat === 'cart_page') return;
+
+    //print_r($args);
+    //global $cfshoppingcart_stat;
+    //if ($cfshoppingcart_stat === 'cart_page') return;
     
     // get data object
     global $WpCFShoppingcart;
@@ -42,9 +43,19 @@ function cfshoppingcart($args = '') {
         if ($model->getShowCommodityOnPage() && is_page()) $rf = 0;
         if ($model->getShowCommodityOnArchive() && is_archive()) $rf = 0;
         if ($model->getShowCommodityOnSingle() && is_single()) $rf = 0;
+        if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
+            $rf = 0;
+        } else {
+            $rf = 1;
+        }
         if ($rf) return;
     } else {
         if ($model->getShowCommodityOnManually()) $rf = 0;
+        if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
+            $rf = 0;
+        } else {
+            $rf = 1;
+        }
         if ($rf) return;
     }
     
@@ -190,6 +201,9 @@ function cfshoppingcart($args = '') {
         $content .= __('Quantity','cfshoppingcart') . ' <input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
         $content .= '</span>';
         $content .= '<input class="add_to_cart_button" type="submit" name="add_to_cart" value="' . __('Add to Cart','cfshoppingcart') . '" />';
+        if ($model->getDisplayWaitingAnimation()) {
+            $content .= ' <img class="cfshoppingcart_waiting_anm" style="border:none;margin:0;padding:0;display:none" src="' . $cfshoppingcart_common->get_plugin_uri()  . '/js/ajax_activity_indicators_download_animated_indicator.gif" />';
+        }
         $content .= '</div><!-- /cfshoppingcart_commodity_op -->';
     }
     // form end ********************************************************

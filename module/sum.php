@@ -105,8 +105,9 @@ function cfshoppingcart_widget_html($sum) {
         $html .= '<tr><td>' . __('Total price','cfshoppingcart') . '</td><td>' . sprintf($currency_format, $sum['total']) . '</td></tr>';
     }
     $html .= '</table>';
-    $html .= '<span class="go_cart">&raquo;&nbsp;<a href="' . $cart_url . '">' . $model->getGoToCartText() . '</a></span>';
-
+    if ($model->getGoToCartText()) {
+        $html .= '<span class="go_cart">&raquo;&nbsp;<a href="' . $cart_url . '">' . $model->getGoToCartText() . '</a></span>';
+    }
     return $html;
 }
 

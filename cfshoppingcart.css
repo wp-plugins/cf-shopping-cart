@@ -4,6 +4,32 @@
  * -*- Encoding: utf8n -*-
  */
 
+div.cfshoppingcart_admin div.cfshoppingcart_admin-links {
+  text-align: right;
+  font-size: .8em;
+  margin-top: -1.6em;
+  margin-right: 8px;
+}
+
+div.cfshoppingcart_admin div.cfshoppingcart_admin-links a {
+  text-decoration: none;
+}
+
+/*
+textarea#orderer_input_screen_text {
+  width: 100%;
+}
+*/
+
+div.postdivrich textarea {
+  width: 100%;
+}
+
+textarea.license {
+  width: 100%;
+}
+
+/*
 .cfs_top_link {
   text-align: right;
   margin: 0 5px 0px 0;
@@ -24,5 +50,5 @@ legend {
 .infield {
   padding: 5px;
 }
-
+*/
 

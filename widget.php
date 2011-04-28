@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart widget
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.3
+Version: 0.6.7
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -52,6 +52,7 @@ class CfshoppingcartWidget extends WP_Widget {
         if (!$title) $title = $this->widget_title;
         echo $before_title . $title . $after_title;
         echo '<div class="cfshoppingcart_widget">';
+        echo '<div class="cfshoppingcart_widget_cart">';
         //
         if (!$html = $_SESSION['cfshoppingcart']['sum']['html']) {
             global $WpCFShoppingcart;
@@ -60,6 +61,8 @@ class CfshoppingcartWidget extends WP_Widget {
             //$html = '<span class="cart_empty">'. __('Shopping Cart is empty','cfshoppingcart') . '</span>';
         }
         echo $html;
+        echo '</div>';
+        echo '<div class="cfshoppingcart_widget_note">' . nl2br($instance['note']) . '</div>';
         echo '</div>';
         echo $after_widget;
     }
@@ -74,8 +77,11 @@ class CfshoppingcartWidget extends WP_Widget {
     /** @see WP_Widget::form */
     function form($instance) {
         $title = esc_attr($instance['title']);
+        $note = esc_attr($instance['note']);
         ?>
         <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+
+        <p><label for="<?php echo $this->get_field_id('note'); ?>"><?php _e('Note:'); ?><br /><textarea class="widefat" id="<?php echo $this->get_field_id('note'); ?>" name="<?php echo $this->get_field_name('note'); ?>"><?php echo $note; ?></textarea></label></p>
         <?php 
     }
 

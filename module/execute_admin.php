@@ -15,8 +15,11 @@ function execute_admin(&$obj) {
     }
 
     ?>
+    <div class="wrap cfshoppingcart_admin">
+    <div id="icon-plugins" class="icon32"><br/></div>
     <h2><?php _e('Cf Shopping Cart', 'cfshoppingcart'); ?></h2>
     <form name="formCFShoppingcart" method="post">
+    <div id="poststuff" class="meta-box-sortables" style="position: relative; margin-top:10px;">
       
     <?php
     if (isset($save)) {
@@ -24,7 +27,9 @@ function execute_admin(&$obj) {
     }
     edit($obj, $msg);
     
+    echo '</div>';
     echo '</form>';
+    echo '</div>';
 }
 
 function save(&$obj) {
@@ -44,6 +49,9 @@ function save(&$obj) {
     
     //print $custom_fields;
     $model = &$obj->model;
+    
+    $model->set_version($model->get_current_version());
+    
     $model->setCustomFields($custom_fields);
     $model->setPriceFieldName($price_field_name);
     //
@@ -69,13 +77,16 @@ function save(&$obj) {
     $model->setMaxQuantityOfOneCommodity($max_quantity_of_one_commodity);
     $model->setMaxQuantityOfTotalOrder($max_quantity_of_total_order);
     $model->setDontLoadCss($dont_load_css);
+    $model->setDisplayWaitingAnimation($display_waiting_animation);
     $model->setDebug($is_debug);
+    $model->setVisualEditor($visual_editor);
 
     $model->setShowCommodityOnHome($show_commodity_on_home);
     $model->setShowCommodityOnPage($show_commodity_on_page);
     $model->setShowCommodityOnArchive($show_commodity_on_archive);
     $model->setShowCommodityOnSingle($show_commodity_on_single);
     $model->setShowCommodityOnManually($show_commodity_on_manually);
+    $model->setShowProductsCategoryNumbers($show_products_category_numbers);
     //
     $model->setGoToCartText($go_to_cart_text);
     $model->setOrdererInputScreenText($orderer_input_screen_text);
@@ -114,11 +125,17 @@ function edit(&$obj, $msg = '') {
     }
       */
     
-    if ($msg) {
-        printf("<div class=\"msg\">%s</div>", $msg);
-    }
 
     $model = $obj->model;
+
+    // update message.
+    $current_version = $model->get_current_version();
+    if ($model->get_version() !== $current_version) {
+        $msg .= '<p><a href="http://takeai.silverpigeon.jp/?page_id=727" target="_blank">Cf Shopping Cart needs your support. Please donate today. Your contribution is needed for making this plugin better.</a></p>';
+    }
+    if ($msg) {
+        echo '<div id="message" class="updated"><p>' . $msg . '</p></div>';
+    }
 
     // Custom Field array and string
     $custom_fields_array = $model->getCustomFields();
@@ -126,10 +143,16 @@ function edit(&$obj, $msg = '') {
     //echo '$model->getCustomFields() = ' . $model->getCustomFields() . ']';
     ?>
 
-    <div class="cfs_top_link"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">demo</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
-    <fieldset style="clear:both"><legend><?php _e('Options', 'cfshoppingcart');?></legend>
-      <div class="infield">
-        <table>
+    <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">demo</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
+
+
+      
+  <div class="postbox cfshoppingcart_postbox">
+    <div class="handlediv" title="Click to toggle"><br /></div>
+    <h3><?php _e('Options','cfshoppingcart');?></h3>
+    <div class="inside">
+      
+        <table class="form-table">
         
         <tr><td><?php _e('Shop now closed', 'cfshoppingcart');?></td><td><input type="checkbox" name="shop_now_closed" value="checked" <?php echo $model->getShopNowClosed();?> /> <?php _e('Closed','cfshoppingcart');?> <?php _e("(Be 'Shop Closed' is user level less than 6.)",'cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Closed message for Sidebar widget', 'cfshoppingcart');?> </td><td><input type="text" name="closed_message_for_sidebar_widget" id="closed_message_for_sidebar_widget" value="<?php echo $model->getClosedMessageForSidebarWidget();?>" size="60" /></td></tr>
@@ -155,7 +178,15 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Max quantity of one commodity', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_one_commodity" id="max_quantity_of_one_commodity" value="<?php echo $model->getMaxQuantityOfOneCommodity();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Max quantity of total order', 'cfshoppingcart');?></td><td><input type="text" name="max_quantity_of_total_order" id="max_quantity_of_total_order" value="<?php echo $model->getMaxQuantityOfTotalOrder();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('"Go to Cart" text', 'cfshoppingcart');?></td><td><input type="text" name="go_to_cart_text" id="go_to_cart_text" value="<?php echo $model->getGoToCartText();?>" size="40" /></td></tr>
-        <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><input type="text" name="orderer_input_screen_text" id="orderer_input_screen_text" value="<?php echo $model->getOrdererInputScreenText();?>" size="40" /></td></tr>
+          
+          
+        <?php if ($model->getVisualEditor()) { ?>
+          <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><div class="postarea postdivrich"><?php the_editor(stripslashes($model->getOrdererInputScreenText()), 'orderer_input_screen_text','orderer_input_screen_text',true); ?></div></td></tr>
+        <?php } else { ?>
+          <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><textarea name="orderer_input_screen_text" id="orderer_input_screen_text" cols="50" rows="5"><?php echo stripslashes($model->getOrdererInputScreenText());?></textarea></td></tr>
+        <?php } ?>
+          
+          
         <tr><td><?php _e('Table tag type','cfshoppingcart');?></td><td><?php echo $model->getTableTagListHtml();?></td></tr>
 <?php/*
           <tr><td><?php _e('Shipping', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php echo __('Must be edit','cfshoppingcart') . ': ' . $shipping_php_path; ?> <font color="red"><?php echo __('* I think this option will be removed, next update.','cfshoppingcart');?></font></td></tr>
@@ -165,10 +196,12 @@ function edit(&$obj, $msg = '') {
         <tr><td><?php _e('Thanks Url', 'cfshoppingcart');?></td><td><input type="text" name="thanks_url" id="thanks_url" value="<?php echo $model->getThanksUrl();?>" size="60" /></td></tr>
         <tr><td><?php _e('In Cart, QF-GetThumb option 1', 'cfshoppingcart');?></td><td><input type="text" name="qfgetthumb_option_1" id="qfgetthumb_option_1" value="<?php echo $model->getQfgetthumbOption1();?>" size="60" /></td></tr>
         <tr><td><?php _e('In Cart, QF-GetThumb default image', 'cfshoppingcart');?></td><td><input type="text" name="qfgetthumb_default_image" id="qfgetthumb_default_image" value="<?php echo $model->getQfgetthumbDefaultImage();?>" size="60" /></td></tr>
-        <tr><td><?php _e('Choice show commodity on page', 'cfshoppingcart');?></td><td><input type="checkbox" name="show_commodity_on_home" value="checked" <?php echo $model->getShowCommodityOnHome();?> /> <?php _e('home','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_page" value="checked" <?php echo $model->getShowCommodityOnPage();?> /> <?php _e('page','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_archive" value="checked" <?php echo $model->getShowCommodityOnArchive();?> /> <?php _e('archive','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_single" value="checked" <?php echo $model->getShowCommodityOnSingle();?> /> <?php _e('single','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_manually" value="checked" <?php echo $model->getShowCommodityOnManually();?> /> <?php _e('manually (must edit theme)','cfshoppingcart');?> </td></tr>
+        <tr><td><?php _e('Choice show commodity on page', 'cfshoppingcart');?></td><td><input type="checkbox" name="show_commodity_on_home" value="checked" <?php echo $model->getShowCommodityOnHome();?> /> <?php _e('home','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_page" value="checked" <?php echo $model->getShowCommodityOnPage();?> /> <?php _e('page','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_archive" value="checked" <?php echo $model->getShowCommodityOnArchive();?> /> <?php _e('archive','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_single" value="checked" <?php echo $model->getShowCommodityOnSingle();?> /> <?php _e('single','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_manually" value="checked" <?php echo $model->getShowCommodityOnManually();?> /> <?php _e('manually (must edit theme)','cfshoppingcart');?> <br /><?php _e('Show products category numbers (Example: 1,2,..)', 'cfshoppingcart');?>: <input type="text" name="show_products_category_numbers" id="show_products_category_numbers" value="<?php echo $model->getShowProductsCategoryNumbers();?>" size="30" /></td></tr>
         <tr><td colspan="2"><?php _e('* Choice manually then insert PHP code: ', 'cfshoppingcart');?> '&lt;?php cfshoppingcart(); ?&gt;' to 'archive.php' and 'single.php' files(and more page.php, index.php...) in '<?php echo get_bloginfo( 'template_directory' );?>' directory.</td></tr>
+        <tr><td><?php _e("Display waiting animation", 'cfshoppingcart');?></td><td><input type="checkbox" name="display_waiting_animation" value="checked" <?php echo $model->getDisplayWaitingAnimation();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><td><?php _e("Don't load css", 'cfshoppingcart');?></td><td><input type="checkbox" name="dont_load_css" value="checked" <?php echo $model->getDontLoadCss();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><td><?php _e('Debug mode', 'cfshoppingcart');?></td><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
+        <tr><td><?php _e('Visual Editor', 'cfshoppingcart');?></td><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?></td></tr>
 
        <?php /* Shipping ****************************************/?>
        <tr><td><?php _e("Shipping", 'cfshoppingcart');?></td><td><input type="checkbox" name="shipping_enabled" value="checked" <?php echo $model->getShippingEnabled();?> /> <?php echo _e('Enabled','cfshoppingcart'); ?></td></tr>
@@ -181,22 +214,45 @@ function edit(&$obj, $msg = '') {
        <?php /* End of Shipping **********************************/?>
 
 
-         <tr><td><input type="submit" name="save" value="<?php _e('Save', 'cfshoppingcart')?>" /></td><td></td></tr>
+         <tr><td><input type="submit" name="save" value="<?php _e('Update Options', 'cfshoppingcart')?>&nbsp;&raquo;" class="button-primary" /></td><td></td></tr>
 
         </table>
-      </div>
-    </fieldset>
+    </div>
+  </div>
 
-      
-    <fieldset><legend><?php _e('Others', 'cfshoppingcart');?></legend>
-      <div class="infield">
-        <table>
-        <tr><td><?php _e('License', 'cfshoppingcart');?></td><td><textarea name="license" id="license" cols="81" rows="12" readonly="readonly"><?php echo $model->getLicenceText(); ?></textarea></td></tr>
-        </table>
-      </div>
-    </fieldset>
-      
-    <?php
+
+
+<?php apply_filters('cfshoppingcart_put_configuration', $obj); ?>
+
+
+<div class="postbox cfshoppingcart_postbox closed">
+  <div class="handlediv" title="Click to toggle"><br /></div>
+  <h3><?php _e('License', 'cfshoppingcart');?></h3>
+  <div class="inside">
+    <textarea name="license" class="license" cols="81" rows="21" readonly="readonly"><?php echo $model->getLicenceText(); ?></textarea>
+  </div>
+</div>
+
+
+
+<?php /*
+<div class="postbox cfshoppingcart_postbox">
+  <div class="handlediv" title="Click to toggle"><br /></div>
+  <h3>Custom Field Template Options</h3>
+  <div class="inside">
+  </div>
+</div>
+
+<div class="postbox cfshoppingcart_postbox closed">
+  <div class="handlediv" title="Click to toggle"><br /></div>
+  <h3>Global Settings</h3>
+  <div class="inside">
+  </div>
+</div>
+*/ ?>
+
+
+<?php
 }
 
 ?>

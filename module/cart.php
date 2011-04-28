@@ -10,7 +10,7 @@
  *   <?php cfshoppingcart_cart(); ?>
  */
 
-require_once('sum.php');
+//require_once('sum.php');
 
 function cfshoppingcart_cart($args = '') {
     //echo '_SESSION = '; print_r($_SESSION);
@@ -18,15 +18,13 @@ function cfshoppingcart_cart($args = '') {
     //unset($_SESSION['cfshoppingcart']);
     //if (!session_id()){ @session_start(); }
 
-    global $cfshoppingcart_stat;
-    $cfshoppingcart_stat = 'cart_page';
+    //global $cfshoppingcart_stat;
+    //$cfshoppingcart_stat = 'cart_page';
     // get data object
     global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
     $model = $WpCFShoppingcart->model;
 
     global $cfshoppingcart_common;
-    //require_once('common.php');
-    //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
 
     if (is_array($args)) {
         $is_shortcode = true;
@@ -143,7 +141,11 @@ function cfshoppingcart_cart($args = '') {
         }
         //
         $content .= $trth. __('Quantity','cfshoppingcart') . $thtd . '<input type="text" name="quantity" class="cfshoppingcart_quantity_' . $postid . '" value="' . $commodity['quantity'] . '" /> ' . $quantity . '</td></tr>';
-        $content .= $trth . $thtd . '<input type="submit" class="cfshoppingcart_cancel_button" name="cancel" value="' . __('Cancel','cfshoppingcart') . '" /> <input type="submit" class="cfshoppingcart_change_quantity_button" name="change_quantity" value="' . __('Change quantity','cfshoppingcart') . '" />' . $tdtr;
+        $content .= $trth . $thtd . '<input type="submit" class="cfshoppingcart_cancel_button" name="cancel" value="' . __('Cancel','cfshoppingcart') . '" /> <input type="submit" class="cfshoppingcart_change_quantity_button" name="change_quantity" value="' . __('Change quantity','cfshoppingcart') . '" />';
+        if ($model->getDisplayWaitingAnimation()) {
+            $content .= ' <img class="cfshoppingcart_waiting_anm" style="border:none;margin:0;padding:0;display:none" src="' . $cfshoppingcart_common->get_plugin_uri()  . '/js/ajax_activity_indicators_download_animated_indicator.gif" />';
+        }
+        $content .= $tdtr;
         // form end ****************************************************
         if ($table_tag == 'table') {
             $content .= '</table>';
@@ -189,7 +191,13 @@ function cfshoppingcart_cart($args = '') {
     if ($order_is_more_than_stock) {
         $content .= '<div class="order_is_more_than_stock"><span>' . __("Order is more than stock, Can't check out.",'cfshoppingcart') . '</span></div>';
     } else {
-        $content .= '<div class="orderer">&raquo;&nbsp;<a class="orderder_input_screen" href="' . $send_order_url . '">' . $model->getOrdererInputScreenText() . '</a></div>';
+        $content .= '<div class="orderer">';
+        $content .= apply_filters('cfshoppingcart_put_checkout_button', $WpCFShoppingcart);
+        $send_order_text = nl2br(stripslashes($model->getOrdererInputScreenText()));
+        if ($send_order_url && $send_order_text) {
+            $content .= '<div class="cfshoppingcart_checkout_link"><a class="orderder_input_screen" href="' . $send_order_url . '">' . $send_order_text . '</a></div>';
+        }
+        $content .= '</div>'; // .orderer
     }
 
     if ($args[0] === 'commu') { return $content; }
