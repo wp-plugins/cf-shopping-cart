@@ -20,7 +20,7 @@ class WpCFShoppingcartPaypalModel {
     // constructor
     function WpCFShoppingcartPaypalModel() {
         // default value
-        $this->enable_paypal_options = 'not_use';
+        $this->enable_paypal_options = '';
         $this->paypal_action_url = 'https://www.paypal.com/cgi-bin/webscr';
         $this->paypal_email_address = get_bloginfo('admin_email');
         $this->paypal_currency = 'USD';
