@@ -143,7 +143,7 @@ function edit(&$obj, $msg = '') {
     //echo '$model->getCustomFields() = ' . $model->getCustomFields() . ']';
     ?>
 
-    <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">demo</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
+    <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">website</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
 
 
       

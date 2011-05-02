@@ -247,7 +247,13 @@ class WpCFShoppingcartPaypal {
             $i++;
             $item_name = $commodity[$product_name_field_name];
             list($postid, $str) = $this->product_id_to_string($product_id);
-            $item_name .= '(' . $str . ')';
+            if (!$item_name) {
+                $post_obj = get_post($postid);
+                $item_name = $post_obj->post_title;
+            }
+            if ($str) {
+                $item_name .= '(' . $str . ')';
+            }
             $amount = $commodity[$price_field_name];
             $quantity = $commodity['quantity'];
             
@@ -293,6 +299,7 @@ class WpCFShoppingcartPaypal {
     
     
     function product_id_to_string($product_id) {
+        $a = array();
         $vl = explode('|', $product_id);
         $postid = array_shift($vl);
         foreach ($vl as $i => $eq) {
@@ -358,7 +365,7 @@ class WpCFShoppingcartPaypal {
 <?php if ($this->getVisualEditor()) { ?>
   <tr><td><?php _e('"Check out" text', 'cfshoppingcart');?></td><td><div class="postarea postdivrich"><?php the_editor(stripslashes($model->getOrdererInputScreenText()), 'paypal_orderer_input_screen_text','paypal_orderer_input_screen_text',true); ?></div></td></tr>
 <?php } else { ?>
-  <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><textarea name="paypal_orderer_input_screen_text" id="paypal_orderer_input_screen_text"><?php echo stripslashes($model->getOrdererInputScreenText());?></textarea></td></tr>
+  <tr><td><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></td><td><textarea name="paypal_orderer_input_screen_text" id="paypal_orderer_input_screen_text" cols="50" rows="5"><?php echo stripslashes($model->getOrdererInputScreenText());?></textarea></td></tr>
 <?php } ?>
 
 
