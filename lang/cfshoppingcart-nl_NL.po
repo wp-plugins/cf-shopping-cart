@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart v0.6.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-11 13:15+0100\n"
-"PO-Revision-Date: 2011-04-12 20:05+0100\n"
+"POT-Creation-Date: 2011-05-02 21:27+0100\n"
+"PO-Revision-Date: 2011-05-02 21:31+0100\n"
 "Last-Translator: GJ van den Os <vandenos@gmail.com>\n"
 "Language-Team: Arrowhosting.nl <vandenos@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,148 +20,147 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: cfshoppingcart.php:171
+#: cfshoppingcart.php:249
 msgid "'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin."
 msgstr "'wpcf7_add_shortcode' functie niet gevonden. Heeft u het Contact formulier 7 plugin wel geïnstaleerd?."
 
-#: cfshoppingcart.php:332
-#: module/cart.php:70
-#: module/commu.php:145
-#: module/commu.php:213
+#: cfshoppingcart.php:440
+#: module/cart.php:68
+#: module/commu.php:137
+#: module/commu.php:205
 #: module/contact-form-7.php:54
 msgid "Shopping Cart is empty."
 msgstr "Uw Winkelwagentje is leeg."
 
-#: cfshoppingcart.php:432
+#: cfshoppingcart.php:541
 msgid "Select"
 msgstr "Selecteer"
 
-#: cfshoppingcart.php:499
+#: cfshoppingcart.php:608
 msgid "Show sold out message"
 msgstr "Toon uitverkocht tekstregel"
 
-#: cfshoppingcart.php:501
+#: cfshoppingcart.php:610
 msgid "Don't show the product"
 msgstr "Artikel Niet Tonen"
 
-#: cfshoppingcart.php:757
+#: cfshoppingcart.php:897
 msgid "Cf Shopping Cart Options"
 msgstr "Cf Shopping Cart Opties"
 
-#: cfshoppingcart.php:758
+#: cfshoppingcart.php:898
 #: widget.php:42
-#: module/execute_admin.php:18
+#: module/execute_admin.php:20
 msgid "Cf Shopping Cart"
 msgstr "Cf Shopping Cart"
 
-#: widget.php:78
+#: widget.php:82
 msgid "Title:"
 msgstr "Titel:"
 
-#: module/cart.php:136
-#: module/function_cfshoppingcart.php:166
-#: module/function_cfshoppingcart.php:233
+#: widget.php:84
+msgid "Note:"
+msgstr "Opmerking:"
+
+#: module/cart.php:134
+#: module/function_cfshoppingcart.php:178
+#: module/function_cfshoppingcart.php:248
 msgid "Many"
 msgstr "Veel"
 
-#: module/cart.php:138
+#: module/cart.php:136
 msgid "Order is more than stock"
 msgstr "Order is hoger dan in voorraad"
 
-#: module/cart.php:145
-#: module/cart.php:164
+#: module/cart.php:143
+#: module/cart.php:166
 #: module/contact-form-7.php:108
 #: module/contact-form-7.php:116
-#: module/execute_admin.php:152
-#: module/function_cfshoppingcart.php:189
+#: module/execute_admin.php:175
+#: module/function_cfshoppingcart.php:201
 msgid "Quantity"
 msgstr "Aantal"
 
-#: module/cart.php:146
+#: module/cart.php:144
 msgid "Cancel"
 msgstr "Artikel Verwijderen"
 
-#: module/cart.php:146
+#: module/cart.php:144
 msgid "Change quantity"
 msgstr "Aantal Vernieuwen"
 
-#: module/cart.php:165
+#: module/cart.php:167
 #: module/contact-form-7.php:117
 msgid "Subtotal"
 msgstr "Subtotaal"
 
-#: module/cart.php:175
+#: module/cart.php:177
 #: module/contact-form-7.php:126
-#: module/execute_admin.php:174
+#: module/execute_admin.php:207
 msgid "Shipping"
 msgstr "Verzendkosten"
 
-#: module/cart.php:184
+#: module/cart.php:186
 #: module/contact-form-7.php:131
-#: module/execute_admin.php:176
-#: module/execute_admin.php:177
-#: module/execute_admin.php:178
-#: module/execute_admin.php:179
-#: module/execute_admin.php:180
+#: module/execute_admin.php:209
+#: module/execute_admin.php:210
+#: module/execute_admin.php:211
+#: module/execute_admin.php:212
+#: module/execute_admin.php:213
 msgid "Total price"
 msgstr "Totaalprijs"
 
-#: module/cart.php:190
+#: module/cart.php:192
 msgid "Order is more than stock, Can't check out."
 msgstr "Order is meer dan voorradig. Bestelling is geanuleerd."
 
-#: module/cfshoppingcart.js.php:117
-#: module/cfshoppingcart.js.php:120
+#: module/cfshoppingcart.js.php:103
+#: module/cfshoppingcart.js.php:106
 msgid "Shopping Cart"
 msgstr "Winkelwagen"
 
-#: module/cfshoppingcart.js.php:165
-#: module/cfshoppingcart.js.php:169
-msgid "Please enter the quantity of the commodity."
-msgstr "A.U.B.! Vul het aantal van het artikel in."
-
-#: module/commu.php:67
-#: module/commu.php:155
-#: module/commu.php:409
+#: module/commu.php:59
+#: module/commu.php:147
+#: module/commu.php:403
 msgid "Sorry, stock is no."
 msgstr "Sorry, Niet voorradig."
 
-#: module/commu.php:75
-#: module/commu.php:164
+#: module/commu.php:67
+#: module/commu.php:156
 msgid "Out of stock"
 msgstr "Niet in Voorraad"
 
-#: module/commu.php:84
-#: module/commu.php:173
+#: module/commu.php:76
+#: module/commu.php:165
 msgid "Max quantity of total order is"
 msgstr "Max. kwantiteit van de totale order is"
 
-#: module/commu.php:108
-#: module/commu.php:181
+#: module/commu.php:100
+#: module/commu.php:173
 msgid "Max quantity of one commodity is"
 msgstr "Max. kwantiteit per produkt is"
 
-#: module/commu.php:120
+#: module/commu.php:112
 msgid "Item to cart."
 msgstr "Artikel naar winkelwagen."
 
-#: module/commu.php:127
+#: module/commu.php:119
 msgid "Change quantity is faild."
 msgstr "Wijzigen van aantal is mislukt!"
 
-#: module/commu.php:140
+#: module/commu.php:132
 msgid "Off the item."
 msgstr "Artikel is verwijderd."
 
-#: module/commu.php:192
+#: module/commu.php:184
 msgid "Quantity has changed"
 msgstr "Aantal is aangepast."
 
-#: module/commu.php:208
+#: module/commu.php:200
 msgid "Off the item"
 msgstr "Artikel is verwijderd"
 
-#: module/commu.php:411
+#: module/commu.php:405
 msgid "Error: Check Stock Custom Field value."
 msgstr "Fout: Controleer \" Custom Field\" waarde."
 
@@ -173,208 +172,282 @@ msgstr "Inclusief de niet voorradige artikelen. Bevestig A.U.B.!"
 msgid "Includes out of stock products. Please confirm."
 msgstr "Inclusief uitverkochte artikelen. Bevestig A.U.B.!"
 
-#: module/execute_admin.php:100
+#: module/execute_admin.php:111
 msgid "Saved"
 msgstr "Opgeslagen"
 
-#: module/execute_admin.php:130
+#: module/execute_admin.php:152
 msgid "Options"
 msgstr "Opties"
 
-#: module/execute_admin.php:134
+#: module/execute_admin.php:157
 msgid "Shop now closed"
 msgstr "Webwinkel status"
 
-#: module/execute_admin.php:134
+#: module/execute_admin.php:157
 msgid "Closed"
 msgstr "Gesloten"
 
-#: module/execute_admin.php:134
+#: module/execute_admin.php:157
 msgid "(Be 'Shop Closed' is user level less than 6.)"
 msgstr "(winkel gesloten voor gebruiksniveau lager dan 6)"
 
-#: module/execute_admin.php:135
+#: module/execute_admin.php:158
 msgid "Closed message for Sidebar widget"
 msgstr "Gesloten tekstregel in Widget"
 
-#: module/execute_admin.php:137
+#: module/execute_admin.php:160
 msgid "Custom field names"
 msgstr "\"Custom Field\" namen (b.v. Naam,Art-nr,Voorraad,Prijs)"
 
-#: module/execute_admin.php:138
+#: module/execute_admin.php:161
 msgid "Price field name"
 msgstr "Veldnaam van de Prijs (Prijs)"
 
-#: module/execute_admin.php:140
+#: module/execute_admin.php:163
 msgid "Be Custom Field name of linking to product page"
 msgstr "\"Custom Field\" naam met link-koppeling naar produktpagina "
 
-#: module/execute_admin.php:140
+#: module/execute_admin.php:163
 msgid "Open another window"
 msgstr "Open in ander venster"
 
-#: module/execute_admin.php:142
+#: module/execute_admin.php:165
 msgid "Number of stock field name"
 msgstr "Veldnaam van de Voorraad (Voorraad)"
 
-#: module/execute_admin.php:142
+#: module/execute_admin.php:165
 msgid "Empty is don't manage stock."
 msgstr "Leeg is geen beheervoorraad"
 
-#: module/execute_admin.php:143
+#: module/execute_admin.php:166
 msgid "Product name field name"
 msgstr "Veldnaam van het Artikel (Artikel)"
 
-#: module/execute_admin.php:144
+#: module/execute_admin.php:167
 msgid "Show Custom Field when price field is empty."
 msgstr "Toon aangepast veld als prijsveld leeg is."
 
-#: module/execute_admin.php:144
-#: module/execute_admin.php:145
-#: module/execute_admin.php:170
-#: module/execute_admin.php:171
-#: module/execute_admin.php:174
+#: module/execute_admin.php:167
+#: module/execute_admin.php:168
+#: module/execute_admin.php:201
+#: module/execute_admin.php:202
+#: module/execute_admin.php:203
+#: module/execute_admin.php:207
 msgid "Enabled"
 msgstr "Ingesteld"
 
-#: module/execute_admin.php:145
+#: module/execute_admin.php:168
 msgid "Be don't show empty field"
 msgstr "Toon geen lege velden"
 
-#: module/execute_admin.php:147
+#: module/execute_admin.php:170
 msgid "Custom Field default value"
 msgstr "\"Custom Field\" standaard waarde"
 
-#: module/execute_admin.php:147
+#: module/execute_admin.php:170
 msgid "example: <br />FieldName1=value1<br />FieldName2=value2<br />..."
 msgstr "voorbeeld: <br />VeldNaam1=waarde1<br />VeldNaam2=waarde2<br />..."
 
-#: module/execute_admin.php:149
+#: module/execute_admin.php:172
 msgid "Type of show sold out message"
 msgstr "Toon het type van uitverkocht bericht"
 
-#: module/execute_admin.php:149
+#: module/execute_admin.php:172
 msgid "if select \"Don't show the post\" then to be private the post at sold out."
 msgstr "Bij selectie \"Artikel Niet Tonen\"  het artikel handmatig bewerken."
 
-#: module/execute_admin.php:150
+#: module/execute_admin.php:173
 msgid "Sold out message"
 msgstr "Uitverkocht tekstregel"
 
-#: module/execute_admin.php:153
+#: module/execute_admin.php:176
 msgid "Currency format"
 msgstr "Valuta-teken (€)"
 
-#: module/execute_admin.php:153
+#: module/execute_admin.php:176
 #, php-format
 msgid "example: $%.02f"
 msgstr "bijvoorbeeld: € %.02f"
 
-#: module/execute_admin.php:154
+#: module/execute_admin.php:177
 msgid "\"#postid\" keyword format"
 msgstr "\"#postid\" code formaat"
 
-#: module/execute_admin.php:154
+#: module/execute_admin.php:177
 #, php-format
 msgid "example: %05d"
 msgstr "bijvoorbeeld: %05d"
 
-#: module/execute_admin.php:155
+#: module/execute_admin.php:178
 msgid "Max quantity of one commodity"
 msgstr "Max. kwantiteit per produkt"
 
-#: module/execute_admin.php:155
-#: module/execute_admin.php:156
+#: module/execute_admin.php:178
+#: module/execute_admin.php:179
 msgid "Zero is no limit."
 msgstr "Nul is geen limiet."
 
-#: module/execute_admin.php:156
+#: module/execute_admin.php:179
 msgid "Max quantity of total order"
 msgstr "Max. kwantiteit van totale order"
 
-#: module/execute_admin.php:157
+#: module/execute_admin.php:180
 msgid "\"Go to Cart\" text"
 msgstr "\"Naar Winkelwagen\" tekst link"
 
-#: module/execute_admin.php:158
+#: module/execute_admin.php:184
+#: module/execute_admin.php:186
 msgid "\"Orderer Input screen\" text"
 msgstr "\"Order Invoer Scherm\" tekst link"
 
-#: module/execute_admin.php:159
+#: module/execute_admin.php:190
 msgid "Table tag type"
 msgstr "Table tag type"
 
-#: module/execute_admin.php:163
+#: module/execute_admin.php:194
 msgid "Cart Url"
 msgstr "Winkelwagen URL"
 
-#: module/execute_admin.php:164
+#: module/execute_admin.php:195
 msgid "Send order Url"
 msgstr "Bestelformulier URL"
 
-#: module/execute_admin.php:165
+#: module/execute_admin.php:196
 msgid "Thanks Url"
 msgstr "Bedankt URL (optioneel)"
 
-#: module/execute_admin.php:166
+#: module/execute_admin.php:197
 msgid "In Cart, QF-GetThumb option 1"
 msgstr "In winkelwagen, QF-GetThumb optie 1"
 
-#: module/execute_admin.php:167
+#: module/execute_admin.php:198
 msgid "In Cart, QF-GetThumb default image"
 msgstr "In winkelwagen, QF-GetThumb standaardafbeelding"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "Choice show commodity on page"
 msgstr "Toon artikel op geslecteerde pagina's"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "home"
 msgstr "home"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "page"
 msgstr "pagina"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "archive"
 msgstr "archief"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "single"
 msgstr "enkel"
 
-#: module/execute_admin.php:168
+#: module/execute_admin.php:199
 msgid "manually (must edit theme)"
 msgstr "handmatig* template bewerken"
 
-#: module/execute_admin.php:169
+#: module/execute_admin.php:199
+msgid "Show products category numbers (Example: 1,2,..)"
+msgstr "Toon artikelen-categorie nummers (bijv.: 1,2,..)"
+
+#: module/execute_admin.php:200
 msgid "* Choice manually then insert PHP code: "
 msgstr "* Bij Handmatig dient u de volgende PHP-code in te voegen: "
 
-#: module/execute_admin.php:170
+#: module/execute_admin.php:201
+msgid "Display waiting animation"
+msgstr "Laat wachten animatie zien"
+
+#: module/execute_admin.php:202
 msgid "Don't load css"
 msgstr "CSS niet laden"
 
-#: module/execute_admin.php:171
+#: module/execute_admin.php:203
 msgid "Debug mode"
 msgstr "Debug Modus"
 
-#: module/execute_admin.php:184
-msgid "Save"
-msgstr "Opslaan"
+#: module/execute_admin.php:204
+msgid "Visual Editor"
+msgstr "Visuele Editor"
 
-#: module/execute_admin.php:191
-msgid "Others"
-msgstr "Overige"
+#: module/execute_admin.php:204
+msgid "Enable the visual editor when setting. Reload this page after update options when change this checkbox."
+msgstr "Visuele (WYSIWYG) editor activeren. Deze pagina opnieuw laden na het wijzigen van opties!"
 
-#: module/execute_admin.php:194
+#: module/execute_admin.php:217
+msgid "Update Options"
+msgstr "Opties bijwerken"
+
+#: module/execute_admin.php:230
 msgid "License"
 msgstr "Licentie"
 
-#: module/function_cfshoppingcart.php:191
+#: module/function_cfshoppingcart.php:203
 msgid "Add to Cart"
 msgstr "Bestellen »"
+
+#: module/paypal.php:206
+msgid "Updated"
+msgstr "Vernieuwd"
+
+#: module/paypal.php:278
+msgid "Make payments with PayPal - it's fast, free and secure!"
+msgstr "Betaal via PayPal - Het is snel, makkelijk en veilig!"
+
+#: module/paypal.php:323
+msgid "PayPal Options"
+msgstr "PayPal Opties"
+
+#: module/paypal.php:329
+msgid "Enable PayPal Options"
+msgstr "PayPal opties activeren"
+
+#: module/paypal.php:334
+msgid "PayPal Email Address"
+msgstr "PayPal E-mailadres"
+
+#: module/paypal.php:339
+msgid "PayPal action URL"
+msgstr "PayPal actie URL"
+
+#: module/paypal.php:344
+msgid "Currency"
+msgstr "Valuta (€)"
+
+#: module/paypal.php:348
+msgid "Use PayPal Profile Based Shipping"
+msgstr "PayPal profiel gebruiken voor Verzendkosten"
+
+#: module/paypal.php:349
+msgid "Check this if you want to use"
+msgstr "U kunt deze optie inschakelen als u dat wilt. "
+
+#: module/paypal.php:349
+msgid "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+msgstr "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+
+#: module/paypal.php:349
+msgid "PayPal profile based shipping"
+msgstr "PayPal profiel gebaseerd bij verzendkosten"
+
+#: module/paypal.php:349
+msgid "Using this will ignore any other shipping options that you have specified in this plugin."
+msgstr "Het gebruik negeert alle andere verzendkosten opties die u hebt opgegeven in deze plugin."
+
+#: module/paypal.php:353
+msgid "Return URL"
+msgstr "Retour URL"
+
+#: module/paypal.php:354
+msgid "This is the URL the customer will be redirected to after a successful payment"
+msgstr "Na een geslaagde betaling wordt uw klant doorgestuurd naar deze URL."
+
+#: module/paypal.php:359
+msgid "\"Check out\" text"
+msgstr "\"Naar Winkelwagen\" tekst link"
 
 #: module/shipping.php:21
 #: module/shipping.php:24
@@ -383,6 +456,15 @@ msgstr "Bestellen »"
 #: module/shipping.php:46
 msgid "Shipping Error"
 msgstr "Verzendingsfout!"
+
+#~ msgid "Please enter the quantity of the commodity."
+#~ msgstr "A.U.B.! Vul het aantal van het artikel in."
+
+#~ msgid "Save"
+#~ msgstr "Opslaan"
+
+#~ msgid "Others"
+#~ msgstr "Overige"
 
 #~ msgid "Communication error"
 #~ msgstr "Verbindingsfout"
