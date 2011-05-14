@@ -211,6 +211,7 @@ function cfshoppingcart_cart($args = '') {
 /* qf-getthumb */
 function get_commodity_img($postid, $qfgetthumb_option_1, $qfgetthumb_default_image) {
     global $post;
+    $post_pool = $post;
     $posts = get_posts('include=' . $postid . '&quantityposts=1');
     $post = $posts[0];
     setup_postdata($post);
@@ -220,6 +221,7 @@ function get_commodity_img($postid, $qfgetthumb_option_1, $qfgetthumb_default_im
         $s = the_qf_get_thumb_one($qfgetthumb_option_1);
     }
     $img = '<img src="' . $s . '" />';
+    $post = $post_pool;
     return $img;
 
 }
