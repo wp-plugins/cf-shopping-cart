@@ -63,8 +63,9 @@ class cfshoppingcart_commu {
                 return ($msg);
             } else if ($this->stock['num'] > 0) {
                 // order is out of stock
-                if (($commodities[$id]['quantity'] + $quantity) > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$this->stock['key']] + $quantity) > $this->stock['num']) {
-                    $msg = array('msg_red' => __('Out of stock', 'cfshoppingcart'),
+                //$dbm = 'if ((' . $commodities[$id]['quantity'] . ' + ' . $quantity . ') > ' . $this->stock['num'] . ' || (' . $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] . ' + ' . $quantity . ') > ' . $this->stock['num'] . ') {';
+                if (($commodities[$id]['quantity'] + $quantity) > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] + $quantity) > $this->stock['num']) {
+                    $msg = array('msg_red' => __('Out of stock', 'cfshoppingcart'),// . $dbm,
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  //'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
@@ -106,7 +107,7 @@ class cfshoppingcart_commu {
             //echo $id;exit;
             $commodities[$id]['quantity'] += $quantity;
             // Change in cart stock
-            $_SESSION[$sname]['incart_stock'][$this->stock['key']] += $quantity;
+            $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] += $quantity;
             $_SESSION[$sname]['commodities'] = $commodities;
             cfshoppingcart_sum();
             $msg = array('msg' => __('Item to cart.', 'cfshoppingcart'),
@@ -124,7 +125,7 @@ class cfshoppingcart_commu {
             }
             if ($quantity == 0) {
                 // Change in cart stock
-                $_SESSION[$sname]['incart_stock'][$this->stock['key']] -= $commodities[$id]['quantity'];
+                $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] -= $commodities[$id]['quantity'];
                 unset($commodities[$id]);
                 $_SESSION[$sname]['commodities'] = $commodities;
                 cfshoppingcart_sum();
@@ -151,7 +152,7 @@ class cfshoppingcart_commu {
                 return ($msg);
             } else if ($this->stock['num'] > 0) {
                 // order is out of stock
-                if ($quantity > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$this->stock['key']] - $commodities[$id]['quantity'] + $quantity) > $this->stock['num']) {
+                if ($quantity > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] - $commodities[$id]['quantity'] + $quantity) > $this->stock['num']) {
                 //if ($quantity > $this->stock['num']) {
                     $msg = array('msg_red' => __('Out of stock', 'cfshoppingcart'),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
@@ -177,7 +178,7 @@ class cfshoppingcart_commu {
                 return ($msg);
             }
             // Change in cart stock
-            $_SESSION[$sname]['incart_stock'][$this->stock['key']] = $_SESSION[$sname]['incart_stock'][$this->stock['key']] - $commodities[$id]['quantity'] + $quantity;
+            $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] = $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] - $commodities[$id]['quantity'] + $quantity;
             $commodities[$id]['quantity'] = $quantity;
             $_SESSION[$sname]['commodities'] = $commodities;
             cfshoppingcart_sum();
@@ -190,7 +191,7 @@ class cfshoppingcart_commu {
         } else if ($cmd === 'cancel') {
             if ($commodities[$id]) {
                 // Change in cart stock
-                $_SESSION[$sname]['incart_stock'][$this->stock['key']] -= $commodities[$id]['quantity'];
+                $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] -= $commodities[$id]['quantity'];
                 //
                 unset($commodities[$id]);
                 $_SESSION[$sname]['commodities'] = $commodities;

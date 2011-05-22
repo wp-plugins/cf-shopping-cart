@@ -14,7 +14,7 @@ $cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
 
 function cfshoppingcart($args = '') {
     //print_r($_SESSION);
-
+    //print_r($_SESSION['cfshoppingcart']['incart_stock']);
     //print_r($args);
     //global $cfshoppingcart_stat;
     //if ($cfshoppingcart_stat === 'cart_page') return;
