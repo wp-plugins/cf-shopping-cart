@@ -4,6 +4,7 @@
  * -*- Encoding: utf8n -*-
  */
 
+
 //require_once('cart.php');
 //require_once('contact-form-7.php');
 
@@ -12,7 +13,9 @@ $WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
 require_once('common.php');
 $cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
 
+
 function cfshoppingcart($args = '') {
+
     //print_r($_SESSION);
     //print_r($_SESSION['cfshoppingcart']['incart_stock']);
     //print_r($args);
@@ -23,6 +26,14 @@ function cfshoppingcart($args = '') {
     global $WpCFShoppingcart;
     $model = $WpCFShoppingcart->model;
     global $cfshoppingcart_common;
+
+
+    // test
+    if (0) {
+        require_once('cf.php');
+        $cf = new cfshoppingcart_products($WpCFShoppingcart);
+        $cf->setPost();
+    }
     
     global $post;
     //$get_post_custom = get_post_custom();
@@ -85,7 +96,7 @@ function cfshoppingcart($args = '') {
         debug_cfshoppingcart('function get_post_custom() return is');
         print_r($c);
     }
-    if ((!$c[$price_field_name] && !$model->getShowCustomFieldWhenPriceFieldIsEmpty()) ||
+    if ((!isset($c[$price_field_name]) && !$model->getShowCustomFieldWhenPriceFieldIsEmpty()) ||
         (strstr($c[$price_field_name][0], '#hidden') && !$model->getShowCustomFieldWhenPriceFieldIsEmpty())) {
         if ($is_debug) {
             debug_cfshoppingcart('price_field_name not found in Custom Field on this post. return function.');
@@ -270,7 +281,7 @@ function cfshoppingcart_get_post_select($n, $cf) {
         $str = $value;
         // check extra charges
         if (preg_match('/^(.*)=(-{0,1}[0-9]*|-{0,1}[0-9]*\.[0-9]*)$/', $str, $match)) {
-            $str = preg_replace('/_/', ' ', trim($match[1], 1));
+            $str = preg_replace('/_/', ' ', trim($match[1]), 1);
         }
         $h .= '<option value="' . $value . '">' . $str . '</option>';
         //$h .= '<option value="' . $str . '">' . $str . '</option>';

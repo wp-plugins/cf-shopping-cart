@@ -9,7 +9,6 @@
  */
 
 class cfshoppingcart_commu {
-    var $_self_path;
     var $model;
     var $common;
     var $customfieldnames;
@@ -17,29 +16,15 @@ class cfshoppingcart_commu {
     var $the_post;
     var $stock;
 
-    function cfshoppingcart_commu() {//$self_path) {
-        $this->_self_path = dirname(__FILE__);
-
+    function cfshoppingcart_commu() {
         // get data object
         global $WpCFShoppingcart, $cfshoppingcart_common;
         $this->model = $WpCFShoppingcart->model;
         $this->customfieldnames = $this->model->getCustomFields();
         $this->common = $cfshoppingcart_common;
-        
-        //$this->cfshoppingcart_session_start();
-        //$this->cfshoppingcart_main();
-        //$this->error_exit();
     }
     
     function commu($cmd, $id, $quantity, $customfield, $id2) {
-        if (0) {
-            $_SESSION = array();
-            session_destroy();
-            $_SESSION = array();
-            
-            unset($_SESSION[$sname]);
-        }
-
         $id = $id2;
 
         $price_field_name = $this->model->getPriceFieldName();
@@ -196,7 +181,7 @@ class cfshoppingcart_commu {
                 unset($commodities[$id]);
                 $_SESSION[$sname]['commodities'] = $commodities;
                 cfshoppingcart_sum();
-                require_once($this->_self_path . '/cart.php');
+                require_once('cart.php');
                 if ($commodities) {
                     $msg = array('msg' => __('Off the item', 'cfshoppingcart'),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
@@ -251,14 +236,12 @@ class cfshoppingcart_commu {
                 $commodity[$number_of_stock_field_name] = $number_of_stock;
             } else if (preg_match('/^#select/', $value)) {
                 // check select value
-                //$value = str_replace("\r\n", "\n", $value);
-                //$value = str_replace("\r", "\n", $value);
                 $value = $this->common->clean_cf_textarea($value);
                 $a = array_flip(explode("\n", $value));
                 if (array_key_exists($_POST[$key], $a)) {
                     // check extra charges
                     if (preg_match('/^(.*)=(-{0,1}[0-9]*|-{0,1}[0-9]*\.[0-9]*)$/', $_POST[$key], $match)) {
-                        $commodity[$key] = preg_replace('/_/', ' ', trim($match[1], 1));
+                        $commodity[$key] = preg_replace('/_/', ' ', trim($match[1]), 1);
                         $commodity['extra_charges'] += $match[2];
                     } else {
                         $commodity[$key] = $_POST[$key];
@@ -424,11 +407,11 @@ class cfshoppingcart_commu {
             } else {
                 if (0) {
                     // Javascript へ送る為に JSON 形式に変換
-                    require_once($this->_self_path . '/../Jsphon/Jsphon.php');
+                    require_once('../Jsphon/Jsphon.php');
                     $json = Jsphon::encode($j);
                     return $json;
                 } else {
-                    require_once($this->_self_path . '/../JSON/JSON.php');
+                    require_once('../JSON/JSON.php');
                     $json = /* php4_110323 & new */ new Services_JSON;
                     $encode = $json->encode($j, true);
                     return $encode;

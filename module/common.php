@@ -66,6 +66,7 @@ class cfshoppingcart_common {
      * return:
      *  array('L' => 500, 'M' => NULL, 'S' => 0);
      */
+    /*
     function split_select($s) {
         $items = explode('|', $s);
         foreach ($items as $i => $item) {
@@ -77,6 +78,7 @@ class cfshoppingcart_common {
         }
         return $ret;
     }
+      */
     
     /*
      * find stock key and number of stock

@@ -4,7 +4,7 @@
  * -*- Encoding: utf8n -*-
  */
 
-function shipping(&$model, $quantity, $total_price) {
+function cfshoppingcart_shipping(&$model, $quantity, $total_price) {
     
     for ($l = 0; $l < 5; $l++) {
         //$fields = $model->getShipping();

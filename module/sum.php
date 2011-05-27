@@ -44,7 +44,7 @@ function cfshoppingcart_sum() {
     if ($model->getShippingEnabled()) {
         // new version shipping
         require_once('shipping.php');
-        list($shipping, $shipping_msg) = shipping(&$model, $num, $sum);
+        list($shipping, $shipping_msg) = cfshoppingcart_shipping(&$model, $num, $sum);
     }
     
     $_SESSION[$sname]['sum']['quantity_of_commodity'] = $num;
