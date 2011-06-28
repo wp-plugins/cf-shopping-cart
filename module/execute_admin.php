@@ -13,7 +13,11 @@ function execute_admin(&$obj) {
         // Array extract to variable
         extract($_REQUEST);
     }
-
+    
+    if (isset($submit_symlink)) {
+        $msg = symbolic_link_for_contactForm7Modules($obj);
+    }
+    
     ?>
     <div class="wrap cfshoppingcart_admin">
     <div id="icon-plugins" class="icon32"><br/></div>
@@ -30,6 +34,54 @@ function execute_admin(&$obj) {
     echo '</div>';
     echo '</form>';
     echo '</div>';
+}
+
+function symbolic_link_for_contactForm7Modules ($obj, $cmd = '') {
+    //print $custom_fields;
+    $model = &$obj->model;
+    
+    $ver = $model->get_version();
+    
+    global $cfshoppingcart_common;
+    
+    $f1 = $cfshoppingcart_common->get_plugin_fullpath();
+    $f2dir = $f1;
+    $f1 .= '/contact-form-7-module/cfshoppingcart.php';
+    $f2dir = str_replace('/cf-shopping-cart', '/contact-form-7/modules', $f2dir);
+    $f2 = $f2dir . '/cfshoppingcart.php';
+    
+    if (file_exists($f2dir)) {
+        if ($cmd === 'check') return true;
+    } else {
+        if ($cmd === 'check') return false;
+        return __('Set extend module for Contact Form 7','cfshoppingcart') . __('Direcotory not found','cfshoppingcart') . ': "' . $f2dir . '"';
+    }
+    
+    if (file_exists($f2)) {
+        return __('Already exists extend module for Contact Form 7.','cfshoppingcart');
+    } else {
+        //echo 'create';
+        $old_umask = umask(0);
+        $old_dir = fileperms($f2dir);
+        if (!@chmod($f2dir, 0777)) {
+            $msg .= '<p>1. ' . __('Change permission to folder to 0777 failed.','cfshoppingcart') . '(' . $f2dir . ')</p>';
+        }
+        if (!@symlink($f1, $f2)) {
+            $msg .= '<p>2. ' . __('Create symbolic link is failed.','cfshoppingcart') . '(' . $f1 . ' to ' . $f2 . ')</p>';
+        }
+        if (!@chmod($f2, 0755)) {
+            $msg .= '<p>3. ' . __('Change permission to folder to 0755 failed.','cfshoppingcart') . '(' . $f2 . ')</p>';
+        }
+        if (!@chmod($f2dir, $old_dir)) {
+            $msg .= '<p>4. ' . __('Change permission to folder failed.','cfshoppingcart') . '(' . $f2dir . ')</p>';
+        }
+        umask($old_umask);
+    }
+    if (file_exists($f2)) {
+        return '<p>' . __('Extend module for Contact Form 7 is OK.','cfshoppingcart') . '</p>';
+    } else {
+        return __('Create link to extend module for Contact Form 7 failed.','cfshoppingcart') . $msg;
+    }
 }
 
 function save(&$obj) {
@@ -188,9 +240,6 @@ function edit(&$obj, $msg = '') {
           
           
         <tr><th><?php _e('Table tag type','cfshoppingcart');?></th><td><?php echo $model->getTableTagListHtml();?></td></tr>
-<?php/*
-          <tr><th><?php _e('Shipping', 'cfshoppingcart');?></th><td><input type="checkbox" name="is_use_shipping" value="checked" <?php echo $model->getIsUseShipping();?> /> <?php echo __('Must be edit','cfshoppingcart') . ': ' . $shipping_php_path; ?> <font color="red"><?php echo __('* I think this option will be removed, next update.','cfshoppingcart');?></font></td></tr>
-       */?>
         <tr><th><?php _e('Cart Url', 'cfshoppingcart');?></th><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" size="60" /></td></tr>
         <tr><th><?php _e('Send order Url', 'cfshoppingcart');?></th><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" size="60" /></td></tr>
         <tr><th><?php _e('Thanks Url', 'cfshoppingcart');?></th><td><input type="text" name="thanks_url" id="thanks_url" value="<?php echo $model->getThanksUrl();?>" size="60" /></td></tr>
@@ -221,6 +270,25 @@ function edit(&$obj, $msg = '') {
   </div>
 
 
+<div class="postbox cfshoppingcart_postbox">
+  <div class="handlediv" title="Click to toggle"><br /></div>
+  <h3><?php _e('Module for Contact Form 7','cfshoppingcart');?></h3>
+  <div class="inside">
+    <?php
+    if (!function_exists('symlink')) {
+        function symlink($a,$b){ return false; }
+        echo '<p>' . __("This server don't have symlink function, therefore can't use button 'Set extend module for Contact Form 7' in Cf Shopping Cart setting screen.",'cfshoppingcart') . '</p>';
+    } else {
+        ?>
+        <table>
+        <tr><td><input type="submit" name="submit_symlink" value="<?php _e('Set extend module for Contact Form 7', 'cfshoppingcart')?>" /></td></tr>
+        <tr><td><p><?php _e('Click button If shown "Array" in Check out Screen shopping item.','cfshoppingcart');?></p><p><?php _e("or Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'.",'cfshoppingcart');?></p></td></tr>
+        </table>
+        <?php
+    }
+    ?>
+  </div>
+</div>
 
 <?php apply_filters('cfshoppingcart_put_configuration', $obj); ?>
 

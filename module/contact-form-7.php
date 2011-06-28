@@ -87,9 +87,14 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
             // stock
             if ($value === $number_of_stock_field_name) {
                 // not use stock
-                if ($number_of_stock == -1) { continue; }
+                //echo 'number_of_stock : ' . $number_of_stock;
+                //print_r($number_of_stock);
+                if ($number_of_stock['num'] == -1) {
+                    $commodity[$value] = __('Many','cfshoppingcart');
+                    //continue;
+                } else 
                 // out of stock
-                if ($commodity[$value] > $number_of_stock) {
+                if ($commodity[$value] > $number_of_stock['num']) {
                     return array(false, __('Includes out of stock products. Please confirm.','cfshoppingcart'));
                 }
             }
