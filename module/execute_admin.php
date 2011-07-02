@@ -164,6 +164,14 @@ function save(&$obj) {
     return $msg;
 }
 
+function wp32bve() {
+    $f = explode('.', get_bloginfo('version'));
+    $ver = $f[0] . '.' . $f[1];
+    if ($ver >= 3.2) {
+        return __("This version of WordPress is can't use Visual Editor.",'cfshoppingcart');
+    }
+}
+
 function edit(&$obj, $msg = '') {
     //require_once('common.php');
     //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
@@ -250,7 +258,7 @@ function edit(&$obj, $msg = '') {
         <tr><th><?php _e("Display waiting animation", 'cfshoppingcart');?></th><td><input type="checkbox" name="display_waiting_animation" value="checked" <?php echo $model->getDisplayWaitingAnimation();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e("Don't load css", 'cfshoppingcart');?></th><td><input type="checkbox" name="dont_load_css" value="checked" <?php echo $model->getDontLoadCss();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Debug mode', 'cfshoppingcart');?></th><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
-        <tr><th><?php _e('Visual Editor', 'cfshoppingcart');?></th><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?></td></tr>
+        <tr><th><?php _e('Visual Editor', 'cfshoppingcart');?></th><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?><?php echo '<br />* ' . wp32bve();?></td></tr>
 
        <?php /* Shipping ****************************************/?>
        <tr><th><?php _e("Shipping", 'cfshoppingcart');?></th><td><input type="checkbox" name="shipping_enabled" value="checked" <?php echo $model->getShippingEnabled();?> /> <?php echo _e('Enabled','cfshoppingcart'); ?></td></tr>
