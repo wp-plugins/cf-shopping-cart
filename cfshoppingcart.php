@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.18
+Version: 0.6.19
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -266,6 +266,7 @@ class WpCFShoppingcartModel {
     var $product_name_field_name;
     var $type_of_show_sold_out_message;
     var $sold_out_message;
+    var $add_to_cart_button_text;
     //
     var $link_to_product_field_name;
     var $open_product_link_to_another_window;
@@ -309,7 +310,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.6.18';
+        $this->version = '0.6.19';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -342,6 +343,7 @@ class WpCFShoppingcartModel {
         $this->product_name_field_name = 'Name';
         $this->type_of_show_sold_out_message = '';
         $this->sold_out_message = 'Sold out';
+        $this->add_to_cart_button_text = 'Add to Cart';
         $this->shop_now_closed = '';
         $this->be_dont_show_empty_field = '';
         $this->closed_message_for_sidebar_widget = 'Shop now closed';
@@ -376,7 +378,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.6.18';
+        return '0.6.19';
     }
     function get_version() {
         return $this->version;
@@ -623,6 +625,15 @@ return $h;
     }
     function getSoldOutMessage() {
         return $this->sold_out_message;
+    }
+    //
+    function setAddToCartButtonText($fields) {
+        $this->add_to_cart_button_text = strip_tags(trim($fields));
+    }
+    function getAddToCartButtonText() {
+        $t = $this->add_to_cart_button_text;
+        if (!$t) { $t = __('Add to Cart','cfshoppingcart'); }
+        return $t;
     }
     
     //

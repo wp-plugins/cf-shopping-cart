@@ -109,6 +109,7 @@ function save(&$obj) {
     //
     $model->setNumberOfStockFieldName($number_of_stock_field_name);
     $model->setProductNameFieldName($product_name_field_name);
+    $model->setAddToCartButtonText($add_to_cart_button_text);
     $model->setSoldOutMessage($sold_out_message);
     $model->setTypeOfShowSoldOutMessage($type_of_show_sold_out_message);
     //
@@ -230,6 +231,7 @@ function edit(&$obj, $msg = '') {
         <tr><th><?php _e('Custom Field default value', 'cfshoppingcart');?> <p> <?php _e("example: <br />FieldName1=value1<br />FieldName2=value2<br />...", 'cfshoppingcart');?></p></th><td><textarea name="custom_field_default_value" id="custom_field_default_value" cols="50" rows="5"><?php echo $model->getCustomFieldDefaultValueRaw();?></textarea></td></tr>
           
         <tr><th><?php _e('Type of show sold out message', 'cfshoppingcart');?> </th><td><?php echo $model->getTypeOfShowSoldOutMessageListHtml();?> <?php _e('if select "Don\'t show the post" then to be private the post at sold out.','cfshoppingcart');?></td></tr>
+        <tr><th><?php _e('Add to Cart button text', 'cfshoppingcart');?> </th><td><input type="text" name="add_to_cart_button_text" id="add_to_cart_button_text" value="<?php echo $model->getAddToCartButtonText();?>" size="60" /></td></tr>
         <tr><th><?php _e('Sold out message', 'cfshoppingcart');?> </th><td><input type="text" name="sold_out_message" id="sold_out_message" value="<?php echo $model->getSoldOutMessage();?>" size="60" /></td></tr>
 
        <tr><th><?php _e('Quantity', 'cfshoppingcart');?></th><td><input type="text" name="quantity" id="quantity" value="<?php echo $model->getQuantity();?>" size="60" /></td></tr>

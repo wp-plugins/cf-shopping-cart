@@ -211,7 +211,7 @@ function cfshoppingcart($args = '') {
         $content .= '<div class="cfshoppingcart_commodity_op"><span>';
         $content .= __('Quantity','cfshoppingcart') . ' <input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
         $content .= '</span>';
-        $content .= '<input class="add_to_cart_button" type="submit" name="add_to_cart" value="' . __('Add to Cart','cfshoppingcart') . '" />';
+        $content .= '<input class="add_to_cart_button" type="submit" name="add_to_cart" value="' . $model->getAddToCartButtonText() . '" />';
         if ($model->getDisplayWaitingAnimation()) {
             $content .= ' <img class="cfshoppingcart_waiting_anm" style="border:none;margin:0;padding:0;display:none" src="' . $cfshoppingcart_common->get_plugin_uri()  . '/js/ajax_activity_indicators_download_animated_indicator.gif" />';
         }
