@@ -165,27 +165,37 @@ function save(&$obj) {
     return $msg;
 }
 
-function wp32bve() {
-    $f = explode('.', get_bloginfo('version'));
-    $ver = $f[0] . '.' . $f[1];
-    if ($ver >= 3.2) {
-        return __("This version of WordPress is can't use Visual Editor.",'cfshoppingcart');
+function cfshoppingcart_get_query_string_array() {
+    $f = array();
+    $f = explode('&', getenv('QUERY_STRING'));
+    //print_r($f);
+    foreach ($f as $i => $v) {
+        $g = explode('=', $v, 2);
+        $qs[urldecode($g[0])] = urldecode($g[1]);
     }
+    return $qs;
+}
+function cfshoppingcart_query_string($name, $value) {
+    $qs = cfshoppingcart_get_query_string_array();
+    
+    if ($value) {
+        $qs[$name] = $value;
+    } else {
+        unset($qs[$name]);
+    }
+    //
+    $q = array();
+    foreach ($qs as $n => $v) {
+        $q[] = urlencode($n) . '=' . urlencode($v);
+    }
+    return join('&', $q);
 }
 
 function edit(&$obj, $msg = '') {
     //require_once('common.php');
     //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
     global $cfshoppingcart_common;
-
-    // old version shipping
-    //$shipping_php_path = get_shipping_php_path();
-    /*
-    if (!file_exists($shipping_php_path)) {
-        $msg .= '<p>' . __('Can not use Shipping.','cfshoppingcart') . '<br />' . __('Shipping setting file not found','cfshoppingcart') . ': "' . $shipping_php_path . '"</p>';
-    }
-      */
-    
+    global $wp_version;
 
     $model = $obj->model;
 
@@ -202,11 +212,34 @@ function edit(&$obj, $msg = '') {
     $custom_fields_array = $model->getCustomFields();
     $custom_fields = $model->getCustomFieldsString();
     //echo '$model->getCustomFields() = ' . $model->getCustomFields() . ']';
+
+    if (version_compare($wp_version, '3.2', '<')) {
+        //wp_tiny_mce(true);
+    }
+
+    //echo 'QUERY_STRING' . $_SERVER['QUERY_STRING'];
+    $qs = cfshoppingcart_get_query_string_array();
+    $qs_option = $qs['option'];
+    //echo $qs_option;
+    
+    $link_cfshoppingcart = '?' . cfshoppingcart_query_string('option', 'cfshoppingcart');
+    $link_cf7 = '?' . cfshoppingcart_query_string('option', 'contactform7');
+    $link_license = '?' . cfshoppingcart_query_string('option', 'license');
+    $link_paypal = '?' . cfshoppingcart_query_string('option', 'paypal');
     ?>
+
+    <div class="cfshoppingcart_admin_tab">
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>">Cf Shopping Cart Options</a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'contactform7'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cf7;?>">Module for Contact Form 7</a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'license'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_license;?>">License</a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>">PayPal Options</a></div>
+    </div>
 
     <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">website</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
 
-
+  <?php
+  if ($qs_option === 'cfshoppingcart' || !$qs_option) {
+  ?>
       
   <div class="postbox cfshoppingcart_postbox">
     <div class="handlediv" title="Click to toggle"><br /></div>
@@ -260,7 +293,7 @@ function edit(&$obj, $msg = '') {
         <tr><th><?php _e("Display waiting animation", 'cfshoppingcart');?></th><td><input type="checkbox" name="display_waiting_animation" value="checked" <?php echo $model->getDisplayWaitingAnimation();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e("Don't load css", 'cfshoppingcart');?></th><td><input type="checkbox" name="dont_load_css" value="checked" <?php echo $model->getDontLoadCss();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Debug mode', 'cfshoppingcart');?></th><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
-        <tr><th><?php _e('Visual Editor', 'cfshoppingcart');?></th><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?><?php echo '<br />* ' . wp32bve();?></td></tr>
+        <tr><th><?php _e('Visual Editor', 'cfshoppingcart');?></th><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?></td></tr>
 
        <?php /* Shipping ****************************************/?>
        <tr><th><?php _e("Shipping", 'cfshoppingcart');?></th><td><input type="checkbox" name="shipping_enabled" value="checked" <?php echo $model->getShippingEnabled();?> /> <?php echo _e('Enabled','cfshoppingcart'); ?></td></tr>
@@ -279,6 +312,7 @@ function edit(&$obj, $msg = '') {
     </div>
   </div>
 
+    <?php } else if ($qs_option === 'contactform7') { ?>
 
 <div class="postbox cfshoppingcart_postbox">
   <div class="handlediv" title="Click to toggle"><br /></div>
@@ -300,8 +334,8 @@ function edit(&$obj, $msg = '') {
   </div>
 </div>
 
-<?php apply_filters('cfshoppingcart_put_configuration', $obj); ?>
 
+    <?php } else if ($qs_option === 'license') { ?>
 
 <div class="postbox cfshoppingcart_postbox closed">
   <div class="handlediv" title="Click to toggle"><br /></div>
@@ -331,6 +365,10 @@ function edit(&$obj, $msg = '') {
 
 
 <?php
+} else if ($qs_option === 'paypal') {
+    apply_filters('cfshoppingcart_put_configuration', $obj);
+} else {
+    echo '<p>Unknown qs_option</p>';
 }
-
+}
 ?>

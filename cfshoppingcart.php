@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.6.19
+Version: 0.7.0
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -118,51 +118,6 @@ function cfshoppingcart_init_session_start(){
 
 
 // ritch text editor
-/*
-function cfshoppingcart_admin_tinymce() {
-    // conditions here
-    wp_enqueue_script( 'common' );
-    wp_enqueue_script( 'jquery-color' );
-    //wp_enqueue_script('post');
-    wp_print_scripts('editor');
-    if (function_exists('add_thickbox')) add_thickbox();
-    wp_print_scripts('media-upload');
-    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
-    wp_admin_css();
-    wp_enqueue_script('utils');
-    do_action("admin_print_styles-post-php");
-    do_action('admin_print_styles');
-}
-*/
-/*
-function cfshoppingcart_admin_tinymce() {
-    wp_admin_css('thickbox');
-    wp_print_scripts('jquery-ui-core');
-    wp_print_scripts('jquery-ui-tabs');
-    //wp_print_scripts('post');
-    wp_print_scripts('editor');
-    add_thickbox();
-    wp_print_scripts('media-upload');
-    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
-    // use the if condition because this function doesn't exist in version prior to 2.7
-}
-*/
-/*
-function cfshoppingcart_admin_tinymce() { // ok
-    // conditions here
-    wp_enqueue_script( 'common' );
-    wp_enqueue_script( 'jquery-color' );
-    wp_print_scripts('editor');
-    if (function_exists('add_thickbox')) add_thickbox();
-    wp_print_scripts('media-upload');
-    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
-    wp_admin_css();
-    wp_enqueue_script('utils');
-    do_action("admin_print_styles-post-php");
-    do_action('admin_print_styles');
-}
-*/
-
 // 2011-04-23
 function cfshoppingcart_admin_tinymce() { //ok 
     wp_enqueue_script('common');
@@ -178,20 +133,18 @@ function cfshoppingcart_admin_tinymce() { //ok
     remove_all_filters('mce_external_plugins');
 }
 
-/*
-function cfshoppingcart_admin_tinymce() { //ok?
-    wp_enqueue_script('word-count');
-    wp_enqueue_script('post');
-    wp_enqueue_script('common');
-    wp_print_scripts('editor');
-    if (function_exists('add_thickbox')) add_thickbox();
-    wp_print_scripts('media-upload');
-    if (function_exists('wp_tiny_mce')) wp_tiny_mce();
-    wp_admin_css();
-    wp_enqueue_script('utils');
+function cfshoppingcart_tiny_mce_before_init($init) {
+    $init['plugins'] = str_replace(
+        array('wpfullscreen',',,'),
+        array('', ','),
+        $init['plugins']
+        );
+    return $init;
 }
-*/
+
 if (is_admin()) {
+    global $wp_version;
+    
     $model = $wpCFShoppingcart->model;
     
     // Registration of management screen header output function.
@@ -202,11 +155,12 @@ if (is_admin()) {
 
     if ($model->getVisualEditor()) {
         // tiny mce
-        //add_action('admin_head', 'wp_tiny_mce'); // this line is commnet.
         add_filter('admin_head','cfshoppingcart_admin_tinymce');
-        // when not working "Insert/edit link" button, add two lines:
-        // http://wordpress.org/support/topic/wp-31-problem-insertedit-link-button
-        add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
+        if (version_compare($wp_version, '3.2', '>=')) {
+            add_filter('cfshoppingcart_tiny_mce_before_init', 'cfshoppingcart_tiny_mce_before_init', 999);
+        } else {
+            add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
+        }
         add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
     }
 } else {
@@ -310,7 +264,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.6.19';
+        $this->version = '0.7.0';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -378,7 +332,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.6.19';
+        return '0.7.0';
     }
     function get_version() {
         return $this->version;
@@ -406,11 +360,6 @@ class WpCFShoppingcartModel {
         $this->visual_editor = $fields;
     }
     function getVisualEditor() {
-        $f = explode('.', get_bloginfo('version'));
-        $ver = $f[0] . '.' . $f[1];
-        if ($ver >= 3.2) {
-            return NULL;
-        }
         return $this->visual_editor;
     }
     //

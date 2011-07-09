@@ -4,6 +4,42 @@
  * -*- Encoding: utf8n -*-
  */
 
+div.cfshoppingcart_admin div.cfshoppingcart_admin_tab {
+  display: block;
+  width: 100%;
+  clear: both;
+  float: left;
+  margin: 20px 0 0 0;
+}
+div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_tab_one {
+  display: block;
+  float: left;
+  font-size: 1.0em;
+}
+div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_tab_one a {
+  border-color: #d1e5ee;
+  -moz-box-shadow: inset 0 1px 0 #fff;
+  -webkit-box-shadow: inset 0 1px 0 #fff;
+  box-shadow: inset 0 1px 0 #fff;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #555;
+  text-decoration: none;
+  border: 1px solid #dfdfdf;
+  background: #eee url(images/fade-butt.png) repeat-x;
+  padding: 8px;
+  margin: 0px 5px 0 0;
+}
+div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_tab_one a:hover {
+  text-decoration: underline;
+}
+div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_current_tab a {
+  text-decoration: underline;
+  background: #eee url(images/gray-grad.png) repeat-x;
+}
+
 div.cfshoppingcart_admin div.cfshoppingcart_admin-links {
   text-align: right;
   font-size: .8em;
