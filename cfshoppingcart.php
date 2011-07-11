@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.7.0
+Version: 0.7.1
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -28,7 +28,7 @@ Author URI: http://takeai.silverpigeon.jp/
 */
 
 // global
-//require_once('module/error_handler.php');
+require_once('module/error_handler.php');
 $wpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
 require_once('module/sum.php');
 require_once('module/common.php');
@@ -155,13 +155,13 @@ if (is_admin()) {
 
     if ($model->getVisualEditor()) {
         // tiny mce
-        add_filter('admin_head','cfshoppingcart_admin_tinymce');
         if (version_compare($wp_version, '3.2', '>=')) {
             add_filter('cfshoppingcart_tiny_mce_before_init', 'cfshoppingcart_tiny_mce_before_init', 999);
         } else {
+            add_filter('admin_head','cfshoppingcart_admin_tinymce');
             add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
+            add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
         }
-        add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
     }
 } else {
     /* $handle スクリプトの識別名
@@ -264,7 +264,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.7.0';
+        $this->version = '0.7.1';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -332,7 +332,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.7.0';
+        return '0.7.1';
     }
     function get_version() {
         return $this->version;

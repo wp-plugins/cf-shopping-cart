@@ -307,7 +307,7 @@ class WpCFShoppingcartErrorHandler {
 
 
 
-add_filter('cfshoppingcart_put_configuration', 'cfshoppingcart_error_handler_configuration',13,1);
+add_filter('cfshoppingcart_error_handler_configuration', 'cfshoppingcart_error_handler_configuration',13,1);
 function cfshoppingcart_error_handler_configuration($obj) {
     //var_dump($args);
     //print_r($args);

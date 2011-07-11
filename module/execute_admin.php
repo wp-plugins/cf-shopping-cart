@@ -226,13 +226,15 @@ function edit(&$obj, $msg = '') {
     $link_cf7 = '?' . cfshoppingcart_query_string('option', 'contactform7');
     $link_license = '?' . cfshoppingcart_query_string('option', 'license');
     $link_paypal = '?' . cfshoppingcart_query_string('option', 'paypal');
+    $link_error_handler = '?' . cfshoppingcart_query_string('option', 'error_handler');
     ?>
 
     <div class="cfshoppingcart_admin_tab">
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>">Cf Shopping Cart Options</a></div>
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'contactform7'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cf7;?>">Module for Contact Form 7</a></div>
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'license'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_license;?>">License</a></div>
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>">PayPal Options</a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart' || !$qs_option){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>"><?php _e('Cf Shopping Cart Options','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'contactform7'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cf7;?>"><?php _e('Module for Contact Form 7','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'license'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_license;?>"><?php _e('License','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>"><?php _e('PayPal Options','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'error_handler'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_error_handler;?>"><?php _e('PHP Error Handler','cfshoppingcart');?></a></div>
     </div>
 
     <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">website</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
@@ -366,7 +368,9 @@ function edit(&$obj, $msg = '') {
 
 <?php
 } else if ($qs_option === 'paypal') {
-    apply_filters('cfshoppingcart_put_configuration', $obj);
+    apply_filters('cfshoppingcart_paypal_put_configuration', $obj);
+} else if ($qs_option === 'error_handler') {
+    apply_filters('cfshoppingcart_error_handler_configuration', $obj);
 } else {
     echo '<p>Unknown qs_option</p>';
 }

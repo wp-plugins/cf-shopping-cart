@@ -387,7 +387,7 @@ class WpCFShoppingcartPaypal {
 
 
 
-add_filter('cfshoppingcart_put_configuration', 'cfshoppingcart_paypal_put_configuration',12,1);
+add_filter('cfshoppingcart_paypal_put_configuration', 'cfshoppingcart_paypal_put_configuration',12,1);
 function cfshoppingcart_paypal_put_configuration($obj) {
     //var_dump($args);
     //print_r($args);
