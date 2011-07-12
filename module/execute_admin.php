@@ -213,6 +213,8 @@ function edit(&$obj, $msg = '') {
     $custom_fields = $model->getCustomFieldsString();
     //echo '$model->getCustomFields() = ' . $model->getCustomFields() . ']';
 
+
+    
     if (version_compare($wp_version, '3.2', '<')) {
         //wp_tiny_mce(true);
     }

@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.7.1
+Version: 0.7.2
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -29,13 +29,13 @@ Author URI: http://takeai.silverpigeon.jp/
 
 // global
 require_once('module/error_handler.php');
-$wpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
+$wpCFShoppingcart = new WpCFShoppingcart();
 require_once('module/sum.php');
 require_once('module/common.php');
 require_once('module/paypal.php');
 
 // global
-$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
+$cfshoppingcart_common = new cfshoppingcart_common();
 
 
 $plugin_folder = $cfshoppingcart_common->get_plugin_folder();
@@ -143,8 +143,6 @@ function cfshoppingcart_tiny_mce_before_init($init) {
 }
 
 if (is_admin()) {
-    global $wp_version;
-    
     $model = $wpCFShoppingcart->model;
     
     // Registration of management screen header output function.
@@ -152,17 +150,6 @@ if (is_admin()) {
     // Registration of management screen function.
     add_action('admin_menu', array(&$wpCFShoppingcart, 'addAdminMenu'));
     add_action('admin_notices', 'cfshoppingcart_action_admin_notices', 5);
-
-    if ($model->getVisualEditor()) {
-        // tiny mce
-        if (version_compare($wp_version, '3.2', '>=')) {
-            add_filter('cfshoppingcart_tiny_mce_before_init', 'cfshoppingcart_tiny_mce_before_init', 999);
-        } else {
-            add_filter('admin_head','cfshoppingcart_admin_tinymce');
-            add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
-            add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
-        }
-    }
 } else {
     /* $handle スクリプトの識別名
      * $src(optional) スクリプトファイルへのパス
@@ -264,7 +251,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.7.1';
+        $this->version = '0.7.2';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -332,7 +319,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.7.1';
+        return '0.7.2';
     }
     function get_version() {
         return $this->version;
@@ -860,13 +847,30 @@ class WpCFShoppingcart {
     }
 
     function addAdminMenu() {
-        add_options_page(
+        $hook = add_options_page(
             __('Cf Shopping Cart Options','cfshoppingcart'),
             __('Cf Shopping Cart','cfshoppingcart'),
             8,
             'cfshoppingcart.php',
             array(&$this, 'executeAdmin')
             );
+        add_action('admin_print_scripts-'.$hook, array(&$this, 'admin_scripts'));
+    }
+
+    function admin_scripts() {
+        global $wp_version;
+        
+        if ($this->model->getVisualEditor()) {
+            // tiny mce
+            if (version_compare($wp_version, '3.2', '>=')) {
+                add_filter('cfshoppingcart_tiny_mce_before_init', 'cfshoppingcart_tiny_mce_before_init', 999);
+            } else {
+                //echo $wp_version;
+                add_filter('admin_head','cfshoppingcart_admin_tinymce');
+                add_action('admin_print_footer_scripts', 'wp_tiny_mce_preload_dialogs', 30);
+                add_action('tiny_mce_preload_dialogs', 'wp_link_dialog', 30);
+            }
+        }
     }
 
     function executeAdmin() {
