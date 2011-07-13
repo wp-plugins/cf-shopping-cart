@@ -69,9 +69,11 @@ function symbolic_link_for_contactForm7Modules ($obj, $cmd = '') {
         if (!@symlink($f1, $f2)) {
             $msg .= '<p>2. ' . __('Create symbolic link is failed.','cfshoppingcart') . '(' . $f1 . ' to ' . $f2 . ')</p>';
         }
+        /*
         if (!@chmod($f2, 0755)) {
-            $msg .= '<p>3. ' . __('Change permission to folder to 0755 failed.','cfshoppingcart') . '(' . $f2 . ')</p>';
+            $msg .= '<p>3. ' . __('Change permission to symbolic link to 0755 failed.','cfshoppingcart') . '(' . $f2 . ')</p>';
         }
+         */
         if (!@chmod($f2dir, $old_dir)) {
             $msg .= '<p>4. ' . __('Change permission to folder failed.','cfshoppingcart') . '(' . $f2dir . ')</p>';
         }
