@@ -8,6 +8,10 @@
 wpcf7_add_shortcode( 'cfshoppingcart', 'wpcf7_cfshoppingcart_shortcode_handler', true );
 wpcf7_add_shortcode( 'cfshoppingcart*', 'wpcf7_cfshoppingcart_shortcode_handler', true );
 
+function wpcf7_cfshoppingcart_shortcode_handler_ver() {
+    return '0.1.1';
+}
+
 function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     global $wpcf7_contact_form;
 
@@ -98,6 +102,7 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     //print_r($cf_opt);
     //echo 'value = ' . $value;
 
+    $html .= '<input type="hidden" name="cfshoppingcart_checkout_data" value="1" />';
     //if (array_key_exists('hidden', $cf_opt)) {
     if (isset($cf_opt['hidden'])) {
         if ($b) {
