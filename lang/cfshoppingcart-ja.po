@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-13 11:41+0900\n"
+"POT-Creation-Date: 2011-08-10 15:45+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: widget.php:42
-#: cfshoppingcart.php:852
+#: cfshoppingcart.php:851
 msgid "Cf Shopping Cart"
 msgstr "CFショッピングカート"
 
@@ -28,34 +28,34 @@ msgstr "メニュー題名:"
 msgid "Note:"
 msgstr "備考"
 
-#: cfshoppingcart.php:191
+#: cfshoppingcart.php:190
 msgid "Cf Shopping Cart say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart setting screen, or Could you install Contact Form 7 plugin."
 msgstr "CFショッピングカート: 'wpcf7_add_shortcode' 関数が見つかりません。 CFショッピングカート設定メニューの「Contact Form 7 用モジュール」を確認してください。 または、Contact Form 7 プラグインをインストールしてください。"
 
-#: cfshoppingcart.php:384
+#: cfshoppingcart.php:383
 #: module/commu.php:123
 #: module/commu.php:191
 #: module/contact-form-7.php:54
 msgid "Shopping Cart is empty."
 msgstr "買い物かごは空です"
 
-#: cfshoppingcart.php:485
+#: cfshoppingcart.php:484
 msgid "Select"
 msgstr "選択"
 
-#: cfshoppingcart.php:552
+#: cfshoppingcart.php:551
 msgid "Show sold out message"
 msgstr "売り切れメッセージを表示"
 
-#: cfshoppingcart.php:554
+#: cfshoppingcart.php:553
 msgid "Don't show the product"
 msgstr "商品を表示しない"
 
-#: cfshoppingcart.php:571
+#: cfshoppingcart.php:570
 msgid "Add to Cart"
 msgstr "かごへ"
 
-#: cfshoppingcart.php:851
+#: cfshoppingcart.php:850
 msgid "Cf Shopping Cart Options"
 msgstr "CFショッピングカート オプション"
 
@@ -349,8 +349,8 @@ msgid "Number of stock field name"
 msgstr "在庫数のフィールド名"
 
 #: module/execute_admin.php:265
-msgid "Empty is don't manage stock."
-msgstr "空白の場合在庫を管理しません。"
+msgid "Empty if don't manage stock."
+msgstr "在庫を管理しない場合は、空白。"
 
 #: module/execute_admin.php:266
 msgid "Product name field name"

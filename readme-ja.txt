@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: shopping, content, widget, plugin, custom field, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.0.4
-Stable tag: 0.7.5
+Stable tag: 0.7.6
 
 Cfショッピングカートはシンプルなショッピングカート機能です。
 
