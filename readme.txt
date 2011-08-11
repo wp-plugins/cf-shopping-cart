@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: PayPal payment, shopping cart, widget, plugin, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.2.1
-Stable tag: 0.7.6
+Stable tag: 0.7.7
 
 Cf Shopping Cart is simple shopping cart plugin for WordPress.
 This plugin be working with Custom Field and more plugins.
@@ -23,9 +23,10 @@ Can set shipping. Support PayPal payment.
 
 = Translators =
 
+* Russian (ru_RU) - [kg69design](http://kg69design.com)
+* Russian (ru_RU) - [Evgeny Vakhteev](http://www.sdelanomnoy.ru/)
 * Dutch (nl_NL) - [G. J. van den Os](http://www.arrowhosting.nl)
 * Dutch (nl_NL) - [Rene](http://www.cesmehotels.com)
-* Russian (ru_RU) - [Evgeny Vakhteev](http://www.sdelanomnoy.ru/)
 * Spanish (es_ES) - [Jorge Guerrero, Miguel Olivares, Estefan僘 Mu?z](http://www.tehacesver.com/)
 * Chinese (zh_TW) - [Tsao Peter](mailto:tsaopeter@yahoo.com.tw)
 * German (de_DE) - Carola Fichtner
@@ -64,6 +65,9 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
 == Changelog ==
+
+= 0.7.7 =
+* Translation for Russian has been created by kg69design.
 
 = 0.7.6 =
 * Fix message.
