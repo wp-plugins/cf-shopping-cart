@@ -14,6 +14,7 @@ function wpcf7_cfshoppingcart_shortcode_handler_ver() {
 
 function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     global $wpcf7_contact_form;
+    $html = '';
 
     if ( ! is_array( $tag ) ) {
         //echo '1';
@@ -106,17 +107,17 @@ function wpcf7_cfshoppingcart_shortcode_handler( $tag ) {
     //if (array_key_exists('hidden', $cf_opt)) {
     if (isset($cf_opt['hidden'])) {
         if ($b) {
-            $html = '<input type="hidden" name="' . $name . '"' . $atts . ' value="' . $value . '">';
+            $html .= '<input type="hidden" name="' . $name . '"' . $atts . ' value="' . $value . '">';
         } else {
             //echo $value;
-            //$html = '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
+            //$html .= '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
             $html .= '<input type="hidden" name="' . $name . '"' . $atts . ' value="">';
         }
     } else {
         if ($b) {
-            $html = '<textarea name="' . $name . '"' . $atts . ' readonly="readonly">' . $value . '</textarea>';
+            $html .= '<textarea name="' . $name . '"' . $atts . ' readonly="readonly">' . $value . '</textarea>';
         } else {
-            $html = '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
+            $html .= '<div class="cfshoppingcart_cart_cf7_msg">' . $value . '</div>';
             $html .= '<textarea name="' . $name . '"' . $atts . ' readonly="readonly"></textarea>';
         }
     }
