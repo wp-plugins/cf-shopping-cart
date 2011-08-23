@@ -6,7 +6,7 @@
 var cfshoppingcart_js = { version: '1' }
 
 <?php
-$wpCfshoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
+$wpCfshoppingcart = new WpCFShoppingcart();
 $model = $wpCfshoppingcart->model;
 if ($model->is_debug()) {
   echo 'cfshoppingcart_js.cfshoppingcart_debug = 1;';

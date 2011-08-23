@@ -195,14 +195,9 @@ class cfshoppingcart_commu {
                 }
                 return ($msg);  // success;
             }
-        /*} else if ($cmd === 'empty_cart') {
-            $this->update_stock();
-            unset($_SESSION[$sname]['commodities']);
-            cfshoppingcart_sum();
-            $msg = array('widget' => $_SESSION[$sname]['sum']['html']);
-            return ($msg);*/
+        } else if ($cmd === 'empty_cart') {
+            $this->cfshoppingcart_empty_cart();
         }
-        //$this->error_exit();
         return;
     }
 
@@ -323,10 +318,10 @@ class cfshoppingcart_commu {
             $cmd = 'change_quantity';
         } else if (array_key_exists('cancel', $_POST)) {
             $cmd = 'cancel';
-        /*} else if (array_key_exists('empty_cart', $_POST)) {
+        } else if (array_key_exists('empty_cart', $_POST)) {
             $cmd = 'empty_cart';
-          */
         } else if (!$cmd = $_POST['cmd']) {
+        //} else if (!$cmd) {
             return;
             //$this->error_exit();
         }

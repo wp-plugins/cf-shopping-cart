@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cf Shopping Cart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-10 15:45+0900\n"
+"POT-Creation-Date: 2011-08-23 10:42+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
 "Language-Team: \n"
@@ -15,8 +15,40 @@ msgstr ""
 "X-Poedit-Basepath: ../cf-shopping-cart\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: cfshoppingcart.php:199
+msgid "Cf Shopping Cart say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart setting screen, or Could you install Contact Form 7 plugin."
+msgstr "CFショッピングカート: 'wpcf7_add_shortcode' 関数が見つかりません。 CFショッピングカート設定メニューの「Contact Form 7 用モジュール」を確認してください。 または、Contact Form 7 プラグインをインストールしてください。"
+
+#: cfshoppingcart.php:392
+#: module/cart.php:68
+#: module/commu.php:123
+#: module/commu.php:191
+#: module/contact-form-7.php:54
+msgid "Shopping Cart is empty."
+msgstr "買い物かごは空です"
+
+#: cfshoppingcart.php:493
+msgid "Select"
+msgstr "選択"
+
+#: cfshoppingcart.php:560
+msgid "Show sold out message"
+msgstr "売り切れメッセージを表示"
+
+#: cfshoppingcart.php:562
+msgid "Don't show the product"
+msgstr "商品を表示しない"
+
+#: cfshoppingcart.php:579
+msgid "Add to Cart"
+msgstr "かごへ"
+
+#: cfshoppingcart.php:859
+msgid "Cf Shopping Cart Options"
+msgstr "CFショッピングカート オプション"
+
+#: cfshoppingcart.php:860
 #: widget.php:42
-#: cfshoppingcart.php:851
 msgid "Cf Shopping Cart"
 msgstr "CFショッピングカート"
 
@@ -28,97 +60,57 @@ msgstr "メニュー題名:"
 msgid "Note:"
 msgstr "備考"
 
-#: cfshoppingcart.php:190
-msgid "Cf Shopping Cart say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart setting screen, or Could you install Contact Form 7 plugin."
-msgstr "CFショッピングカート: 'wpcf7_add_shortcode' 関数が見つかりません。 CFショッピングカート設定メニューの「Contact Form 7 用モジュール」を確認してください。 または、Contact Form 7 プラグインをインストールしてください。"
+#: module/cart.php:134
+#: module/contact-form-7.php:93
+msgid "Many"
+msgstr "豊富"
 
-#: cfshoppingcart.php:383
-#: module/commu.php:123
-#: module/commu.php:191
-#: module/contact-form-7.php:54
-msgid "Shopping Cart is empty."
-msgstr "買い物かごは空です"
+#: module/cart.php:136
+msgid "Order is more than stock"
+msgstr "オーダーが在庫数より多いです。"
 
-#: cfshoppingcart.php:484
-msgid "Select"
-msgstr "選択"
+#: module/cart.php:143
+#: module/cart.php:166
+#: module/contact-form-7.php:113
+#: module/contact-form-7.php:121
+msgid "Quantity"
+msgstr "数量"
 
-#: cfshoppingcart.php:551
-msgid "Show sold out message"
-msgstr "売り切れメッセージを表示"
+#: module/cart.php:144
+msgid "Cancel"
+msgstr "キャンセル"
 
-#: cfshoppingcart.php:553
-msgid "Don't show the product"
-msgstr "商品を表示しない"
+#: module/cart.php:144
+msgid "Change quantity"
+msgstr "数量変更"
 
-#: cfshoppingcart.php:570
-msgid "Add to Cart"
-msgstr "かごへ"
+#: module/cart.php:167
+#: module/contact-form-7.php:122
+msgid "Subtotal"
+msgstr "小計"
 
-#: cfshoppingcart.php:850
-msgid "Cf Shopping Cart Options"
-msgstr "CFショッピングカート オプション"
+#: module/cart.php:177
+#: module/contact-form-7.php:131
+msgid "Shipping"
+msgstr "送料"
 
-#: module/error_handler.php:235
-#: module/paypal.php:206
-msgid "Updated"
-msgstr "更新しました"
+#: module/cart.php:186
+#: module/contact-form-7.php:136
+msgid "Total price"
+msgstr "合計金額"
 
-#: module/error_handler.php:256
-msgid "Error Handler Options"
-msgstr "エラーハンドラーオプション"
+#: module/cart.php:192
+msgid "Order is more than stock, Can't check out."
+msgstr "オーダーが在庫数より多いです、買い物を確定できません。"
 
-#: module/error_handler.php:262
-msgid "Enable Error Handler"
-msgstr "エラーハンドラーを有効にする"
-
-#: module/error_handler.php:263
-#: module/error_handler.php:283
-#: module/error_handler.php:288
-#: module/paypal.php:337
-msgid "Enabled"
-msgstr "有効"
-
-#: module/error_handler.php:267
-msgid "From Email Address"
-msgstr "送り元メールアドレス"
-
-#: module/error_handler.php:272
-msgid "To Email Address"
-msgstr "送り先メールアドレス"
-
-#: module/error_handler.php:277
-msgid "Email subject"
-msgstr "メール 題名"
-
-#: module/error_handler.php:282
-msgid "Output log"
-msgstr "ログ出力"
-
-#: module/error_handler.php:283
-msgid "Log file will be output to folder:"
-msgstr "ログファイルの出力先フォルダー:"
-
-#: module/error_handler.php:287
-msgid "Output display"
-msgstr "画面出力"
-
-#: module/error_handler.php:294
-#: module/paypal.php:375
-msgid "Update Options"
-msgstr "オプションの更新"
-
-#: module/shipping.php:21
-#: module/shipping.php:24
-#: module/shipping.php:27
-#: module/shipping.php:30
-#: module/shipping.php:46
-msgid "Shipping Error"
-msgstr "送料エラー"
+#: module/cfshoppingcart.js.php:103
+#: module/cfshoppingcart.js.php:106
+msgid "Shopping Cart"
+msgstr "買い物かご"
 
 #: module/commu.php:44
 #: module/commu.php:133
-#: module/commu.php:387
+#: module/commu.php:382
 msgid "Sorry, stock is no."
 msgstr "申し訳御座いません、在庫が御座いません。"
 
@@ -157,7 +149,7 @@ msgstr "数量を変更しました"
 msgid "Off the item"
 msgstr "買い物かごから除きました"
 
-#: module/commu.php:389
+#: module/commu.php:384
 msgid "Error: Check Stock Custom Field value."
 msgstr "エラー: 在庫のカスタムフィールドの値を確認してください。"
 
@@ -165,97 +157,55 @@ msgstr "エラー: 在庫のカスタムフィールドの値を確認してく�
 msgid "Includes no stock products. Please confirm."
 msgstr "カートに在庫の無い商品が含まれています、ご確認ください。"
 
-#: module/contact-form-7.php:93
-#: module/function_cfshoppingcart.php:189
-#: module/function_cfshoppingcart.php:259
-msgid "Many"
-msgstr "豊富"
-
 #: module/contact-form-7.php:98
 msgid "Includes out of stock products. Please confirm."
 msgstr "カートに在庫を超える商品が含まれています、ご確認ください。"
 
-#: module/contact-form-7.php:113
-#: module/contact-form-7.php:121
-#: module/function_cfshoppingcart.php:212
-#: module/sum.php:93
-msgid "Quantity"
-msgstr "数量"
+#: module/error_handler.php:235
+msgid "Updated"
+msgstr "更新しました"
 
-#: module/contact-form-7.php:122
-#: module/sum.php:94
-msgid "Subtotal"
-msgstr "小計"
+#: module/error_handler.php:256
+msgid "Error Handler Options"
+msgstr "エラーハンドラーオプション"
 
-#: module/contact-form-7.php:131
-#: module/sum.php:100
-msgid "Shipping"
-msgstr "送料"
+#: module/error_handler.php:262
+msgid "Enable Error Handler"
+msgstr "エラーハンドラーを有効にする"
 
-#: module/contact-form-7.php:136
-#: module/sum.php:105
-msgid "Total price"
-msgstr "合計金額"
+#: module/error_handler.php:263
+#: module/error_handler.php:283
+#: module/error_handler.php:288
+msgid "Enabled"
+msgstr "有効"
 
-#: module/paypal.php:284
-msgid "Make payments with PayPal - it's fast, free and secure!"
-msgstr "PayPal を使用してお支払いを - 迅速、無料、安全です。"
+#: module/error_handler.php:267
+msgid "From Email Address"
+msgstr "送り元メールアドレス"
 
-#: module/paypal.php:330
-msgid "PayPal Options"
-msgstr "PayPal オプション"
+#: module/error_handler.php:272
+msgid "To Email Address"
+msgstr "送り先メールアドレス"
 
-#: module/paypal.php:336
-msgid "Enable PayPal Options"
-msgstr "PayPal オプションを有効にする"
+#: module/error_handler.php:277
+msgid "Email subject"
+msgstr "メール 題名"
 
-#: module/paypal.php:341
-msgid "PayPal Email Address"
-msgstr "PayPal メールアドレス"
+#: module/error_handler.php:282
+msgid "Output log"
+msgstr "ログ出力"
 
-#: module/paypal.php:346
-msgid "PayPal action URL"
-msgstr "PayPal アクションURL"
+#: module/error_handler.php:283
+msgid "Log file will be output to folder:"
+msgstr "ログファイルの出力先フォルダー:"
 
-#: module/paypal.php:351
-msgid "Currency"
-msgstr "通貨"
+#: module/error_handler.php:287
+msgid "Output display"
+msgstr "画面出力"
 
-#: module/paypal.php:355
-msgid "Use PayPal Profile Based Shipping"
-msgstr "PayPal プロファイルのシッピングを使用する"
-
-#: module/paypal.php:356
-msgid "Check this if you want to use"
-msgstr "チェックされている場合使用: "
-
-#: module/paypal.php:356
-msgid "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
-msgstr "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
-
-#: module/paypal.php:356
-msgid "PayPal profile based shipping"
-msgstr "PayPal プロフィールの配送料金"
-
-#: module/paypal.php:356
-msgid "Using this will ignore any other shipping options that you have specified in this plugin."
-msgstr "本プラグインで指定されている配送料金は使用されません。"
-
-#: module/paypal.php:360
-msgid "Return URL"
-msgstr "戻る URL"
-
-#: module/paypal.php:361
-msgid "This is the URL the customer will be redirected to after a successful payment"
-msgstr "支払いが成功した場合に戻るURL"
-
-#: module/paypal.php:366
-msgid "\"Check out\" text"
-msgstr "\"チェックアウト\"テキストの変更"
-
-#: module/paypal.php:368
-msgid "\"Orderer Input screen\" text"
-msgstr "\"ご注文者情報入力画面\"テキストの変更"
+#: module/error_handler.php:294
+msgid "Update Options"
+msgstr "オプションの更新"
 
 #: module/execute_admin.php:57
 #: module/execute_admin.php:334
@@ -303,6 +253,11 @@ msgstr "Contact From 7用拡張モジュール"
 #: module/execute_admin.php:348
 msgid "License"
 msgstr "License"
+
+#: module/execute_admin.php:240
+#: module/paypal.php:330
+msgid "PayPal Options"
+msgstr "PayPal オプション"
 
 #: module/execute_admin.php:241
 msgid "PHP Error Handler"
@@ -423,6 +378,12 @@ msgstr "注文合計数量の最大"
 msgid "\"Go to Cart\" text"
 msgstr "\"買い物かごを表示\"テキストの変更"
 
+#: module/execute_admin.php:285
+#: module/execute_admin.php:287
+#: module/paypal.php:368
+msgid "\"Orderer Input screen\" text"
+msgstr "\"ご注文者情報入力画面\"テキストの変更"
+
 #: module/execute_admin.php:291
 msgid "Table tag type"
 msgstr "テーブルタグのタイプ"
@@ -511,26 +472,69 @@ msgstr "注文画面の商品に\"Array\"と表示される場合はボタンを
 msgid "or Copy 'cfshoppingcart.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'."
 msgstr "または、'cfshoppingcart.php' ファイルをフォルダ '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' から '/wp-content/plugins/contact-form-7/module/' へコピーしてください。"
 
-#: module/cfshoppingcart.js.php:103
-#: module/cfshoppingcart.js.php:106
-msgid "Shopping Cart"
-msgstr "買い物かご"
+#: module/paypal.php:284
+msgid "Make payments with PayPal - it's fast, free and secure!"
+msgstr "PayPal を使用してお支払いを - 迅速、無料、安全です。"
 
-#: module/cart.php:136
-msgid "Order is more than stock"
-msgstr "オーダーが在庫数より多いです。"
+#: module/paypal.php:336
+msgid "Enable PayPal Options"
+msgstr "PayPal オプションを有効にする"
 
-#: module/cart.php:144
-msgid "Cancel"
-msgstr "キャンセル"
+#: module/paypal.php:341
+msgid "PayPal Email Address"
+msgstr "PayPal メールアドレス"
 
-#: module/cart.php:144
-msgid "Change quantity"
-msgstr "数量変更"
+#: module/paypal.php:346
+msgid "PayPal action URL"
+msgstr "PayPal アクションURL"
 
-#: module/cart.php:192
-msgid "Order is more than stock, Can't check out."
-msgstr "オーダーが在庫数より多いです、買い物を確定できません。"
+#: module/paypal.php:351
+msgid "Currency"
+msgstr "通貨"
+
+#: module/paypal.php:355
+msgid "Use PayPal Profile Based Shipping"
+msgstr "PayPal プロファイルのシッピングを使用する"
+
+#: module/paypal.php:356
+msgid "Check this if you want to use"
+msgstr "チェックされている場合使用: "
+
+#: module/paypal.php:356
+msgid "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+msgstr "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+
+#: module/paypal.php:356
+msgid "PayPal profile based shipping"
+msgstr "PayPal プロフィールの配送料金"
+
+#: module/paypal.php:356
+msgid "Using this will ignore any other shipping options that you have specified in this plugin."
+msgstr "本プラグインで指定されている配送料金は使用されません。"
+
+#: module/paypal.php:360
+msgid "Return URL"
+msgstr "戻る URL"
+
+#: module/paypal.php:361
+msgid "This is the URL the customer will be redirected to after a successful payment"
+msgstr "支払いが成功した場合に戻るURL"
+
+#: module/paypal.php:361
+msgid "example: http://example.com/thanks/<strong>?cfshoppingcart_after_payment_processing=successful</strong>"
+msgstr "例: http://example.com/thanks/<strong>?cfshoppingcart_after_payment_processing=successful</strong>"
+
+#: module/paypal.php:366
+msgid "\"Check out\" text"
+msgstr "\"チェックアウト\"テキストの変更"
+
+#: module/shipping.php:21
+#: module/shipping.php:24
+#: module/shipping.php:27
+#: module/shipping.php:30
+#: module/shipping.php:46
+msgid "Shipping Error"
+msgstr "送料エラー"
 
 #~ msgid "Change permission to folder to 0755 failed."
 #~ msgstr "フォルダーパーミッションの 0755 への変更に失敗しました。"

@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.7.8
+Version: 0.7.9
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -90,6 +90,15 @@ function cfshoppingcart_init_session_start(){
         require_once('contact-form-7-module/cfshoppingcart.php');
     }
     unset($_SESSION['cfshoppingcart']['no_ajax_msg']);
+    // After payment processing when successful
+    if (isset($_GET['cfshoppingcart_after_payment_processing'])) {
+        if ($_GET['cfshoppingcart_after_payment_processing'] === 'successful') {
+            // do clear cart
+            require_once('module/commu.php');
+            $commu = new cfshoppingcart_commu();
+            $commu->cfshoppingcart_empty_cart();
+        }
+    }
     if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_GET['wp_cfshoppingcart'])) {
         // ajax onload
         //exit();
@@ -250,7 +259,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.7.8';
+        $this->version = '0.7.9';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -318,7 +327,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.7.8';
+        return '0.7.9';
     }
     function get_version() {
         return $this->version;

@@ -339,12 +339,12 @@ class WpCFShoppingcartPaypal {
 
 <tr>
 <th scope="row"><?php _e('PayPal Email Address','cfshoppingcart');?></th>
-<td><input type="text" name="paypal_email_address" value="<?php echo $model->getPaypalEmailAddress();?>" size="100" /></td>
+<td><input type="text" name="paypal_email_address" value="<?php echo $model->getPaypalEmailAddress();?>" size="50" /></td>
 </tr>
 
 <tr>
 <th scope="row"><?php _e('PayPal action URL','cfshoppingcart');?></th>
-<td><input type="text" name="paypal_action_url" value="<?php echo $model->getPaypalActionUrl();?>" size="100" /><br />e.g. https://www.paypal.com/cgi-bin/webscr (sandbox: https://www.sandbox.paypal.com/cgi-bin/webscr)</td>
+<td><input type="text" name="paypal_action_url" value="<?php echo $model->getPaypalActionUrl();?>" size="50" /><br />e.g. https://www.paypal.com/cgi-bin/webscr (sandbox: https://www.sandbox.paypal.com/cgi-bin/webscr)</td>
 </tr>
 
 <tr>
@@ -358,7 +358,7 @@ class WpCFShoppingcartPaypal {
 
 <tr>
 <th scope="row"><?php _e('Return URL','cfshoppingcart');?></th>
-<td><input type="text" name="paypal_return_url" value="<?php echo $model->getPaypalReturnUrl();?>" size="100" /><br /> <?php _e('This is the URL the customer will be redirected to after a successful payment','cfshoppingcart');?></td>
+<td><input type="text" name="paypal_return_url" value="<?php echo $model->getPaypalReturnUrl();?>" size="50" /><br /> <?php _e('This is the URL the customer will be redirected to after a successful payment','cfshoppingcart');?><br /><?php _e('example: http://example.com/thanks/<strong>?cfshoppingcart_after_payment_processing=successful</strong>','cfshoppingcart');?></td>
 </tr>
 
 
