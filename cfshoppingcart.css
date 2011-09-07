@@ -37,7 +37,7 @@ div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_t
 }
 div.cfshoppingcart_admin div.cfshoppingcart_admin_tab div.cfshoppingcart_admin_current_tab a {
   text-decoration: underline;
-  background: #eee url(images/gray-grad.png) repeat-x;
+  background: #dfdfdf url(images/gray-grad.png) repeat-x;
 }
 
 div.cfshoppingcart_admin div.cfshoppingcart_admin-links {

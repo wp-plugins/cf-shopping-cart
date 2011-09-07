@@ -19,6 +19,94 @@ class cfshoppingcart_common {
         return $content;
     }
     
+    function is_show_product() {
+        //echo 'is_show_product';
+        global $post;
+        global $WpCFShoppingcart;
+        global $cfshoppingcart_common;
+        $model = $WpCFShoppingcart->model;
+        
+        $rf = 1;
+        if ($model->getShowCommodityOnManually()) {
+            $rf = 0;
+            if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
+                $rf = 0;
+            } else {
+                $rf = 1;
+            }
+            if ($rf) {
+                return false;
+            }
+        } else {
+            if ($model->getShowCommodityOnHome() && is_home()) $rf = 0;
+            if ($model->getShowCommodityOnPage() && is_page()) $rf = 0;
+            if ($model->getShowCommodityOnArchive() && is_archive()) $rf = 0;
+            if ($model->getShowCommodityOnSingle() && is_single()) $rf = 0;
+            if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
+                $rf = 0;
+            } else {
+                $rf = 1;
+            }
+            if ($rf) {
+                return false;
+            }
+        }
+        
+        $price_field_name = $model->getPriceFieldName();
+        $c = $cfshoppingcart_common->get_custom_fields();
+        
+        if ((!isset($c[$price_field_name]) && !$model->getShowCustomFieldWhenPriceFieldIsEmpty()) ||
+            (strstr($c[$price_field_name][0], '#hidden') && !$model->getShowCustomFieldWhenPriceFieldIsEmpty())) {
+            if ($is_debug) {
+                debug_cfshoppingcart('price_field_name not found in Custom Field on this post. return function.');
+            }
+            return false; // 単価が無い
+        }
+        return true;
+    }
+    
+    /*
+     * use to content instead of excerpt
+     */
+    function use_the_content_instead_of_the_excerpt() {
+        //echo 'use_the_content_instead_of_the_excerpt';
+        global $post;
+        global $WpCFShoppingcart;
+        global $cfshoppingcart_common;
+        $model = $WpCFShoppingcart->model;
+
+        if (!$this->is_show_product()) {
+            return false;
+        }
+        
+        $instead = false;
+        if ($model->getContentInsteadOfExcerptOnHome() && is_home()) {
+            $instead = true;
+        } else if ($model->getContentInsteadOfExcerptOnPage() && is_page()) {
+            $instead = true;
+        } else if ($model->getContentInsteadOfExcerptOnArchive() && is_archive()) {
+            //echo 'is_archive';exit;
+            $instead = true;
+        } else if ($model->getContentInsteadOfExcerptOnSingle() && is_single()) {
+            $instead = true;
+        } else {
+            if (is_archive()) {
+                $cat = $model->getContentInsteadOfExcerptOnCategoryNumbers();
+                $cat_id = get_query_var('cat');
+                if (in_array($cat_id, $cat)) {
+                    $instead = true;
+                }
+            } else if (is_page()) {
+                $page = $model->getContentInsteadOfExcerptOnPageNumbers();
+                $page_id = get_query_var('page_id');
+                if (in_array($page_id, $page)) {
+                    $instead = true;
+                }
+            }
+        }
+        return $instead;
+    }
+    
     function get_custom_fields($postid = NULL) {
         global $post;
 
@@ -161,28 +249,28 @@ class cfshoppingcart_common {
             }
         }
         // number of stock not found.
-        //echo ', a';exit;
         return NULL;
     }
 
 
     function is_stock_zero($postid) {
         global $WpCFShoppingcart;
-        //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
         $model = $WpCFShoppingcart->model;
 
         // get real post id and stock key.
         list($postid, $stock_key) = $this->get_real_postid_and_stock_key($postid);
         
-        //$customfield = get_post_custom($postid);
         $customfield = $this->get_custom_fields($postid);
         $number_of_stock_field_name = $model->getNumberOfStockFieldName();
         $stock_value = $this->split_cf_text($customfield[$number_of_stock_field_name][0]);
-        
+        //print_r($stock_value);
         foreach ($stock_value as $key => $value) {
-            if (is_null($value)) continue;
+            //if (is_null($value)) continue;
             if (preg_match('/^-{0,1}[0-9]*$/', $value)) {
                 if ($value != 0) return false;
+            }
+            if (preg_match('/^-{0,1}[0-9]*$/', $key)) {
+                if ($key) return false;
             }
         }
         return true;
@@ -428,4 +516,20 @@ class cfshoppingcart_common {
     }
     
 }//class
+
+
+function cfshoppingcart_use_the_content_instead_of_the_excerpt_hook($content) {
+    //echo 'cfshoppingcart_use_the_content_instead_of_the_excerpt_hook';
+    global $post;
+    global $cfshoppingcart_common;
+    
+    //$content = get_the_excerpt($post->ID);
+    if (!$cfshoppingcart_common->use_the_content_instead_of_the_excerpt()) {
+        return $content;
+    }
+    $content = get_the_content($post->ID);
+    $content = apply_filters('the_content', $content);
+    return $content;
+}
+
 ?>

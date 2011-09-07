@@ -14,11 +14,30 @@ if ($model->is_debug()) {
   echo 'cfshoppingcart_js.cfshoppingcart_debug = 0;';
 }
 $widgetEmptyCartHtml = $model->getWidgetEmpyCartHtml();
+//
+$pnotify_obj = new WpCFShoppingcartPnotify($wpCfshoppingcart);
+$pnotify = $pnotify_obj->model;
 ?>
+
+cfshoppingcart_js.body_height = 0;
 
 jQuery(document).ready(function(){
     //alert('cfshoppingcart.js is ready');
     cfshoppingcart_js.init();
+    // Reset Ready.functions
+    jQuery('*').click(function(){
+        var body_height = jQuery("body").height();
+        if (cfshoppingcart_js.body_height != body_height) {
+            cfshoppingcart_js.body_height = body_height;
+            //document.title = document.title + '.';
+            // Reset Cf Shopping Cart plugin
+            cfshoppingcart_js.init();
+            // Reset WP FancyZoom plugin version 1.2
+            if (typeof setupZoom == "function") {
+                setupZoom();
+            }
+        }
+    });
 });
 
 
@@ -100,47 +119,16 @@ cfshoppingcart_js.cfshoppingcart_response = function(responseText, statusText) {
         jQuery('#cfshoppingcart_form').html(json['cart_html']);
     }
     if (json['msg']) {
-        cfshoppingcart_js.cfshoppingcart_pnotify('notice', json['msg'], '<?php _e('Shopping Cart','cfshoppingcart');?>');
+        cfshoppingcart_js.cfshoppingcart_pnotify('notice', json['msg'], json['title']);
     }
     if (json['msg_red']) {
-        cfshoppingcart_js.cfshoppingcart_pnotify('error', json['msg_red'], '<?php _e('Shopping Cart','cfshoppingcart');?>');
+        cfshoppingcart_js.cfshoppingcart_pnotify('error', json['msg_red'], json['title']);
     }
     // important. Need cancel product.
     cfshoppingcart_js.init();
 }
 
-cfshoppingcart_js.cfshoppingcart_pnotify = function(type, msg, title) {
-    jQuery.pnotify({
-      pnotify_title: title,
-      pnotify_text: msg,
-      //pnotify_type: 'error',
-      //pnotify_type: 'notice',
-      pnotify_type: type,
-      pnotify_hide: false,
-      pnotify_closer: true,
-      pnotify_nonblock: false,
-      pnotify_animate_speed: 0,
-      pnotify_shadow: true,
-      pnotify_opacity: 1.0,
-      pnotify_mouse_reset: false,
-      pnotify_history: false,
-      pnotify_notice_icon: "ui-icon ui-icon-comment",
-      pnotify_after_init: function(pnotify){
-          // Remove the notice if the user mouses over it.
-          pnotify.mouseout(function(){
-              pnotify.pnotify_remove();
-          });
-      },
-      pnotify_before_open: function(pnotify){
-          var timer = setInterval(function(){
-              // Remove the interval.
-              window.clearInterval(timer);
-              pnotify.pnotify_remove();
-          }, 2000); // ms
-      }
-    });
-}
-
+<?php echo $pnotify->getJsFunction(); ?>
 
 cfshoppingcart_js.obj2text = function(obj) {
     var ret = '';
@@ -158,6 +146,6 @@ function cfshoppingcart_empty_cart() {
     var thanks = "<?php echo $model->getThanksUrl(); ?>";
     //alert('cfshoppingcart_empty_cart()');
     jQuery('.cfshoppingcart_widget_cart').html('<?php echo preg_replace('/[\r\n]/', '', $widgetEmptyCartHtml);?>');
-    if (thanks) { location.replace(thanks); }
+        if (thanks) { location.replace(thanks); }
 }
 

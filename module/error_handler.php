@@ -19,8 +19,10 @@ function cfshoppingcart_errorHandler($errno, $errstr, $errfile, $errline, $errco
         // error_reporting 設定に含まれていないエラーコードです
         return;
     }
-    if (!strstr($errfile, 'cf-shopping-cart')) {
-        return;
+    if ($model->getCfshoppingcartOnly()) {
+        if (!strstr($errfile, 'cf-shopping-cart')) {
+            return;
+        }
     }
     
     $content = "\n";
@@ -86,6 +88,7 @@ function cfshoppingcart_errorHandler($errno, $errstr, $errfile, $errline, $errco
 
 class WpCFShoppingcartErrorHandlerModel {
     var $enabled;
+    var $cfshoppingcart_only;
     var $from_email;
     var $to_email;
     var $subject;
@@ -94,6 +97,7 @@ class WpCFShoppingcartErrorHandlerModel {
 
     function WpCFShoppingcartErrorHandlerModel() {
         $this->enabled = '';
+        $this->cfshoppingcart_only = 'checked';
         $this->from_email = get_bloginfo('admin_email');
         $this->to_email = get_bloginfo('admin_email');
         $this->subject = 'Cf Shopping Cart Error Handler';
@@ -106,6 +110,13 @@ class WpCFShoppingcartErrorHandlerModel {
     }
     function getEnabled() {
         return $this->enabled;
+    }
+    //
+    function setCfshoppingcartOnly($v) {
+        $this->cfshoppingcart_only = $v;
+    }
+    function getCfshoppingcartOnly() {
+        return $this->cfshoppingcart_only;
     }
     //
     function setFromEmail($v) {
@@ -230,6 +241,7 @@ class WpCFShoppingcartErrorHandler {
         $model->setSubject($subject);
         $model->setOutputLog($output_log);
         $model->setOutput($output);
+        $model->setCfshoppingcartOnly($cfshoppingcart_only);
         //
         $this->updateWpOption($model); // Update database-model
         $msg .= __('Updated', 'cfshoppingcart');
@@ -264,18 +276,23 @@ class WpCFShoppingcartErrorHandler {
 </tr>
 
 <tr>
+<th scope="row"><?php _e('Cf Shopping Cart only','cfshoppingcart');?></th>
+<td><input type="checkbox" name="cfshoppingcart_only" value="checked" <?php echo $model->getCfshoppingcartOnly();?>/> <?php _e('Enabled','cfshoppingcart');?></td>
+</tr>
+
+<tr>
 <th scope="row"><?php _e('From Email Address','cfshoppingcart');?></th>
-<td><input type="text" name="from_email" value="<?php echo $model->getFromEmail();?>" size="100" /></td>
+<td><input type="text" name="from_email" value="<?php echo $model->getFromEmail();?>" size="50" /></td>
 </tr>
 
 <tr>
 <th scope="row"><?php _e('To Email Address','cfshoppingcart');?></th>
-<td><input type="text" name="to_email" value="<?php echo $model->getToEmail();?>" size="100" /></td>
+<td><input type="text" name="to_email" value="<?php echo $model->getToEmail();?>" size="50" /></td>
 </tr>
 
 <tr>
 <th scope="row"><?php _e('Email subject','cfshoppingcart');?></th>
-<td><input type="text" name="subject" value="<?php echo $model->getSubject();?>" size="100" /></td>
+<td><input type="text" name="subject" value="<?php echo $model->getSubject();?>" size="50" /></td>
 </tr>
 
 <tr>

@@ -161,7 +161,25 @@ function save(&$obj) {
     $model->setCustomFieldDefaultValueRaw($custom_field_default_value);
     //
     $model->setShowCustomFieldWhenPriceFieldIsEmpty($show_custom_field_when_price_field_is_empty);
+    //
+    $model->setDontDisplayTheseInformationOfBelowIfSoldOutProduct($dont_display_these_information_of_below_if_sold_out_product);
+    
+    $model->setContentInsteadOfExcerptOnHome($content_instead_of_excerpt_on_home);
+    $model->setContentInsteadOfExcerptOnPage($content_instead_of_excerpt_on_page);
+    $model->setContentInsteadOfExcerptOnArchive($content_instead_of_excerpt_on_archive);
+    $model->setContentInsteadOfExcerptOnSingle($content_instead_of_excerpt_on_single);
+    $model->setContentInsteadOfExcerptOnCategoryNumbers($content_instead_of_excerpt_on_category_numbers);
+    $model->setContentInsteadOfExcerptOnPageNumbers($content_instead_of_excerpt_on_page_numbers);
+    //
+    $model->setDontDisplayOrderQuantityTextbox($dont_display_order_quantity_textbox);
+    $model->setPlacedCartLinkToUnderTheProduct($placed_cart_link_to_under_the_product);
+    $model->setCartLinkText($cart_link_text);
+    $model->setPlacedCheckOutLinkToUnderTheProduct($placed_check_out_link_to_under_the_product);
+    $model->setCheckOutLinkText($check_out_link_text);
 
+    $model->setDisplaySoldOutMessageInPriceField($display_sold_out_message_in_price_field);
+    $model->setSoldOutMessageInPriceField($sold_out_message_in_price_field);
+    
     $obj->updateWpOption($model); // Save database-model
     $msg .= __('Saved', 'cfshoppingcart');
     return $msg;
@@ -230,15 +248,17 @@ function edit(&$obj, $msg = '') {
     $link_cf7 = '?' . cfshoppingcart_query_string('option', 'contactform7');
     $link_license = '?' . cfshoppingcart_query_string('option', 'license');
     $link_paypal = '?' . cfshoppingcart_query_string('option', 'paypal');
+    $link_pnotify = '?' . cfshoppingcart_query_string('option', 'pnotify');
     $link_error_handler = '?' . cfshoppingcart_query_string('option', 'error_handler');
     ?>
 
     <div class="cfshoppingcart_admin_tab">
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart' || !$qs_option){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>"><?php _e('Cf Shopping Cart Options','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart' || !$qs_option){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>"><?php _e('Shopping cart','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>"><?php _e('PayPal','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'pnotify'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_pnotify;?>"><?php _e('pnotify','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'contactform7'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cf7;?>"><?php _e('Module for Contact Form 7','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'error_handler'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_error_handler;?>"><?php _e('Error handler','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'license'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_license;?>"><?php _e('License','cfshoppingcart');?></a></div>
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>"><?php _e('PayPal Options','cfshoppingcart');?></a></div>
-      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'error_handler'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_error_handler;?>"><?php _e('PHP Error Handler','cfshoppingcart');?></a></div>
     </div>
 
     <div class="cfshoppingcart_admin-links"><a href="http://takeai.silverpigeon.jp/">blog</a> | <a href="http://cfshoppingcart.silverpigeon.jp/">website</a> | <a href="http://takeai.silverpigeon.jp/?page_id=727">donate</a></div>
@@ -255,31 +275,42 @@ function edit(&$obj, $msg = '') {
         <table class="form-table">
         
         <tr><th><?php _e('Shop now closed', 'cfshoppingcart');?></th><td><input type="checkbox" name="shop_now_closed" value="checked" <?php echo $model->getShopNowClosed();?> /> <?php _e('Closed','cfshoppingcart');?> <?php _e("(Be 'Shop Closed' is user level less than 6.)",'cfshoppingcart');?></td></tr>
-        <tr><th><?php _e('Closed message for Sidebar widget', 'cfshoppingcart');?> </th><td><input type="text" name="closed_message_for_sidebar_widget" id="closed_message_for_sidebar_widget" value="<?php echo $model->getClosedMessageForSidebarWidget();?>" size="60" /></td></tr>
+        <tr><th><?php _e('Closed message for Sidebar widget', 'cfshoppingcart');?> </th><td><input type="text" name="closed_message_for_sidebar_widget" id="closed_message_for_sidebar_widget" value="<?php echo $model->getClosedMessageForSidebarWidget();?>" style="width:95%" /></td></tr>
 
-        <tr><th><?php _e('Custom field names', 'cfshoppingcart');?> </th><td><input type="text" name="custom_fields" id="custom_fields" value="<?php echo $custom_fields;?>" size="60" /> </td></tr>
-        <tr><th><?php _e('Price field name', 'cfshoppingcart');?> </th><td><input type="text" name="price_field_name" id="price_field_name" value="<?php echo $model->getPriceFieldName();?>" size="60" /></td></tr>
+        <tr><th><?php _e('Custom field names', 'cfshoppingcart');?> </th><td><input type="text" name="custom_fields" id="custom_fields" value="<?php echo $custom_fields;?>" style="width:95%" /> </td></tr>
+          <tr><th><?php _e('Price field name', 'cfshoppingcart');?> </th><td><input type="text" name="price_field_name" id="price_field_name" value="<?php $v = $model->getPriceFieldName(1); echo $v['value'];?>" style="width:95%" /><?php if(!$v['value']){echo '<br /><font color="red">'.__('*Required','cfshoppingcart').'</font>';}else if($v['msg']){echo'<br /><font color="red">'.$v['msg'].'</font>';}?></td></tr>
           
-        <tr><th><?php _e('Be Custom Field name of linking to product page', 'cfshoppingcart');?> </th><td><input type="text" name="link_to_product_field_name" id="link_to_product_field_name" value="<?php echo $model->getLinkToProductFieldName();?>" size="60" /> <input type="checkbox" name="open_product_link_to_another_window" value="checked" <?php echo $model->getOpenProductLinkToAnotherWindow();?> /> <?php _e('Open another window','cfshoppingcart');?></td></tr>
+            <tr><th><?php _e('Be Custom Field name of linking to product page', 'cfshoppingcart');?> </th><td><input type="text" name="link_to_product_field_name" id="link_to_product_field_name" value="<?php $v = $model->getLinkToProductFieldName(1); echo $v['value'];?>" style="width:300px" /> <input type="checkbox" name="open_product_link_to_another_window" value="checked" <?php echo $model->getOpenProductLinkToAnotherWindow();?> /> <?php _e('Open another window','cfshoppingcart');?><?php if($v['value'] && $v['msg']){echo'<br /><font color="red">'.$v['msg'].'</font>';}?></td></tr>
           
-        <tr><th><?php _e('Number of stock field name', 'cfshoppingcart');?> </th><td><input type="text" name="number_of_stock_field_name" id="number_of_stock_field_name" value="<?php echo $model->getNumberOfStockFieldName();?>" size="60" /> <?php _e("Empty if don't manage stock.",'cfshoppingcart');?></td></tr>
-        <tr><th><?php _e('Product name field name', 'cfshoppingcart');?> </th><td><input type="text" name="product_name_field_name" id="product_name_field_name" value="<?php echo $model->getProductNameFieldName();?>" size="60" /></td></tr>
+        <tr><th><?php _e('Number of stock field name', 'cfshoppingcart');?> </th><td><input type="text" name="number_of_stock_field_name" id="number_of_stock_field_name" value="<?php $v = $model->getNumberOfStockFieldName(1); echo $v['value'];?>" style="width:95%" /> <?php _e("Empty if don't manage stock.",'cfshoppingcart');?><?php if($v['value'] && $v['msg']){echo'<br /><font color="red">'.$v['msg'].'</font>';}?></td></tr>
+          
+        <tr><th><?php _e('Product name field name', 'cfshoppingcart');?> </th><td><input type="text" name="product_name_field_name" id="product_name_field_name" value="<?php $v = $model->getProductNameFieldName(1); echo $v['value'];?>" style="width:95%" /><?php if($v['value'] && $v['msg']){echo'<br /><font color="red">'.$v['msg'].'</font>';}?></td></tr>
+          
         <tr><th><?php _e("Show Custom Field when price field is empty.", 'cfshoppingcart');?></th><td><input type="checkbox" name="show_custom_field_when_price_field_is_empty" value="checked" <?php echo $model->getShowCustomFieldWhenPriceFieldIsEmpty();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e("Be don't show empty field", 'cfshoppingcart');?></th><td><input type="checkbox" name="be_dont_show_empty_field" value="checked" <?php echo $model->getBeDontShowEmptyField();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
 
-        <tr><th><?php _e('Custom Field default value', 'cfshoppingcart');?> <p> <?php _e("example: <br />FieldName1=value1<br />FieldName2=value2<br />...", 'cfshoppingcart');?></p></th><td><textarea name="custom_field_default_value" id="custom_field_default_value" cols="50" rows="5"><?php echo $model->getCustomFieldDefaultValueRaw();?></textarea></td></tr>
+        <tr><th><?php _e('Custom Field default value', 'cfshoppingcart');?> <p> <?php _e("example: <br />FieldName1=value1<br />FieldName2=value2<br />...", 'cfshoppingcart');?></p></th><td><textarea name="custom_field_default_value" id="custom_field_default_value" style="width:95%" rows="5"><?php echo $model->getCustomFieldDefaultValueRaw();?></textarea></td></tr>
           
         <tr><th><?php _e('Type of show sold out message', 'cfshoppingcart');?> </th><td><?php echo $model->getTypeOfShowSoldOutMessageListHtml();?> <?php _e('if select "Don\'t show the post" then to be private the post at sold out.','cfshoppingcart');?></td></tr>
-        <tr><th><?php _e('Add to Cart button text', 'cfshoppingcart');?> </th><td><input type="text" name="add_to_cart_button_text" id="add_to_cart_button_text" value="<?php echo $model->getAddToCartButtonText();?>" size="60" /></td></tr>
-        <tr><th><?php _e('Sold out message', 'cfshoppingcart');?> </th><td><input type="text" name="sold_out_message" id="sold_out_message" value="<?php echo $model->getSoldOutMessage();?>" size="60" /></td></tr>
+          
+        <tr><th><?php _e('Sold out message in Stock field', 'cfshoppingcart');?> </th><td><input type="text" name="sold_out_message" id="sold_out_message" value="<?php echo $model->getSoldOutMessage();?>" style="width:500px" /></td></tr>
+          
+       <tr><th><?php _e('Display sold out message in Price field', 'cfshoppingcart');?></th><td><input type="checkbox" name="display_sold_out_message_in_price_field" value="checked" <?php echo $model->getDisplaySoldOutMessageInPriceField();?> /> <?php _e("Enabled.",'cfshoppingcart');?> <?php _e('Text','cfshoppingcart');?> <input type="text" name="sold_out_message_in_price_field" id="sold_out_message_in_price_field" value="<?php echo $model->getSoldOutMessageInPriceField();?>" style="width:300px" /></td></tr>
+         
+        <tr><th><?php _e("Don't display these information of below if sold out product. (fieldname1, fieldname2, ...)", 'cfshoppingcart');?> </th><td><input type="text" name="dont_display_these_information_of_below_if_sold_out_product" id="dont_display_these_information_of_below_if_sold_out_product" value="<?php $v = $model->getDontDisplayTheseInformationOfBelowIfSoldOutProduct(1); echo join(',',$v['value']);?>" style="width:95%" /><?php if($v['value'] && $v['msg']){echo'<br /><font color="red">'.$v['msg'].'</font>';}?></td></tr>
 
-       <tr><th><?php _e('Quantity', 'cfshoppingcart');?></th><td><input type="text" name="quantity" id="quantity" value="<?php echo $model->getQuantity();?>" size="60" /></td></tr>
+        <tr><th><?php _e('Add to Cart button text', 'cfshoppingcart');?> </th><td><input type="text" name="add_to_cart_button_text" id="add_to_cart_button_text" value="<?php echo $model->getAddToCartButtonText();?>" style="width:95%" /></td></tr>
+
+        <tr><th><?php _e('Quantity', 'cfshoppingcart');?></th><td><?php _e('Text','cfshoppingcart');?>: <input type="text" name="quantity" id="quantity" value="<?php echo $model->getQuantity();?>" style="width:300px" /><br /><?php _e("Don't display order quantity textbox if choice terminals",'cfshoppingcart');?>: <?php echo $model->getDontDisplayOrderQuantityTextboxHtml();?></td></tr>
         <tr><th><?php _e('Currency format', 'cfshoppingcart');?></th><td><input type="text" name="currency_format" id="currency_format" value="<?php echo $model->getCurrencyFormat();?>" size="10" /> <?php _e('example: $%.02f','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('"#postid" keyword format', 'cfshoppingcart');?></th><td><input type="text" name="postid_format" id="postid_format" value="<?php echo $model->getPostidFormat();?>" size="10" /> <?php _e('example: %05d','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Max quantity of one commodity', 'cfshoppingcart');?></th><td><input type="text" name="max_quantity_of_one_commodity" id="max_quantity_of_one_commodity" value="<?php echo $model->getMaxQuantityOfOneCommodity();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Max quantity of total order', 'cfshoppingcart');?></th><td><input type="text" name="max_quantity_of_total_order" id="max_quantity_of_total_order" value="<?php echo $model->getMaxQuantityOfTotalOrder();?>" size="10" /> <?php _e('Zero is no limit.','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('"Go to Cart" text', 'cfshoppingcart');?></th><td><input type="text" name="go_to_cart_text" id="go_to_cart_text" value="<?php echo $model->getGoToCartText();?>" size="40" /></td></tr>
           
+        <tr><th><?php _e('Cart link', 'cfshoppingcart');?></th><td><?php _e('Text','cfshoppingcart');?>: <input type="text" name="cart_link_text" id="cart_link_text" value="<?php echo $model->getCartLinkText();?>" style="width:300px" /><br /><?php _e("Placed cart link to under the product if choice terminals",'cfshoppingcart');?>: <?php echo $model->getPlacedCartLinkToUnderTheProductHtml();?></td></tr>
+          
+        <tr><th><?php _e('Check out link', 'cfshoppingcart');?></th><td><?php _e('Text','cfshoppingcart');?>: <input type="text" name="check_out_link_text" id="check_out_link_text" value="<?php echo $model->getCheckOutLinkText();?>" style="width:300px" /><br /><?php _e("Placed check out link to under the product if choice termials",'cfshoppingcart');?>: <?php echo $model->getPlacedCheckOutLinkToUnderTheProductHtml();?></td></tr>
           
         <?php if ($model->getVisualEditor()) { ?>
           <tr><th><?php _e('"Orderer Input screen" text', 'cfshoppingcart');?></th><td><div class="postarea postdivrich"><?php the_editor(stripslashes($model->getOrdererInputScreenText()), 'orderer_input_screen_text','orderer_input_screen_text',true); ?></div></td></tr>
@@ -289,13 +320,16 @@ function edit(&$obj, $msg = '') {
           
           
         <tr><th><?php _e('Table tag type','cfshoppingcart');?></th><td><?php echo $model->getTableTagListHtml();?></td></tr>
-        <tr><th><?php _e('Cart Url', 'cfshoppingcart');?></th><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" size="60" /></td></tr>
-        <tr><th><?php _e('Send order Url', 'cfshoppingcart');?></th><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" size="60" /></td></tr>
-        <tr><th><?php _e('Thanks Url', 'cfshoppingcart');?></th><td><input type="text" name="thanks_url" id="thanks_url" value="<?php echo $model->getThanksUrl();?>" size="60" /></td></tr>
-        <tr><th><?php _e('In Cart, QF-GetThumb option 1', 'cfshoppingcart');?></th><td><input type="text" name="qfgetthumb_option_1" id="qfgetthumb_option_1" value="<?php echo $model->getQfgetthumbOption1();?>" size="60" /></td></tr>
-        <tr><th><?php _e('In Cart, QF-GetThumb default image', 'cfshoppingcart');?></th><td><input type="text" name="qfgetthumb_default_image" id="qfgetthumb_default_image" value="<?php echo $model->getQfgetthumbDefaultImage();?>" size="60" /></td></tr>
+        <tr><th><?php _e('Cart Url', 'cfshoppingcart');?></th><td><input type="text" name="cart_url" id="cart_url" value="<?php echo $model->getCartUrl();?>" style="width:95%" /></td></tr>
+        <tr><th><?php _e('Send order Url', 'cfshoppingcart');?></th><td><input type="text" name="send_order_url" id="send_order_url" value="<?php echo $model->getSendOrderUrl();?>" style="width:95%" /></td></tr>
+        <tr><th><?php _e('Thanks Url', 'cfshoppingcart');?></th><td><input type="text" name="thanks_url" id="thanks_url" value="<?php echo $model->getThanksUrl();?>" style="width:95%" /></td></tr>
+        <tr><th><?php _e('In Cart, QF-GetThumb option 1', 'cfshoppingcart');?></th><td><input type="text" name="qfgetthumb_option_1" id="qfgetthumb_option_1" value="<?php echo $model->getQfgetthumbOption1();?>" style="width:95%" /></td></tr>
+        <tr><th><?php _e('In Cart, QF-GetThumb default image', 'cfshoppingcart');?></th><td><input type="text" name="qfgetthumb_default_image" id="qfgetthumb_default_image" value="<?php echo $model->getQfgetthumbDefaultImage();?>" style="width:95%" /></td></tr>
         <tr><th><?php _e('Choice show commodity on page', 'cfshoppingcart');?></th><td><input type="checkbox" name="show_commodity_on_home" value="checked" <?php echo $model->getShowCommodityOnHome();?> /> <?php _e('home','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_page" value="checked" <?php echo $model->getShowCommodityOnPage();?> /> <?php _e('page','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_archive" value="checked" <?php echo $model->getShowCommodityOnArchive();?> /> <?php _e('archive','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_single" value="checked" <?php echo $model->getShowCommodityOnSingle();?> /> <?php _e('single','cfshoppingcart');?> <input type="checkbox" name="show_commodity_on_manually" value="checked" <?php echo $model->getShowCommodityOnManually();?> /> <?php _e('manually (must edit theme)','cfshoppingcart');?> <br /><?php _e('Show products category numbers (Example: 1,2,..)', 'cfshoppingcart');?>: <input type="text" name="show_products_category_numbers" id="show_products_category_numbers" value="<?php echo $model->getShowProductsCategoryNumbers();?>" size="30" /></td></tr>
         <tr><td colspan="2"><?php _e('* Choice manually then insert PHP code: ', 'cfshoppingcart');?> '&lt;?php cfshoppingcart(); ?&gt;' to 'archive.php' and 'single.php' files(and more page.php, index.php...) in '<?php echo get_bloginfo( 'template_directory' );?>' directory.</td></tr>
+
+        <tr><th><?php _e('Display to content instead of excerpt if choice or input.', 'cfshoppingcart');?></th><td><input type="checkbox" name="content_instead_of_excerpt_on_home" value="checked" <?php echo $model->getContentInsteadOfExcerptOnHome();?> /> <?php _e('home','cfshoppingcart');?> <input type="checkbox" name="content_instead_of_excerpt_on_page" value="checked" <?php echo $model->getContentInsteadOfExcerptOnPage();?> /> <?php _e('page','cfshoppingcart');?> <input type="checkbox" name="content_instead_of_excerpt_on_archive" value="checked" <?php echo $model->getContentInsteadOfExcerptOnArchive();?> /> <?php _e('archive','cfshoppingcart');?> <input type="checkbox" name="content_instead_of_excerpt_on_single" value="checked" <?php echo $model->getContentInsteadOfExcerptOnSingle();?> /> <?php _e('single','cfshoppingcart');?> <br /><input type="text" name="content_instead_of_excerpt_on_category_numbers" id="content_instead_of_excerpt_on_category_numbers" value="<?php echo join(',',$model->getContentInsteadOfExcerptOnCategoryNumbers());?>" size="20" /> <?php _e('Category numbers (Example: 1,2,..)', 'cfshoppingcart');?><br /><input type="text" name="content_instead_of_excerpt_on_page_numbers" id="content_instead_of_excerpt_on_page_numbers" value="<?php echo join(',',$model->getContentInsteadOfExcerptOnPageNumbers());?>" size="20" /> <?php _e('Page numbers (Example: 1,2,..)', 'cfshoppingcart');?></td></tr>
+          
         <tr><th><?php _e("Display waiting animation", 'cfshoppingcart');?></th><td><input type="checkbox" name="display_waiting_animation" value="checked" <?php echo $model->getDisplayWaitingAnimation();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e("Don't load css", 'cfshoppingcart');?></th><td><input type="checkbox" name="dont_load_css" value="checked" <?php echo $model->getDontLoadCss();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Debug mode', 'cfshoppingcart');?></th><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
@@ -304,11 +338,11 @@ function edit(&$obj, $msg = '') {
        <?php /* Shipping ****************************************/?>
        <tr><th><?php _e("Shipping", 'cfshoppingcart');?></th><td><input type="checkbox" name="shipping_enabled" value="checked" <?php echo $model->getShippingEnabled();?> /> <?php echo _e('Enabled','cfshoppingcart'); ?></td></tr>
        
-       <tr><th> </th><td><input type="text" name="shipping[0][0]" id="shipping[0][0]" value="<?php echo $model->getShipping(0,0);?>" size="10" />: <input type="text" name="shipping[0][1]" id="shipping[0][1]" value="<?php echo $model->getShipping(0,1);?>" size="10" /> <?php echo $model->getShippingListHtml(0,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(0,3);?> <input type="text" name="shipping[0][4]" id="shipping[0][4]" value="<?php echo $model->getShipping(0,4);?>" size="10" /></td></tr>
-       <tr><th> </th><td><input type="text" name="shipping[1][0]" id="shipping[1][0]" value="<?php echo $model->getShipping(1,0);?>" size="10" />: <input type="text" name="shipping[1][1]" id="shipping[1][1]" value="<?php echo $model->getShipping(1,1);?>" size="10" /> <?php echo $model->getShippingListHtml(1,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(1,3);?> <input type="text" name="shipping[1][4]" id="shipping[1][4]" value="<?php echo $model->getShipping(1,4);?>" size="10" /></td></tr>
-       <tr><th> </th><td><input type="text" name="shipping[2][0]" id="shipping[2][0]" value="<?php echo $model->getShipping(2,0);?>" size="10" />: <input type="text" name="shipping[2][1]" id="shipping[2][1]" value="<?php echo $model->getShipping(2,1);?>" size="10" /> <?php echo $model->getShippingListHtml(2,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(2,3);?> <input type="text" name="shipping[2][4]" id="shipping[2][4]" value="<?php echo $model->getShipping(2,4);?>" size="10" /></td></tr>
-       <tr><th> </th><td><input type="text" name="shipping[3][0]" id="shipping[3][0]" value="<?php echo $model->getShipping(3,0);?>" size="10" />: <input type="text" name="shipping[3][1]" id="shipping[3][1]" value="<?php echo $model->getShipping(3,1);?>" size="10" /> <?php echo $model->getShippingListHtml(3,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(3,3);?> <input type="text" name="shipping[3][4]" id="shipping[3][4]" value="<?php echo $model->getShipping(3,4);?>" size="10" /></td></tr>
-       <tr><th> </th><td><input type="text" name="shipping[4][0]" id="shipping[4][0]" value="<?php echo $model->getShipping(4,0);?>" size="10" />: <input type="text" name="shipping[4][1]" id="shipping[4][1]" value="<?php echo $model->getShipping(4,1);?>" size="10" /> <?php echo $model->getShippingListHtml(4,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(4,3);?> <input type="text" name="shipping[4][4]" id="shipping[4][4]" value="<?php echo $model->getShipping(4,4);?>" size="10" /></td></tr>
+       <tr><th> </th><td><input type="text" name="shipping[0][0]" id="shipping[0][0]" value="<?php echo $model->getShipping(0,0);?>" style="width:90px" />: <input type="text" name="shipping[0][1]" id="shipping[0][1]" value="<?php echo $model->getShipping(0,1);?>" style="width:90px" /> <?php echo $model->getShippingListHtml(0,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(0,3);?> <input type="text" name="shipping[0][4]" id="shipping[0][4]" value="<?php echo $model->getShipping(0,4);?>" style="width:90px" /></td></tr>
+       <tr><th> </th><td><input type="text" name="shipping[1][0]" id="shipping[1][0]" value="<?php echo $model->getShipping(1,0);?>" style="width:90px" />: <input type="text" name="shipping[1][1]" id="shipping[1][1]" value="<?php echo $model->getShipping(1,1);?>" style="width:90px" /> <?php echo $model->getShippingListHtml(1,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(1,3);?> <input type="text" name="shipping[1][4]" id="shipping[1][4]" value="<?php echo $model->getShipping(1,4);?>" style="width:90px" /></td></tr>
+       <tr><th> </th><td><input type="text" name="shipping[2][0]" id="shipping[2][0]" value="<?php echo $model->getShipping(2,0);?>" style="width:90px" />: <input type="text" name="shipping[2][1]" id="shipping[2][1]" value="<?php echo $model->getShipping(2,1);?>" style="width:90px" /> <?php echo $model->getShippingListHtml(2,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(2,3);?> <input type="text" name="shipping[2][4]" id="shipping[2][4]" value="<?php echo $model->getShipping(2,4);?>" style="width:90px" /></td></tr>
+       <tr><th> </th><td><input type="text" name="shipping[3][0]" id="shipping[3][0]" value="<?php echo $model->getShipping(3,0);?>" style="width:90px" />: <input type="text" name="shipping[3][1]" id="shipping[3][1]" value="<?php echo $model->getShipping(3,1);?>" style="width:90px" /> <?php echo $model->getShippingListHtml(3,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(3,3);?> <input type="text" name="shipping[3][4]" id="shipping[3][4]" value="<?php echo $model->getShipping(3,4);?>" style="width:90px" /></td></tr>
+       <tr><th> </th><td><input type="text" name="shipping[4][0]" id="shipping[4][0]" value="<?php echo $model->getShipping(4,0);?>" style="width:90px" />: <input type="text" name="shipping[4][1]" id="shipping[4][1]" value="<?php echo $model->getShipping(4,1);?>" style="width:90px" /> <?php echo $model->getShippingListHtml(4,2);?> <?php _e('Total price','cfshoppingcart');?> <?php echo $model->getShippingListHtml(4,3);?> <input type="text" name="shipping[4][4]" id="shipping[4][4]" value="<?php echo $model->getShipping(4,4);?>" style="width:90px" /></td></tr>
        <?php /* End of Shipping **********************************/?>
 
 
@@ -371,6 +405,8 @@ function edit(&$obj, $msg = '') {
 
 
 <?php
+} else if ($qs_option === 'pnotify') {
+    apply_filters('cfshoppingcart_pnotify_put_configuration', $obj);
 } else if ($qs_option === 'paypal') {
     apply_filters('cfshoppingcart_paypal_put_configuration', $obj);
 } else if ($qs_option === 'error_handler') {

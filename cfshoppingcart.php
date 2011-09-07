@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.7.9
+Version: 0.8.8
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -33,10 +33,11 @@ $wpCFShoppingcart = new WpCFShoppingcart();
 require_once('module/sum.php');
 require_once('module/common.php');
 require_once('module/paypal.php');
+require_once('module/pnotify.php');
+//require_once('module/cfshoppingcart_put_cf_image.php');
 
 // global
 $cfshoppingcart_common = new cfshoppingcart_common();
-
 
 $plugin_folder = $cfshoppingcart_common->get_plugin_folder();
 $plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
@@ -104,10 +105,14 @@ function cfshoppingcart_init_session_start(){
         //exit();
     } else if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_POST['wp_cfshoppingcart'])) {
         cfshoppingcart_sum();
+        //echo $_SERVER['HTTP_X_REQUESTED_WITH'];
+        //echo print_r($_POST);
+        //exit;
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             // ajax json echo
             @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
             //@header('Content-Type: text/html; charset=' . get_option('blog_charset'));
+            //exit;
             //require_once('JSON/JSON.php');
         }
         require_once('module/commu.php');
@@ -174,6 +179,7 @@ if (is_admin()) {
     require_once('module/add_wp_footer.php');
     add_action('wp_footer', 'cfshoppingcart_add_wp_footer');
     //
+    add_action('the_excerpt', 'cfshoppingcart_use_the_content_instead_of_the_excerpt_hook');
     require_once('module/contact-form-7.php');
     require_once('module/function_cfshoppingcart.php');
     require_once('module/show_product.php');
@@ -199,6 +205,7 @@ function cfshoppingcart_action_admin_notices() {
         echo '<div id="message" class="updated"><p>' . __("Cf Shopping Cart say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart setting screen, or Could you install Contact Form 7 plugin.",'cfshoppingcart') . '</p></div>';
     }
 }
+
 
 /* Data model */
 class WpCFShoppingcartItemModel {
@@ -255,11 +262,29 @@ class WpCFShoppingcartModel {
     var $show_custom_field_when_price_field_is_empty;
     var $display_waiting_animation;
     var $visual_editor;
-    
+    //
+    var $dont_display_these_information_of_below_if_sold_out_product;
+    //
+    var $content_instead_of_excerpt_on_home;
+    var $content_instead_of_excerpt_on_page;
+    var $content_instead_of_excerpt_on_archive;
+    var $content_instead_of_excerpt_on_single;
+    var $content_instead_of_excerpt_on_category_numbers;
+    var $content_instead_of_excerpt_on_page_numbers;
+    //
+    var $dont_display_order_quantity_textbox;
+    var $placed_cart_link_to_under_the_product;
+    var $cart_link_text;
+    var $placed_check_out_link_to_under_the_product;
+    var $check_out_link_text;
+    //
+    var $display_sold_out_message_in_price_field;
+    var $sold_out_message_in_price_field;
+
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.7.9';
+        $this->version = '0.8.8';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -308,7 +333,25 @@ class WpCFShoppingcartModel {
         //
         $this->dont_load_css = '';
         $this->display_waiting_animation = '';
-        $show_custom_field_when_price_field_is_empty = '';
+        $this->show_custom_field_when_price_field_is_empty = '';
+        //
+        $this->dont_display_these_information_of_below_if_sold_out_product = '';
+        //
+        $this->content_instead_of_excerpt_on_home = '';
+        $this->content_instead_of_excerpt_on_page = '';
+        $this->content_instead_of_excerpt_on_archive = '';
+        $this->content_instead_of_excerpt_on_single = '';
+        $this->content_instead_of_excerpt_on_category_numbers = '';
+        $this->content_instead_of_excerpt_on_page_numbers = '';
+        //
+        $this->dont_display_order_quantity_textbox = '';
+        $this->placed_cart_link_to_under_the_product = '';
+        $this->cart_link_text = __('View cart','cfshoppingcart');
+        $this->placed_check_out_link_to_under_the_product = '';
+        $this->check_out_link_text = __('Check out','cfshoppingcart');
+        //
+        $this->display_sold_out_message_in_price_field = '';
+        $this->sold_out_message_in_price_field = __('Sold out','cfshoppingcart');
     }
 
     function toDouble($v) {
@@ -327,7 +370,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.7.9';
+        return '0.8.8';
     }
     function get_version() {
         return $this->version;
@@ -421,7 +464,7 @@ class WpCFShoppingcartModel {
     }
     function setCustomFieldDefaultValue($fields) {
         // set data
-        global $WpCFShoppingcart, $cfshoppingcart_common;
+        global $wpCFShoppingcart, $cfshoppingcart_common;
         //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
         $model = $WpCFShoppingcart->model;
         
@@ -522,22 +565,43 @@ return $h;
     function setNumberOfStockFieldName($fields) {
         $this->number_of_stock_field_name = strip_tags(trim($fields));
     }
-    function getNumberOfStockFieldName() {
-        return $this->number_of_stock_field_name;
+    function getNumberOfStockFieldName($ra = 0) {
+        $v = $this->number_of_stock_field_name;
+        if (!$ra) return $v;
+        
+        if (in_array($v, $cfs = $this->getCustomFields())) {
+            return array('value' => $v, 'msg' => '');
+        } else {
+            return array('value' => $v, 'msg' => __('*This field name is not exists in Custom Field.','cfshoppingcart'));
+        }
     }
     // product name
     function setProductNameFieldName($fields) {
         $this->product_name_field_name = strip_tags(trim($fields));
     }
-    function getProductNameFieldName() {
-        return $this->product_name_field_name;
+    function getProductNameFieldName($ra = 0) {
+        $v = $this->product_name_field_name;
+        if (!$ra) return $v;
+        
+        if (in_array($v, $cfs = $this->getCustomFields())) {
+            return array('value' => $v, 'msg' => '');
+        } else {
+            return array('value' => $v, 'msg' => __('*This field name is not exists in Custom Field.','cfshoppingcart'));
+        }
     }
     //
     function setLinkToProductFieldName($fields) {
         $this->link_to_product_field_name = strip_tags(trim($fields));
     }
-    function getLinkToProductFieldName() {
-        return $this->link_to_product_field_name;
+    function getLinkToProductFieldName($ra = 0) {
+        $v = $this->link_to_product_field_name;
+        if (!$ra) return $v;
+        
+        if (in_array($v, $cfs = $this->getCustomFields())) {
+            return array('value' => $v, 'msg' => '');
+        } else {
+            return array('value' => $v, 'msg' => __('*This field name is not exists in Custom Field.','cfshoppingcart'));
+        }
     }
     function setOpenProductLinkToAnotherWindow($fields) {
         $this->open_product_link_to_another_window = $fields;
@@ -682,8 +746,15 @@ return $h;
     function setPriceFieldName($field) {
         $this->price_field_name = strip_tags(trim($field));
     }
-    function getPriceFieldName() {
-        return $this->price_field_name;
+    function getPriceFieldName($ra = 0) {
+        $v = $this->price_field_name;
+        if (!$ra) return $v;
+        
+        if (in_array($v, $cfs = $this->getCustomFields())) {
+            return array('value' => $v, 'msg' => '');
+        } else {
+            return array('value' => $v, 'msg' => __('*This field name is not exists in Custom Field.','cfshoppingcart'));
+        }
     }
     //
     function setCurrencyFormat($field) {
@@ -763,6 +834,181 @@ return $h;
     }
     function getMaxQuantityOfTotalOrder() {
         return $this->max_quantity_of_total_order;
+    }
+    //
+    function setDontDisplayTheseInformationOfBelowIfSoldOutProduct($fields) {
+        $a = array();
+        $f = explode(',', $fields);
+        foreach ($f as $key => $value) {
+            $s = strip_tags(trim($value));
+            if ($s) array_push($a, $s);
+        }
+        $this->dont_display_these_information_of_below_if_sold_out_product = $a;
+    }
+    function getDontDisplayTheseInformationOfBelowIfSoldOutProduct($ra = 0) {
+        $cf = $this->dont_display_these_information_of_below_if_sold_out_product;
+        if (is_array($cf)) {
+            $ret = $cf;
+        } else {
+            $a = array();
+            array_push($a, $cf);
+            $ret = $a;
+        }
+        if (!$ra) return $ret;
+        
+        // check if exists field name
+        $cfs = $this->getCustomFields();
+        $faild_values = array();
+        foreach ($ret as $k1 => $v1) {
+            if (!in_array($v1, $cfs)) {
+                $faild_values[] = $v1;
+            }
+        }
+        if ($faild_values) {
+            return array('value' => $ret, 'msg' => sprintf(__('*Field name "%s" is not exists in Custom Field.','cfshoppingcart'), join(',',$faild_values)));
+        } else {
+            return array('value' => $ret, '');
+        }
+    }
+
+
+    //
+    function setContentInsteadOfExcerptOnHome($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->content_instead_of_excerpt_on_home = $fields;
+    }
+    function getContentInsteadOfExcerptOnHome() {
+        return $this->content_instead_of_excerpt_on_home;
+    }
+    function setContentInsteadOfExcerptOnPage($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->content_instead_of_excerpt_on_page = $fields;
+    }
+    function getContentInsteadOfExcerptOnPage() {
+        return $this->content_instead_of_excerpt_on_page;
+    }
+    function setContentInsteadOfExcerptOnArchive($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->content_instead_of_excerpt_on_archive = $fields;
+    }
+    function getContentInsteadOfExcerptOnArchive() {
+        return $this->content_instead_of_excerpt_on_archive;
+    }
+    function setContentInsteadOfExcerptOnSingle($fields) {
+        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
+        $this->content_instead_of_excerpt_on_single = $fields;
+    }
+    function getContentInsteadOfExcerptOnSingle() {
+        return $this->content_instead_of_excerpt_on_single;
+    }
+    function setContentInsteadOfExcerptOnCategoryNumbers($fields) {
+        $f = trim(preg_replace('/[^0-9,]|^,+|,+$/', '', $fields));
+        if ($f === "") {
+            $this->content_instead_of_excerpt_on_category_numbers = NULL;
+        } else {
+            $f = explode(',', $f);
+            $this->content_instead_of_excerpt_on_category_numbers = $f;
+        }
+    }
+    function getContentInsteadOfExcerptOnCategoryNumbers() {
+        $a = $this->content_instead_of_excerpt_on_category_numbers;
+        if (!is_array($a)) return array();
+        return $a;
+    }
+    function setContentInsteadOfExcerptOnPageNumbers($fields) {
+        $f = trim(preg_replace('/[^0-9,]|^,+|,+$/', '', $fields));
+        if ($f === "") {
+            $this->content_instead_of_excerpt_on_page_numbers = NULL;
+        } else {
+            $f = explode(',', $f);
+            $this->content_instead_of_excerpt_on_page_numbers = $f;
+        }
+    }
+    function getContentInsteadOfExcerptOnPageNumbers() {
+        $a = $this->content_instead_of_excerpt_on_page_numbers;
+        if (!is_array($a)) return array();
+        return $a;
+    }
+
+    //
+    function setDontDisplayOrderQuantityTextbox($fields) {
+        $this->dont_display_order_quantity_textbox = $fields;
+    }
+    function getDontDisplayOrderQuantityTextboxHtml() {
+        return $this->getSelectTerminalTag('dont_display_order_quantity_textbox', $this->dont_display_order_quantity_textbox);
+    }
+    function getDontDisplayOrderQuantityTextboxValue() {
+        global $wpCFShoppingcart;
+        $ttype = $wpCFShoppingcart->getTerminalType();
+        return $this->dont_display_order_quantity_textbox[$ttype];
+    }
+    function setPlacedCartLinkToUnderTheProduct($fields) {
+        $this->placed_cart_link_to_under_the_product = $fields;
+    }
+    function getPlacedCartLinkToUnderTheProductHtml() {
+        return $this->getSelectTerminalTag('placed_cart_link_to_under_the_product', $this->placed_cart_link_to_under_the_product);
+    }
+    function getPlacedCartLinkToUnderTheProductValue() {
+        global $wpCFShoppingcart;
+        $ttype = $wpCFShoppingcart->getTerminalType();
+        return $this->placed_cart_link_to_under_the_product[$ttype];
+    }
+    function setCartLinkText($fields) {
+        $this->cart_link_text = $fields;
+    }
+    function getCartLinkText() {
+        return $this->cart_link_text;
+    }
+    function setPlacedCheckOutLinkToUnderTheProduct($fields) {
+        $this->placed_check_out_link_to_under_the_product = $fields;
+    }
+    function getPlacedCheckOutLinkToUnderTheProductHtml() {
+        return $this->getSelectTerminalTag('placed_check_out_link_to_under_the_product', $this->placed_check_out_link_to_under_the_product);
+    }
+    function getPlacedCheckOutLinkToUnderTheProductValue() {
+        global $wpCFShoppingcart;
+        $ttype = $wpCFShoppingcart->getTerminalType();
+        return $this->placed_check_out_link_to_under_the_product[$ttype];
+    }
+    function setCheckOutLinkText($fields) {
+        $this->check_out_link_text = $fields;
+    }
+    function getCheckOutLinkText() {
+        return $this->check_out_link_text;
+    }
+    //
+    function setDisplaySoldOutMessageInPriceField($fields) {
+        $this->display_sold_out_message_in_price_field = $fields;
+    }
+    function getDisplaySoldOutMessageInPriceField() {
+        return $this->display_sold_out_message_in_price_field;
+    }
+    function setSoldOutMessageInPriceField($fields) {
+        $this->sold_out_message_in_price_field = $fields;
+    }
+    function getSoldOutMessageInPriceField() {
+        return $this->sold_out_message_in_price_field;
+    }
+    //
+    function getSelectTerminalTag($name, $values) {
+        $v = array('pc',
+                   'smartphone',
+                   //'tabletpc',
+                   'cellphone',
+                   );
+        $m = array(__('PC','cfshoppingcart'),
+                   __('Smartphone','cfshoppingcart'),
+                   //__('Tablet PC','cfshoppingcart'),
+                   __('Cellphone','cfshoppingcart'),
+                   );
+        $c = count($v);
+        $h = array();
+        for ($i = 0; $i < $c; $i++) {
+            $n = $name . '[' . $v[$i] . ']';
+            if ($values[$v[$i]]) { $checked = 'checked'; } else {$checked = '';}
+            $h[] = '<input type="checkbox" name="'.$n.'" value="checked" '.$checked.' /> '.$m[$i];
+        }
+        return join(', ', $h);
     }
 }
 
@@ -884,6 +1130,36 @@ class WpCFShoppingcart {
     function executeAdmin() {
         require_once('module/execute_admin.php');
         execute_admin($this);
+    }
+    
+    function getTerminalType() {
+        global $Ktai_Style;
+        $ret = '';
+        if (is_object($Ktai_Style)) {
+            if ($Ktai_Style->is_ktai()) {
+                $ret = 'ktai';
+            }
+        }
+        if ($ret == '' && class_exists('WPtouchPlugin')) {
+            $wptouch = new WPtouchPlugin();
+            if ($wptouch->applemobile) { // boolean
+                $ret = 'smartphone';
+            }
+        }
+        if ($ret == '') {
+            $ret = 'pc';
+        }
+        //
+        if (isset($this->args['debug'])) {
+            echo '<p>getTerminalType: applemobile = '.$ret . '</p>';
+            if (is_object($Ktai_Style)) {
+                echo '<p>getTerminalType: KtaiStylePlugin not found.</p>';
+            }
+            if (class_exists('WPtouchPlugin')) {
+                echo '<p>getTerminalType: WPtouchPlugin not found.</p>';
+            }
+        }
+        return $ret;
     }
 }
 ?>

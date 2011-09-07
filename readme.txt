@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: PayPal payment, shopping cart, widget, plugin, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb
 Requires at least: 2.6
 Tested up to: 3.2.1
-Stable tag: 0.7.9
+Stable tag: 0.8.8
 
 Cf Shopping Cart is simple shopping cart plugin for WordPress.
 This plugin be working with Custom Field and more plugins.
@@ -65,6 +65,37 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 ------------
 
 == Changelog ==
+
+= 0.8.8 =
+* Attention, this version has many changes. previous version is 0.7.9.
+* Added options.
+* One part of function is using WPtouch plugin.
+* Remove and split shortcode "cfshoppingcart_put_cf_image" to another plugin.
+
+= 0.8.7 =
+* Added options and bug fix.
+
+= 0.8.6 =
+* Added options and bug fix.
+
+= 0.8.5 =
+* Added shortcode "cfshoppingcart_put_cf_image" and options.
+
+= 0.8.4 =
+* This is test version, added options.
+
+= 0.8.3 =
+* This is test version.
+
+= 0.8.2 =
+* This is test version.
+
+= 0.8.1 =
+* Added option: Display to content instead of excerpt if choice or input.
+
+= 0.8.0 =
+* Can edit popup messages (pnotify.js).
+* Hide field of product information when sold out.
 
 = 0.7.9 =
 * Add return URL parameter that is change stock and empty cart after paypal payment successful.
@@ -325,6 +356,15 @@ URL: http://wordpress.org/extend/plugins/exec-php/
 
 Name: QF-GetThumb
 URL: http://wordpress.org/extend/plugins/qf-getthumb/
+
+Name: QF-GetThumb-wb (branch QF-GetThumb)
+URL: http://takeai.silverpigeon.jp/?cat=28
+
+Name: WPtouch
+URL: http://wordpress.org/extend/plugins/wptouch/
+
+Name: Cf Image Gallery
+URL: http://wordpress.org/extend/plugins/cf-image-gallery/
 
 
 == Others ==

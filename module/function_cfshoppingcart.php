@@ -5,38 +5,28 @@
  */
 
 
-//require_once('cart.php');
-//require_once('contact-form-7.php');
-
 // get data object
-$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
+$WpCFShoppingcart = new WpCFShoppingcart();
 require_once('common.php');
-$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
-
+$cfshoppingcart_common = new cfshoppingcart_common();
 
 function cfshoppingcart($args = '') {
 
     //print_r($_SESSION);
     //print_r($_SESSION['cfshoppingcart']['incart_stock']);
     //print_r($args);
-    //global $cfshoppingcart_stat;
-    //if ($cfshoppingcart_stat === 'cart_page') return;
     
     // get data object
     global $WpCFShoppingcart;
     $model = $WpCFShoppingcart->model;
     global $cfshoppingcart_common;
+    global $post;
 
-
-    // test
-    if (0) {
-        require_once('cf.php');
-        $cf = new cfshoppingcart_products($WpCFShoppingcart);
-        $cf->setPost();
+    // manual
+    if (!$cfshoppingcart_common->is_show_product()) {
+        return false;
     }
     
-    global $post;
-    //$get_post_custom = get_post_custom();
     $get_post_custom = $cfshoppingcart_common->get_custom_fields();
     //print_r($get_post_custom);
     
@@ -44,31 +34,8 @@ function cfshoppingcart($args = '') {
     if ($is_debug = $model->is_debug()) {
         require_once('debug.php');
         echo debug_cfshoppingcart('called: function cfshoppingcart()');
-        //
-        //echo '<a href="' . $cfshoppingcart_common->get_plugin_module_uri() . '/commu.php' . '" target="_blank">SEE THE commu.php OUTPUT MESSAGE.</a>';
     }
     
-    $rf = 1;
-    if ($args === 'setting') {
-        if ($model->getShowCommodityOnHome() && is_home()) $rf = 0;
-        if ($model->getShowCommodityOnPage() && is_page()) $rf = 0;
-        if ($model->getShowCommodityOnArchive() && is_archive()) $rf = 0;
-        if ($model->getShowCommodityOnSingle() && is_single()) $rf = 0;
-        if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
-            $rf = 0;
-        } else {
-            $rf = 1;
-        }
-        if ($rf) return;
-    } else {
-        if ($model->getShowCommodityOnManually()) $rf = 0;
-        if (!$rf && $model->isShowProductsCategoryNumber($post->ID)) {
-            $rf = 0;
-        } else {
-            $rf = 1;
-        }
-        if ($rf) return;
-    }
     
     $price_field_name = $model->getPriceFieldName();
     $number_of_stock_field_name = $model->getNumberOfStockFieldName();
@@ -95,13 +62,6 @@ function cfshoppingcart($args = '') {
     if ($is_debug) {
         debug_cfshoppingcart('function get_post_custom() return is');
         print_r($c);
-    }
-    if ((!isset($c[$price_field_name]) && !$model->getShowCustomFieldWhenPriceFieldIsEmpty()) ||
-        (strstr($c[$price_field_name][0], '#hidden') && !$model->getShowCustomFieldWhenPriceFieldIsEmpty())) {
-        if ($is_debug) {
-            debug_cfshoppingcart('price_field_name not found in Custom Field on this post. return function.');
-        }
-        return; // 単価が無い
     }
 
     if ($is_debug) {
@@ -134,12 +94,22 @@ function cfshoppingcart($args = '') {
     $select_array_index = 0;
     $stock_array = array();
     $stock_array_index = 0;
+
+    $dont_display_these_information_of_below_if_sold_out_product = $model->getDontDisplayTheseInformationOfBelowIfSoldOutProduct();
+    //print_r($dont_display_these_information_of_below_if_sold_out_product);
+    $is_sold_out = $cfshoppingcart_common->is_stock_zero($id);
+    
+    $stock_value = $c[$number_of_stock_field_name][0];
+    $stock_value = cfshoppingcart_get_stock_html($stock_value, $is_sold_out);
+    
     foreach ($custom_fields as $key => $value) {
         //print "[$value]";
         $value = trim($value);
-        $is_sold_out = false;
+        //$is_sold_out = false;
+        $asfso = array_search($value, $dont_display_these_information_of_below_if_sold_out_product);
+        if ($is_sold_out === true && $asfso !== NULL && $asfso !== false) { continue; }
         if (strstr($c[$value][0], '#hidden')) { continue; }
-        if (!$c[$value][0] && $model->getBeDontShowEmptyField()) { continue; }
+        if ((is_null($c[$value][0]) || $c[$value][0] === '') && $model->getBeDontShowEmptyField()) { continue; }
         $c[$value][0] = str_replace('#postid', sprintf($model->getPostidFormat(), $id), $c[$value][0]);
         $c[$value][0] = str_replace('#post_title', $post->post_title, $c[$value][0]);
         if ($link_to_product) {
@@ -153,7 +123,11 @@ function cfshoppingcart($args = '') {
             }
         }
         if ($value === $price_field_name) {
-            $c[$value][0] = sprintf($currency_format, $c[$value][0]);
+            if ($is_sold_out && $model->getDisplaySoldOutMessageInPriceField()) {
+                $c[$price_field_name][0] = $model->getSoldOutMessageInPriceField();
+            } else {
+                $c[$value][0] = sprintf($currency_format, $c[$value][0]);
+            }
         }
         // select
         if (strstr($c[$value][0], '#hidden')) {
@@ -172,25 +146,6 @@ function cfshoppingcart($args = '') {
     if ($table_tag == 'table') { $content .= '</table>'; } else { $content .= '</dl>'; }
     $content .= '</div>';
 
-    $stock_value = $c[$number_of_stock_field_name][0];
-    //echo 'stock_value = ' . $stock_value;
-    // stock table html
-    //echo 'select_array = '; print_r($select_array);
-    //$stock_value = cfshoppingcart_get_stock_html($select_array, $stock_value);
-    $stock_value = cfshoppingcart_get_stock_html($stock_value);
-    //echo 'stock_value = ' . $stock_value;
-    if (!$number_of_stock_field_name) {
-        // don't stock manage
-        $is_sold_out = false;
-    } else if (preg_match('/[^0-9\-]/', $stock_value)) {
-    } else if ($stock_value == -1) {
-        // -1: don't stock manage
-        $is_sold_out = false;
-        $stock_value = __('Many','cfshoppingcart');
-    } else if ($stock_value == 0 && $model->getTypeOfShowSoldOutMessage() === 'show_sold_out_message') {
-        $stock_value = $model->getSoldOutMessage();
-        $is_sold_out = true;
-    }
     $stock_content = $trth . $number_of_stock_field_name . $thtd . $stock_value . $tdtr;
 
     $content = str_replace('__stock__', $stock_content, $content);
@@ -204,14 +159,17 @@ function cfshoppingcart($args = '') {
     if ($is_sold_out) {
         $content .= '<div class="cfshoppingcart_commodity_op_sold_out"></div>';
     } else if (!$c[$price_field_name]) {
-        // nothing
     } else if (strstr($c[$price_field_name][0], '#hidden')) {
-        // nothing
     } else {
         $content .= '<div class="cfshoppingcart_commodity_op"><span>';
-        $content .= __('Quantity','cfshoppingcart') . ' <input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
+        if ($model->getDontDisplayOrderQuantityTextboxValue()) {
+            $content .= '<input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="hidden" value="1" />';
+        } else {
+            $content .= __('Quantity','cfshoppingcart') . ' <input name="quantity" class="cfshoppingcart_quantity_' . $id . '" type="text" value="1" /> ' . $quantity_str . ' ';
+        }
         $content .= '</span>';
         $content .= '<input class="add_to_cart_button" type="submit" name="add_to_cart" value="' . $model->getAddToCartButtonText() . '" />';
+        $content .= cfshoppingcart_get_under_link();
         if ($model->getDisplayWaitingAnimation()) {
             $content .= ' <img class="cfshoppingcart_waiting_anm" style="border:none;margin:0;padding:0;display:none" src="' . $cfshoppingcart_common->get_plugin_uri()  . '/js/ajax_activity_indicators_download_animated_indicator.gif" />';
         }
@@ -221,6 +179,8 @@ function cfshoppingcart($args = '') {
     $content .= '</form>';
     $content .= '</div><!-- /.cfshoppingcart_post_wrap -->';
     
+    
+    // Out put contents.
     if ($model->getShowCommodityOnManually()) {
         echo $content;
     } else {
@@ -228,16 +188,36 @@ function cfshoppingcart($args = '') {
     }
 }
 
+function cfshoppingcart_get_under_link() {
+    global $WpCFShoppingcart;
+    $model = $WpCFShoppingcart->model;
+    $html = array();
+    
+    if ($model->getPlacedCartLinkToUnderTheProductValue()) {
+        $html[] = '<a class="cfshoppingcart_under_the_link_cart" href="' . $model->getCartUrl() . '">' . $model->getCartLinkText() . '</a>';
+    }
+    if ($model->getPlacedCheckOutLinkToUnderTheProductValue()) {
+        $html[] = '<a class="cfshoppingcart_under_the_link_check_out" href="' . $model->getSendOrderUrl() . '">' . $model->getCheckOutLinkText() . '</a>';
+    }
+    return '<div class="cfshoppingcart_under_the_link">' . join('<span class="cfshoppingcart_under_the_link_separator"> | </span>', $html) . '</div>';
+}
 
-//function cfshoppingcart_get_stock_html($select_array, $stock_value) {
-function cfshoppingcart_get_stock_html($stock_value) {
-    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
+
+function cfshoppingcart_get_stock_html($stock_value, $is_sold_out) {
+    global $WpCFShoppingcart;
     $model = $WpCFShoppingcart->model;
 
     global $cfshoppingcart_common;
+
+    if ($is_sold_out && $model->getTypeOfShowSoldOutMessage() == 'show_sold_out_message') {
+        return $model->getSoldOutMessage();
+    }
     
     $stock_value = $cfshoppingcart_common->clean_cf_textarea($stock_value);
     if (!strstr($stock_value, "\n")) {
+        if ($stock_value == -1) {
+            return __('Many','cfshoppingcart');
+        }
         return $stock_value;
     }
     //echo "[$stock_value]";

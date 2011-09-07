@@ -26,7 +26,7 @@ class WpCFShoppingcartPaypalModel {
         $this->paypal_currency = 'USD';
         $this->paypal_collect_address = '';
         $this->use_paypal_profile_shipping = '';
-        $this->paypal_return_url = '';
+        $this->paypal_return_url = get_bloginfo('url') . '?cfshoppingcart_after_payment_processing=successful';
         $this->hide_paypal_cart_image = '';
         $this->automatic_redirection_checkout_page = '';
         $this->paypal_orderer_input_screen_text = '&raquo;&nbsp;Check out with PayPal';

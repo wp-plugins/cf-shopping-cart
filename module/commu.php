@@ -15,6 +15,7 @@ class cfshoppingcart_commu {
     var $postid;
     var $the_post;
     var $stock;
+    var $pnotify;
 
     function cfshoppingcart_commu() {
         // get data object
@@ -22,6 +23,9 @@ class cfshoppingcart_commu {
         $this->model = $WpCFShoppingcart->model;
         $this->customfieldnames = $this->model->getCustomFields();
         $this->common = $cfshoppingcart_common;
+        //
+        $pnotify_obj = new WpCFShoppingcartPnotify($WpCFShoppingcart);
+        $this->pnotify = $pnotify_obj->model;
     }
     
     function commu($cmd, $id, $quantity, $customfield, $id2) {
@@ -41,16 +45,17 @@ class cfshoppingcart_commu {
             // Check number of stock
             if ($this->stock['num'] == 0) {
                 // stock is no.
-                $msg = array('msg_red' => __('Sorry, stock is no.', 'cfshoppingcart'),
+                $msg = array('msg_red' => $this->pnotify->getSorryStockIsNo(),
+                             'title' => $this->pnotify->getSorryStockIsNoTitle(),
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              //'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
                 return ($msg);
             } else if ($this->stock['num'] > 0) {
                 // order is out of stock
-                //$dbm = 'if ((' . $commodities[$id]['quantity'] . ' + ' . $quantity . ') > ' . $this->stock['num'] . ' || (' . $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] . ' + ' . $quantity . ') > ' . $this->stock['num'] . ') {';
                 if (($commodities[$id]['quantity'] + $quantity) > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] + $quantity) > $this->stock['num']) {
-                    $msg = array('msg_red' => __('Out of stock', 'cfshoppingcart'),// . $dbm,
+                    $msg = array('msg_red' => $this->pnotify->getOutOfStock(),
+                                 'title' => $this->pnotify->getOutOfStockTitle(),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  //'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
@@ -59,7 +64,8 @@ class cfshoppingcart_commu {
             }
             // Check total quantity
             if ($max_quantity_of_total_order != 0 && ($total_quantity + $quantity) > $max_quantity_of_total_order) {
-                $msg = array('msg_red' => __('Max quantity of total order is', 'cfshoppingcart') . ' ' . $max_quantity_of_total_order,
+                $msg = array('msg_red' => sprintf($this->pnotify->getMaxQuantity(), $max_quantity_of_total_order),
+                             'title' => $this->pnotify->getMaxQuantityTitle(),
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              //'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
@@ -83,7 +89,8 @@ class cfshoppingcart_commu {
             }
             // Check quantity of one commodity
             if ($max_quantity_of_one_commodity != 0 && ($commodities[$id]['quantity'] + $quantity) > $max_quantity_of_one_commodity) {
-                $msg = array('msg_red' => __('Max quantity of one commodity is', 'cfshoppingcart') . ' ' . $max_quantity_of_one_commodity,
+                $msg = array('msg_red' => sprintf($this->pnotify->getMaxQuantityProduct(), $max_quantity_of_one_commodity),
+                             'title' => $this->pnotify->getMaxQuantityProductTitle(),
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              //'cart_html' => cfshoppingcart_cart(array('commu'))
                 );
@@ -95,14 +102,16 @@ class cfshoppingcart_commu {
             $_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] += $quantity;
             $_SESSION[$sname]['commodities'] = $commodities;
             cfshoppingcart_sum();
-            $msg = array('msg' => __('Item to cart.', 'cfshoppingcart'),
-                'widget' => $_SESSION[$sname]['sum']['html'],
-                    //'cart_html' => cfshoppingcart_cart(array('commu'))
-            );
+            $msg = array('msg' => $this->pnotify->getItemToCart(),
+                         'title' => $this->pnotify->getItemToCartTitle(),
+                         'widget' => $_SESSION[$sname]['sum']['html'],
+                         //'cart_html' => cfshoppingcart_cart(array('commu'))
+                         );
             return ($msg);
         } else if ($cmd === 'change_quantity') {
             if (!$commodities[$id]) {
-                $msg = array('msg_red' => __('Change quantity is faild.', 'cfshoppingcart'),
+                $msg = array('msg_red' => $this->pnotify->getChangeQuantityIsFaild(),
+                             'title' => $this->pnotify->getChangeQuantityIsFaildTitle(),
                              //'widget' => $_SESSION[$sname]['sum']['html'],
                              //'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
@@ -115,50 +124,87 @@ class cfshoppingcart_commu {
                 $_SESSION[$sname]['commodities'] = $commodities;
                 cfshoppingcart_sum();
                 if ($commodities) {
-                    $msg = array('msg' => __('Off the item.', 'cfshoppingcart'),
+                    $msg = array('msg' => $this->pnotify->getOffTheItem(),
+                                 'title' => $this->pnotify->getOffTheItemTitle(),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
                 } else {
+                    $msg = array('msg' => $this->pnotify->getCartIsEmpty(),
+                                 'title' => $this->pnotify->getCartIsEmptyTitle(),
+                                 'widget' => $_SESSION[$sname]['sum']['html'],
+                                 'cart_html' => cfshoppingcart_cart(array('commu'))
+                                 );
+                    /*
                     $msg = array('msg' => __('Shopping Cart is empty.', 'cfshoppingcart'),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
+                      */
                 }
                 return ($msg);
             }
             // Check number of stock
             if ($this->stock['num'] == 0) {
                 // stock is no.
-                $msg = array('msg_red' => __('Sorry, stock is no.', 'cfshoppingcart'),
+                /*
+                $msg = array('msg_red' => $this->pnotify->getStockIsNo(),
+                             'title' => $this->pnotify->getStockIsNoTitle(),
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              'cart_html' => cfshoppingcart_cart(array('commu'))
+                             );
+                  */
+                $msg = array('msg_red' => $this->pnotify->getSorryStockIsNo(),
+                             'title' => $this->pnotify->getSorryStockIsNoTitle(),
+                             'widget' => $_SESSION[$sname]['sum']['html'],
+                             //'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
                 return ($msg);
             } else if ($this->stock['num'] > 0) {
                 // order is out of stock
                 if ($quantity > $this->stock['num'] || ($_SESSION[$sname]['incart_stock'][$id][$this->stock['key']] - $commodities[$id]['quantity'] + $quantity) > $this->stock['num']) {
                 //if ($quantity > $this->stock['num']) {
+                    $msg = array('msg_red' => $this->pnotify->getOutOfStock(),
+                                 'title' => $this->pnotify->getOutOfStockTitle(),
+                                 'widget' => $_SESSION[$sname]['sum']['html'],
+                                 //'cart_html' => cfshoppingcart_cart(array('commu'))
+                                 );
+                    /*
                     $msg = array('msg_red' => __('Out of stock', 'cfshoppingcart'),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
+                     */
                     return ($msg);
                 }
             }
             // Check total quantity
             if ($max_quantity_of_total_order != 0 && ($total_quantity + $quantity - $commodities[$id]['quantity']) > $max_quantity_of_total_order) {
+                $msg = array('msg_red' => sprintf($this->pnotify->getMaxQuantity(), $max_quantity_of_total_order),
+                             'title' => $this->pnotify->getMaxQuantityTitle(),
+                             'widget' => $_SESSION[$sname]['sum']['html'],
+                             //'cart_html' => cfshoppingcart_cart(array('commu'))
+                             );
+                /*
                 $msg = array('msg_red' => __('Max quantity of total order is', 'cfshoppingcart') . ' ' . $max_quantity_of_total_order,
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
+                  */
                 return ($msg);
             }
             // Check quantity of one commodity
             if ($max_quantity_of_one_commodity != 0 && $quantity > $max_quantity_of_one_commodity) {
+                /*
                 $msg = array('msg_red' => __('Max quantity of one commodity is', 'cfshoppingcart') . ' ' . $max_quantity_of_one_commodity,
                              'widget' => $_SESSION[$sname]['sum']['html'],
                              'cart_html' => cfshoppingcart_cart(array('commu'))
+                             );
+                 */
+                $msg = array('msg_red' => sprintf($this->pnotify->getMaxQuantityProduct(), $max_quantity_of_one_commodity),
+                             'title' => $this->pnotify->getMaxQuantityProductTitle(),
+                             'widget' => $_SESSION[$sname]['sum']['html'],
+                             //'cart_html' => cfshoppingcart_cart(array('commu'))
                              );
                 return ($msg);
             }
@@ -167,7 +213,8 @@ class cfshoppingcart_commu {
             $commodities[$id]['quantity'] = $quantity;
             $_SESSION[$sname]['commodities'] = $commodities;
             cfshoppingcart_sum();
-            $msg = array('msg' => __('Quantity has changed', 'cfshoppingcart'),
+            $msg = array('msg' => $this->pnotify->getQuantityChanged(),
+                         'title' => $this->pnotify->getQuantityChangedTitle(),
                          'widget' => $_SESSION[$sname]['sum']['html'],
                          'cart_html' => cfshoppingcart_cart(array('commu'))
                          );
@@ -183,12 +230,20 @@ class cfshoppingcart_commu {
                 cfshoppingcart_sum();
                 require_once('cart.php');
                 if ($commodities) {
+                    $msg = array('msg' => $this->pnotify->getOffTheItem(),
+                                 'title' => $this->pnotify->getOffTheItemTitle(),
+                                 'widget' => $_SESSION[$sname]['sum']['html'],
+                                 'cart_html' => cfshoppingcart_cart(array('commu'))
+                                 );
+                    /*
                     $msg = array('msg' => __('Off the item', 'cfshoppingcart'),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
+                      */
                 } else {
-                    $msg = array('msg' => __('Shopping Cart is empty.', 'cfshoppingcart'),
+                    $msg = array('msg' => $this->pnotify->getCartIsEmpty(),
+                                 'title' => $this->pnotify->getCartIsEmptyTitle(),
                                  'widget' => $_SESSION[$sname]['sum']['html'],
                                  'cart_html' => cfshoppingcart_cart(array('commu'))
                                  );
