@@ -32,9 +32,9 @@
 
 function cfshoppingcart_put_shipping($atts, $content = NULL, $code = '') {
     //print_r($args, $content);
-    global $WpCFShoppingcart;
-    $model = $WpCFShoppingcart->model;
-    $currency_format = $model->getCurrencyFormat();
+    global $wpCFShoppingcart;
+    $model = $wpCFShoppingcart->shipping->model;
+    $currency_format = $wpCFShoppingcart->model->getCurrencyFormat();
     
     for ($l = 0; $l < 5; $l++) {
         $content = str_replace('shipping' . ($l+1), sprintf($currency_format,$model->getShipping($l, 0)), $content);
@@ -45,5 +45,6 @@ function cfshoppingcart_put_shipping($atts, $content = NULL, $code = '') {
     }
     return $content;
 }
+add_shortcode('cfshoppingcart_put_shipping', 'cfshoppingcart_put_shipping');
 
 ?>

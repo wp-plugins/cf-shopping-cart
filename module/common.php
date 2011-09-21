@@ -22,9 +22,9 @@ class cfshoppingcart_common {
     function is_show_product() {
         //echo 'is_show_product';
         global $post;
-        global $WpCFShoppingcart;
+        global $wpCFShoppingcart;
         global $cfshoppingcart_common;
-        $model = $WpCFShoppingcart->model;
+        $model = $wpCFShoppingcart->model;
         
         $rf = 1;
         if ($model->getShowCommodityOnManually()) {
@@ -71,9 +71,9 @@ class cfshoppingcart_common {
     function use_the_content_instead_of_the_excerpt() {
         //echo 'use_the_content_instead_of_the_excerpt';
         global $post;
-        global $WpCFShoppingcart;
+        global $wpCFShoppingcart;
         global $cfshoppingcart_common;
-        $model = $WpCFShoppingcart->model;
+        $model = $wpCFShoppingcart->model;
 
         if (!$this->is_show_product()) {
             return false;
@@ -110,9 +110,9 @@ class cfshoppingcart_common {
     function get_custom_fields($postid = NULL) {
         global $post;
 
-        global $WpCFShoppingcart;
-        //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-        $model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart;
+        //$wpCFShoppingcart = new WpCFShoppingcart();
+        $model = $wpCFShoppingcart->model;
         $default = $model->getCustomFieldDefaultValue();
         
         if (is_null($postid) || preg_match('/[^0-9]/', $postid)) {
@@ -177,9 +177,9 @@ class cfshoppingcart_common {
      */
     //function get_stock($cf_stock, $id) {
     function get_cf_stock($id) {
-        global $WpCFShoppingcart;
-        //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-        $model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart;
+        //$wpCFShoppingcart = new WpCFShoppingcart();
+        $model = $wpCFShoppingcart->model;
         
         // get real post id and stock key.
         $ids = explode('|', $id);
@@ -254,8 +254,8 @@ class cfshoppingcart_common {
 
 
     function is_stock_zero($postid) {
-        global $WpCFShoppingcart;
-        $model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart;
+        $model = $wpCFShoppingcart->model;
 
         // get real post id and stock key.
         list($postid, $stock_key) = $this->get_real_postid_and_stock_key($postid);
@@ -301,9 +301,9 @@ class cfshoppingcart_common {
             echo '<p>set_cf_stock: postid is not integer.</p>';
             return -255;
         }
-        global $WpCFShoppingcart;
-        //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-        $model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart;
+        //$wpCFShoppingcart = new WpCFShoppingcart();
+        $model = $wpCFShoppingcart->model;
         
         $number_of_stock_field_name = $model->getNumberOfStockFieldName();
         // the product is not stock manage.
@@ -340,8 +340,8 @@ class cfshoppingcart_common {
     
     
     function get_cf_names() {
-        global $WpCFShoppingcart;
-        $model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart;
+        $model = $wpCFShoppingcart->model;
         return $model->getCustomFields();
     }
 

@@ -5,17 +5,17 @@
 
 function cfshoppingcart_add_wp_head() {
     //require_once('common.php');
-    //$cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
+    //$cfshoppingcart_common = new cfshoppingcart_common();
     //global $cfshoppingcart_common;
-    global $WpCFShoppingcart, $cfshoppingcart_common;
-    $model = & $WpCFShoppingcart->model;
+    global $wpCFShoppingcart, $cfshoppingcart_common;
+    $model = & $wpCFShoppingcart->model;
     
     //$plugin_folder = $cfshoppingcart_common->get_plugin_folder();
     //$plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
     //$plugin_path = $cfshoppingcart_common->get_plugin_path();
     $plugin_uri = $cfshoppingcart_common->get_plugin_uri();
 
-    if (!$model->getDontLoadCss()) {
+    if (!$wpCFShoppingcart->pnotify->model->getDontLoadPnotifyCss()) {
         echo '<link type="text/css" rel="stylesheet" href="';
         echo $plugin_uri . '/js/jquery.pnotify.default.css" />' . "\n";
         echo '<link type="text/css" rel="stylesheet" href="';

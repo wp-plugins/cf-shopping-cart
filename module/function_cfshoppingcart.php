@@ -6,7 +6,7 @@
 
 
 // get data object
-$WpCFShoppingcart = new WpCFShoppingcart();
+$wpCFShoppingcart = new WpCFShoppingcart();
 require_once('common.php');
 $cfshoppingcart_common = new cfshoppingcart_common();
 
@@ -17,8 +17,8 @@ function cfshoppingcart($args = '') {
     //print_r($args);
     
     // get data object
-    global $WpCFShoppingcart;
-    $model = $WpCFShoppingcart->model;
+    global $wpCFShoppingcart;
+    $model = $wpCFShoppingcart->model;
     global $cfshoppingcart_common;
     global $post;
 
@@ -189,8 +189,8 @@ function cfshoppingcart($args = '') {
 }
 
 function cfshoppingcart_get_under_link() {
-    global $WpCFShoppingcart;
-    $model = $WpCFShoppingcart->model;
+    global $wpCFShoppingcart;
+    $model = $wpCFShoppingcart->model;
     $html = array();
     
     if ($model->getPlacedCartLinkToUnderTheProductValue()) {
@@ -204,8 +204,8 @@ function cfshoppingcart_get_under_link() {
 
 
 function cfshoppingcart_get_stock_html($stock_value, $is_sold_out) {
-    global $WpCFShoppingcart;
-    $model = $WpCFShoppingcart->model;
+    global $wpCFShoppingcart;
+    $model = $wpCFShoppingcart->model;
 
     global $cfshoppingcart_common;
 
@@ -248,7 +248,7 @@ function cfshoppingcart_get_stock_html($stock_value, $is_sold_out) {
 
 function cfshoppingcart_get_post_select($n, $cf) {
     //echo 'cfshoppingcart_get_post_select';
-    global $cfshoppingcart_common;// = /* php4_110323 & new */ new cfshoppingcart_common();
+    global $cfshoppingcart_common;// = new cfshoppingcart_common();
 
     $cf = $cfshoppingcart_common->clean_cf_textarea($cf);
     $cfa = explode("\n", $cf);

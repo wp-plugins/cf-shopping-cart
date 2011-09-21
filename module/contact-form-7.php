@@ -25,10 +25,10 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
     //print_r($cf_opt);
     
     // get data object
-    $WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-    $model = $WpCFShoppingcart->model;
+    $wpCFShoppingcart = new WpCFShoppingcart();
+    $model = $wpCFShoppingcart->model;
     require_once('common.php');
-    $cfshoppingcart_common = /* php4_110323 & new */ new cfshoppingcart_common();
+    $cfshoppingcart_common = new cfshoppingcart_common();
     
     //print_r($model);
     $price_field_name = $model->getPriceFieldName();
@@ -37,7 +37,6 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
     $quantity = $model->getQuantity();
     $cart_url = $model->getCartUrl();
     $send_order_url = $model->getSendOrderUrl();
-    //$is_use_shipping = $model->getIsUseShipping();
     $number_of_stock_field_name = $model->getNumberOfStockFieldName();
     
     $commodities = $_SESSION['cfshoppingcart']['commodities'];
@@ -124,7 +123,7 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
 
     // shipping new and old
     //if ($model->getShippingEnabled() || $is_use_shipping) {
-    if ($model->getShippingEnabled()) {
+    if ($wpCFShoppingcart->shipping->model->getShippingEnabled()) {
         if ($sum['shipping'] < 0 && $sum['shipping_msg']) {
             $ret .= '' . $sum['shipping_msg'] . "\n";
         } else {

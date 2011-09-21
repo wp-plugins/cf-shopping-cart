@@ -15,8 +15,8 @@ function cfshoppingcart_checkout_link($args = '', $content = '') {
     //print_r($args);
     
     // get data object
-    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
-    $model = $WpCFShoppingcart->model;
+    global $wpCFShoppingcart;// = new WpCFShoppingcart();
+    $model = $wpCFShoppingcart->model;
     //print_r($model);
     $a = '';
     

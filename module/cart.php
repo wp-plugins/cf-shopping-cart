@@ -10,19 +10,14 @@
  *   <?php cfshoppingcart_cart(); ?>
  */
 
-//require_once('sum.php');
-
 function cfshoppingcart_cart($args = '') {
     //echo '_SESSION = '; print_r($_SESSION);
     //echo '_SESSION_cfshoppingcart_commodities = '; print_r($_SESSION['cfshoppingcart']['commodities']);
     //unset($_SESSION['cfshoppingcart']);
     //if (!session_id()){ @session_start(); }
 
-    //global $cfshoppingcart_stat;
-    //$cfshoppingcart_stat = 'cart_page';
-    // get data object
-    global $WpCFShoppingcart;// = /* php4_110323 & new */ new WpCFShoppingcart();
-    $model = $WpCFShoppingcart->model;
+    global $wpCFShoppingcart;
+    $model = $wpCFShoppingcart->model;
 
     global $cfshoppingcart_common;
 
@@ -46,7 +41,6 @@ function cfshoppingcart_cart($args = '') {
     $send_order_url = $model->getSendOrderUrl();
     $qfgetthumb_option_1 = $model->getQfgetthumbOption1();
     $qfgetthumb_default_image = $model->getQfgetthumbDefaultImage();
-    //$is_use_shipping = $model->getIsUseShipping();
     $number_of_stock_field_name = $model->getNumberOfStockFieldName();
     $table_tag = $model->getTableTag();
     $link_to_product_field_name = $model->getLinkToProductFieldName();
@@ -166,7 +160,7 @@ function cfshoppingcart_cart($args = '') {
     $content .= $trth . __('Quantity','cfshoppingcart') . $thtd . $sum['quantity_of_commodity'] . $quantity . $tdtr;
     $content .= $trth . __('Subtotal','cfshoppingcart') . $thtd . sprintf($currency_format, $sum['price']) . $tdtr;
 
-    if ($model->getShippingEnabled()) {
+    if ($wpCFShoppingcart->shipping->model->getShippingEnabled()) {
         if ($sum['shipping'] < 0 && $sum['shipping_msg']) {
             if ($table_tag == 'table') {
                 $content .= '<tr><td colspan="2">' . $sum['shipping_msg'] . '</td></tr>';
@@ -192,7 +186,7 @@ function cfshoppingcart_cart($args = '') {
         $content .= '<div class="order_is_more_than_stock"><span>' . __("Order is more than stock, Can't check out.",'cfshoppingcart') . '</span></div>';
     } else {
         $content .= '<div class="orderer">';
-        $content .= apply_filters('cfshoppingcart_put_checkout_button', $WpCFShoppingcart);
+        $content .= apply_filters('cfshoppingcart_put_checkout_button', $wpCFShoppingcart);
         $send_order_text = nl2br(stripslashes($model->getOrdererInputScreenText()));
         if ($send_order_url && $send_order_text) {
             $content .= '<div class="cfshoppingcart_checkout_link"><a class="orderder_input_screen" href="' . $send_order_url . '">' . $send_order_text . '</a></div>';

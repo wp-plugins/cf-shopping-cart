@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.8.8
+Version: 0.8.9
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -34,7 +34,8 @@ require_once('module/sum.php');
 require_once('module/common.php');
 require_once('module/paypal.php');
 require_once('module/pnotify.php');
-//require_once('module/cfshoppingcart_put_cf_image.php');
+require_once('module/put_shipping.php');
+
 
 // global
 $cfshoppingcart_common = new cfshoppingcart_common();
@@ -61,7 +62,6 @@ function cfshoppingcart_clear_after_sent_email($cf7) {
     }
     
     // Clear cart before action
-    //$a = array('a');
     //do_action_ref_array('cfshoppingcart_before_clear_cart', array(&$this));
     do_action_ref_array('cfshoppingcart_before_clear_cart', array());
     
@@ -175,7 +175,6 @@ if (is_admin()) {
     wp_enqueue_script('jquery.pnotify', $plugin_uri . '/js/jquery.pnotify.min.js', array('jquery'), '1.0.1');
     //
     require_once('module/add_wp_head.php');
-    add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/add_wp_footer.php');
     add_action('wp_footer', 'cfshoppingcart_add_wp_footer');
     //
@@ -191,8 +190,6 @@ if (is_admin()) {
     require_once('module/cart_link.php');
     add_shortcode('cfshoppingcart_cart_link', 'cfshoppingcart_cart_link');
     //
-    require_once('module/put_shipping.php');
-    add_shortcode('cfshoppingcart_put_shipping', 'cfshoppingcart_put_shipping');
     //
     require_once('module/send_order_link.php');
     add_shortcode('cfshoppingcart_checkout_link', 'cfshoppingcart_checkout_link');
@@ -233,7 +230,6 @@ class WpCFShoppingcartModel {
     var $send_order_url;// = 'http://';
     var $qfgetthumb_option_1;// = 'tag=0&num=0&crop_w=150&width=160&crop_h=150&height=160';
     var $qfgetthumb_default_image;// = '';
-    //var $is_use_shipping;// = '';
     //var $cfshoppingcart_justamomentplease;// = 'text-align:center;background:#fff09e;border:2px solid orange;';
     var $max_quantity_of_one_commodity;// = 12;
     var $max_quantity_of_total_order;// = 36;
@@ -247,8 +243,6 @@ class WpCFShoppingcartModel {
     var $go_to_cart_text;
     var $orderer_input_screen_text;
     var $thanks_url;
-    var $shipping;
-    var $shipping_enabled;
     var $shop_now_closed;
     var $be_dont_show_empty_field;
     var $closed_message_for_sidebar_widget;
@@ -258,7 +252,6 @@ class WpCFShoppingcartModel {
     var $custom_field_default_value;
     var $custom_field_default_value_raw;
     //
-    var $dont_load_css;
     var $show_custom_field_when_price_field_is_empty;
     var $display_waiting_animation;
     var $visual_editor;
@@ -284,7 +277,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.8.8';
+        $this->version = '0.8.9';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -295,7 +288,6 @@ class WpCFShoppingcartModel {
         $this->send_order_url = 'http://';
         $this->qfgetthumb_option_1 = 'tag=0&num=0&crop_w=150&width=160&crop_h=150&height=160';
         $this->qfgetthumb_default_image = '';
-        //$this->is_use_shipping = '';
         //$this->cfshoppingcart_justamomentplease = 'text-align:center;background:#fff09e;border:2px solid orange;';
         $this->max_quantity_of_one_commodity = 12;
         $this->max_quantity_of_total_order = 36;
@@ -310,8 +302,6 @@ class WpCFShoppingcartModel {
         $this->go_to_cart_text = '&raquo;&nbsp;Go To Cart';
         $this->orderer_input_screen_text = '&raquo;&nbsp;Orderer Input screen';
         $this->thanks_url = '';
-        $this->shipping = array();
-        $this->shipping_enabled = '';
         // stock
         $this->number_of_stock_field_name = '';
         $this->product_name_field_name = 'Name';
@@ -331,7 +321,6 @@ class WpCFShoppingcartModel {
         //
         $this->custom_field_default_value = '';
         //
-        $this->dont_load_css = '';
         $this->display_waiting_animation = '';
         $this->show_custom_field_when_price_field_is_empty = '';
         //
@@ -370,7 +359,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.8.8';
+        return '0.8.9';
     }
     function get_version() {
         return $this->version;
@@ -419,13 +408,6 @@ class WpCFShoppingcartModel {
         return $this->display_waiting_animation;
     }
     //
-    function setDontLoadCss($fields) {
-        $this->dont_load_css = $fields;
-    }
-    function getDontLoadCss() {
-        return $this->dont_load_css;
-    }
-    //
     function getWidgetEmpyCartHtml() {
         $current_user = wp_get_current_user();
         $html = '';
@@ -465,8 +447,8 @@ class WpCFShoppingcartModel {
     function setCustomFieldDefaultValue($fields) {
         // set data
         global $wpCFShoppingcart, $cfshoppingcart_common;
-        //$WpCFShoppingcart = /* php4_110323 & new */ new WpCFShoppingcart();
-        $model = $WpCFShoppingcart->model;
+        //$wpCFShoppingcart = new WpCFShoppingcart();
+        $model = $wpCFShoppingcart->model;
         
         $default = $cfshoppingcart_common->clean_cf_textarea(strip_tags($fields));
         $default = explode("\n", $default);
@@ -503,45 +485,6 @@ class WpCFShoppingcartModel {
         return $this->closed_message_for_sidebar_widget;
     }
     //
-    function setShippingEnabled($fields) {
-        $fields = preg_replace('/[^a-zA-Z]/', '', $fields);
-        $this->shipping_enabled = $fields;
-    }
-    function getShippingEnabled() {
-        return $this->shipping_enabled;
-    }
-    function setShipping($fields) {
-        //print_r($fields);
-        for ($l = 0; $l < 5; $l++) {
-            //echo 'k0 = ' . $fields[$l][0];
-            $fields[$l][0] = $this->toDouble($fields[$l][0]);
-            $fields[$l][1] = $this->toDouble($fields[$l][1]);
-            if ($fields[$l][2] !== '<' && $fields[$l][2] !== '<=') {
-                $fields[$l][2] = '';
-            }
-            if ($fields[$l][3] !== '<' && $fields[$l][3] !== '<=') {
-                $fields[$l][3] = '';
-            }
-            $fields[$l][4] = $this->toDouble($fields[$l][4]);
-        }
-        $this->shipping = $fields;
-    }
-    function getShipping($l, $c) {
-        return $this->shipping[$l][$c];
-    }
-    function getShippingListHtml($l, $c) {
-        $gt = $this->shipping[$l][$c];
-        
-        $h = '<select name="shipping[' . $l . '][' . $c . ']" id="shipping[' . $l . '][' . $c . ']" >';
-        $h .= '<option value="">' . __('Select','cfshoppingcart').'</option>';
-        if ($gt === '<') { $selected = 'selected="selected"'; } else { $selected = ''; }
-        $h .= '<option class="lt" value="<" ' . $selected . '>&lt;</option>';
-        if ($gt === '<=') { $selected = 'selected="selected"'; } else { $selected = ''; }
-        $h .= '<option class="le" value="<=" ' . $selected . '>&lt;=</option>';
-        $h .= '</select>';
-return $h;
-    }
-    
     //
     function setTableTag($fields) {
         $this->table_tag = strip_tags($fields);
@@ -1017,6 +960,7 @@ class WpCFShoppingcart {
     var $view;
     var $model;
     var $common;
+    var $shipping; // object
     var $request;
     var $plugin_name;
     var $plugin_fullpath, $plugin_path, $plugin_folder, $plugin_uri;
@@ -1025,9 +969,12 @@ class WpCFShoppingcart {
     function WpCFShoppingcart() {
         $this->plugin_name = 'cfshoppingcart';
         $this->model = $this->getModelObject();
+        
+        require_once('module/shipping.php');
+        $this->shipping = new WpCFShoppingcartShipping($wpCFShoppingcart);
 
         require_once('module/common.php');
-        $this->common = /* php4_110323 & new */ new cfshoppingcart_common();
+        $this->common = new cfshoppingcart_common();
         $this->plugin_uri = $this->common->get_plugin_uri();
     }
     
@@ -1046,7 +993,7 @@ class WpCFShoppingcart {
         } else {
             // create model instance if it is not registered,
             // register it to Wordpress
-            $model = /* php4_110323 & new */ new WpCFShoppingcartModel();
+            $model = new WpCFShoppingcartModel();
             $this->addWpOption($model);
         }
         return $model;

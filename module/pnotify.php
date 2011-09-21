@@ -26,6 +26,8 @@ class WpCFShoppingcartPnotifyModel {
     var $quantity_changed;
     //
     var $js_function;
+    //
+    var $dont_load_css;
     
     // constructor
     function WpCFShoppingcartPnotifyModel() {
@@ -50,6 +52,8 @@ class WpCFShoppingcartPnotifyModel {
         $this->quantity_changed = __('Quantity has changed.','cfshoppingcart');
         //
         $this->js_function = $this->get_js_function();
+        //
+        $this->dont_load_css = '';
     }
 
     function get_js_function() {
@@ -222,6 +226,13 @@ return $jsf;
     function getQuantityChanged() {
         return $this->quantity_changed;
     }
+    //
+    function setDontLoadPnotifyCss($fields) {
+        $this->dont_load_css = $fields;
+    }
+    function getDontLoadPnotifyCss() {
+        return $this->dont_load_css;
+    }
 }
 
 /* main class */
@@ -239,9 +250,10 @@ class WpCFShoppingcartPnotify {
         $this->plugin_name = 'cfshoppingcart_pnotify';
         $this->model = $this->getModelObject();
         $this->wpCFShoppingcart = $obj;
+
         
         //require_once('module/common.php');
-        //$this->common = /* php4_110323 & new */ new cfshoppingcart_common();
+        //$this->common = new cfshoppingcart_common();
         //$this->plugin_uri = $this->common->get_plugin_uri();
     }
     
@@ -329,6 +341,8 @@ class WpCFShoppingcartPnotify {
         $model->setCartIsEmpty($cart_is_empty);
         $model->setQuantityChangedTitle($quantity_changed_title);
         $model->setQuantityChanged($quantity_changed);
+        //
+        $model->setDontLoadPnotifyCss($dont_load_css);
         
         //
         $this->updateWpOption($model); // Update database-model
@@ -443,6 +457,11 @@ class WpCFShoppingcartPnotify {
 </table>
 
 <table class="form-table">
+  <caption><?php _e('css','cfshoppingcart');?></caption>
+  <tr><th><?php _e("Don't load css", 'cfshoppingcart');?></th><td><input type="checkbox" name="dont_load_css" value="checked" <?php echo $model->getDontLoadPnotifyCss();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
+</table>
+
+<table class="form-table">
   <caption><?php _e('Javascript function','cfshoppingcart');?></caption>
 <tr>
 <th scope="row"> </th>
@@ -468,7 +487,18 @@ class WpCFShoppingcartPnotify {
     
 } // class
 
-
+/*
+  // add_wp_head.php...
+add_action('wp_head', function() {
+    if (!$this->model->getDontLoadPnotifyCss()) {
+        $plugin_uri = $this->wpCFShoppingcart->common->get_plugin_uri();
+        echo '<link type="text/css" rel="stylesheet" href="';
+        echo $plugin_uri . '/js/jquery.pnotify.default.css" />' . "\n";
+        echo '<link type="text/css" rel="stylesheet" href="';
+        echo $plugin_uri . '/js/jquery-ui.css" />' . "\n";
+    }
+});
+*/
 
 add_filter('cfshoppingcart_pnotify_put_configuration', 'cfshoppingcart_pnotify_put_configuration',12,1);
 function cfshoppingcart_pnotify_put_configuration($obj) {

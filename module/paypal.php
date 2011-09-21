@@ -123,7 +123,7 @@ class WpCFShoppingcartPaypal {
         $this->wpCFShoppingcart = $obj;
         
         //require_once('module/common.php');
-        //$this->common = /* php4_110323 & new */ new cfshoppingcart_common();
+        //$this->common = new cfshoppingcart_common();
         //$this->plugin_uri = $this->common->get_plugin_uri();
     }
     

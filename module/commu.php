@@ -19,12 +19,12 @@ class cfshoppingcart_commu {
 
     function cfshoppingcart_commu() {
         // get data object
-        global $WpCFShoppingcart, $cfshoppingcart_common;
-        $this->model = $WpCFShoppingcart->model;
+        global $wpCFShoppingcart, $cfshoppingcart_common;
+        $this->model = $wpCFShoppingcart->model;
         $this->customfieldnames = $this->model->getCustomFields();
         $this->common = $cfshoppingcart_common;
         //
-        $pnotify_obj = new WpCFShoppingcartPnotify($WpCFShoppingcart);
+        $pnotify_obj = new WpCFShoppingcartPnotify($wpCFShoppingcart);
         $this->pnotify = $pnotify_obj->model;
     }
     
@@ -462,7 +462,7 @@ class cfshoppingcart_commu {
                     return $json;
                 } else {
                     require_once('../JSON/JSON.php');
-                    $json = /* php4_110323 & new */ new Services_JSON;
+                    $json = new Services_JSON;
                     $encode = $json->encode($j, true);
                     return $encode;
                 }
