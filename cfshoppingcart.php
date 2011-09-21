@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.8.9
+Version: 0.8.10
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -175,6 +175,7 @@ if (is_admin()) {
     wp_enqueue_script('jquery.pnotify', $plugin_uri . '/js/jquery.pnotify.min.js', array('jquery'), '1.0.1');
     //
     require_once('module/add_wp_head.php');
+    add_action('wp_head', 'cfshoppingcart_add_wp_head');
     require_once('module/add_wp_footer.php');
     add_action('wp_footer', 'cfshoppingcart_add_wp_footer');
     //
@@ -277,7 +278,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.8.9';
+        $this->version = '0.8.10';
         $this->debug = '';
         $this->visual_editor = '';
         $this->custom_fields = array('Product ID','Name','Price');
@@ -359,7 +360,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.8.9';
+        return '0.8.10';
     }
     function get_version() {
         return $this->version;
@@ -960,6 +961,7 @@ class WpCFShoppingcart {
     var $view;
     var $model;
     var $common;
+    var $pnotify;
     var $shipping; // object
     var $request;
     var $plugin_name;
@@ -972,6 +974,9 @@ class WpCFShoppingcart {
         
         require_once('module/shipping.php');
         $this->shipping = new WpCFShoppingcartShipping($wpCFShoppingcart);
+
+        require_once('module/pnotify.php');
+        $this->pnotify = new WpCFShoppingcartPnotify($wpCFShoppingcart);
 
         require_once('module/common.php');
         $this->common = new cfshoppingcart_common();

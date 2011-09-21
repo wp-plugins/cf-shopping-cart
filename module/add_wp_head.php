@@ -4,9 +4,6 @@
  */
 
 function cfshoppingcart_add_wp_head() {
-    //require_once('common.php');
-    //$cfshoppingcart_common = new cfshoppingcart_common();
-    //global $cfshoppingcart_common;
     global $wpCFShoppingcart, $cfshoppingcart_common;
     $model = & $wpCFShoppingcart->model;
     
@@ -20,10 +17,6 @@ function cfshoppingcart_add_wp_head() {
         echo $plugin_uri . '/js/jquery.pnotify.default.css" />' . "\n";
         echo '<link type="text/css" rel="stylesheet" href="';
         echo $plugin_uri . '/js/jquery-ui.css" />' . "\n";
-        //echo '<link type="text/css" rel="stylesheet" href="';
-        //echo $plugin_uri . 'cfshoppingcart.css" />' . "\n";
-        //echo '<link type="text/css" rel="stylesheet" href="';
-        //echo $plugin_uri . '/js/jquery.alerts.css" />' . "\n";
     }
     
     /*
