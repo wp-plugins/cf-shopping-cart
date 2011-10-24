@@ -262,6 +262,7 @@ class cfshoppingcart_common {
         
         $customfield = $this->get_custom_fields($postid);
         $number_of_stock_field_name = $model->getNumberOfStockFieldName();
+        if (!$number_of_stock_field_name) return false;
         $stock_value = $this->split_cf_text($customfield[$number_of_stock_field_name][0]);
         //print_r($stock_value);
         foreach ($stock_value as $key => $value) {
