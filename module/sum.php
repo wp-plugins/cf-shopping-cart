@@ -14,7 +14,8 @@ function cfshoppingcart_sum() {
     //require_once('common.php');
     //$cfshoppingcart_common = new cfshoppingcart_common();
     global $cfshoppingcart_common;
-
+    $cfname = $cfshoppingcart_common->get_session_key();
+    
     $plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
     //$plugin_path = $cfshoppingcart_common->get_plugin_path();
     //$plugin_folder = $cfshoppingcart_common->get_plugin_folder();
@@ -27,8 +28,7 @@ function cfshoppingcart_sum() {
     $model = $wpCFShoppingcart->model;
     $price_field_name = $model->getPriceFieldName();
     
-    $sname = 'cfshoppingcart';
-    $commodities  = $_SESSION[$sname]['commodities'];
+    $commodities  = $_SESSION[$cfname]['commodities'];
     
     $sum = 0;
     $num = 0;
@@ -44,18 +44,15 @@ function cfshoppingcart_sum() {
         list($shipping, $shipping_msg) = $wpCFShoppingcart->shipping->get_shipping($num, $sum);
     }
     
-    $_SESSION[$sname]['sum']['quantity_of_commodity'] = $num;
-    $_SESSION[$sname]['sum']['price'] = $sum;
-    $_SESSION[$sname]['sum']['shipping'] = $shipping;
-    $_SESSION[$sname]['sum']['shipping_msg'] = $shipping_msg;
-    $_SESSION[$sname]['sum']['total'] = $shipping + $sum;
+    $_SESSION[$cfname]['sum']['quantity_of_commodity'] = $num;
+    $_SESSION[$cfname]['sum']['price'] = $sum;
+    $_SESSION[$cfname]['sum']['shipping'] = $shipping;
+    $_SESSION[$cfname]['sum']['shipping_msg'] = $shipping_msg;
+    $_SESSION[$cfname]['sum']['total'] = $shipping + $sum;
     
-    //if ($sum == 0 || $num == 0) {
-    //    $html = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
-    //} else {
-    $html  = cfshoppingcart_widget_html($_SESSION[$sname]['sum']);
+    $html  = cfshoppingcart_widget_html($_SESSION[$cfname]['sum']);
     //}
-    $_SESSION[$sname]['sum']['html'] = $html;
+    $_SESSION[$cfname]['sum']['html'] = $html;
     
     return $html;
 }
@@ -78,9 +75,7 @@ function cfshoppingcart_widget_html($sum) {
         return $html;
     }
     
-    //$sum = $_SESSION['cfshoppingcart']['sum'];
     if ($sum['price'] == 0 || $sum['quantity_of_commodity'] == 0) {
-        //$html = '<span class="cart_empty">' . __('Shopping Cart is empty.', 'cfshoppingcart') . '</span>';
         $html = $model->getWidgetEmpyCartHtml();
         return $html;
     }

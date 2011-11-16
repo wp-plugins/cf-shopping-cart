@@ -124,6 +124,7 @@ function save(&$obj) {
     $model->setDisplayWaitingAnimation($display_waiting_animation);
     $model->setDebug($is_debug);
     $model->setVisualEditor($visual_editor);
+    $model->setMultiSiteSupport($multi_site_support);
 
     $model->setShowCommodityOnHome($show_commodity_on_home);
     $model->setShowCommodityOnPage($show_commodity_on_page);
@@ -323,7 +324,7 @@ function edit(&$obj, $msg = '') {
         <tr><th><?php _e('Debug mode', 'cfshoppingcart');?></th><td><input type="checkbox" name="is_debug" value="checked" <?php echo $model->getDebug();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
         <tr><th><?php _e('Visual Editor', 'cfshoppingcart');?></th><td><input type="checkbox" name="visual_editor" value="checked" <?php echo $model->getVisualEditor();?> /> <?php _e('Enable the visual editor when setting. Reload this page after update options when change this checkbox.','cfshoppingcart');?></td></tr>
 
-
+        <tr><th><?php _e('Mult site support', 'cfshoppingcart');?></th><td><input type="checkbox" name="multi_site_support" value="checked" <?php echo $model->getMultiSiteSupport();?> /> <?php _e('Enabled','cfshoppingcart');?></td></tr>
 
          <tr><th><input type="submit" name="save" value="<?php _e('Update Options', 'cfshoppingcart')?>&nbsp;&raquo;" class="button-primary" /></th><td></td></tr>
 

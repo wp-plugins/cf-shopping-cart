@@ -219,6 +219,7 @@ class WpCFShoppingcartPaypal {
         $model = $this->model;
         require_once('common.php');
         $common = new cfshoppingcart_common();
+        $cfname = $common->get_session_key();
         $obj = $this->wpCFShoppingcart;
         $cfmodel = $obj->model;
         $product_name_field_name = $cfmodel->getProductNameFieldName();
@@ -238,10 +239,10 @@ class WpCFShoppingcartPaypal {
         $html .= '<input type="hidden" name="item_number" value="" />';
          */
 
-        //print_r($_SESSION['cfshoppingcart']);
-        //print_r($_SESSION['cfshoppingcart']['commodities']);
-        $shipping = $_SESSION['cfshoppingcart']['sum']['shipping'];
-        $commodities = $_SESSION['cfshoppingcart']['commodities'];
+        //print_r($_SESSION[$cfname]);
+        //print_r($_SESSION[$cfname]['commodities']);
+        $shipping = $_SESSION[$cfname]['sum']['shipping'];
+        $commodities = $_SESSION[$cfname]['commodities'];
         $i = 0;
         foreach ($commodities as $product_id => $commodity) {
             $i++;

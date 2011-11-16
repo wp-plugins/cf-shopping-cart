@@ -29,6 +29,7 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
     $model = $wpCFShoppingcart->model;
     require_once('common.php');
     $cfshoppingcart_common = new cfshoppingcart_common();
+    $cfname = $cfshoppingcart_common->get_session_key();
     
     //print_r($model);
     $price_field_name = $model->getPriceFieldName();
@@ -39,8 +40,8 @@ function cfshoppingcart_ContactForm7($cf_opt = array()) {
     $send_order_url = $model->getSendOrderUrl();
     $number_of_stock_field_name = $model->getNumberOfStockFieldName();
     
-    $commodities = $_SESSION['cfshoppingcart']['commodities'];
-    $sum = $_SESSION['cfshoppingcart']['sum'];
+    $commodities = $_SESSION[$cfname]['commodities'];
+    $sum = $_SESSION[$cfname]['sum'];
 
     // shop now closed
     $current_user = wp_get_current_user();

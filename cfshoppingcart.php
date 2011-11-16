@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.8.11
+Version: 0.8.12
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -76,7 +76,9 @@ add_action('wpcf7_mail_sent', 'cfshoppingcart_clear_after_sent_email');
 // $priority number (8) is less than Contact Form 7
 add_action('init', 'cfshoppingcart_init_session_start', 8);
 function cfshoppingcart_init_session_start(){
-    global $Ktai_Style;
+    global $Ktai_Style, $cfshoppingcart_common;
+    $cfname = $cfshoppingcart_common->get_session_key();
+    
     if (is_object($Ktai_Style)) {
         if ($Ktai_Style->is_ktai()) {
             ini_set('session.use_cookies','off');
@@ -90,7 +92,7 @@ function cfshoppingcart_init_session_start(){
         //echo 'wpcf7_add_shortcode found.';
         require_once('contact-form-7-module/cfshoppingcart.php');
     }
-    unset($_SESSION['cfshoppingcart']['no_ajax_msg']);
+    unset($_SESSION[$cfname]['no_ajax_msg']);
     // After payment processing when successful
     if (isset($_GET['cfshoppingcart_after_payment_processing'])) {
         if ($_GET['cfshoppingcart_after_payment_processing'] === 'successful') {
@@ -124,7 +126,7 @@ function cfshoppingcart_init_session_start(){
             exit;
         } else {
             //print_r($msg);
-            $_SESSION['cfshoppingcart']['no_ajax_msg'] = $msg;
+            $_SESSION[$cfname]['no_ajax_msg'] = $msg;
         }
     }
 }
@@ -256,6 +258,7 @@ class WpCFShoppingcartModel {
     var $show_custom_field_when_price_field_is_empty;
     var $display_waiting_animation;
     var $visual_editor;
+    var $multi_site_support;
     //
     var $dont_display_these_information_of_below_if_sold_out_product;
     //
@@ -278,9 +281,10 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.8.11';
+        $this->version = '0.8.12';
         $this->debug = '';
         $this->visual_editor = '';
+        $this->multi_site_support = '';
         $this->custom_fields = array('Product ID','Name','Price');
         $this->price_field_name = 'Price';
         $this->currency_format = '$%.02fYen';
@@ -360,7 +364,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.8.11';
+        return '0.8.12';
     }
     function get_version() {
         return $this->version;
@@ -389,6 +393,13 @@ class WpCFShoppingcartModel {
     }
     function getVisualEditor() {
         return $this->visual_editor;
+    }
+    //
+    function setMultiSiteSupport($fields) {
+        $this->multi_site_support = $fields;
+    }
+    function getMultiSiteSupport() {
+        return $this->multi_site_support;
     }
     //
     function is_debug() {

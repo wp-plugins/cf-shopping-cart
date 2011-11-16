@@ -11,15 +11,11 @@
  */
 
 function cfshoppingcart_cart($args = '') {
-    //echo '_SESSION = '; print_r($_SESSION);
-    //echo '_SESSION_cfshoppingcart_commodities = '; print_r($_SESSION['cfshoppingcart']['commodities']);
-    //unset($_SESSION['cfshoppingcart']);
-    //if (!session_id()){ @session_start(); }
-
     global $wpCFShoppingcart;
     $model = $wpCFShoppingcart->model;
 
     global $cfshoppingcart_common;
+    $cfname = $cfshoppingcart_common->get_session_key();
 
     if (is_array($args)) {
         $is_shortcode = true;
@@ -46,8 +42,8 @@ function cfshoppingcart_cart($args = '') {
     $link_to_product_field_name = $model->getLinkToProductFieldName();
     $open_product_link_to_another_window = $model->getOpenProductLinkToAnotherWindow();
     
-    $commodities = $_SESSION['cfshoppingcart']['commodities'];
-    $sum = $_SESSION['cfshoppingcart']['sum'];
+    $commodities = $_SESSION[$cfname]['commodities'];
+    $sum = $_SESSION[$cfname]['sum'];
 
     // shop now closed
     $current_user = wp_get_current_user();

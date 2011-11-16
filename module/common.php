@@ -7,10 +7,12 @@
 
 class cfshoppingcart_common {
     function get_no_ajax_message() {
+        $cfname = $this->get_session_key();
+        
         // put no ajax message
-        if ($_SESSION['cfshoppingcart']['no_ajax_msg']) {
-            $msg_red = $_SESSION['cfshoppingcart']['no_ajax_msg']['msg_red'];
-            $msg = $_SESSION['cfshoppingcart']['no_ajax_msg']['msg'];
+        if ($_SESSION[$cfname]['no_ajax_msg']) {
+            $msg_red = $_SESSION[$cfname]['no_ajax_msg']['msg_red'];
+            $msg = $_SESSION[$cfname]['no_ajax_msg']['msg'];
             if ($msg_red) { $msg = $msg_red; }
             if ($msg) {
                 $content .= '<div class="no_ajax_msg">' . $msg . '</div>';
@@ -63,6 +65,46 @@ class cfshoppingcart_common {
             return false; // 単価が無い
         }
         return true;
+    }
+
+    /*
+     * multi site function
+     * site id
+     */
+    function get_current_site_id() {
+        global $wpCFShoppingcart;
+        $model = $wpCFShoppingcart->model;
+        
+        if ($model->getMultiSiteSupport() && function_exists('get_current_site')) {
+            $this_blog_name = get_bloginfo('name');
+            $this_blog_id = 0;
+            $my_child_blogs = get_blog_list();
+            foreach ( $my_child_blogs as $key => $value ){
+                if ( get_blog_option($value["blog_id"], 'blogname') == $this_blog_name ){
+                    $this_blog_id = $value["blog_id"];
+                    break 1;
+                }
+            }
+            //echo $this_blog_name . 'のブログIDは、' . $this_blog_id . 'です。';
+            //var_dump(get_blog_status());
+            //$current_site = wpmu_current_site();
+            //echo $current_site->blog_id;
+            //var_dump($current_site);
+            //$current_site = get_current_site();
+            //var_dump($current_site);
+            //$current_site = get_current_site();
+            //return $current_site->id;
+            return $this_blog_id;
+        } else {
+            return 9999;
+        }
+    }
+    /*
+     * multi site function
+     * session first key
+     */
+    function get_session_key() {
+        return sprintf("cfshoppingcart_%d", $this->get_current_site_id());
     }
     
     /*
