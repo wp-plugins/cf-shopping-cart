@@ -233,6 +233,7 @@ function edit(&$obj, $msg = '') {
     
     $link_cfshoppingcart = '?' . cfshoppingcart_query_string('option', 'cfshoppingcart');
     $link_shipping = '?' . cfshoppingcart_query_string('option', 'shipping');
+    $link_widget = '?' . cfshoppingcart_query_string('option', 'widget');
     $link_cf7 = '?' . cfshoppingcart_query_string('option', 'contactform7');
     $link_license = '?' . cfshoppingcart_query_string('option', 'license');
     $link_paypal = '?' . cfshoppingcart_query_string('option', 'paypal');
@@ -243,6 +244,7 @@ function edit(&$obj, $msg = '') {
     <div class="cfshoppingcart_admin_tab">
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'cfshoppingcart' || !$qs_option){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cfshoppingcart;?>"><?php _e('Shopping cart','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'shipping'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_shipping;?>"><?php _e('Shipping','cfshoppingcart');?></a></div>
+      <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'widget'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_widget;?>"><?php _e('Widget','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'paypal'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_paypal;?>"><?php _e('PayPal','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'pnotify'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_pnotify;?>"><?php _e('pnotify','cfshoppingcart');?></a></div>
       <div class="cfshoppingcart_admin_tab_one <?php if ($qs_option === 'contactform7'){echo 'cfshoppingcart_admin_current_tab';}?>"><a href="<?php echo $link_cf7;?>"><?php _e('Module for Contact Form 7','cfshoppingcart');?></a></div>
@@ -387,6 +389,8 @@ function edit(&$obj, $msg = '') {
 <?php
 } else if ($qs_option === 'shipping') {
     apply_filters('cfshoppingcart_shipping_put_configuration', $obj);
+} else if ($qs_option === 'widget') {
+    apply_filters('cfshoppingcart_widget_put_configuration', $obj);
 } else if ($qs_option === 'pnotify') {
     apply_filters('cfshoppingcart_pnotify_put_configuration', $obj);
 } else if ($qs_option === 'paypal') {

@@ -80,7 +80,8 @@ function cfshoppingcart_widget_html($sum) {
         return $html;
     }
     
-    $html  = '<table>';
+    $html = cfshoppingcart_widget_html_products();
+    $html .= '<table>';
     $html .= '<tr><td>' . __('Quantity','cfshoppingcart') . '</td><td>' . $sum['quantity_of_commodity'] . $quantity . '</td></tr>';
     $html .= '<tr><td>' . __('Subtotal','cfshoppingcart') . '</td><td>' . sprintf($currency_format, $sum['price']) . '</td></tr>';
     if ($wpCFShoppingcart->shipping->model->getShippingEnabled()) {
@@ -99,6 +100,43 @@ function cfshoppingcart_widget_html($sum) {
         $html .= '<span class="go_cart">&raquo;&nbsp;<a href="' . $cart_url . '">' . $model->getGoToCartText() . '</a></span>';
     }
     return $html;
+}
+
+function cfshoppingcart_widget_html_products() {
+    global $cfshoppingcart_common;
+    $cfname = $cfshoppingcart_common->get_session_key();
+    
+    //$plugin_fullpath = $cfshoppingcart_common->get_plugin_fullpath();
+    
+    // get data object
+    global $wpCFShoppingcart;
+    $widget = $wpCFShoppingcart->widget;
+    if (!$widget->model->getWidgetEnabledCartInfo()) {
+        return '';
+    }
+    $cart_info = $widget->model->getCartInfo();
+    $cart_info_head = $widget->model->getCartInfoHead();
+    $cart_info_tail = $widget->model->getCartInfoTail();
+    $model = $wpCFShoppingcart->model;
+    $price_field_name = $model->getPriceFieldName();
+
+    if (!$cart_info) {
+        return $cart_info_head . $cart_info_tail;
+    }
+
+    //$test = "<tr><td>Maker</td>[Maker]</td></tr><tr><td>Product ID</td><td>[Product ID]</td></tr><tr><td>Name</td><td>[Name]</td></tr><tr><td>Size</td><td>[Size]</td></tr><tr><td>extra charges</td><td>[extra_charges]</td></tr><tr><td>Color</td><td>[Color]</td></tr><tr><td>Price</td><td>[Price]</td></tr><tr><td>Stock</td><td>[Stock]</td></tr><tr><td>Checkbox</td><td>[Checkbox]</td></tr><tr><td>quantity</td><td>[quantity]</td></tr><tr><td>_sum_</td><td>[_sum_]</td></tr>";
+    $html = "";
+    $commodities  = $_SESSION[$cfname]['commodities'];
+    foreach ($commodities as $key1 => $commodity) {
+        $line = $cart_info;
+        $commodity['_sum_'] = $commodity[$price_field_name] * $commodity['quantity'];
+        foreach ($commodity as $key2 => $str) {
+            $line = str_replace('['.$key2.']', $str, $line);
+        }
+        $html .= $line;
+    }
+
+    return $cart_info_head . $html . $cart_info_tail;
 }
 
 ?>
