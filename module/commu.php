@@ -285,7 +285,7 @@ class cfshoppingcart_commu {
             $value = str_replace('#post_title', $this->the_post->post_title, $value);
             if ($number_of_stock_field_name && $key === $number_of_stock_field_name) {
                 $commodity[$number_of_stock_field_name] = $number_of_stock;
-            } else if (preg_match('/^#select/', $value)) {
+            } else if (preg_match('/^#(select|radio)/', $value)) {
                 // check select value
                 $value = $this->common->clean_cf_textarea($value);
                 $a = array_flip(explode("\n", $value));
@@ -401,12 +401,12 @@ class cfshoppingcart_commu {
         //$customfield = get_post_custom($id);
         $customfield = $this->common->get_custom_fields($id);
         
-        // #select
+        // #select and #radio
         $select = array($id);
         $i = 1;
         foreach ($this->customfieldnames as $index2 => $fieldname) {
             $value = $customfield[$fieldname][0];
-            if (!preg_match('/^#select/', $value)) { continue; }
+            if (!preg_match('/^#(select|radio)/', $value)) { continue; }
             $select[$i] = ''; // default value
             //$value = str_replace("\r\n", "\n", $value);
             //$value = str_replace("\r", "\n", $value);

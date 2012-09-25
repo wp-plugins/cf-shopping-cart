@@ -389,9 +389,10 @@ class cfshoppingcart_common {
     }
 
     /*
-     * text: #select|#hidden|L_Red=1|M_Yellow=-1
+     * text: #select|#radio|#hidden|L_Red=1|M_Yellow=-1
      * return: array(
      *   [#select] => NULL
+     *   [#radio] => NULL
      *   [#hidden] => NULL
      *   [L_Red] => 1
      *   [M_Yellow] => -1

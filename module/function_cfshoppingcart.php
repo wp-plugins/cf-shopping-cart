@@ -131,7 +131,10 @@ function cfshoppingcart($args = '') {
             continue;
         } else if (preg_match('/^#select/', $c[$value][0])) {
             // make select html tag
-            $c[$value][0] = cfshoppingcart_get_post_select($value, $c[$value][0]);
+            $c[$value][0] = cfshoppingcart_get_post_select($value, $c[$value][0], 'select');
+        } else if (preg_match('/^#radio/', $c[$value][0])) {
+            // make select html tag
+            $c[$value][0] = cfshoppingcart_get_post_select($value, $c[$value][0], 'radio');
         }
         // stock
         if ($value === $number_of_stock_field_name) {
@@ -243,7 +246,7 @@ function cfshoppingcart_get_stock_html($stock_value, $is_sold_out) {
     return 0;
 }
 
-function cfshoppingcart_get_post_select($n, $cf) {
+function cfshoppingcart_get_post_select($n, $cf, $type) {
     //echo 'cfshoppingcart_get_post_select';
     global $cfshoppingcart_common;// = new cfshoppingcart_common();
 
@@ -253,6 +256,11 @@ function cfshoppingcart_get_post_select($n, $cf) {
     $h = '';
     foreach ($cfa as $index => $value) {
         if ($index == 0) { continue; }
+        if ($index == 1 && $type === 'radio') {
+            $checked = 'checked';
+        } else {
+            $checked = '';
+        }
         $value = trim($value);
         if (!$value) { continue; }
         $str = $value;
@@ -260,11 +268,16 @@ function cfshoppingcart_get_post_select($n, $cf) {
         if (preg_match('/^(.*)=(-{0,1}[0-9]*|-{0,1}[0-9]*\.[0-9]*)$/', $str, $match)) {
             $str = preg_replace('/_/', ' ', trim($match[1]), 1);
         }
-        $h .= '<option value="' . $value . '">' . $str . '</option>';
-        //$h .= '<option value="' . $str . '">' . $str . '</option>';
+        if ($type === 'select') {
+            $h .= '<option value="' . $value . '">' . $str . '</option>';
+        } else { // radio
+            $h .= '<input type="radio" name="' . $n . '" value="' . $value . '" ' . $checked . ' />' . $str;
+        }
     }
     if (!$h) return '';
-    $h = '<select name="' . $n . '">' . $h . '</select>';
+    if ($type == 'select') {
+        $h = '<select name="' . $n . '">' . $h . '</select>';
+    }
     return $h;
 }
 ?>

@@ -14,6 +14,7 @@ class cfshoppingcart_cf {
     var $post_id;
     var $post_title;
     var $select;
+    var $radio;
     //
     var $name;
     var $raw_value;
@@ -28,6 +29,7 @@ class cfshoppingcart_cf {
         if (strstr($raw_cf, '#postid')) { $this->post_id = true; }
         if (strstr($raw_cf, '#post_title')) { $this->post_title = true; }
         if (strstr($raw_cf, '#select')) { $this->select = true; }
+        if (strstr($raw_cf, '#radio')) { $this->radio = true; }
         $this->clean_value = $this->clean_cf_value($raw_cf);
         $this->explode_value = explode("\n", $this->clean_value);
     }
