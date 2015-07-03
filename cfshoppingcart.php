@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.8.15
+Version: 0.8.16
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -201,7 +201,9 @@ if (is_admin()) {
 }
 
 function cfshoppingcart_action_admin_notices() {
-    echo '<div id="message" class="error"><p>Cf Shopping Cart: New version 2.0, Tests now. Be careful: 2.0 is NOT COMPATIBLE previous! <a href="http://cfshoppingcart.silverpigeon.jp/">[Website]</a></p></div>';
+    if (!array_key_exists('dismiss20', $_COOKIE)) {
+        echo '<div id="message" class="dismiss20 error"><p>Cf Shopping Cart: New version 2.0, Tests now. Be careful: 2.0 is NOT COMPATIBLE previous! <a href="http://cfshoppingcart.silverpigeon.jp/">[Website] </a></p><button class="Dismiss20">Dismiss</button></div>';
+    }
     if (!function_exists('wpcf7_add_shortcode')) {
         echo '<div id="message" class="updated"><p>' . __("Cf Shopping Cart say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart setting screen, or Could you install Contact Form 7 plugin.",'cfshoppingcart') . '</p></div>';
     }
@@ -282,7 +284,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.8.15';
+        $this->version = '0.8.16';
         $this->debug = '';
         $this->visual_editor = '';
         $this->multi_site_support = '';
@@ -365,7 +367,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.8.15';
+        return '0.8.16';
     }
     function get_version() {
         return $this->version;
@@ -1064,6 +1066,8 @@ class WpCFShoppingcart {
 
         echo '<script type="text/javascript" src="';
         echo $this->plugin_uri . '/js/jquery.cookie.js"></script>' . "\n";
+        echo '<script type="text/javascript" src="';
+        echo $this->plugin_uri . '/js/dismiss20.js"></script>' . "\n";
         echo '<script type="text/javascript" src="';
         echo $this->plugin_uri . '/js/postbox.js"></script>' . "\n";
     }
