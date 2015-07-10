@@ -4,7 +4,7 @@ Plugin Name: Cf Shopping Cart
 Plugin URI: http://takeai.silverpigeon.jp/
 Description: Placement simply shopping cart to content.
 Author: AI.Takeuchi
-Version: 0.8.16
+Version: 0.8.17
 Author URI: http://takeai.silverpigeon.jp/
 */
 
@@ -284,7 +284,7 @@ class WpCFShoppingcartModel {
     // constructor
     function WpCFShoppingcartModel() {
         // default value
-        $this->version = '0.8.16';
+        $this->version = '0.8.17';
         $this->debug = '';
         $this->visual_editor = '';
         $this->multi_site_support = '';
@@ -367,7 +367,7 @@ class WpCFShoppingcartModel {
     
     //
     function get_current_version() {
-        return '0.8.16';
+        return '0.8.17';
     }
     function get_version() {
         return $this->version;
@@ -1134,4 +1134,16 @@ class WpCFShoppingcart {
         return $ret;
     }
 }
-?>
+
+
+$file = basename( __FILE__ );
+$folder = basename( dirname( __FILE__ ) );
+$hook = "in_plugin_update_message-{$folder}/{$file}";
+add_action($hook, 'update_message_wpse_cfshoppingcart_08', 10, 2);
+
+function update_message_wpse_cfshoppingcart_08($plugin_data, $r) {
+    echo '<strong style="font-size:20; font-weight:bold; color:red;">BE CAREFUL: This version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0.8 series.</strong>';
+}
+
+
+
