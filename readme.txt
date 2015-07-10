@@ -3,7 +3,7 @@ Contributors: AI.Takeuchi
 Tags: PayPal payment, shopping cart, widget, plugin, Exec-PHP, Contact Form 7, Custom Field Template, QF-GetThumb, Multi site supported
 Requires at least: 2.6
 Tested up to: 3.2.1
-Stable tag: 0.8.17
+Stable tag: 0.8.18
 
 BE CAREFUL: Next version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0.8 series.
 Cf Shopping Cart is simple shopping cart plugin for WordPress.
@@ -68,14 +68,14 @@ error_reporting  =  E_ALL & ~E_NOTICE & ~E_DEPRECATED
 
 == Upgrade Notice ==
 
-= 0.8.17 =
+= 0.8.18 =
 
 BE CAREFUL: Next version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0.8 series.
 <strong style="font-size:20; font-weight:bold; color:red;">BE CAREFUL: Next version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0.8 series.</strong>
 
 == Changelog ==
 
-= 0.8.17 =
+= 0.8.18 =
 * Add Admin Notices and button: 
   New version 2.0, Tests now. 
   Be careful: 2.0 is NOT COMPATIBLE previous!
