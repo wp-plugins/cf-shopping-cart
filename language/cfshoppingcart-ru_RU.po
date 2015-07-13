@@ -1,0 +1,594 @@
+# Translation of the WordPress plugin   by .
+# Copyright (C) 2010
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress plugin cfshoppingcart2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-10 23:29+0200\n"
+"PO-Revision-Date: 2011-08-10 23:30+0200\n"
+"Last-Translator: kg69design <kg69design@gmail.com>\n"
+"Language-Team: http://wordpress.org/tag/cf-shopping-cart\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../cf-shopping-cart\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: cfshoppingcart2.php:190
+msgid "Cf Shopping Cart 2 say: 'wpcf7_add_shortcode' function not found. Let you see 'Module for Contact Form 7' menu of Cf Shopping Cart 2 setting screen, or Could you install Contact Form 7 plugin."
+msgstr "\"wpcf7_add_shortcode\" функция не найдена. Проверьте, установлен ли плагин Contact Form 7, произведены ли необходимые настройки в нем"
+
+#: cfshoppingcart2.php:383
+#: module/cart.php:68
+#: module/commu.php:123
+#: module/commu.php:191
+#: module/contact-form-7.php:54
+msgid "Shopping Cart is empty."
+msgstr "Корзина пуста."
+
+#: cfshoppingcart2.php:484
+msgid "Select"
+msgstr "Выбрать"
+
+#: cfshoppingcart2.php:551
+msgid "Show sold out message"
+msgstr "Показать сообщение о том, что товар продан"
+
+#: cfshoppingcart2.php:553
+msgid "Don't show the product"
+msgstr "Не показывать проданный товар"
+
+#: cfshoppingcart2.php:570
+msgid "Add to Cart"
+msgstr "Добавить в корзину"
+
+#: cfshoppingcart2.php:850
+msgid "Cf Shopping Cart 2 Options"
+msgstr "Настройки Cf Shopping Cart 2"
+
+#: cfshoppingcart2.php:851
+#: widget.php:42
+msgid "Cf Shopping Cart 2"
+msgstr "Cf Shopping Cart 2"
+
+#: widget.php:82
+msgid "Title:"
+msgstr "Наименование:"
+
+#: widget.php:84
+msgid "Note:"
+msgstr "Примечание:"
+
+#: module/cart.php:134
+#: module/contact-form-7.php:93
+msgid "Many"
+msgstr "В большом количестве"
+
+#: module/cart.php:136
+msgid "Order is more than stock"
+msgstr "Заказано больше, чем есть на складе"
+
+#: module/cart.php:143
+#: module/cart.php:166
+#: module/contact-form-7.php:113
+#: module/contact-form-7.php:121
+msgid "Quantity"
+msgstr "Количество"
+
+#: module/cart.php:144
+msgid "Cancel"
+msgstr "Отменить"
+
+#: module/cart.php:144
+msgid "Change quantity"
+msgstr "Изменить количество"
+
+#: module/cart.php:167
+#: module/contact-form-7.php:122
+msgid "Subtotal"
+msgstr "Промежуточный итог"
+
+#: module/cart.php:177
+#: module/contact-form-7.php:131
+msgid "Shipping"
+msgstr "Доставка"
+
+#: module/cart.php:186
+#: module/contact-form-7.php:136
+msgid "Total price"
+msgstr "Итого"
+
+#: module/cart.php:192
+msgid "Order is more than stock, Can't check out."
+msgstr "Заказано больше, чем есть на складе. Невозможно осуществить заказ."
+
+#: module/cfshoppingcart2.js.php:103
+#: module/cfshoppingcart2.js.php:106
+msgid "Shopping Cart"
+msgstr "Ваша корзина"
+
+#: module/commu.php:44
+#: module/commu.php:133
+#: module/commu.php:387
+msgid "Sorry, stock is no."
+msgstr "Извините, товара нет на складе."
+
+#: module/commu.php:53
+#: module/commu.php:142
+msgid "Out of stock"
+msgstr "Распродано"
+
+#: module/commu.php:62
+#: module/commu.php:151
+msgid "Max quantity of total order is"
+msgstr "Максимальное количество товаров в заказе"
+
+#: module/commu.php:86
+#: module/commu.php:159
+msgid "Max quantity of one commodity is"
+msgstr "Максимальное количество одного товара"
+
+#: module/commu.php:98
+msgid "Item to cart."
+msgstr "Добавлено в корзину"
+
+#: module/commu.php:105
+msgid "Change quantity is faild."
+msgstr "Измение количества не удалось"
+
+#: module/commu.php:118
+msgid "Off the item."
+msgstr "Заказ товара отменен."
+
+#: module/commu.php:170
+msgid "Quantity has changed"
+msgstr "Количество товара изменено"
+
+#: module/commu.php:186
+msgid "Off the item"
+msgstr "Заказ товара отменен"
+
+#: module/commu.php:389
+msgid "Error: Check Stock Custom Field value."
+msgstr "Ошибка: Проверьте значение поля Custom Field  \"Склад\" (Stock) "
+
+#: module/contact-form-7.php:73
+msgid "Includes no stock products. Please confirm."
+msgstr "В вашем заказе есть товары, отсутствующие на складе. Подтвердите заказ."
+
+#: module/contact-form-7.php:98
+msgid "Includes out of stock products. Please confirm."
+msgstr "В вашем заказе есть товары, в данный момент распроданные. Подтвердите заказ."
+
+#: module/error_handler.php:235
+msgid "Updated"
+msgstr "Обновлено"
+
+#: module/error_handler.php:256
+msgid "Error Handler Options"
+msgstr "Параметры Error Handler"
+
+#: module/error_handler.php:262
+msgid "Enable Error Handler"
+msgstr "Включить Error Handler"
+
+#: module/error_handler.php:263
+#: module/error_handler.php:283
+#: module/error_handler.php:288
+msgid "Enabled"
+msgstr "Включить"
+
+#: module/error_handler.php:267
+msgid "From Email Address"
+msgstr "Email отправителя"
+
+#: module/error_handler.php:272
+msgid "To Email Address"
+msgstr "Email получателя"
+
+#: module/error_handler.php:277
+msgid "Email subject"
+msgstr "Тема письма"
+
+#: module/error_handler.php:282
+msgid "Output log"
+msgstr "Log файл"
+
+#: module/error_handler.php:283
+msgid "Log file will be output to folder:"
+msgstr "Log файл будет записан в папку:"
+
+#: module/error_handler.php:287
+msgid "Output display"
+msgstr "Показать Log файл"
+
+#: module/error_handler.php:294
+msgid "Update Options"
+msgstr "Сохранить изменения"
+
+#: module/execute_admin.php:57
+#: module/execute_admin.php:334
+msgid "Set extend module for Contact Form 7"
+msgstr "Установить"
+
+#: module/execute_admin.php:57
+msgid "Direcotory not found"
+msgstr "Директория не найдена"
+
+#: module/execute_admin.php:61
+msgid "Already exists extend module for Contact Form 7."
+msgstr "Расширение к плагину Contact Form 7 уже добавлено."
+
+#: module/execute_admin.php:67
+msgid "Change permission to folder to 0777 failed."
+msgstr "Изменение прав (0777) на папку не удалось."
+
+#: module/execute_admin.php:70
+msgid "Create symbolic link is failed."
+msgstr "Создание symbolic link не удалось."
+
+#: module/execute_admin.php:78
+msgid "Change permission to folder failed."
+msgstr "Изменение прав на папку не удалось."
+
+#: module/execute_admin.php:83
+msgid "Extend module for Contact Form 7 is OK."
+msgstr "Расширение к плагину Contact Form 7 в порядке."
+
+#: module/execute_admin.php:85
+msgid "Create link to extend module for Contact Form 7 failed."
+msgstr "Создание ссылки к расширению к плагину Contact Form 7 не удалось."
+
+#: module/execute_admin.php:166
+msgid "Saved"
+msgstr "Сохранено"
+
+#: module/execute_admin.php:238
+#: module/execute_admin.php:325
+msgid "Module for Contact Form 7"
+msgstr "Расширение к плагину Contact Form 7"
+
+#: module/execute_admin.php:239
+#: module/execute_admin.php:348
+msgid "License"
+msgstr "Лицензия"
+
+#: module/execute_admin.php:240
+#: module/paypal.php:330
+msgid "PayPal Options"
+msgstr "Настройки PayPal"
+
+#: module/execute_admin.php:241
+msgid "PHP Error Handler"
+msgstr "PHP Error Handler"
+
+#: module/execute_admin.php:252
+msgid "Options"
+msgstr "Настройки"
+
+#: module/execute_admin.php:257
+msgid "Shop now closed"
+msgstr "Магазин временно закрыт"
+
+#: module/execute_admin.php:257
+msgid "Closed"
+msgstr "Если отмечено, то"
+
+#: module/execute_admin.php:257
+msgid "(Be 'Shop Closed' is user level less than 6.)"
+msgstr "Магазин будет закрыт пользователям с уровнем доступа ниже 6."
+
+#: module/execute_admin.php:258
+msgid "Closed message for Sidebar widget"
+msgstr "Сообщение о том, что магазин закрыт"
+
+#: module/execute_admin.php:260
+msgid "Custom field names"
+msgstr "Имена полей Custom Field"
+
+#: module/execute_admin.php:261
+msgid "Price field name"
+msgstr "Имя поля Custom Field, служащее ценой товара"
+
+#: module/execute_admin.php:263
+msgid "Be Custom Field name of linking to product page"
+msgstr "Имя поля Custom Field, значение которого будет ссылкой на страницу товара"
+
+#: module/execute_admin.php:263
+msgid "Open another window"
+msgstr "Открыть в новом окне"
+
+#: module/execute_admin.php:265
+msgid "Number of stock field name"
+msgstr "Имя поля Custom Field, служащее для указания кол-ва товаров на складе \"Stock\""
+
+#: module/execute_admin.php:265
+msgid "Empty if don't manage stock."
+msgstr "Не заполняйте, если не используете поле 'stock' (склад)"
+
+#: module/execute_admin.php:266
+msgid "Product name field name"
+msgstr "Имя поля Custom Field, служащее наименованием товара"
+
+#: module/execute_admin.php:267
+msgid "Show Custom Field when price field is empty."
+msgstr "Показывать значения полей Custom Field , если поле цены не заполнено"
+
+#: module/execute_admin.php:268
+msgid "Be don't show empty field"
+msgstr "Не показывать значения незаполненных полей Custom Field"
+
+#: module/execute_admin.php:270
+msgid "Custom Field default value"
+msgstr "Значения полей Custom Field по умолчанию"
+
+#: module/execute_admin.php:270
+msgid "example: <br />FieldName1=value1<br />FieldName2=value2<br />..."
+msgstr "пример: <br />FieldName1=value1<br />FieldName2=value2<br />..."
+
+#: module/execute_admin.php:272
+msgid "Type of show sold out message"
+msgstr "Вариант сообщения, если товар уже куплен"
+
+#: module/execute_admin.php:272
+msgid "if select \"Don't show the post\" then to be private the post at sold out."
+msgstr "Если выбрано \"Не показывать купленный продукт\", тогда страница товара будет недоступна."
+
+#: module/execute_admin.php:273
+msgid "Add to Cart button text"
+msgstr "Текст на кнопке \"Добавить в корзину\""
+
+#: module/execute_admin.php:274
+msgid "Sold out message"
+msgstr "Сообщение о покупке"
+
+#: module/execute_admin.php:277
+msgid "Currency format"
+msgstr "Формат представления  валюты"
+
+#: module/execute_admin.php:277
+#, php-format
+msgid "example: $%.02f"
+msgstr "Например: $%.02f"
+
+#: module/execute_admin.php:278
+msgid "\"#postid\" keyword format"
+msgstr "Формат - \"#postid\""
+
+#: module/execute_admin.php:278
+#, php-format
+msgid "example: %05d"
+msgstr "Например: %05d"
+
+#: module/execute_admin.php:279
+msgid "Max quantity of one commodity"
+msgstr "Максимальное количество одного товара"
+
+#: module/execute_admin.php:279
+#: module/execute_admin.php:280
+msgid "Zero is no limit."
+msgstr "Ноль - без ограничений."
+
+#: module/execute_admin.php:280
+msgid "Max quantity of total order"
+msgstr "Максимальное количество заказа"
+
+#: module/execute_admin.php:281
+msgid "\"Go to Cart\" text"
+msgstr "Текст ссылки \"Перейти в корзину\""
+
+#: module/execute_admin.php:285
+#: module/execute_admin.php:287
+#: module/paypal.php:368
+msgid "\"Orderer Input screen\" text"
+msgstr "Текст ссылки \"Оформить заказ\""
+
+#: module/execute_admin.php:291
+msgid "Table tag type"
+msgstr "Формат вывода"
+
+#: module/execute_admin.php:292
+msgid "Cart Url"
+msgstr "URL страницы корзины"
+
+#: module/execute_admin.php:293
+msgid "Send order Url"
+msgstr "URL страницы оформления заказов "
+
+#: module/execute_admin.php:294
+msgid "Thanks Url"
+msgstr "Адресс страницы с благодарностью за покупку"
+
+#: module/execute_admin.php:295
+msgid "In Cart, QF-GetThumb option 1"
+msgstr "В корзине, QF-GetThumb опция 1"
+
+#: module/execute_admin.php:296
+msgid "In Cart, QF-GetThumb default image"
+msgstr "В корзине, QF-GetThumb картинка по умолчанию"
+
+#: module/execute_admin.php:297
+msgid "Choice show commodity on page"
+msgstr "Выбрать отображение товаров на странице:"
+
+#: module/execute_admin.php:297
+msgid "home"
+msgstr "home"
+
+#: module/execute_admin.php:297
+msgid "page"
+msgstr "page"
+
+#: module/execute_admin.php:297
+msgid "archive"
+msgstr "archive"
+
+#: module/execute_admin.php:297
+msgid "single"
+msgstr "single"
+
+#: module/execute_admin.php:297
+msgid "manually (must edit theme)"
+msgstr "Вручную (необходимо редактирование темы)"
+
+#: module/execute_admin.php:297
+msgid "Show products category numbers (Example: 1,2,..)"
+msgstr "Указать номер категории записи (post) товара (Например: 1,2,..)"
+
+#: module/execute_admin.php:298
+msgid "* Choice manually then insert PHP code: "
+msgstr "* При выборе \"Вручную\" вставьте код:"
+
+#: module/execute_admin.php:299
+msgid "Display waiting animation"
+msgstr "Отображать анимацию ожидания"
+
+#: module/execute_admin.php:300
+msgid "Don't load css"
+msgstr "Не использовать CSS"
+
+#: module/execute_admin.php:301
+msgid "Debug mode"
+msgstr "Режим отладки (Debug mode)"
+
+#: module/execute_admin.php:302
+msgid "Visual Editor"
+msgstr "Визуальный редактор"
+
+#: module/execute_admin.php:302
+msgid "Enable the visual editor when setting. Reload this page after update options when change this checkbox."
+msgstr "Включить визуальный редактор на данной странице. Изменения вступят в силу после перезагрузки данной страницы"
+
+#: module/execute_admin.php:330
+msgid "This server don't have symlink function, therefore can't use button 'Set extend module for Contact Form 7' in Cf Shopping Cart 2 setting screen."
+msgstr "Сервер не поддерживает symlink function, поэтому нельзя установить необходимое расширение для модуля Contact Form 7"
+
+#: module/execute_admin.php:335
+msgid "Click button If shown \"Array\" in Check out Screen shopping item."
+msgstr "Нажмите кнопку ниже если на странице заказа товара появляется надпись \"Array\"."
+
+#: module/execute_admin.php:335
+msgid "or Copy 'cfshoppingcart2.php' file from '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' to '/wp-content/plugins/contact-form-7/module/'."
+msgstr "или скопируйте файл  'cfshoppingcart2.php' из '/wp-content/plugins/cf-shopping-cart/contact-form-7-module/' в '/wp-content/plugins/contact-form-7/module/'."
+
+#: module/paypal.php:284
+msgid "Make payments with PayPal - it's fast, free and secure!"
+msgstr "Осуществляйте платежи с PayPal - это быстро, бесплатно и безопасно!"
+
+#: module/paypal.php:336
+msgid "Enable PayPal Options"
+msgstr "Включить PayPal параметры"
+
+#: module/paypal.php:341
+msgid "PayPal Email Address"
+msgstr "PayPal Email Address"
+
+#: module/paypal.php:346
+msgid "PayPal action URL"
+msgstr "PayPal action URL"
+
+#: module/paypal.php:351
+msgid "Currency"
+msgstr "Формат представления  валюты"
+
+#: module/paypal.php:355
+msgid "Use PayPal Profile Based Shipping"
+msgstr "Использовать доставку на основе PayPal профиля"
+
+#: module/paypal.php:356
+msgid "Check this if you want to use"
+msgstr "Отметьте, если вы хотите использовать"
+
+#: module/paypal.php:356
+msgid "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+msgstr "https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_html_ProfileAndTools#id08A9EF00IQY"
+
+#: module/paypal.php:356
+msgid "PayPal profile based shipping"
+msgstr "доставку на основе PayPal профиля"
+
+#: module/paypal.php:356
+msgid "Using this will ignore any other shipping options that you have specified in this plugin."
+msgstr "Этот параметр переопределит все другие настройки доставки в этом плагине"
+
+#: module/paypal.php:360
+msgid "Return URL"
+msgstr "Return URL"
+
+#: module/paypal.php:361
+msgid "This is the URL the customer will be redirected to after a successful payment"
+msgstr "Это URL, на который клиент будет перенаправлен после успешной оплаты"
+
+#: module/paypal.php:366
+msgid "\"Check out\" text"
+msgstr "\"Check out\" текст"
+
+#: module/shipping.php:21
+#: module/shipping.php:24
+#: module/shipping.php:27
+#: module/shipping.php:30
+#: module/shipping.php:46
+msgid "Shipping Error"
+msgstr "Ошибка доставка"
+
+#: ../module/execute_admin.php:265
+msgid "Empty is don't manage stock."
+msgstr "Не заполняйте, если не используете поле 'stock' (склад)"
+
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Communication error"
+#~ msgstr "Сбой связи"
+
+#~ msgid "Add to cart faild, please try again."
+#~ msgstr "Не удалось добавить товар в корзину, пожалуйста попробуйте снова."
+
+#~ msgid "Change quantity faild, please try again."
+#~ msgstr "Изменить количество не удалось, пожалуйста попробуйте снова."
+
+#~ msgid "Just a moment please."
+#~ msgstr "Минуточку."
+
+#~ msgid "Cancel commodity faild, please try again."
+#~ msgstr "Отменить добавление товара не удалось, пожалуйста попробуйте снова."
+
+#~ msgid "Empty cart faild."
+#~ msgstr "Не удалось очистить корзину."
+
+#~ msgid "Please enter the quantity of the commodity."
+#~ msgstr "Пожалуста введите количество товара."
+
+#~ msgid "Commodity must be less than 100."
+#~ msgstr "Количество товара должно быть меньше 100."
+
+#~ msgid "Communication error login"
+#~ msgstr "Ошибка авторизации"
+
+#~ msgid "Login faild, please try again."
+#~ msgstr "Ошибка авторизации, попробуйте снова"
+
+#~ msgid "Customer data fields"
+#~ msgstr "Поля ввода данных клиента"
+
+#~ msgid "Can not use Shipping."
+#~ msgstr "Не могу использовать доставку."
+
+#~ msgid "Shipping setting file not found"
+#~ msgstr "Файл настроек параметров доставки не найден"
+
+#~ msgid "Must be edit"
+#~ msgstr "Должно быть отредактировано"
+
+#~ msgid "CSS \"Just a moment please\""
+#~ msgstr "CSS \"Подождите минуточку пожалуйста\""
+
+#~ msgid "Shopping Cart is empty"
+#~ msgstr "Корзина пуста"

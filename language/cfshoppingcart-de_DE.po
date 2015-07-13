@@ -1,0 +1,426 @@
+# Translation of the WordPress plugin   by .
+# Copyright (C) 2010
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress plugin cfshoppingcart2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-14 09:57+0900\n"
+"PO-Revision-Date: 2011-04-14 09:58+0900\n"
+"Last-Translator: AI.Takeuchi <takeai@silverpigeon.jp>\n"
+"Language-Team:  <fichtner@carola-fichtner.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../cf-shopping-cart\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: widget.php:42
+#: cfshoppingcart2.php:734
+#: module/execute_admin.php:18
+msgid "Cf Shopping Cart 2"
+msgstr "Cf Shopping Cart 2"
+
+#: widget.php:78
+msgid "Title:"
+msgstr "Titel:"
+
+#: cfshoppingcart2.php:156
+msgid "'wpcf7_add_shortcode' function not found. Could you install Contact Form 7 plugin."
+msgstr ""
+
+#: cfshoppingcart2.php:317
+#: module/commu.php:137
+#: module/commu.php:205
+#: module/contact-form-7.php:54
+msgid "Shopping Cart is empty."
+msgstr "Der Warenkorb ist leer."
+
+#: cfshoppingcart2.php:417
+msgid "Select"
+msgstr ""
+
+#: cfshoppingcart2.php:484
+msgid "Show sold out message"
+msgstr ""
+
+#: cfshoppingcart2.php:486
+msgid "Don't show the product"
+msgstr ""
+
+#: cfshoppingcart2.php:733
+msgid "Cf Shopping Cart 2 Options"
+msgstr "Cf Shopping Cart 2 Optionen"
+
+#: module/shipping.php:21
+#: module/shipping.php:24
+#: module/shipping.php:27
+#: module/shipping.php:30
+#: module/shipping.php:46
+#, fuzzy
+msgid "Shipping Error"
+msgstr "Versand"
+
+#: module/commu.php:59
+#: module/commu.php:147
+#: module/commu.php:403
+msgid "Sorry, stock is no."
+msgstr ""
+
+#: module/commu.php:67
+#: module/commu.php:156
+msgid "Out of stock"
+msgstr ""
+
+#: module/commu.php:76
+#: module/commu.php:165
+msgid "Max quantity of total order is"
+msgstr "Die maximale Menge der gesamten Bestellung ist "
+
+#: module/commu.php:100
+#: module/commu.php:173
+msgid "Max quantity of one commodity is"
+msgstr "Die maximale Bestellmenge für einen Artikel ist "
+
+#: module/commu.php:112
+#, fuzzy
+msgid "Item to cart."
+msgstr "In den Warenkorb"
+
+#: module/commu.php:119
+#, fuzzy
+msgid "Change quantity is faild."
+msgstr "Anzahl ändern"
+
+#: module/commu.php:132
+msgid "Off the item."
+msgstr ""
+
+#: module/commu.php:184
+msgid "Quantity has changed"
+msgstr ""
+
+#: module/commu.php:200
+msgid "Off the item"
+msgstr ""
+
+#: module/commu.php:405
+msgid "Error: Check Stock Custom Field value."
+msgstr ""
+
+#: module/contact-form-7.php:73
+msgid "Includes no stock products. Please confirm."
+msgstr ""
+
+#: module/contact-form-7.php:93
+msgid "Includes out of stock products. Please confirm."
+msgstr ""
+
+#: module/contact-form-7.php:108
+#: module/contact-form-7.php:116
+#: module/function_cfshoppingcart2.php:190
+#: module/sum.php:93
+#: module/execute_admin.php:152
+msgid "Quantity"
+msgstr "Menge"
+
+#: module/contact-form-7.php:117
+#: module/sum.php:94
+msgid "Subtotal"
+msgstr "Zwischensumme"
+
+#: module/contact-form-7.php:126
+#: module/sum.php:100
+#: module/execute_admin.php:174
+msgid "Shipping"
+msgstr "Versand"
+
+#: module/contact-form-7.php:131
+#: module/sum.php:105
+#: module/execute_admin.php:176
+#: module/execute_admin.php:177
+#: module/execute_admin.php:178
+#: module/execute_admin.php:179
+#: module/execute_admin.php:180
+msgid "Total price"
+msgstr "Gesamtsumme"
+
+#: module/function_cfshoppingcart2.php:167
+#: module/function_cfshoppingcart2.php:234
+msgid "Many"
+msgstr ""
+
+#: module/function_cfshoppingcart2.php:192
+msgid "Add to Cart"
+msgstr "Dem Warenkorb hinzufügen"
+
+#: module/execute_admin.php:100
+msgid "Saved"
+msgstr "Gespeichert"
+
+#: module/execute_admin.php:130
+msgid "Options"
+msgstr "Optionen"
+
+#: module/execute_admin.php:134
+msgid "Shop now closed"
+msgstr ""
+
+#: module/execute_admin.php:134
+msgid "Closed"
+msgstr ""
+
+#: module/execute_admin.php:134
+msgid "(Be 'Shop Closed' is user level less than 6.)"
+msgstr ""
+
+#: module/execute_admin.php:135
+msgid "Closed message for Sidebar widget"
+msgstr ""
+
+#: module/execute_admin.php:137
+msgid "Custom field names"
+msgstr "Individuelle Feldnamen"
+
+#: module/execute_admin.php:138
+msgid "Price field name"
+msgstr "Preis Feldname"
+
+#: module/execute_admin.php:140
+msgid "Be Custom Field name of linking to product page"
+msgstr ""
+
+#: module/execute_admin.php:140
+msgid "Open another window"
+msgstr ""
+
+#: module/execute_admin.php:142
+#, fuzzy
+msgid "Number of stock field name"
+msgstr "Individuelle Feldnamen"
+
+#: module/execute_admin.php:142
+msgid "Empty is don't manage stock."
+msgstr ""
+
+#: module/execute_admin.php:143
+#, fuzzy
+msgid "Product name field name"
+msgstr "Preis Feldname"
+
+#: module/execute_admin.php:144
+msgid "Show Custom Field when price field is empty."
+msgstr ""
+
+#: module/execute_admin.php:144
+#: module/execute_admin.php:145
+#: module/execute_admin.php:170
+#: module/execute_admin.php:171
+#: module/execute_admin.php:174
+msgid "Enabled"
+msgstr ""
+
+#: module/execute_admin.php:145
+msgid "Be don't show empty field"
+msgstr ""
+
+#: module/execute_admin.php:147
+#, fuzzy
+msgid "Custom Field default value"
+msgstr "Individuelle Feldnamen"
+
+#: module/execute_admin.php:147
+msgid "example: <br />FieldName1=value1<br />FieldName2=value2<br />..."
+msgstr ""
+
+#: module/execute_admin.php:149
+msgid "Type of show sold out message"
+msgstr ""
+
+#: module/execute_admin.php:149
+msgid "if select \"Don't show the post\" then to be private the post at sold out."
+msgstr ""
+
+#: module/execute_admin.php:150
+msgid "Sold out message"
+msgstr ""
+
+#: module/execute_admin.php:153
+msgid "Currency format"
+msgstr "Währungsformat"
+
+#: module/execute_admin.php:153
+#, php-format
+msgid "example: $%.02f"
+msgstr "Beispiel: $%.02f"
+
+#: module/execute_admin.php:154
+msgid "\"#postid\" keyword format"
+msgstr ""
+
+#: module/execute_admin.php:154
+#, fuzzy, php-format
+msgid "example: %05d"
+msgstr "Beispiel: $%.02f"
+
+#: module/execute_admin.php:155
+msgid "Max quantity of one commodity"
+msgstr "maximale Bestellmenge für einen Artikel"
+
+#: module/execute_admin.php:155
+#: module/execute_admin.php:156
+msgid "Zero is no limit."
+msgstr "Null heisst unbegrenzt."
+
+#: module/execute_admin.php:156
+msgid "Max quantity of total order"
+msgstr "maximale Menge der gesamten Bestellung"
+
+#: module/execute_admin.php:157
+#, fuzzy
+msgid "\"Go to Cart\" text"
+msgstr "Zum Warenkorb"
+
+#: module/execute_admin.php:158
+#, fuzzy
+msgid "\"Orderer Input screen\" text"
+msgstr "Weiter zur Bestellung"
+
+#: module/execute_admin.php:159
+msgid "Table tag type"
+msgstr ""
+
+#: module/execute_admin.php:163
+msgid "Cart Url"
+msgstr "Url des Warenkorbes"
+
+#: module/execute_admin.php:164
+msgid "Send order Url"
+msgstr "Url für das Bestellformular"
+
+#: module/execute_admin.php:165
+msgid "Thanks Url"
+msgstr ""
+
+#: module/execute_admin.php:166
+msgid "In Cart, QF-GetThumb option 1"
+msgstr "Im Warenkorb, QF-GetThumb Option 1"
+
+#: module/execute_admin.php:167
+msgid "In Cart, QF-GetThumb default image"
+msgstr "Im Warenkorb, QF-GetThumb Standardbild"
+
+#: module/execute_admin.php:168
+msgid "Choice show commodity on page"
+msgstr "Artikelauswahl auf der Seite"
+
+#: module/execute_admin.php:168
+msgid "home"
+msgstr "home"
+
+#: module/execute_admin.php:168
+msgid "page"
+msgstr "Seite"
+
+#: module/execute_admin.php:168
+msgid "archive"
+msgstr "Archiv"
+
+#: module/execute_admin.php:168
+msgid "single"
+msgstr "einzeln"
+
+#: module/execute_admin.php:168
+msgid "manually (must edit theme)"
+msgstr "manuell (Theme muss bearbeitet werden)"
+
+#: module/execute_admin.php:169
+msgid "* Choice manually then insert PHP code: "
+msgstr "* Manuell wählen, dann PHP Code einfügen:"
+
+#: module/execute_admin.php:170
+msgid "Don't load css"
+msgstr ""
+
+#: module/execute_admin.php:171
+msgid "Debug mode"
+msgstr "Debug Modus"
+
+#: module/execute_admin.php:184
+msgid "Save"
+msgstr "Speichern"
+
+#: module/execute_admin.php:191
+msgid "Others"
+msgstr ""
+
+#: module/execute_admin.php:194
+msgid "License"
+msgstr ""
+
+#: module/cfshoppingcart2.js.php:99
+#: module/cfshoppingcart2.js.php:102
+#, fuzzy
+msgid "Shopping Cart"
+msgstr "Cf Shopping Cart 2"
+
+#: module/cart.php:138
+msgid "Order is more than stock"
+msgstr ""
+
+#: module/cart.php:146
+msgid "Cancel"
+msgstr "Warenkorb leeren"
+
+#: module/cart.php:146
+msgid "Change quantity"
+msgstr "Anzahl ändern"
+
+#: module/cart.php:190
+msgid "Order is more than stock, Can't check out."
+msgstr ""
+
+#~ msgid "Communication error"
+#~ msgstr "Verbindungsfehler"
+
+#~ msgid "Add to cart faild, please try again."
+#~ msgstr "Das Einfügen in den Warenkorb schlug fehl, bitte erneut versuchen."
+
+#~ msgid "Change quantity faild, please try again."
+#~ msgstr "Das Ändern der Menge schlug fehl, bitte erneut versuchen."
+
+#~ msgid "Just a moment please."
+#~ msgstr "Einen Moment bitte."
+
+#~ msgid "Cancel commodity faild, please try again."
+#~ msgstr "Das Entfernen des Artikels schlug fehl, bitte erneut versuchen."
+
+#~ msgid "Do empty cart faild."
+#~ msgstr "Das Leeren des Warenkorbs schlug fehl, bitte erneut versuchen."
+
+#~ msgid "Please enter the quantity of the commodity."
+#~ msgstr "Bitte die Artikelmenge angeben."
+
+#~ msgid "Commodity must be less than 100."
+#~ msgstr "Es dürfen maximal 100 Artikel sein."
+
+#~ msgid "Can not use Shipping."
+#~ msgstr "Versand wird nicht verwendet."
+
+#~ msgid "Shipping setting file not found"
+#~ msgstr "Datei für Versandeinstellungen wurde nicht gefunden"
+
+#~ msgid "Must be edit"
+#~ msgstr "Muss editiert werden"
+
+#~ msgid "CSS \"Just a moment please\""
+#~ msgstr "CSS \"Einen Moment bitte\""
+
+#~ msgid "Shopping Cart is empty"
+#~ msgstr "Der Warenkorb ist leer."
