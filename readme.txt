@@ -135,6 +135,7 @@ rows = 4
 cols = 40
 ------------------------
 
+== Settings ==
 
 = Shortcode =
 
@@ -381,23 +382,5 @@ BE CAREFUL: This version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0
 1. screenshot-1.png
 2. screenshot-2.png
 3. screenshot-3.png
-
-
-== More plugins. Thank you! ==
-
-Name: Custom Field Template
-URL: http://wordpress.org/extend/plugins/custom-field-template/
-
-Name: Contact Form 7
-URL: http://wordpress.org/extend/plugins/contact-form-7/
-
-Name: QF-GetThumb
-URL: http://wordpress.org/extend/plugins/qf-getthumb/
-
-Name: Smart Custom Fields
-URL: https://wordpress.org/plugins/smart-custom-fields/
-
-Name: MW WP Form
-URL: https://wordpress.org/plugins/mw-wp-form/
 
 
