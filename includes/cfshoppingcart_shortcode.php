@@ -203,7 +203,8 @@ function cfshoppingcart_shortcode($atts = array(), $content = '') {
 }
 
 function cfshoppingcart_get_email_content($cart) {
-
+    $LF = "\r\n";
+    
     $products = &$cart->items;
     $cart->calc();
 
@@ -226,15 +227,15 @@ function cfshoppingcart_get_email_content($cart) {
         $separator = ",";
     }
 
-    $email_admin = '#' . $separator . "Cf Shopping Cart\n";
-    $email_admin .= '#' . $separator . join($separator, $product_fileds) . "\n";
+    $email_admin = '#' . $separator . "Cf Shopping Cart".$LF;
+    $email_admin .= '#' . $separator . join($separator, $product_fileds) . $LF;
     $email_customer = '';
 
     $count = 1;
     $count2 = 1;
     foreach ($products as $id => $product) {
         $email_admin .= $count . $separator;
-        $email_customer .= "-- " . __('Order Product', DOMAIN_CF_SHOPPING_CART) . " [" . $count2++ . "] --\n";
+        $email_customer .= "-- " . __('Order Product', DOMAIN_CF_SHOPPING_CART) . " [" . $count2++ . "] --".$LF;
         foreach ($product_fileds as $field) {
             $value = get_cf($product->product_id, $field);
 
@@ -263,15 +264,15 @@ function cfshoppingcart_get_email_content($cart) {
             }
             $email_admin .= $value . $separator;
             if ($field !== $stock_quantity_field_name) {
-                $email_customer .= $field . ': ' . $value . "\n";
+                $email_customer .= $field . ': ' . $value . $LF;
             }
         } // foreach
-        $email_admin = trim($email_admin) . "\n";
+        $email_admin = trim($email_admin) . $LF;
         $count++;
     } // foreach
     // total 
-    $email_admin .= '#' . $separator . join($separator, $total_fileds) . "\n";
-    $email_customer .= "-- " . __('Total', DOMAIN_CF_SHOPPING_CART) . " --\n";
+    $email_admin .= '#' . $separator . join($separator, $total_fileds) . $LF;
+    $email_customer .= "-- " . __('Total', DOMAIN_CF_SHOPPING_CART) . " --".$LF;
     $count = 1;
     foreach ($total_fileds as $field) {
         switch ($field) {
@@ -292,10 +293,10 @@ function cfshoppingcart_get_email_content($cart) {
                 break;
         }
         $email_admin .= $count++ . $separator . $value . $separator;
-        $email_customer .= $field . ': ' . $value . "\n";
+        $email_customer .= $field . ': ' . $value . $LF;
     }
-    $email_admin = trim($email_admin) . "\n";
-    $email_admin .= '#' . $separator . "End of Cf Shopping Cart\n";
+    $email_admin = trim($email_admin) . $LF;
+    $email_admin .= '#' . $separator . "End of Cf Shopping Cart".$LF;
 
     return array('admin' => $email_admin, 'customer' => $email_customer);
 }

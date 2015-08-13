@@ -115,7 +115,13 @@ function the_content($content) {
     $tag .= '</form>';
 
     $tag = apply_filters(DOMAIN_CF_SHOPPING_CART . '_filter_the_content', $tag, $post->ID);
-    return '<div class="' . DOMAIN_CF_SHOPPING_CART . ' product post_id-' . $post->ID . '">' . $content . $tag . '</div>';
+    $count = 0;
+    $content = preg_replace('/<!--\s+cfshoppingcart-product-embed\s+-->/', $tag, $content, -1,  $count);
+    if (!$count) {
+        $content .= $tag;
+    }
+    //return '<div class="' . DOMAIN_CF_SHOPPING_CART . ' product post_id-' . $post->ID . '">' . $content . $tag . '</div>';
+    return '<div class="' . DOMAIN_CF_SHOPPING_CART . ' product post_id-' . $post->ID . '">' . $content . '</div>';
 }
 
 add_filter('the_content', 'cfshoppingcart\the_content');

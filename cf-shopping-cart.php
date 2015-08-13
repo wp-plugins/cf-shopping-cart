@@ -6,7 +6,7 @@ namespace cfshoppingcart;
  * Plugin Name: Cf Shopping Cart
  * Plugin URI: http://cfshoppingcart.silverpigeon.jp/
  * Description: Simple shopping cart.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: AI.Takeuchi
  * Author URI: http://cfshoppingcart.silverpigeon.jp/
  * Created : September 25, 2012
@@ -407,6 +407,19 @@ function get_POSTvalue($key, $support_before_redirect = false) {
         return $request[$key];
     }
     return null;
+}
+
+function get_POSTarray() {
+    $request = $_POST;
+
+    //debuglog(serialize($_POST));
+    //debuglog(serialize($_FILES));
+
+    if (!$request && $support_before_redirect && array_key_exists('_POST', $_SESSION[DOMAIN_CF_SHOPPING_CART])) {
+        $request = $_SESSION[DOMAIN_CF_SHOPPING_CART]['_POST'];
+    }
+
+    return $request;
 }
 
 /* quantity */

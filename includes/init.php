@@ -67,7 +67,17 @@ function exec_cmd() {
     $serial = new serial();
     $cart = $serial->load();
     $cmd = getPostValue('cmd');
-    if (strtolower($_SERVER['REQUEST_METHOD']) == 'post' && $cmd == 'check_out') {
+    // mwform_submitButton-422
+    $submitBack = getPostValue('submitBack');
+    $p = get_POSTarray();
+    $mwform_submitButton = false;
+    foreach ($p as $k => $v) {
+        if (strpos($k, 'mwform_submitButton-') !== false) {
+            $mwform_submitButton = true;
+            break;
+        }
+    }
+    if (strtolower($_SERVER['REQUEST_METHOD']) == 'post' && $cmd == 'check_out' && !$submitBack && $mwform_submitButton) {
         $msg = $cart->check_out();
         clear_cart();
         if ($msg === CF_SHOPPING_CART_MSG_TRUE) {

@@ -2,8 +2,8 @@
 Contributors: AI.Takeuchi
 Tags: plugin, shopping cart, simple
 Requires at least: 4.1
-Tested up to: 4.2.2
-Stable tag: 2.0.0
+Tested up to: 4.2.4
+Stable tag: 2.0.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -371,6 +371,11 @@ add_filter('cfshoppingcart_filter_cart', 'put_image_to_cart', 10, 2);
 BE CAREFUL: This version 2.0.0 is NOT COMPATIBLE with 0.8 series and less than 0.8 series.
 
 == Changelog ==
+
+= 2.0.1 =
+* Fix, has been empty cart at mistaken timing.
+* Add keyword: '<!-- cfshoppingcart-product-embed -->'
+  This keyword will be replaced product information at a product page.
 
 = 2.0.0 =
 * This is not compatible with previous version.
